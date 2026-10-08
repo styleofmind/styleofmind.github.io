@@ -48,7 +48,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .hero{min-height:735px;padding-top:78px}
 .hero-bg{position:absolute;inset:0;background:
 linear-gradient(90deg,rgba(8,22,29,.98) 0%,rgba(8,22,29,.9) 32%,rgba(8,22,29,.45) 57%,rgba(8,22,29,.15) 100%),
-url("../concept-v2.2/assets/generated/звёздная_глубина_психология_отношений.png") center/cover no-repeat}
+url("../concept-v2.2/assets/generated/звёздная_глубина_психология_отношений.png") 62% center/cover no-repeat}
 .hero-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 40%,rgba(225,182,101,.34),transparent 27%),radial-gradient(circle at 89% 29%,rgba(225,182,101,.18),transparent 17%)}
 .hero-shimmer{position:absolute;pointer-events:none;border-radius:50%;filter:blur(8px)}.hero-shimmer-a{width:520px;height:520px;right:10%;top:-20px;background:radial-gradient(circle,rgba(229,188,109,.32),transparent 65%)}.hero-shimmer-b{width:260px;height:260px;left:12%;bottom:3%;background:radial-gradient(circle,rgba(138,102,54,.13),transparent 68%)}
 .hero-orbits{position:absolute;inset:0;opacity:.28;background:repeating-radial-gradient(ellipse at 83% 42%,transparent 0 95px,rgba(214,167,91,.18) 96px 97px,transparent 98px 150px);mask-image:linear-gradient(90deg,transparent 42%,#000 60%,#000 100%)}
@@ -98,7 +98,7 @@ url("../concept-v2.2/assets/generated/золотая_орбита_безмяте
   .mobile-menu{position:absolute;top:78px;right:20px;left:20px;background:rgba(8,22,29,.97);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(15px);padding:18px}.mobile-menu.open{display:block}.mobile-menu nav{display:flex;flex-direction:column;gap:4px}.mobile-menu a{padding:9px 8px}.mobile-menu .button{margin-top:8px}
   .hero{min-height:760px}.hero-layout{grid-template-columns:1fr;min-height:680px}.hero-copy{padding-top:105px;max-width:620px}.hero-portrait-wrap{position:absolute;right:-60px;bottom:-30px;min-height:570px;width:56vw;max-width:520px;opacity:.74}.hero-copy{position:relative;z-index:4}.hero-bg{background:
     linear-gradient(90deg,rgba(8,22,29,.97),rgba(8,22,29,.82) 46%,rgba(8,22,29,.48)),
-    url("../concept-v2.2/assets/generated/звёздная_глубина_психология_отношений.png") center/cover no-repeat}
+    url("../concept-v2.2/assets/generated/звёздная_глубина_психология_отношений.png") 70% center/cover no-repeat}
   .trust-grid{grid-template-columns:repeat(2,1fr)}
   .about-layout,.method-layout,.process-layout,.faq-layout{grid-template-columns:1fr 1fr;gap:32px}.about-layout .hand-note{display:none}.arch-image{width:260px;height:320px}.method-layout .lotus-art{grid-column:2;grid-row:1 / span 2}.method-steps{margin-top:25px}.process-visual{grid-column:2}.request-grid{grid-template-columns:repeat(3,1fr)}.request-card:nth-child(3n){border-right:0}.request-card:nth-child(n+4){border-top:1px solid var(--dark-line)}
   .pricing-grid{grid-template-columns:repeat(2,1fr)}.diagnostic-card{grid-column:span 2}.process-grid{grid-template-columns:repeat(2,1fr)}.outcome-grid{grid-template-columns:repeat(2,1fr)}.review-slider{grid-template-columns:1fr}.review-card:not(:first-child){display:none}.slider-button{display:grid;place-items:center;flex:0 0 40px}
