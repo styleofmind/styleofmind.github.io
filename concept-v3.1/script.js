@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 (() => {
   const header = document.querySelector('.site-header');
   const menuToggle = document.querySelector('.menu-toggle');
