@@ -3,23 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0a151b">
-  <meta name="description" content="Style of Mind — концепт 3.1: атмосферный лендинг психологической практики по визуальному референсу.">
-  <title>Style of Mind — concept v3.1</title>
+  <meta name="theme-color" content="#0b171e">
+  <meta name="description" content="Style of Mind — психологическая практика. Системные расстановки, отношения, семейные сценарии и индивидуальная работа.">
+  <title>Style of Mind — психолог · расстановки</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip" href="#content">К содержанию</a>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
 
-  <header class="site-header" id="top">
-    <div class="shell header-row">
-      <a class="brand" href="#top" aria-label="Style of Mind — вверх">
-        <span class="brand-mark">✦</span>
-        <span><strong>Style of Mind</strong><small>психолог · расстановки</small></span>
+  <header class="site-header" id="header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Style of Mind — наверх">
+        <span class="brand-star" aria-hidden="true">✦</span>
+        <span class="brand-copy">
+          <span class="brand-name">Style of Mind</span>
+          <span class="brand-subtitle">психолог · расстановки</span>
+        </span>
       </a>
+
       <nav class="desktop-nav" aria-label="Основная навигация">
         <a href="#about">Обо мне</a>
         <a href="#method">Метод</a>
@@ -27,179 +31,354 @@
         <a href="#reviews">Отзывы</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="button button-ghost" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться</a>
-      <details class="mobile-nav">
-        <summary>Меню <span>☰</span></summary>
-        <nav aria-label="Мобильная навигация">
-          <a href="#about">Обо мне</a><a href="#method">Метод</a><a href="#formats">Форматы</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a>
-          <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться</a>
-        </nav>
-      </details>
+
+      <a class="button button-outline header-cta" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">
+        Записаться
+      </a>
+
+      <button class="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false">
+        <span></span><span></span>
+        <span class="sr-only">Открыть меню</span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav aria-label="Мобильная навигация">
+        <a href="#about">Обо мне</a>
+        <a href="#method">Метод</a>
+        <a href="#requests">Запросы</a>
+        <a href="#formats">Форматы</a>
+        <a href="#process">Процесс</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#faq">FAQ</a>
+        <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться</a>
+      </nav>
     </div>
   </header>
 
-  <main id="content">
-    <section class="hero dark-surface">
-      <div class="hero-art" aria-hidden="true">
-        <div class="hero-photo"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-stars"></div>
-        <div class="hero-lines"></div>
-      </div>
-      <div class="shell hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Глубина · осознанность · выбор</p>
-          <h1>Расставить<br>точки над «МЫ»</h1>
-          <p class="lead">Психологическая работа с отношениями, повторяющимися сценариями и значимыми семейными связями. Чтобы учиться понимать себя, свои связи и делать осознанный выбор.</p>
-          <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться на консультацию <span>→</span></a>
-        </div>
-      </div>
-    </section>
+  <main id="main">
+    <section class="hero dark-section" id="top">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-shimmer hero-shimmer-a" aria-hidden="true"></div>
+      <div class="hero-shimmer hero-shimmer-b" aria-hidden="true"></div>
+      <div class="hero-orbits" aria-hidden="true"></div>
 
-    <section class="benefits dark-surface">
-      <div class="shell benefit-grid">
-        <article><div class="round-icon">✦</div><h2>Профессиональный<br>подход</h2><p>Психологическое образование, супервизия, опыт работы с семейными системами.</p></article>
-        <article><div class="round-icon">❧</div><h2>Глубокая работа<br>с причинами</h2><p>Исследуем не только текущие ситуации, но и контекст отношений, семейной истории и опыта поколений.</p></article>
-        <article><div class="round-icon">◉</div><h2>Безопасное<br>пространство</h2><p>Бережное сопровождение, принятие и уважение к вашим чувствам и темпу.</p></article>
-        <article><div class="round-icon">☼</div><h2>Осознанные<br>перемены</h2><p>Помогаю увидеть новые возможности и найти решения, которые подходят именно вам.</p></article>
-      </div>
-    </section>
-
-    <section class="about light-surface" id="about">
-      <div class="shell about-grid">
-        <div class="image-frame arch"><img src="../concept-v2.2/assets/generated/звёздное_озеро_в_золотых_горах.png" alt="Пейзаж с озером и горами" loading="lazy"></div>
-        <div>
-          <p class="eyebrow dark-text">Обо мне</p>
-          <h2>Я — психолог</h2>
-          <p>В своей работе я соединяю профессиональный психологический подход с вниманием к символам, образам и смысловым связям. Это помогает посмотреть на ситуацию шире и найти опору внутри себя.</p>
-          <a class="button button-outline-dark" href="#method">Узнать больше <span>→</span></a>
-        </div>
-        <p class="hand-note">Иногда, чтобы<br>увидеть больше,<br>нужно просто<br>увидеть картину целиком.</p>
-      </div>
-    </section>
-
-    <section class="method dark-surface" id="method">
-      <div class="shell method-grid">
-        <div>
-          <p class="eyebrow">Метод</p>
-          <h2>Как работают<br>системные расстановки</h2>
-          <p class="lead">Это метод, который помогает увидеть скрытые связи, повторяющиеся сценарии и глубинные причины ваших ситуаций.</p>
-          <a class="button button-ghost" href="#formats">Подробнее о методе <span>→</span></a>
-        </div>
-        <div class="numbered">
-          <div><b>01</b><span>Погружение в ситуацию<br>и выявление запроса</span></div>
-          <div><b>02</b><span>Расстановка — работа<br>с фигурами и образами</span></div>
-          <div><b>03</b><span>Важные инсайты и новые<br>возможности</span></div>
-          <div><b>04</b><span>Интеграция и закрепление<br>результатов</span></div>
-        </div>
-        <div class="lotus"><img src="../concept-v2.2/assets/generated/сияющий_лотос_среди_золотых_линий.png" alt="" loading="lazy"></div>
-      </div>
-    </section>
-
-    <section class="requests light-surface">
-      <div class="shell">
-        <p class="eyebrow dark-text">С какими запросами можно обратиться</p>
-        <h2>Вы можете обратиться, если</h2>
-        <div class="six-grid">
-          <article><span>♡</span><h3>Отношения<br>и семья</h3><p>Кризисы, конфликты, ревность, повторяющиеся сценарии.</p></article>
-          <article><span>♙</span><h3>Повторяющиеся<br>ситуации</h3><p>Чувство, что похожие истории снова и снова возвращаются.</p></article>
-          <article><span>◎</span><h3>Эмоциональное<br>состояние</h3><p>Тревога, вина, обиды, внутреннее напряжение.</p></article>
-          <article><span>❧</span><h3>Родовые<br>сценарии</h3><p>Семейная история, связи, темы и наследуемые паттерны.</p></article>
-          <article><span>✧</span><h3>Жизненные<br>выборы</h3><p>Решения, поиск опоры, новый этап и направление.</p></article>
-          <article><span>∞</span><h3>Личностный<br>рост</h3><p>Глубокое понимание себя, ценностей и отношений.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="formats dark-surface" id="formats">
-      <div class="shell">
-        <p class="eyebrow">Форматы и стоимость</p>
-        <div class="format-grid">
-          <article class="price-card"><span class="mini-icon">♙</span><h3>Индивидуальная<br>расстановка</h3><p>1–1,5 часа · онлайн</p><strong>5 000 ₽</strong><a href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer" class="button button-ghost">Записаться →</a></article>
-          <article class="price-card"><span class="mini-icon">◎</span><h3>Онлайн-расстановка</h3><p>1,5–2 часа · группа</p><strong>7 000 ₽</strong><a href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer" class="button button-ghost">Записаться →</a></article>
-          <article class="price-card"><span class="mini-icon">◌</span><h3>Групповая расстановка</h3><p>2,5–3 часа · очно</p><strong>12 000 ₽</strong><a href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer" class="button button-ghost">Записаться →</a></article>
-          <article class="diagnostic"><p class="eyebrow dark-text">Особый формат</p><h3>Диагностическая сессия</h3><p>Если вы пока не готовы к расстановке, можно начать с отдельной встречи 30–40 минут.</p><strong>1 200 ₽</strong><a href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer" class="button button-outline-dark">Подробнее →</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="process light-surface">
-      <div class="shell process-grid">
-        <div>
-          <p class="eyebrow dark-text">Процесс</p>
-          <h2>Как проходит расстановка</h2>
-          <p>Простая и понятная последовательность шагов.</p>
-          <div class="process-cards">
-            <article><b>01</b><h3>Подготовка</h3><p>Обсуждаем ваш запрос, формат и детали.</p></article>
-            <article><b>02</b><h3>Расстановка</h3><p>Вы размещаете фигуры и наблюдаете процесс.</p></article>
-            <article><b>03</b><h3>Осмысление</h3><p>Мы исследуем, что происходит и какие смыслы появляются.</p></article>
-            <article><b>04</b><h3>Интеграция</h3><p>Вы уносите с собой инсайты и новые способы взглянуть на ситуацию.</p></article>
+      <div class="shell hero-layout">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">глубина · осознанность · выбор</p>
+          <h1>Расставить<br><em>точки над «МЫ»</em></h1>
+          <p class="hero-description">
+            Психологическая работа с отношениями, семейными сценариями и повторяющимися ситуациями.
+            Спокойно исследуем ваш запрос, находим связи и возвращаем опору.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">
+              Записаться на консультацию <span aria-hidden="true">→</span>
+            </a>
+            <a class="text-button light" href="#about">Узнать больше <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-meta">
+            <span>онлайн · Zoom</span>
+            <span>очно · Санкт-Петербург</span>
           </div>
         </div>
-        <div class="image-frame arch small-arch"><img src="../concept-v2.2/assets/generated/звёздное_озеро_в_золотых_горах.png" alt="" loading="lazy"></div>
-        <p class="hand-note right">Каждая встреча —<br>индивидуальна.<br>Подберём темп и формат.</p>
+
+        <div class="hero-portrait-wrap reveal delay-1" aria-hidden="true">
+          <div class="hero-portrait-glow"></div>
+          <div class="hero-portrait">
+            <img src="../concept-v2.2/assets/objects/портрет_женщины_в_чёрной_рубашке_и_очках.png" alt="">
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="after dark-surface">
+    <section class="trust-strip dark-section">
+      <div class="shell trust-grid">
+        <article class="trust-card reveal">
+          <div class="circle-icon">✦</div>
+          <h2>Профессиональный<br>подход</h2>
+          <p>Психологическое образование, супервизия и опыт работы с семейными системами.</p>
+        </article>
+        <article class="trust-card reveal delay-1">
+          <div class="circle-icon">❧</div>
+          <h2>Глубокая работа<br>с причинами</h2>
+          <p>Исследуем не только ситуацию, но и повторяющиеся связи и семейный контекст.</p>
+        </article>
+        <article class="trust-card reveal delay-2">
+          <div class="circle-icon">◉</div>
+          <h2>Безопасное<br>пространство</h2>
+          <p>Бережное сопровождение, уважение к вашему темпу, чувствам и границам.</p>
+        </article>
+        <article class="trust-card reveal delay-3">
+          <div class="circle-icon">☼</div>
+          <h2>Осознанные<br>перемены</h2>
+          <p>Помогаю увидеть варианты и выбрать то, что действительно подходит вам.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about light-section texture" id="about">
+      <div class="shell about-layout">
+        <div class="arch-image reveal">
+          <img src="../concept-v2.2/assets/generated/звёздное_озеро_в_золотых_горах.png" alt="Золотистый пейзаж с озером и горами" loading="lazy">
+        </div>
+
+        <div class="about-copy reveal delay-1">
+          <p class="eyebrow dark">обо мне</p>
+          <h2>Я — психолог</h2>
+          <p>
+            В работе соединяю профессиональный психологический подход с вниманием к образам,
+            отношениям и смысловым связям. Это помогает посмотреть на историю шире и заметить
+            то, что раньше оставалось за кадром.
+          </p>
+          <p>
+            Мы не торопимся с выводами и не ищем «правильный ответ». Важнее понять,
+            что происходит именно с вами и какие шаги становятся возможными.
+          </p>
+          <a class="button button-dark-outline" href="#method">Подробнее обо мне <span aria-hidden="true">→</span></a>
+        </div>
+
+        <p class="hand-note reveal delay-2">
+          Иногда, чтобы<br>
+          увидеть больше,<br>
+          нужно просто<br>
+          увидеть картину целиком.
+        </p>
+      </div>
+    </section>
+
+    <section class="method dark-section" id="method">
+      <div class="shell method-layout">
+        <div class="method-copy reveal">
+          <p class="eyebrow">метод</p>
+          <h2>Как работают<br>системные расстановки</h2>
+          <p>
+            Формат помогает исследовать отношения, повторяющиеся сценарии и значимые связи
+            вокруг вашего запроса через работу с фигурами, образами и наблюдением.
+          </p>
+          <a class="button button-outline" href="#formats">Посмотреть форматы <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="method-steps reveal delay-1">
+          <div class="method-step"><b>01</b><span>Погружение в ситуацию<br>и формулировка запроса</span></div>
+          <div class="method-step"><b>02</b><span>Расстановка — работа<br>с фигурами и образами</span></div>
+          <div class="method-step"><b>03</b><span>Важные наблюдения<br>и новые возможности</span></div>
+          <div class="method-step"><b>04</b><span>Интеграция и возвращение<br>к повседневной жизни</span></div>
+        </div>
+
+        <div class="lotus-art reveal delay-2" aria-hidden="true">
+          <img src="../concept-v2.2/assets/generated/сияющий_лотос_среди_золотых_линий.png" alt="" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="requests light-section texture" id="requests">
       <div class="shell">
-        <p class="eyebrow">После встречи</p>
-        <h2>Что можно получить от встречи</h2>
-        <div class="after-grid">
-          <article><span>◔</span><h3>Больше ясности</h3><p>Внутреннее спокойствие и понимание ситуации.</p></article>
-          <article><span>⌘</span><h3>Новые вопросы</h3><p>К себе, к отношениям, к жизни и своим решениям.</p></article>
-          <article><span>◫</span><h3>Смещение взгляда</h3><p>Возможность посмотреть на историю с другой стороны.</p></article>
-          <article><span>✧</span><h3>Личные выводы</h3><p>Принятие и движение в выбранном направлении.</p></article>
+        <div class="section-heading reveal">
+          <p class="eyebrow dark">с какими запросами можно обратиться</p>
+          <h2>Вы можете обратиться, если</h2>
+        </div>
+
+        <div class="request-grid">
+          <article class="request-card reveal"><span>♡</span><h3>Отношения<br>и семья</h3><p>Конфликты, кризисы, ревность, близость и границы.</p></article>
+          <article class="request-card reveal delay-1"><span>♙</span><h3>Повторяющиеся<br>ситуации</h3><p>Чувство, что похожие истории снова и снова возвращаются.</p></article>
+          <article class="request-card reveal delay-2"><span>◎</span><h3>Эмоциональное<br>состояние</h3><p>Тревога, вина, обиды, внутреннее напряжение и неопределённость.</p></article>
+          <article class="request-card reveal"><span>❧</span><h3>Семейные<br>сценарии</h3><p>История семьи, связи между поколениями и повторяющиеся темы.</p></article>
+          <article class="request-card reveal delay-1"><span>✧</span><h3>Жизненные<br>выборы</h3><p>Важные решения, новый этап, поиск опоры и направления.</p></article>
+          <article class="request-card reveal delay-2"><span>∞</span><h3>Личностный<br>рост</h3><p>Глубокое понимание себя, своих ценностей и отношений.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="reviews light-surface" id="reviews">
+    <section class="formats dark-section" id="formats">
       <div class="shell">
-        <p class="eyebrow dark-text">Отзывы клиентов</p>
-        <h2>Реальные истории и изменения</h2>
-        <div class="review-grid">
-          <blockquote><div class="avatar">А</div><p>«После расстановки я увидел, что искал не девушку, а одобрение. Теперь спокойнее смотрю на свои выборы.»</p><footer>Анна, 32 года</footer></blockquote>
-          <blockquote><div class="avatar">Е</div><p>«Развод был очень тяжёлым. Мне стало легче увидеть свою историю иначе и перестать постоянно корить себя.»</p><footer>Елена, 36 лет</footer></blockquote>
-          <blockquote><div class="avatar">И</div><p>«Очень ценно, что вы создаёте такое бережное пространство. Я почувствовала принятие и смогла двигаться дальше.»</p><footer>Ирина, 41 год</footer></blockquote>
+        <div class="section-heading dark-heading reveal">
+          <p class="eyebrow">форматы и стоимость</p>
+          <h2>Выберите удобный<br>формат работы</h2>
+          <p class="section-lead">Онлайн в Zoom или очно в Санкт-Петербурге.</p>
         </div>
-        <a class="text-link" href="#faq">Все отзывы →</a>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <div class="price-icon">♙</div>
+            <p class="price-kicker">01 · индивидуально</p>
+            <h3>Индивидуальная<br>расстановка</h3>
+            <p>Спокойный персональный формат с вашим запросом и фигурками.</p>
+            <div class="price-row"><span>1–1,5 часа</span><strong>5 000 ₽</strong></div>
+            <a class="button button-outline" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться <span>→</span></a>
+          </article>
+
+          <article class="price-card featured reveal delay-1">
+            <div class="price-icon">◎</div>
+            <p class="price-kicker">02 · группа онлайн</p>
+            <h3>Онлайн-расстановка<br>с заместителями</h3>
+            <p>Групповой формат в Zoom с участием других людей в ролях упражнения.</p>
+            <div class="price-row"><span>1,5–2 часа</span><strong>7 000 ₽</strong></div>
+            <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Выбрать время <span>→</span></a>
+          </article>
+
+          <article class="price-card reveal delay-2">
+            <div class="price-icon">◌</div>
+            <p class="price-kicker">03 · группа очно</p>
+            <h3>Групповая расстановка<br>в Санкт-Петербурге</h3>
+            <p>Очная встреча с заместителями. Даты и место уточняются при записи.</p>
+            <div class="price-row"><span>2,5–3 часа</span><strong>12 000 ₽</strong></div>
+            <a class="button button-outline" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться <span>→</span></a>
+          </article>
+
+          <article class="diagnostic-card reveal delay-3">
+            <p class="eyebrow dark">особый формат</p>
+            <h3>Диагностическая<br>сессия</h3>
+            <p>
+              Можно начать с отдельной встречи на 30–40 минут, чтобы познакомиться,
+              обсудить запрос и понять, какой формат подходит.
+            </p>
+            <div class="diagnostic-price"><strong>1 200 ₽</strong><span>первый сеанс</span></div>
+            <a class="button button-dark-outline" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Подробнее <span>→</span></a>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="faq light-surface" id="faq">
-      <div class="shell faq-grid">
-        <div>
-          <p class="eyebrow dark-text">FAQ</p>
-          <h2>Частые вопросы</h2>
-          <p>Ответы на самые популярные вопросы.</p>
+    <section class="process light-section texture" id="process">
+      <div class="shell process-layout">
+        <div class="process-main reveal">
+          <div class="section-heading">
+            <p class="eyebrow dark">процесс</p>
+            <h2>Как проходит встреча</h2>
+            <p class="section-lead dark-lead">Понятная последовательность помогает заранее представить формат и свой темп.</p>
+          </div>
+
+          <div class="process-grid">
+            <article><span>01</span><h3>Подготовка</h3><p>Обсуждаем запрос, формат и организационные детали.</p></article>
+            <article><span>02</span><h3>Расстановка</h3><p>Вы размещаете фигуры и наблюдаете за процессом.</p></article>
+            <article><span>03</span><h3>Осмысление</h3><p>Обсуждаем наблюдения, ощущения и то, что оказалось важным.</p></article>
+            <article><span>04</span><h3>Интеграция</h3><p>Возвращаем найденные опоры в повседневную жизнь.</p></article>
+          </div>
         </div>
-        <div class="faq-list">
-          <details><summary>Как выбрать формат расстановки? <span>+</span></summary><p>Формат зависит от вашего запроса и удобного способа работы. На встрече можно обсудить варианты.</p></details>
-          <details><summary>Нужна ли подготовка? <span>+</span></summary><p>Достаточно прийти с темой, которую вы хотите исследовать. Организационные детали обсуждаются заранее.</p></details>
-          <details><summary>Можно ли начать с диагностической сессии? <span>+</span></summary><p>Да. Это отдельная платная встреча на 30–40 минут онлайн. После неё решение о дальнейшем формате остаётся за вами.</p></details>
-          <details><summary>Как проходит оплата? <span>+</span></summary><p>Подтверждение записи проводится по предоплате. Условия переноса и отмены уточняются при записи.</p></details>
-          <details><summary>Можно ли работать онлайн? <span>+</span></summary><p>Да. Индивидуальный и групповой формат доступны онлайн в Zoom; также возможны очные встречи в Санкт-Петербурге.</p></details>
+
+        <div class="process-visual reveal delay-1">
+          <div class="arch-image small"><img src="../concept-v2.2/assets/generated/звёздное_озеро_в_золотых_горах.png" alt="" loading="lazy"></div>
+          <p class="hand-note">Каждая встреча —<br>индивидуальна.<br>Подберём темп и формат.</p>
         </div>
-        <div class="faq-art"><img src="../concept-v2.2/assets/generated/золотая_арка_над_каменным_путем.png" alt="" loading="lazy"><p>Если у вас остались вопросы — напишите мне.</p></div>
       </div>
     </section>
 
-    <section class="final dark-surface">
-      <div class="shell final-inner">
-        <p class="eyebrow">Готовы сделать шаг к себе?</p>
-        <h2>Запишитесь на консультацию<br>и начните путь к изменениям.</h2>
-        <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться на консультацию <span>→</span></a>
+    <section class="outcomes dark-section" id="outcomes">
+      <div class="shell">
+        <div class="section-heading dark-heading reveal">
+          <p class="eyebrow">после встречи</p>
+          <h2>Что можно унести<br>с собой</h2>
+          <p class="section-lead">Не обещание результата, а пространство для наблюдений, вопросов и личных выводов.</p>
+        </div>
+
+        <div class="outcome-grid">
+          <article class="reveal"><span>◔</span><h3>Больше ясности</h3><p>Внутреннее спокойствие и более понятная картина ситуации.</p></article>
+          <article class="reveal delay-1"><span>⌘</span><h3>Новые вопросы</h3><p>К себе, отношениям, жизни и решениям, которые сейчас важны.</p></article>
+          <article class="reveal delay-2"><span>◫</span><h3>Смещение взгляда</h3><p>Возможность увидеть знакомую историю с другой стороны.</p></article>
+          <article class="reveal delay-3"><span>✧</span><h3>Личные выводы</h3><p>Принятие и пространство для самостоятельного дальнейшего выбора.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews light-section texture" id="reviews">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow dark">отзывы клиентов</p>
+          <h2>Реальные истории<br>и изменения</h2>
+        </div>
+
+        <div class="review-slider-wrap">
+          <button class="slider-button prev" type="button" aria-label="Предыдущий отзыв">←</button>
+          <div class="review-slider" data-slider>
+            <article class="review-card"><div class="avatar">А</div><p>«После расстановки я понял, что искал не девушку, а одобрение. Теперь спокойнее смотрю на свои выборы.»</p><footer>Анна · 32 года</footer></article>
+            <article class="review-card"><div class="avatar">Е</div><p>«Развод был очень тяжёлым. Мне стало легче увидеть свою историю иначе и перестать постоянно корить себя.»</p><footer>Елена · 36 лет</footer></article>
+            <article class="review-card"><div class="avatar">И</div><p>«Очень ценно, что здесь можно говорить спокойно. Я почувствовала принятие и смогла двигаться дальше.»</p><footer>Ирина · 41 год</footer></article>
+          </div>
+          <button class="slider-button next" type="button" aria-label="Следующий отзыв">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq light-section texture" id="faq">
+      <div class="shell faq-layout">
+        <div class="faq-intro reveal">
+          <p class="eyebrow dark">faq</p>
+          <h2>Частые<br>вопросы</h2>
+          <p>Здесь собраны ответы на то, что чаще всего хочется понять до встречи.</p>
+          <a class="button button-dark-outline" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Перейти к записи <span>→</span></a>
+        </div>
+
+        <div class="faq-list reveal delay-1">
+          <details open>
+            <summary>Как выбрать формат расстановки?<span>+</span></summary>
+            <p>Формат зависит от вашего запроса, опыта и удобного способа работы. Это можно обсудить ещё до записи.</p>
+          </details>
+          <details>
+            <summary>Нужна ли подготовка?<span>+</span></summary>
+            <p>Достаточно прийти с темой, которую вы хотите исследовать. Организационные детали мы согласуем заранее.</p>
+          </details>
+          <details>
+            <summary>Можно ли начать с диагностической сессии?<span>+</span></summary>
+            <p>Да. Это отдельная платная встреча на 30–40 минут онлайн. После неё решение о дальнейшем формате остаётся за вами.</p>
+          </details>
+          <details>
+            <summary>Как проходит оплата и отмена?<span>+</span></summary>
+            <p>Для подтверждения записи используется предоплата. Условия переноса и отмены уточняются при записи.</p>
+          </details>
+          <details>
+            <summary>Можно ли работать онлайн?<span>+</span></summary>
+            <p>Да. Индивидуальный и групповой формат доступны онлайн в Zoom; также проводятся очные групповые встречи в Санкт-Петербурге.</p>
+          </details>
+          <details>
+            <summary>Что такое генограмма?<span>+</span></summary>
+            <p>Это схема родственных связей и значимых семейных событий по вашему рассказу. Она помогает упорядочить информацию, но не подтверждает факты о других людях.</p>
+          </details>
+        </div>
+
+        <div class="faq-visual reveal delay-2">
+          <img src="../concept-v2.2/assets/generated/золотая_арка_над_каменным_путем.png" alt="" loading="lazy">
+          <p>Если остались вопросы —<br>можно написать мне.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta dark-section">
+      <div class="final-bg" aria-hidden="true"></div>
+      <div class="shell final-content reveal">
+        <p class="eyebrow">готовы сделать шаг к себе?</p>
+        <h2>Начните с разговора<br>о том, что важно именно вам.</h2>
+        <p>Можно записаться на расстановку сразу или начать с диагностической сессии.</p>
+        <div class="final-actions">
+          <a class="button button-gold" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться на консультацию <span>→</span></a>
+          <a class="button button-outline" href="https://t.me/olgastyleofmind" target="_blank" rel="noopener noreferrer">Telegram <span>↗</span></a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer dark-surface">
-    <div class="shell footer-row">
-      <a class="brand" href="#top"><span class="brand-mark">✦</span><span><strong>Style of Mind</strong><small>психолог · расстановки</small></span></a>
-      <nav aria-label="Навигация в подвале"><a href="#about">Обо мне</a><a href="#method">Метод</a><a href="#formats">Форматы</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a></nav>
-      <span class="copyright">© 2026 Style of Mind</span>
+  <footer class="site-footer dark-section">
+    <div class="shell footer-grid">
+      <a class="brand" href="#top">
+        <span class="brand-star">✦</span>
+        <span class="brand-copy"><span class="brand-name">Style of Mind</span><span class="brand-subtitle">психолог · расстановки</span></span>
+      </a>
+
+      <nav aria-label="Навигация в подвале">
+        <a href="#about">Обо мне</a>
+        <a href="#method">Метод</a>
+        <a href="#formats">Форматы</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="footer-side">
+        <a href="https://t.me/olgastyleofmind" target="_blank" rel="noopener noreferrer">Telegram ↗</a>
+        <span>© 2026 Style of Mind</span>
+      </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
