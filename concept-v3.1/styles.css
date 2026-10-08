@@ -45,36 +45,33 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .text-button{display:inline-flex;align-items:center;gap:9px;font-size:12px}.text-button.light{color:#eee5d9}.text-button:hover{color:var(--gold2)}
 .menu-toggle{display:none;margin-left:auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;position:relative}.menu-toggle span:not(.sr-only){position:absolute;left:11px;right:11px;height:1px;background:#f5eadc;transition:.2s}.menu-toggle span:nth-child(1){top:15px}.menu-toggle span:nth-child(2){top:25px}
 .mobile-menu{display:none}
-.hero{min-height:735px;padding-top:78px}
+.hero{min-height:720px;padding-top:78px}
 .hero-bg{position:absolute;inset:0;background:
-radial-gradient(ellipse at 78% 34%,rgba(226,186,111,.34) 0%,rgba(174,128,62,.18) 22%,transparent 46%),
-radial-gradient(ellipse at 92% 76%,rgba(126,93,47,.18) 0%,transparent 38%),
-radial-gradient(ellipse at 42% 16%,rgba(52,86,96,.22) 0%,transparent 42%),
-linear-gradient(116deg,#07141b 0%,#0a1a22 36%,#112830 63%,#1b2730 100%);}
-.hero-bg:before{content:"";position:absolute;inset:-12%;opacity:.5;background:
-radial-gradient(circle at 75% 31%,rgba(247,220,171,.72) 0 1px,transparent 2px),
-radial-gradient(circle at 82% 24%,rgba(247,220,171,.55) 0 1px,transparent 2px),
-radial-gradient(circle at 69% 18%,rgba(247,220,171,.48) 0 1px,transparent 2px),
-radial-gradient(circle at 57% 40%,rgba(247,220,171,.35) 0 1px,transparent 2px),
-radial-gradient(circle at 88% 48%,rgba(247,220,171,.4) 0 1px,transparent 2px),
-radial-gradient(circle at 34% 62%,rgba(189,212,219,.24) 0 1px,transparent 2px),
-radial-gradient(circle at 18% 28%,rgba(189,212,219,.18) 0 1px,transparent 2px);background-size:100% 100%;}
+linear-gradient(90deg,rgba(4,13,18,.48) 0%,rgba(6,18,24,.20) 48%,rgba(6,14,19,.08) 76%,rgba(6,14,19,.20) 100%),
+url("assets/objects/hero-background.webp") center 50%/cover no-repeat;transform:scale(1.015);filter:saturate(.92) brightness(.90)}
+.hero-bg:before{content:"";position:absolute;inset:0;opacity:.32;background:
+radial-gradient(circle at 74% 28%,rgba(247,220,171,.72) 0 1px,transparent 2px),
+radial-gradient(circle at 82% 22%,rgba(247,220,171,.52) 0 1px,transparent 2px),
+radial-gradient(circle at 64% 18%,rgba(247,220,171,.45) 0 1px,transparent 2px),
+radial-gradient(circle at 58% 46%,rgba(247,220,171,.34) 0 1px,transparent 2px),
+radial-gradient(circle at 90% 50%,rgba(247,220,171,.34) 0 1px,transparent 2px);
+background-size:100% 100%}
 .hero-bg:after{content:"";position:absolute;inset:0;background:
-radial-gradient(ellipse at 76% 41%,rgba(237,196,118,.22),transparent 25%),
-linear-gradient(180deg,rgba(2,9,13,.05),rgba(2,9,13,.28) 74%,rgba(2,9,13,.62) 100%);}
-.hero-shimmer{position:absolute;pointer-events:none;border-radius:50%;filter:blur(8px)}.hero-shimmer-a{width:520px;height:520px;right:10%;top:-20px;background:radial-gradient(circle,rgba(229,188,109,.32),transparent 65%)}.hero-shimmer-b{width:260px;height:260px;left:12%;bottom:3%;background:radial-gradient(circle,rgba(138,102,54,.13),transparent 68%)}
+radial-gradient(ellipse at 76% 42%,rgba(237,196,118,.18),transparent 28%),
+linear-gradient(180deg,rgba(2,9,13,.02),rgba(2,9,13,.18) 72%,rgba(2,9,13,.52) 100%)}
+.hero-shimmer{position:absolute;pointer-events:none;border-radius:50%;filter:blur(8px)}.hero-shimmer-a{width:520px;height:520px;right:4%;top:20px;background:radial-gradient(circle,rgba(229,188,109,.24),transparent 65%)}.hero-shimmer-b{width:260px;height:260px;left:10%;bottom:2%;background:radial-gradient(circle,rgba(138,102,54,.12),transparent 68%)}
 .hero-orbits{position:absolute;inset:0;opacity:.28;background:repeating-radial-gradient(ellipse at 83% 42%,transparent 0 95px,rgba(214,167,91,.18) 96px 97px,transparent 98px 150px);mask-image:linear-gradient(90deg,transparent 42%,#000 60%,#000 100%)}
-.hero-layout{position:relative;z-index:2;min-height:650px;display:grid;grid-template-columns:minmax(0,570px) 1fr;align-items:center}
-.hero-copy{padding:70px 0 100px}
+.hero-layout{position:relative;z-index:2;min-height:642px;display:grid;grid-template-columns:minmax(0,540px) minmax(420px,1fr);align-items:stretch}
+.hero-copy{padding:104px 0 88px;display:flex;flex-direction:column;justify-content:center}
 .eyebrow{margin:0 0 11px;text-transform:uppercase;letter-spacing:.25em;font-size:9px;font-weight:600;color:var(--gold2)}.eyebrow.dark{color:#8a755a}
 .hero h1,.section-heading h2,.about h2,.method h2,.final-cta h2{font-family:var(--serif);font-weight:500;letter-spacing:-.035em}
 .hero h1{font-size:clamp(50px,6.3vw,76px);line-height:.97;margin:0 0 22px}.hero h1 em{font-style:normal}
 .hero-description{max-width:520px;font-size:13px;color:rgba(248,242,233,.76);margin:0 0 28px}
 .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.hero-portrait-wrap{position:relative;min-height:640px;display:flex;justify-content:center;align-items:flex-end}
-.hero-portrait-glow{position:absolute;width:560px;height:560px;border-radius:50%;right:1%;top:40px;background:radial-gradient(circle,rgba(240,191,104,.34),transparent 68%);filter:blur(12px)}
-.hero-portrait{position:relative;z-index:1;width:min(570px,72vw);height:620px;display:flex;align-items:flex-end;justify-content:center}
-.hero-portrait img{height:100%;width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 25px 28px rgba(0,0,0,.24))}
+.hero-portrait-wrap{position:relative;min-height:642px;display:flex;justify-content:flex-end;align-items:flex-end;padding-right:18px}
+.hero-portrait-glow{position:absolute;width:500px;height:500px;border-radius:50%;right:-10px;bottom:70px;background:radial-gradient(circle,rgba(240,191,104,.30),transparent 68%);filter:blur(14px)}
+.hero-portrait{position:relative;z-index:1;width:min(430px,42vw);height:570px;display:flex;align-items:flex-end;justify-content:center}
+.hero-portrait img{display:block;width:auto;height:555px;max-width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 25px 28px rgba(0,0,0,.30));}
 .trust-strip{border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
 .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:36px 0}.trust-card{text-align:center;padding:0 10px}.circle-icon{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 12px;color:var(--gold2);font-size:20px}.trust-card h2{font:500 18px/1.1 var(--serif);margin:0 0 10px}.trust-card p{max-width:230px;margin:0 auto;color:rgba(248,242,233,.61);font-size:10px}
 .about{padding:86px 0}.about-layout{position:relative;z-index:1;display:grid;grid-template-columns:300px minmax(0,1fr) 240px;gap:70px;align-items:center}
@@ -108,7 +105,7 @@ url("../concept-v2.2/assets/generated/золотая_орбита_безмяте
 @media (max-width:1000px){
   .shell{width:min(100% - 44px,760px)}.desktop-nav,.header-cta{display:none}.menu-toggle{display:block}
   .mobile-menu{position:absolute;top:78px;right:20px;left:20px;background:rgba(8,22,29,.97);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(15px);padding:18px}.mobile-menu.open{display:block}.mobile-menu nav{display:flex;flex-direction:column;gap:4px}.mobile-menu a{padding:9px 8px}.mobile-menu .button{margin-top:8px}
-  .hero{min-height:760px}.hero-layout{grid-template-columns:1fr;min-height:0;align-items:stretch;padding-bottom:0}.hero-copy{padding-top:105px;max-width:620px}.hero-portrait-wrap{position:relative;right:auto;bottom:auto;min-height:500px;width:100%;max-width:none;opacity:1;order:2;margin-top:8px;display:flex;align-items:flex-end;justify-content:center}.hero-copy{position:relative;z-index:4;order:1}.hero-bg{background:
+  .hero{min-height:760px}.hero-layout{grid-template-columns:1fr;min-height:0;align-items:stretch;padding-bottom:0}.hero-copy{padding-top:105px;padding-bottom:32px;max-width:620px}.hero-portrait-wrap{position:relative;right:auto;bottom:auto;min-height:520px;width:100%;max-width:none;opacity:1;order:2;margin-top:0;display:flex;align-items:flex-end;justify-content:center;padding-right:0}.hero-portrait{width:min(400px,78vw);height:510px}.hero-portrait img{height:500px}.hero-bg{background:
     radial-gradient(ellipse at 78% 34%,rgba(226,186,111,.30) 0%,rgba(174,128,62,.14) 22%,transparent 46%),
     radial-gradient(ellipse at 92% 76%,rgba(126,93,47,.16) 0%,transparent 38%),
     radial-gradient(ellipse at 42% 16%,rgba(52,86,96,.18) 0%,transparent 42%),
@@ -122,7 +119,7 @@ url("../concept-v2.2/assets/generated/золотая_орбита_безмяте
 @media (max-width:640px){
   .shell{width:calc(100% - 30px)}
   .header-inner{height:68px}.mobile-menu{top:68px}
-  .hero{min-height:0}.hero-layout{min-height:0;padding-bottom:0}.hero-copy{padding-top:92px;padding-bottom:42px}.hero h1{font-size:46px}.hero-description{font-size:12px}.hero-portrait-wrap{width:100%;min-height:430px;right:auto;bottom:auto;opacity:1;margin-top:0}.hero-portrait{width:min(520px,96vw);height:430px}.hero-portrait-glow{width:420px;height:420px;right:50%;transform:translateX(50%);top:20px}.hero-actions{align-items:flex-start;flex-direction:column}
+  .hero{min-height:0}.hero-layout{min-height:0;padding-bottom:0}.hero-copy{padding-top:92px;padding-bottom:34px}.hero h1{font-size:46px}.hero-description{font-size:12px}.hero-portrait-wrap{width:100%;min-height:430px;right:auto;bottom:auto;opacity:1;margin-top:0;padding-right:0}.hero-portrait{width:min(350px,92vw);height:450px}.hero-portrait img{height:440px}.hero-portrait-glow{width:390px;height:390px;right:50%;transform:translateX(50%);top:28px}.hero-actions{align-items:flex-start;flex-direction:column}
   .hero-meta{gap:12px;flex-direction:column}
   .trust-grid,.about-layout,.method-layout,.process-layout,.pricing-grid,.faq-layout{grid-template-columns:1fr}.trust-grid{gap:0}.trust-card{padding:16px 8px}.trust-card h2{font-size:17px}.trust-card p{font-size:10px}
   .about{padding:58px 0}.arch-image{width:270px;height:300px}.about h2,.method h2,.section-heading h2,.faq-intro h2,.final-cta h2{font-size:40px}.method{padding:60px 0}.method-layout .lotus-art{grid-column:auto;grid-row:auto}.method-steps{margin-top:0}.requests{padding:58px 0}.request-grid{grid-template-columns:repeat(2,1fr)}.request-card:nth-child(3n){border-right:1px solid var(--dark-line)}.request-card:nth-child(2n){border-right:0}.request-card:nth-child(n+3){border-top:1px solid var(--dark-line)}
