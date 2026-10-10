@@ -124,7 +124,7 @@ def run_audit(page_arg: str, out_arg: str) -> int:
                 )
                 page.goto(page_url, wait_until="load", timeout=30000)
                 page.evaluate("document.fonts.ready")
-                screenshot = out_dir / f"concepts/concept-1/v1.2-{label}.png"
+                screenshot = out_dir / f"concept-v1.2-{label}.png"
                 page.screenshot(path=str(screenshot), full_page=True)
 
                 details = page.evaluate("""() => {

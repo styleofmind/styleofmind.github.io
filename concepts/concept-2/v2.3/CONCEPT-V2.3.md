@@ -1,4 +1,4 @@
-# Style of Mind — concepts/concept-2/v2.3
+# Style of Mind — concept-v2.3
 
 Snapshot date: 2026-10-08
 
