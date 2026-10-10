@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const openCookieSettings = function(){
     if (!cookieConsent) return;
     cookieConsent.hidden = false;
+    // Закрываем промо-окно, чтобы оно не перекрывало диалог настроек.
+    window.dispatchEvent(new CustomEvent('olgaCookieSettingsOpened'));
     cookieReject?.focus();
   };
   cookieSettingsTrigger?.addEventListener('click', openCookieSettings);
@@ -111,8 +113,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  if (desktopMagic && window.AOS) {
-    AOS.init({duration:480, once:true, offset:120, easing:'ease-out-cubic'});
+  if (window.AOS) {
+    if (prefersReducedMotion) {
+      // Без анимации контент обязан оставаться видимым: AOS CSS скрывает data-aos-элементы до init.
+      document.querySelectorAll('[data-aos]').forEach(function (element) {
+        element.removeAttribute('data-aos');
+        element.classList.remove('aos-init', 'aos-animate');
+      });
+    } else {
+      // Инициализируем AOS и на мобильных устройствах, иначе размеченный контент остаётся прозрачным.
+      AOS.init({
+        duration: desktopMagic ? 480 : 360,
+        once: true,
+        offset: desktopMagic ? 120 : 60,
+        easing: 'ease-out-cubic'
+      });
+    }
   }
 
   if (document.querySelector('.reviews-swiper') && window.Swiper) {
@@ -314,20 +330,30 @@ document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem(SHOWN_KEY)) return;
     let shown = false;
     let scrollTimer = null;
+    // После выбора cookies даём время закрыть баннер или открыть настройки.
+    let consentReadyAt = window.cookieConsent ? 0 : Number.POSITIVE_INFINITY;
+    window.addEventListener('olgaConsentChanged', function () {
+      consentReadyAt = Date.now() + 3000;
+    });
     const showPopup = function(){
-      if (shown) return;
+      // Сначала пользователь выбирает cookie-настройки; промо-окно не перекрывает consent-диалог.
+      if (shown || !window.cookieConsent || Date.now() < consentReadyAt) return;
       shown = true;
       popup.hidden = false;
+      document.documentElement.classList.add('has-offer-popup');
       sessionStorage.setItem(SHOWN_KEY, '1');
       if (window.trackEvent) window.trackEvent('open_popup');
       closeBtn?.focus();
     };
     const closePopup = function(){
       popup.hidden = true;
+      document.documentElement.classList.remove('has-offer-popup');
       if (window.trackEvent) window.trackEvent('close_popup');
     };
+    window.addEventListener('olgaCookieSettingsOpened', closePopup);
     const maybeShowByScroll = function(){
-      if (shown) return;
+      // Не ставим таймер появления, пока посетитель не выбрал cookie-настройки.
+      if (shown || !window.cookieConsent) return;
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function(){
         const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -363,6 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 (() => {
   if (!window.PointerEvent) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const carousels = document.querySelectorAll('.process-section .process-figures');
   carousels.forEach((carousel) => {
     const wrap = carousel.closest('.process-figures-wrap');
@@ -418,4 +445,47 @@ document.addEventListener('DOMContentLoaded', function () {
     carousel.addEventListener('mouseleave', stopDrag);
 
   });
+})();
+
+
+// DIKIDI injects its close control outside the visible dialog and does not close on its own click.
+// Keep the control usable with mouse and keyboard, then delegate closure to the widget's backdrop handler.
+(() => {
+  const closeSelector = '[class*="dikidi-"][class$="-close"]';
+  const modalSelector = '[class*="dikidi-"][class*="-modal"]';
+
+  const bindDikidiCloseControls = (root) => {
+    if (!root || typeof root.querySelectorAll !== 'function') return;
+    const controls = [];
+    if (root.matches && root.matches(closeSelector)) controls.push(root);
+    controls.push(...root.querySelectorAll(closeSelector));
+
+    controls.forEach((control) => {
+      if (control.dataset.olgaCloseBound === 'true') return;
+      control.dataset.olgaCloseBound = 'true';
+      control.setAttribute('role', 'button');
+      control.setAttribute('tabindex', '0');
+      control.setAttribute('aria-label', 'Закрыть окно записи');
+
+      const closeWidget = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const modal = control.closest(modalSelector);
+        if (modal) modal.click();
+      };
+
+      control.addEventListener('click', closeWidget);
+      control.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') closeWidget(event);
+      });
+    });
+  };
+
+  bindDikidiCloseControls(document);
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach(bindDikidiCloseControls);
+    });
+  });
+  observer.observe(document.documentElement, {childList: true, subtree: true});
 })();

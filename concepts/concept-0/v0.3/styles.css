@@ -617,3 +617,502 @@ img{max-width:100%;height:auto}
     transition:none!important;
   }
 }
+
+
+/* Финальная адаптация: карточки и первый экран не сжимаются в узкие колонки. */
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .hero-copy,
+  .hero-video {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-video {
+    width: min(100%, 320px);
+    justify-self: center;
+  }
+
+  .cards-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .brand {
+    flex: 0 1 auto;
+    gap: .45rem;
+  }
+
+  .brand-full {
+    display: none;
+  }
+
+  .brand-mobile {
+    display: inline;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .header-inner {
+    gap: .65rem;
+  }
+
+  .header-btn {
+    flex: 0 0 auto;
+    padding-inline: .8rem;
+    white-space: nowrap;
+  }
+
+  .hero-copy p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-btn {
+    padding-inline: .65rem;
+    font-size: .88rem;
+  }
+}
+
+
+/* Узкие экраны: убираем внутреннее сжатие колонок и сохраняем читаемую ширину. */
+@media (max-width: 767px) {
+  .container {
+    padding-inline: 24px;
+  }
+
+  .diagnostic-inner,
+  .approach-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    min-width: 0;
+  }
+
+  .diagnostic-section .text-column,
+  .diagnostic-section .offer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    box-sizing: border-box;
+  }
+
+  .diagnostic-offer {
+    padding: 1.35rem;
+  }
+
+  .process-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    min-width: 0;
+  }
+
+  .process-layout > *,
+  .process-copy,
+  .process-figures-wrap {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .process-section .process-figures-wrap {
+    overflow: hidden;
+  }
+
+  .reviews-swiper {
+    padding: .5rem .5rem 3.5rem;
+  }
+
+  .contacts-section .contact-links {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .75rem;
+  }
+
+  .contact-link-card {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-inline: 18px;
+  }
+
+  .diagnostic-offer {
+    padding: 1.1rem;
+  }
+
+  .reviews-swiper {
+    padding-inline: .25rem;
+  }
+}
+
+
+/* Если промо-окно открыто у подвала, настройки cookies остаются доступными. */
+.has-offer-popup .site-footer .cookie-settings-trigger {
+  position: relative;
+  z-index: 610;
+}
+
+
+/* DIKIDI: external script forces a 740px dialog; constrain it to the viewport on phones. */
+@media (max-width: 767px) {
+  body > div[class^="dikidi-"][class$="-modal"] {
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] {
+    box-sizing: border-box !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    height: min(670px, calc(100vh - 48px)) !important;
+    margin: 0 auto !important;
+  }
+
+  body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] > iframe {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+
+/* Keep the injected DIKIDI close control inside the visible service-selection dialog. */
+[class*="dikidi-"][class$="-close"] {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  z-index: 2147483647 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, .96) !important;
+  color: #2e2e2e !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .18) !important;
+  cursor: pointer !important;
+}
+
+[class*="dikidi-"][class$="-close"]:focus-visible {
+  outline: 3px solid var(--accent-dark) !important;
+  outline-offset: 2px !important;
+}
+
+
+/* Override the more specific desktop layout of the specialist gallery on phones. */
+@media (max-width: 767px) {
+  .approach-section .approach-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .approach-section .approach-gallery {
+    width: 100%;
+    max-width: 560px;
+    min-width: 0;
+    justify-self: center;
+  }
+
+  .approach-section .approach-copy {
+    width: 100%;
+    max-width: 680px;
+    min-width: 0;
+    justify-self: stretch;
+  }
+}
+
+
+/* DIKIDI shell only: center the injected window and refine its backdrop/frame. */
+body > div[class^="dikidi-"][class$="-modal"] {
+  box-sizing: border-box !important;
+  padding: 16px !important;
+  overflow: hidden !important;
+  background: rgba(35, 43, 34, .58) !important;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  box-sizing: border-box !important;
+  width: min(740px, calc(100vw - 48px)) !important;
+  max-width: calc(100vw - 32px) !important;
+  height: min(670px, calc(100vh - 48px)) !important;
+  max-height: calc(100vh - 32px) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, .72) !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  box-shadow: 0 28px 90px rgba(20, 30, 24, .32) !important;
+}
+
+body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] > iframe {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: inherit !important;
+}
+
+@supports (height: 100dvh) {
+  body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] {
+    height: min(670px, calc(100dvh - 48px)) !important;
+    max-height: calc(100dvh - 32px) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body > div[class^="dikidi-"][class$="-modal"] {
+    padding: 12px !important;
+  }
+
+  body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    height: min(670px, calc(100vh - 32px)) !important;
+    max-height: calc(100vh - 24px) !important;
+  }
+
+  @supports (height: 100dvh) {
+    body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"] {
+      height: min(670px, calc(100dvh - 32px)) !important;
+      max-height: calc(100dvh - 24px) !important;
+    }
+  }
+}
+
+
+/* Final polish: cookie consent and the one-time booking offer. */
+.cookie-consent {
+  background: #fff !important;
+  border: 1px solid rgba(46, 46, 46, .10);
+  box-shadow: 0 18px 56px rgba(31, 42, 31, .16);
+  gap: 14px 22px;
+}
+
+.cookie-consent__text {
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.cookie-consent__actions .btn {
+  min-height: 46px;
+  border-radius: 13px;
+}
+
+.cookie-consent__actions .btn:focus-visible {
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 3px;
+}
+
+.popup {
+  width: min(410px, calc(100vw - 24px));
+  max-height: calc(100vh - 32px);
+  padding: 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff !important;
+  border: 1px solid rgba(46, 46, 46, .09);
+  border-radius: 22px;
+  box-shadow: 0 24px 72px rgba(31, 42, 31, .22);
+  color: var(--text);
+  -webkit-overflow-scrolling: touch;
+}
+
+.popup h2 {
+  margin: 0 0 12px;
+  padding: 0 46px 0 0;
+  font-size: clamp(21px, 3.3vw, 26px);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.popup p {
+  margin: 0 0 18px;
+  padding: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.popup .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  line-height: 1.3;
+  white-space: normal;
+  text-align: center;
+}
+
+.popup-close {
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(46, 46, 46, .10);
+  background: #f6f2eb;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.popup-close:hover {
+  background: #eee7db;
+  box-shadow: 0 4px 12px rgba(31, 42, 31, .10);
+  transform: rotate(4deg);
+}
+
+.popup-close:focus-visible {
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 3px;
+}
+
+.popup[hidden] {
+  display: none !important;
+}
+
+@supports (height: 100dvh) {
+  .popup {
+    max-height: calc(100dvh - 32px);
+  }
+}
+
+@media (max-width: 767px) {
+  .cookie-consent {
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 9px;
+    padding: 13px;
+    border-radius: 17px;
+  }
+
+  .cookie-consent__text {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .cookie-consent__actions {
+    gap: 8px;
+  }
+
+  .cookie-consent__actions .btn {
+    min-height: 44px;
+    padding: 10px 11px;
+    border-radius: 12px;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .popup {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: calc(100vw - 24px);
+    max-width: 410px;
+    max-height: calc(100vh - 24px);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .popup h2 {
+    padding-right: 44px;
+    font-size: clamp(21px, 5.8vw, 25px);
+    line-height: 1.18;
+  }
+
+  .popup p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .popup-close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 359px) {
+  .cookie-consent {
+    padding: 12px;
+  }
+
+  .cookie-consent__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cookie-consent__actions .btn {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .popup {
+    padding: 18px;
+  }
+
+  .popup h2 {
+    padding-right: 40px;
+    font-size: 21px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .cookie-consent__actions {
+    align-items: stretch;
+  }
+
+  .cookie-consent__actions .btn {
+    min-width: 0;
+    padding-inline: 8px;
+    font-size: 13px;
+    line-height: 1.25;
+  }
+}
