@@ -22,7 +22,7 @@
 
 ```powershell
 # Локальный предпросмотр
-.\.venv\Scripts\python.exe .\tools\site_tools.py preview --page concept-v1.2 --port 8000
+.\.venv\Scripts\python.exe .\tools\site_tools.py preview --page concepts/concept-1/v1.2 --port 8000
 
 # Автопроверка и скриншоты
 .\.venv\Scripts\python.exe .\tools\site_tools.py audit

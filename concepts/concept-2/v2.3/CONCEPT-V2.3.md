@@ -1,4 +1,4 @@
-# Style of Mind — concept-v2.3
+# Style of Mind — concepts/concept-2/v2.3
 
 Snapshot date: 2026-10-08
 
@@ -44,4 +44,4 @@ background + woman/object + decorative light/lines + real HTML typography/naviga
 
 Then use the same layer-first approach for the remaining sections and perform visual comparison against the section reference crops.
 
-The published concept is available at /concept-v2.3/.
+The published concept is available at /concepts/concept-2/v2.3/.
