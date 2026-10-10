@@ -3,82 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f2ec">
-  <meta name="description" content="Каталог концептов Style of Mind.">
+  <meta name="theme-color" content="#f5f3ee">
+  <meta name="description" content="Минималистичный каталог концептов Style of Mind. Выберите версию для просмотра.">
   <title>Концепты — Style of Mind</title>
   <style>
-    :root{color-scheme:light;--paper:#f4f2ec;--ink:#202522;--muted:#74776f;--line:#deded5;--card:#fbfaf6;--accent:#425b4b;--accent-soft:#e8eee7}
+    :root{color-scheme:light;--paper:#f5f3ee;--ink:#252923;--muted:#777970;--line:#deded5;--card:#fbfaf7;--accent:#4b6251}
     *{box-sizing:border-box}
     body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    main{width:min(1040px,calc(100% - 48px));margin:0 auto}
-    .hero{padding:clamp(48px,9vw,100px) 0 34px}
-    .eyebrow{margin:0 0 16px;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
-    h1{max-width:720px;margin:0;font:400 clamp(42px,8vw,76px)/.98 Georgia,"Times New Roman",serif;letter-spacing:-.045em}
-    .catalog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:30px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
-    .catalog-head h2{margin:0;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-    .catalog-head p{margin:0;color:var(--muted);font-size:12px}
-    .concept-groups{display:grid;gap:28px}.concept-group{padding:20px;border:1px solid var(--line);border-radius:6px;background:rgba(251,250,246,.55)}.group-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}.group-head h3{margin:0;font:400 27px/1 Georgia,"Times New Roman",serif;letter-spacing:-.035em}.group-head p{margin:0;color:var(--muted);font-size:11px;letter-spacing:.04em}.catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .card{position:relative;display:flex;min-height:138px;flex-direction:column;justify-content:space-between;gap:22px;padding:18px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:inherit;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}
-    .card:hover{transform:translateY(-2px);border-color:#9ca99b;background:#fff}
-    .card:focus-visible,.footer a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-    .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .version{font:400 30px/1 Georgia,"Times New Roman",serif;letter-spacing:-.04em}
-    .arrow{color:var(--muted);font-size:18px;transition:transform .18s}
-    .card:hover .arrow{transform:translate(2px,-2px)}
-    .card-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-    .card-label{color:var(--muted);font-size:12px;line-height:1.45}
-    .status{max-width:56%;padding:5px 8px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-size:10px;line-height:1.35;text-align:right}
-    .footer{display:flex;flex-wrap:wrap;gap:12px 22px;margin:34px 0 40px;padding-top:18px;border-top:1px solid var(--line)}
-    .footer a{color:var(--muted);font-size:12px;text-decoration-thickness:1px;text-underline-offset:4px}
-    .footer a:hover{color:var(--ink)}
-    @media(min-width:760px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}.concept-group:last-child .catalog{grid-template-columns:repeat(3,minmax(0,1fr))}.card{min-height:148px}}
-    @media(max-width:520px){main{width:calc(100% - 28px)}.hero{padding-top:54px}.catalog{grid-template-columns:1fr}.concept-group{padding:14px}.group-head{align-items:flex-start;flex-direction:column;gap:5px}.concept-group:last-child .catalog{grid-template-columns:1fr}.card{min-height:120px;padding:17px}.catalog-head{align-items:flex-start;flex-direction:column;gap:6px}.card-bottom{align-items:flex-start;flex-direction:column}.status{max-width:100%;text-align:left}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+    main{width:min(1000px,calc(100% - 40px));margin:0 auto}
+    .header{padding:clamp(38px,7vw,72px) 0 26px}
+    .eyebrow{margin:0 0 10px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+    h1{margin:0;font:400 clamp(34px,5vw,48px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.04em}
+    .catalog-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+    .catalog-meta h2{margin:0;font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase}
+    .catalog-meta p{margin:0;color:var(--muted);font-size:12px;white-space:nowrap}
+    .catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:94px;padding:18px 20px;border:1px solid var(--line);border-radius:5px;background:var(--card);color:inherit;text-decoration:none;transition:border-color .16s,background .16s}
+    .card:hover{border-color:#aeb8aa;background:#fff}
+    .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    .card-copy{display:grid;gap:5px;min-width:0}
+    .version{font:400 27px/1 Georgia,"Times New Roman",serif;letter-spacing:-.035em}
+    .label{color:var(--muted);font-size:12px;line-height:1.3}
+    .arrow{flex:0 0 auto;color:var(--muted);font-size:19px;transition:transform .16s}
+    .card:hover .arrow{transform:translate(2px,-2px);color:var(--accent)}
+    .footer{margin:28px 0 36px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+    @media(max-width:700px){main{width:calc(100% - 32px)}.catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{min-height:86px;padding:15px}.version{font-size:25px}}
+    @media(max-width:360px){main{width:calc(100% - 24px)}.catalog{grid-template-columns:1fr}.card{min-height:76px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
   </style>
 </head>
 <body>
 <main>
-  <header class="hero">
-    <p class="eyebrow">Style of Mind · Каталог</p>
+  <header class="header">
+    <p class="eyebrow">Style of Mind</p>
+    <h1>Концепты</h1>
   </header>
 
   <section aria-labelledby="catalog-title">
-    <div class="catalog-head">
-      <h2 id="catalog-title">Все концепты</h2>
-      <p>3 семейства · 8 версий</p>
+    <div class="catalog-meta">
+      <h2 id="catalog-title">Выберите версию</h2>
+      <p>4 семейства · 9 версий</p>
     </div>
-    <div class="concept-groups" aria-label="Концепты по семействам">
-      <section class="concept-group" aria-labelledby="group-0-title">
-        <div class="group-head"><h3 id="group-0-title">Концепт 0</h3><p>3 версии</p></div>
-        <nav class="catalog" aria-label="Версии концепта 0">
-          <a class="card" href="./concepts/concept-0/v0.1/"><div class="card-top"><span class="version">0.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 0.1</span></div></a>
-          <a class="card" href="./concepts/concept-0/v0.2/"><div class="card-top"><span class="version">0.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 0.2</span><span class="status">Рабочий вариант · пауза в разработке</span></div></a>
-          <a class="card" href="./concepts/concept-0/v0.3/"><div class="card-top"><span class="version">0.3</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 0.3</span></div></a>
-        </nav>
-      </section>
-      <section class="concept-group" aria-labelledby="group-1-title">
-        <div class="group-head"><h3 id="group-1-title">Концепт 1</h3><p>2 версии</p></div>
-        <nav class="catalog" aria-label="Версии концепта 1">
-          <a class="card" href="./concepts/concept-1/v1.1/"><div class="card-top"><span class="version">1.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 1.1</span></div></a>
-          <a class="card" href="./concepts/concept-1/v1.2/"><div class="card-top"><span class="version">1.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 1.2</span></div></a>
-        </nav>
-      </section>
-      <section class="concept-group" aria-labelledby="group-2-title">
-        <div class="group-head"><h3 id="group-2-title">Концепт 2</h3><p>3 версии</p></div>
-        <nav class="catalog" aria-label="Версии концепта 2">
-          <a class="card" href="./concepts/concept-2/v2.1/"><div class="card-top"><span class="version">2.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.1</span></div></a>
-          <a class="card" href="./concepts/concept-2/v2.2/"><div class="card-top"><span class="version">2.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.2</span></div></a>
-          <a class="card" href="./concepts/concept-2/v2.3/"><div class="card-top"><span class="version">2.3</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.3</span></div></a>
-        </nav>
-      </section>
-    </div>
+    <nav class="catalog" aria-label="Все концепты Style of Mind">
+      <a class="card" href="./concepts/concept-0/v0.1/"><span class="card-copy"><span class="version">0.1</span><span class="label">Концепт 0</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-0/v0.2/"><span class="card-copy"><span class="version">0.2</span><span class="label">Концепт 0</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-0/v0.3/"><span class="card-copy"><span class="version">0.3</span><span class="label">Концепт 0</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-1/v1.1/"><span class="card-copy"><span class="version">1.1</span><span class="label">Концепт 1</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-1/v1.2/"><span class="card-copy"><span class="version">1.2</span><span class="label">Концепт 1</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-2/v2.1/"><span class="card-copy"><span class="version">2.1</span><span class="label">Концепт 2</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-2/v2.2/"><span class="card-copy"><span class="version">2.2</span><span class="label">Концепт 2</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-2/v2.3/"><span class="card-copy"><span class="version">2.3</span><span class="label">Концепт 2</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="card" href="./concepts/concept-4/v4.1/"><span class="card-copy"><span class="version">4.1</span><span class="label">Концепт 4</span></span><span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
   </section>
 
-  <footer class="footer" aria-label="Ссылки проекта">
-    <a href="./PLAN.md">План работ</a>
-    <a href="./PROJECT_CONTEXT.md">Контекст проекта</a>
-    <a href="https://github.com/styleofmind/styleofmind.github.io">Репозиторий на GitHub</a>
-  </footer>
+  <footer class="footer">Style of Mind · Каталог концептов</footer>
 </main>
 </body>
 </html>
