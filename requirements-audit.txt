@@ -1,0 +1,10 @@
+﻿playwright
+requests
+beautifulsoup4
+lxml
+html5lib
+tinycss2
+cssutils
+pytest
+Pillow
+rich
