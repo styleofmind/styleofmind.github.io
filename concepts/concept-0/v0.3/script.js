@@ -80,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
     window.dispatchEvent(new CustomEvent('olgaConsentChanged', {
       detail: {consent: nextValue, previous: previousValue}
     }));
-    cookieSettingsTrigger?.focus();
+    // Возвращаем фокус, не прокручивая страницу к кнопке настроек в подвале.
+    cookieSettingsTrigger?.focus({preventScroll: true});
   };
   cookieAccept?.addEventListener('click', function(){ setConsent('all'); });
   cookieReject?.addEventListener('click', function(){ setConsent('essential'); });

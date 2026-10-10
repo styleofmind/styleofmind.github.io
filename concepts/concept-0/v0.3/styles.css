@@ -1116,3 +1116,99 @@ body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-d
     line-height: 1.25;
   }
 }
+
+
+/* Concept 1.2 booking header adapted to Concept 0.3's DIKIDI shell. */
+body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"].olga-dikidi-dialog {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(157, 120, 56, .42) !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  box-shadow: 0 28px 80px rgba(25, 35, 30, .30) !important;
+}
+
+.olga-dikidi-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex: 0 0 72px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 72px;
+  padding: 10px 62px 10px 22px;
+  border-bottom: 1px solid rgba(157, 120, 56, .46);
+  border-radius: 19px 19px 0 0;
+  background: linear-gradient(110deg, #26392f, #35483c);
+  text-align: left;
+}
+
+.olga-dikidi-header__eyebrow {
+  display: block;
+  color: #d7bf8d;
+  font: 700 8px/1.2 Arial, Helvetica, sans-serif;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.olga-dikidi-header__title {
+  display: block;
+  width: 100%;
+  color: #fffaf1;
+  font: 16px/1.25 Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+body > div[class^="dikidi-"][class$="-modal"] > div[class^="dikidi-"][class$="-dialog"].olga-dikidi-dialog > iframe {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: calc(100% - 72px) !important;
+  border: 0 !important;
+  border-radius: 0 0 19px 19px !important;
+}
+
+body > div[class^="dikidi-"][class$="-modal"] div[class*="-close"] {
+  z-index: 5 !important;
+  border: 1px solid rgba(215, 191, 141, .9) !important;
+  border-radius: 50% !important;
+  background: #26392f !important;
+  color: #f7e9c8 !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .18) !important;
+}
+
+@media (max-width: 767px) {
+  .olga-dikidi-header {
+    flex-basis: 72px;
+    min-height: 72px;
+    padding: 9px 56px 9px 16px;
+  }
+
+  .olga-dikidi-header__title {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 359px) {
+  .olga-dikidi-header {
+    padding-right: 54px;
+    padding-left: 13px;
+  }
+
+  .olga-dikidi-header__eyebrow {
+    font-size: 7px;
+  }
+
+  .olga-dikidi-header__title {
+    font-size: 13px;
+  }
+}

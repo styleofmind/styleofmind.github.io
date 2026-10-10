@@ -11,12 +11,12 @@ $openBraces = [regex]::Matches($css, '\{').Count
 $closeBraces = [regex]::Matches($css, '\}').Count
 Write-Host "Content sections: $sectionCount (expected 10 content sections + mobile photo block)"
 Write-Host "Mobile photo blocks: $mobilePortraitCount (expected 1)"
-Write-Host "FAQ items: $faqCount (expected 6)"
+Write-Host "FAQ items: $faqCount (expected 5)"
 Write-Host "Price cards: $priceCount (expected 4)"
 Write-Host "CSS brace balance: $($openBraces - $closeBraces)"
 if ($sectionCount -ne 11) { throw "Unexpected section count: $sectionCount" }
 if ($mobilePortraitCount -ne 1) { throw "Unexpected mobile photo block count: $mobilePortraitCount" }
-if ($faqCount -ne 6) { throw "Unexpected FAQ count: $faqCount" }
+if ($faqCount -ne 5) { throw "Unexpected FAQ count: $faqCount" }
 if ($priceCount -ne 4) { throw "Unexpected price card count: $priceCount" }
 if ($openBraces -ne $closeBraces) { throw 'CSS brace mismatch' }
 $missing = @()
@@ -37,5 +37,5 @@ if ($missing.Count -gt 0) { $missing | ForEach-Object { Write-Host "  $_" }; thr
 node --check (Join-Path $root 'script.js')
 if ($LASTEXITCODE -ne 0) { throw 'JavaScript syntax check failed' }
 Write-Host 'JavaScript syntax: OK'
-Write-Host "Optimized backgrounds: $((Get-ChildItem (Join-Path $root 'assets\backgrounds') -Filter 'section-*.jpg').Count) / 12"
+Write-Host "Background JPG assets: $((Get-ChildItem (Join-Path $root 'assets\backgrounds') -Filter 'section-*.jpg').Count) total (12 core + composed variants)"
 Write-Host 'All checks passed.'

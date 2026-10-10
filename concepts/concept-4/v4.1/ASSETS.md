@@ -6,14 +6,14 @@
 
 | Каталог | Содержимое и назначение |
 |---|---|
-| `assets/backgrounds/` | `section-01.jpg`–`section-12.jpg` и `about-watercolor-background.jpg` |
+| `assets/backgrounds/` | `section-01.jpg`–`section-12.jpg`, `section-08-composed.jpg`, `section-11-composed.jpg` и `about-watercolor-background.jpg` |
 | `assets/identity/` | `brand-mark.svg` |
 | `assets/portraits/` | `olga-hero-glasses.png`, `olga-hero.png` (social preview), `olga-about.png` |
 | `assets/scenes/` | `about-arch-interior.png` — графический фон блока «Обо мне» |
 | `assets/why-me/` | Текстура, ботанический элемент, рамка и золотые декоративные детали |
 | `assets/references/` | `style-guide-olga-suslennikova.png` — визуальный эталон |
 
-Все локальные изображения, на которые ссылаются HTML и CSS, проверены. Двенадцать фоновых изображений секций оптимизированы в JPEG. Портреты и декоративные PNG/SVG сохранены в исходном качестве.
+Все локальные изображения, на которые ссылаются HTML и CSS, проверены. Двенадцать основных фонов оптимизированы в JPEG; для блоков 8 и 11 дополнительно используются собранные композиции с интерьерными деталями справа. Портреты и прозрачные декоративные PNG/SVG сохранены с прозрачностью.
 
 ## Локальный архив, исключённый из Git
 
