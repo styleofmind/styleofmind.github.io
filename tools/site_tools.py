@@ -9,13 +9,14 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PAGE = "concepts/concept-1/v1.2/index.html"
-DEFAULT_REPORT_DIR = PROJECT_ROOT.parent / "site-audit"
+DEFAULT_REPORT_DIR = PROJECT_ROOT / "site-audit"
 VIEWPORTS = [
     ("desktop", 1440, 900),
     ("tablet", 768, 1024),
@@ -48,13 +49,19 @@ def make_server(directory: Path, port: int = 0) -> ThreadingHTTPServer:
 
 def run_preview(page_arg: str, port: int) -> int:
     target = resolve_page(page_arg)
-    if target.is_dir():
-        directory, path_part = target, "/"
-    else:
-        directory, path_part = target.parent, "/" + target.name
+    is_directory = target.is_dir()
+    target_file = target / "index.html" if is_directory else target
+    try:
+        relative_target = (target if is_directory else target_file).resolve().relative_to(PROJECT_ROOT)
+    except ValueError:
+        print(f"Preview target must be inside the project: {target_file}", file=sys.stderr)
+        return 2
+    path_part = "/" + quote(relative_target.as_posix(), safe="/")
+    if is_directory:
+        path_part = path_part.rstrip("/") + "/"
 
     try:
-        server = make_server(directory, port)
+        server = make_server(PROJECT_ROOT, port)
     except OSError as exc:
         print(f"Could not start local preview server on port {port}: {exc}", file=sys.stderr)
         return 2
@@ -81,6 +88,12 @@ def run_audit(page_arg: str, out_arg: str) -> int:
         print(f"HTML file not found: {page_file}", file=sys.stderr)
         return 2
 
+    try:
+        relative_page = page_file.resolve().relative_to(PROJECT_ROOT)
+    except ValueError:
+        print(f"Audit target must be inside the project: {page_file}", file=sys.stderr)
+        return 2
+
     out_dir = Path(out_arg)
     if not out_dir.is_absolute():
         out_dir = (PROJECT_ROOT / out_dir).resolve()
@@ -94,10 +107,11 @@ def run_audit(page_arg: str, out_arg: str) -> int:
         "page_errors": [],
         "failed_requests": [],
     }
-    server = make_server(page_file.parent)
+    server = make_server(PROJECT_ROOT)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
-    page_url = f"http://127.0.0.1:{server.server_port}/{page_file.name}"
+    page_path = quote(relative_page.as_posix(), safe="/")
+    page_url = f"http://127.0.0.1:{server.server_port}/{page_path}"
 
     try:
         with sync_playwright() as playwright:
@@ -124,6 +138,17 @@ def run_audit(page_arg: str, out_arg: str) -> int:
                 )
                 page.goto(page_url, wait_until="load", timeout=30000)
                 page.evaluate("document.fonts.ready")
+                page.evaluate("""async () => {
+                    const images = [...document.images];
+                    for (const image of images) image.loading = "eager";
+                    await Promise.all(images.map(image => new Promise(resolve => {
+                        if (image.complete) return resolve();
+                        const done = () => resolve();
+                        image.addEventListener("load", done, { once: true });
+                        image.addEventListener("error", done, { once: true });
+                        setTimeout(done, 8000);
+                    })));
+                }""")
                 screenshot = out_dir / f"concept-v1.2-{label}.png"
                 page.screenshot(path=str(screenshot), full_page=True)
 

@@ -223,18 +223,18 @@ document.addEventListener('DOMContentLoaded', function () {
   // 6. Варианты поз котиков — все 12 вариантов встроены в HTML, без дополнительных сетевых запросов
   // Локальные WebP-позы котиков подключаются по относительным путям.
   const catPoseSources = [
-    './assets/cats/cat-01.webp',
-    './assets/cats/cat-02.webp',
-    './assets/cats/cat-03.webp',
-    './assets/cats/cat-04.webp',
-    './assets/cats/cat-05.webp',
-    './assets/cats/cat-06.webp',
-    './assets/cats/cat-07.webp',
-    './assets/cats/cat-08.webp',
-    './assets/cats/cat-09.webp',
-    './assets/cats/cat-10.webp',
-    './assets/cats/cat-11.webp',
-    './assets/cats/cat-12.webp',
+    '../images/cat-01.webp',
+    '../images/cat-02.webp',
+    '../images/cat-03.webp',
+    '../images/cat-04.webp',
+    '../images/cat-05.webp',
+    '../images/cat-06.webp',
+    '../images/cat-07.webp',
+    '../images/cat-08.webp',
+    '../images/cat-09.webp',
+    '../images/cat-10.webp',
+    '../images/cat-11.webp',
+    '../images/cat-12.webp',
   ];
 
   function initMagicCat(cat) {

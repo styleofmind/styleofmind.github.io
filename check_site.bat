@@ -9,6 +9,6 @@ if not exist "%PY%" (
 )
 "%PY%" "%ROOT%tools\site_tools.py" audit
 echo.
-echo Report and screenshots: "%ROOT%..\site-audit"
+echo Report and screenshots: "%ROOT%site-audit"
 pause
 endlocal
