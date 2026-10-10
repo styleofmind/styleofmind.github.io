@@ -85,7 +85,7 @@ p { margin-bottom: 18px; }
 .hero__note { display: flex; align-items: center; gap: 10px; margin-top: 30px; color: rgba(251,249,246,.73); font-size: .67rem; letter-spacing: .03em; }
 .tiny-star { color: var(--color-gold-light); font-size: 1.25rem; }
 .hero__portrait { position: relative; z-index: 1; display: flex; height: 100%; min-height: 420px; align-items: end; justify-content: center; margin: 0; }
-.hero__portrait img { position: relative; z-index: 2; width: min(100%, 480px); max-height: 620px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 16px 24px rgba(0,0,0,.18)); }
+.hero__portrait img { position: relative; z-index: 2; width: min(100%, 480px); max-height: 620px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 16px 24px rgba(0,0,0,.18)); -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%); mask-image: linear-gradient(to bottom, #000 84%, transparent 100%); }
 .portrait-orbit { position: absolute; z-index: 0; top: 14%; left: 50%; width: 90%; aspect-ratio: 1; border: 1px solid rgba(212,175,124,.48); border-radius: 50%; transform: translateX(-50%); }
 .portrait-orbit--two { top: 22%; width: 76%; border-color: rgba(212,175,124,.25); }
 .mobile-portrait-block { display: none; }
@@ -96,6 +96,17 @@ p { margin-bottom: 18px; }
 .hero__aside small { color: rgba(251,249,246,.68); font-size: .66rem; }
 .scroll-cue { position: absolute; z-index: 3; right: 32px; bottom: 26px; display: flex; align-items: center; gap: 10px; color: rgba(251,249,246,.68); font-size: .6rem; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
 .scroll-cue span:first-child { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(212,175,124,.7); border-radius: 50%; color: var(--color-gold-light); font-size: .9rem; }
+
+/* Hero portrait source 01: reveal more of the shoulders and upper torso. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero__portrait img { width: min(106%, 480px); max-width: none; flex-shrink: 0; }
+}
+@media (min-width: 1101px) and (max-width: 1240px) {
+  .hero__portrait img { width: min(108%, 430px); max-width: none; flex-shrink: 0; }
+}
+@media (min-width: 1241px) {
+  .hero__portrait img { width: min(116%, 480px); max-width: none; flex-shrink: 0; }
+}
 
 /* 02 ? Value strip ? visual pattern aligned with concept-1/v1.2 */
 .value-strip {
@@ -398,8 +409,8 @@ p { margin-bottom: 18px; }
   .hero__copy { grid-column: 1; grid-row: 1; align-self: start; width: 100%; min-width: 0; max-width: 100%; padding: 48px 0 15px; }
   .hero__portrait { display: none; }
   .mobile-portrait-block { display: block; position: relative; overflow: hidden; padding: 24px 18px 28px; background: #f7f2ea; }
-  .mobile-portrait-block__figure { position: relative; isolation: isolate; width: min(100%, 360px); height: clamp(350px, 100vw, 390px); margin: 0 auto 8px; }
-  .mobile-portrait-block__figure img { position: absolute; z-index: 1; bottom: 0; left: 50%; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform: translateX(-50%); filter: drop-shadow(0 16px 24px rgba(0,0,0,.14)); }
+  .mobile-portrait-block__figure { position: relative; isolation: isolate; width: min(100%, 360px); height: auto; aspect-ratio: 995 / 1031; margin: 0 auto 8px; }
+  .mobile-portrait-block__figure img { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform: none; filter: drop-shadow(0 16px 24px rgba(0,0,0,.14)); -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); }
   .mobile-portrait-block__orbit { position: absolute; z-index: 0; top: 5%; left: 50%; width: 96%; aspect-ratio: 1; border: 1px solid rgba(184,146,91,.42); border-radius: 50%; transform: translateX(-50%); }
   .mobile-portrait-block__orbit--two { top: 17%; width: 78%; border-color: rgba(184,146,91,.25); }
   .mobile-portrait-block__caption { margin: 0; color: var(--color-dark); font: 400 1.08rem/1.4 var(--font-heading); text-align: center; }
@@ -466,7 +477,7 @@ p { margin-bottom: 18px; }
   .container { width: calc(100vw - 30px); }
   .hero__grid { min-height: auto; grid-template-columns: minmax(0,1fr); }
   .hero__copy h1 { font-size: clamp(2.3rem, 10.2vw, 3.2rem); }
-  .mobile-portrait-block__figure { height: 350px; }
+  .mobile-portrait-block__figure { height: auto; }
   .hero__lead { font-size: .78rem; }
   .card-grid--four, .card-grid--three { grid-template-columns: 1fr; }
   .request-card { min-height: auto; padding: 22px 20px; }
