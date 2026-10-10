@@ -202,6 +202,20 @@ a:focus-visible,summary:focus-visible{outline:2px solid #94702d;outline-offset:4
 .site-footer .footer-legal-links{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;padding-top:12px;border-top:1px solid rgba(217,180,92,.12);font-size:9px;line-height:1.4;color:#969b98}
 .footer-legal-links a{color:#c7b17f;white-space:nowrap}
 .footer-legal-links span{color:rgba(217,180,92,.45)}
+/* DIKIDI booking modal: align the outer shell with the site and keep it responsive. */
+div[class*="dikidi-"][class*="-modal"]{backdrop-filter:blur(5px)}
+div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{border:1px solid rgba(217,180,92,.42)!important;border-radius:18px!important;box-shadow:0 28px 80px rgba(0,0,0,.46)!important}
+div[class*="dikidi-"][class*="-modal"] div[class*="-close"]{display:grid!important;place-items:center;width:36px!important;height:36px!important;border:1px solid var(--gold)!important;border-radius:50%!important;background:var(--night)!important;color:var(--gold-light)!important;text-shadow:none!important;font-size:28px!important;line-height:1!important;right:-42px!important;top:-42px!important}
+@media(max-width:800px){
+  div[class*="dikidi-"][class*="-modal"]{box-sizing:border-box!important;padding:0 12px!important;overflow-x:hidden!important}
+  div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{box-sizing:border-box!important;width:calc(100vw - 32px)!important;max-width:740px!important;height:min(670px,calc(100vh - 100px))!important;height:min(670px,calc(100dvh - 100px))!important;margin:50px auto 24px!important}
+  div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"] iframe{box-sizing:border-box!important;width:100%!important;height:100%!important;max-width:100%!important}
+  div[class*="dikidi-"][class*="-modal"] div[class*="-close"]{right:0!important;top:-42px!important}
+}
+@media(max-width:360px){
+  div[class*="dikidi-"][class*="-modal"]{padding:0 8px!important}
+  div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{width:calc(100vw - 16px)!important}
+}
 @media (max-width:950px){
   .page-width{width:min(100% - 42px,760px)}.header-inner{width:calc(100% - 38px)}
   .desktop-nav{gap:17px}.hero-inner{grid-template-columns:1fr .8fr}.hero h1{font-size:clamp(46px,7vw,68px)}
