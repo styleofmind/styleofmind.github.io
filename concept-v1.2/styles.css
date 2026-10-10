@@ -221,7 +221,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid #94702d;outline-offset:4
   .method-grid{gap:27px}.method-steps{max-width:550px}.method-footnote{grid-column:auto}.lotus-art{right:-42px;bottom:0;width:150px;height:130px;opacity:.22}
   .topic-grid{grid-template-columns:repeat(2,1fr);gap:10px}.topic-card{min-height:175px;padding:19px 16px}.topic-card h3{font-size:18px}.topic-card p{font-size:11px}
   .format-grid{grid-template-columns:1fr;max-width:490px;margin:auto}.format-card{min-height:0;padding:23px}.format-icon{margin:16px 0 12px}.format-meta{margin-top:6px}
-  .diagnostic-grid{gap:28px}.diagnostic-offer{max-width:490px}.process-grid{grid-template-columns:repeat(2,1fr);gap:10px}.process-card{min-height:160px;padding:18px 15px}
+  .diagnostic-grid{gap:28px}.diagnostic-offer{max-width:490px}.process-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.process-card{min-width:0;min-height:160px;padding:18px 15px}
   .experience-grid{gap:17px}.experience-list{gap:15px}.experience-list article{gap:10px}.experience-list article>span{width:34px;height:34px;flex-basis:34px}
   .review-grid{grid-template-columns:1fr;max-width:560px}.review-card{min-height:0}.faq-intro{position:static}.faq-list summary{font-size:18px;padding:17px 35px 17px 0}
   .final-section{padding:75px 0 65px}.final-inner .section-title{font-size:clamp(35px,9vw,48px)}.final-inner>p:not(.eyebrow){font-size:15px}
