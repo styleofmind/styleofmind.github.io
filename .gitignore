@@ -1,4 +1,4 @@
-﻿.venv/
+.venv/
 __pycache__/
 .pytest_cache/
 *.py[cod]
@@ -7,3 +7,22 @@ test-results/
 
 # Local audit reports and screenshots; keep generated outputs out of Git.
 /site-audit/
+# Concept 4.1 local reference archives and visual audit artifacts
+/concepts/concept-4/v4.1/previews/
+/concepts/concept-4/v4.1/viewport-check.html
+/concepts/concept-4/v4.1/CHAT_ASSET_IMPORT_LOG.txt
+/concepts/concept-4/v4.1/IMPORT_CHAT_IMAGE_PACK.ps1
+# Only the curated asset directories used by the published concept are tracked.
+/concepts/concept-4/v4.1/assets/*/
+!/concepts/concept-4/v4.1/assets/backgrounds/
+!/concepts/concept-4/v4.1/assets/backgrounds/**
+!/concepts/concept-4/v4.1/assets/identity/
+!/concepts/concept-4/v4.1/assets/identity/**
+!/concepts/concept-4/v4.1/assets/portraits/
+!/concepts/concept-4/v4.1/assets/portraits/**
+!/concepts/concept-4/v4.1/assets/references/
+!/concepts/concept-4/v4.1/assets/references/**
+!/concepts/concept-4/v4.1/assets/scenes/
+!/concepts/concept-4/v4.1/assets/scenes/**
+!/concepts/concept-4/v4.1/assets/why-me/
+!/concepts/concept-4/v4.1/assets/why-me/**

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Звёздный знак Style of Mind</title>
+  <g fill="none" stroke="#d9b45c" stroke-linecap="round">
+    <path d="M32 3v58M3 32h58" stroke-width="1.25" opacity=".9"/>
+    <path d="M11.5 11.5l41 41m0-41l-41 41" stroke-width=".7" opacity=".46"/>
+    <path d="M32 10c2.5 12 10 19.5 22 22-12 2.5-19.5 10-22 22C29.5 42 22 34.5 10 32c12-2.5 19.5-10 22-22Z" fill="#d9b45c" fill-opacity=".15" stroke-width=".9"/>
+    <circle cx="32" cy="32" r="3.2" fill="#f0d9a6" stroke="#f0d9a6"/>
+  </g>
+</svg>
