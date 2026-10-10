@@ -8,7 +8,7 @@
 |---|---|
 | `assets/backgrounds/` | `section-01.jpg`–`section-12.jpg` и `about-watercolor-background.jpg` |
 | `assets/identity/` | `brand-mark.svg` |
-| `assets/portraits/` | `olga-hero.png`, `olga-about.png` |
+| `assets/portraits/` | `olga-hero-glasses.png`, `olga-hero.png` (social preview), `olga-about.png` |
 | `assets/scenes/` | `about-arch-interior.png` — графический фон блока «Обо мне» |
 | `assets/why-me/` | Текстура, ботанический элемент, рамка и золотые декоративные детали |
 | `assets/references/` | `style-guide-olga-suslennikova.png` — визуальный эталон |
