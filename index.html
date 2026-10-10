@@ -18,8 +18,8 @@
     .catalog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:30px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
     .catalog-head h2{margin:0;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
     .catalog-head p{margin:0;color:var(--muted);font-size:12px}
-    .catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .card{position:relative;display:flex;min-height:154px;flex-direction:column;justify-content:space-between;gap:22px;padding:20px 21px;border:1px solid var(--line);border-radius:5px;background:var(--card);color:inherit;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}
+    .concept-groups{display:grid;gap:28px}.concept-group{padding:20px;border:1px solid var(--line);border-radius:6px;background:rgba(251,250,246,.55)}.group-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}.group-head h3{margin:0;font:400 27px/1 Georgia,"Times New Roman",serif;letter-spacing:-.035em}.group-head p{margin:0;color:var(--muted);font-size:11px;letter-spacing:.04em}.catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .card{position:relative;display:flex;min-height:138px;flex-direction:column;justify-content:space-between;gap:22px;padding:18px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:inherit;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}
     .card:hover{transform:translateY(-2px);border-color:#9ca99b;background:#fff}
     .card:focus-visible,.footer a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
     .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -32,8 +32,8 @@
     .footer{display:flex;flex-wrap:wrap;gap:12px 22px;margin:34px 0 40px;padding-top:18px;border-top:1px solid var(--line)}
     .footer a{color:var(--muted);font-size:12px;text-decoration-thickness:1px;text-underline-offset:4px}
     .footer a:hover{color:var(--ink)}
-    @media(min-width:760px){.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}.card{min-height:172px}}
-    @media(max-width:520px){main{width:calc(100% - 28px)}.hero{padding-top:54px}.catalog{grid-template-columns:1fr}.card{min-height:130px;padding:17px}.catalog-head{align-items:flex-start;flex-direction:column;gap:6px}.card-bottom{align-items:flex-start;flex-direction:column}.status{max-width:100%;text-align:left}}
+    @media(min-width:760px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}.concept-group:last-child .catalog{grid-template-columns:repeat(3,minmax(0,1fr))}.card{min-height:148px}}
+    @media(max-width:520px){main{width:calc(100% - 28px)}.hero{padding-top:54px}.catalog{grid-template-columns:1fr}.concept-group{padding:14px}.group-head{align-items:flex-start;flex-direction:column;gap:5px}.concept-group:last-child .catalog{grid-template-columns:1fr}.card{min-height:120px;padding:17px}.catalog-head{align-items:flex-start;flex-direction:column;gap:6px}.card-bottom{align-items:flex-start;flex-direction:column}.status{max-width:100%;text-align:left}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -48,38 +48,32 @@
   <section aria-labelledby="catalog-title">
     <div class="catalog-head">
       <h2 id="catalog-title">Все концепты</h2>
-      <p>7 вариантов · выберите, чтобы открыть</p>
+      <p>3 семейства · 7 версий</p>
     </div>
-    <nav class="catalog" aria-label="Все концепты сайта">
-      <a class="card" href="./concepts/concept-0/v0.1/">
-        <div class="card-top"><span class="version">0.1</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 0.1</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-0/v0.2/">
-        <div class="card-top"><span class="version">0.2</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 0.2</span><span class="status">Рабочий вариант · пауза в разработке</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-1/v1.1/">
-        <div class="card-top"><span class="version">1.1</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 1.1</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-1/v1.2/">
-        <div class="card-top"><span class="version">1.2</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 1.2</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-2/v2.1/">
-        <div class="card-top"><span class="version">2.1</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 2.1</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-2/v2.2/">
-        <div class="card-top"><span class="version">2.2</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 2.2</span></div>
-      </a>
-      <a class="card" href="./concepts/concept-2/v2.3/">
-        <div class="card-top"><span class="version">2.3</span><span class="arrow" aria-hidden="true">↗</span></div>
-        <div class="card-bottom"><span class="card-label">Концепт 2.3</span></div>
-      </a>
-    </nav>
+    <div class="concept-groups" aria-label="Концепты по семействам">
+      <section class="concept-group" aria-labelledby="group-0-title">
+        <div class="group-head"><h3 id="group-0-title">Концепт 0</h3><p>2 версии</p></div>
+        <nav class="catalog" aria-label="Версии концепта 0">
+          <a class="card" href="./concepts/concept-0/v0.1/"><div class="card-top"><span class="version">0.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 0.1</span></div></a>
+          <a class="card" href="./concepts/concept-0/v0.2/"><div class="card-top"><span class="version">0.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 0.2</span><span class="status">Рабочий вариант · пауза в разработке</span></div></a>
+        </nav>
+      </section>
+      <section class="concept-group" aria-labelledby="group-1-title">
+        <div class="group-head"><h3 id="group-1-title">Концепт 1</h3><p>2 версии</p></div>
+        <nav class="catalog" aria-label="Версии концепта 1">
+          <a class="card" href="./concepts/concept-1/v1.1/"><div class="card-top"><span class="version">1.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 1.1</span></div></a>
+          <a class="card" href="./concepts/concept-1/v1.2/"><div class="card-top"><span class="version">1.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 1.2</span></div></a>
+        </nav>
+      </section>
+      <section class="concept-group" aria-labelledby="group-2-title">
+        <div class="group-head"><h3 id="group-2-title">Концепт 2</h3><p>3 версии</p></div>
+        <nav class="catalog" aria-label="Версии концепта 2">
+          <a class="card" href="./concepts/concept-2/v2.1/"><div class="card-top"><span class="version">2.1</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.1</span></div></a>
+          <a class="card" href="./concepts/concept-2/v2.2/"><div class="card-top"><span class="version">2.2</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.2</span></div></a>
+          <a class="card" href="./concepts/concept-2/v2.3/"><div class="card-top"><span class="version">2.3</span><span class="arrow" aria-hidden="true">↗</span></div><div class="card-bottom"><span class="card-label">Концепт 2.3</span></div></a>
+        </nav>
+      </section>
+    </div>
   </section>
 
   <footer class="footer" aria-label="Ссылки проекта">
