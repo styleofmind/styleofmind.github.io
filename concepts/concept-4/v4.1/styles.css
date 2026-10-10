@@ -97,82 +97,43 @@ p { margin-bottom: 18px; }
 .scroll-cue { position: absolute; z-index: 3; right: 32px; bottom: 26px; display: flex; align-items: center; gap: 10px; color: rgba(251,249,246,.68); font-size: .6rem; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
 .scroll-cue span:first-child { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(212,175,124,.7); border-radius: 50%; color: var(--color-gold-light); font-size: .9rem; }
 
-/* 02 · Advantages */
-.advantages {
-  position: relative;
-  overflow: hidden;
+/* 02 ? Value strip ? visual pattern aligned with concept-1/v1.2 */
+.value-strip {
+  padding: 34px 0 43px;
   color: var(--color-cream);
-  background-color: var(--color-night);
-  background-image:
-    linear-gradient(100deg, rgba(23,21,18,.72), rgba(23,21,18,.58) 48%, rgba(23,21,18,.74)),
-    radial-gradient(ellipse at 50% 0%, rgba(212,175,124,.09), transparent 58%),
-    url("./assets/why-me/background-texture.png");
-  background-position: center;
-  background-size: cover;
+  background: linear-gradient(180deg, #151e28, #111923);
+  border-top: 1px solid rgba(217,180,92,.12);
+  border-bottom: 1px solid rgba(217,180,92,.14);
 }
-.advantages > .container { position: relative; z-index: 1; }
-.advantages::before {
-  position: absolute;
-  z-index: 0;
-  top: 3%;
-  right: max(20px, calc((100vw - var(--container)) / 2 - 8px));
-  width: clamp(105px, 13vw, 188px);
-  aspect-ratio: 246 / 300;
-  content: "";
-  background: url("./assets/why-me/botanical-sprig.png") right top / contain no-repeat;
-  opacity: .46;
-  pointer-events: none;
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
-.advantages::after {
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  left: 0;
-  width: clamp(230px, 34vw, 470px);
-  height: clamp(68px, 10vw, 136px);
-  content: "";
-  background-image: url("./assets/why-me/light-particles.png"), url("./assets/why-me/gold-line.png");
-  background-position: 12% 70%, left bottom;
-  background-repeat: no-repeat, no-repeat;
-  background-size: 58% auto, 100% 100%;
-  opacity: .29;
-  pointer-events: none;
+.value-item { min-width: 0; padding: 0 16px; text-align: center; }
+.line-icon {
+  display: grid;
+  width: 47px;
+  height: 47px;
+  place-items: center;
+  margin: 0 auto 12px;
+  border: 1px solid rgba(217,180,92,.42);
+  border-radius: 50%;
+  color: #f0d9a6;
+  font: 25px Georgia, "Times New Roman", serif;
+  box-shadow: inset 0 0 16px rgba(217,180,92,.035);
 }
-.advantages .eyebrow { color: var(--color-gold-light); }
-.advantages .section-heading { margin-bottom: clamp(34px, 4vw, 48px); }
-.advantages .section-heading h2 {
-  margin-bottom: 17px;
-  font-size: clamp(2.4rem, 4.25vw, 3.7rem);
-  letter-spacing: -.03em;
-  line-height: 1.08;
+.value-item h2 {
+  margin: 0 0 9px;
+  color: #f4eee3;
+  font: 400 19px/1.15 Georgia, "Times New Roman", serif;
 }
-.advantages .section-heading .eyebrow { margin-bottom: 16px; font-size: .67rem; letter-spacing: .22em; }
-.advantages .section-heading__lead {
-  max-width: 600px;
-  margin-inline: auto;
-  color: rgba(251,249,246,.79);
-  font-size: clamp(.88rem, 1.12vw, .98rem);
-  line-height: 1.82;
+.value-item p {
+  max-width: 220px;
+  margin: 0 auto;
+  color: #bfc1bd;
+  font: 12px/1.55 Arial, Helvetica, sans-serif;
 }
-.advantages .ornament-line { width: 116px; margin-top: 25px; background: linear-gradient(90deg, transparent, rgba(212,175,124,.68), transparent); }
-.advantages .ornament-line::after { border-color: rgba(212,175,124,.78); background: var(--color-night); }
-.feature-card {
-  display: flex;
-  min-width: 0;
-  min-height: 286px;
-  flex-direction: column;
-  align-items: center;
-  padding: 31px clamp(20px, 2vw, 28px) 29px;
-  border: 0;
-  border-radius: var(--radius);
-  background: url("./assets/why-me/card-frame.svg") center / 100% 100% no-repeat;
-  text-align: center;
-  transition: transform .25s ease, filter .25s ease;
-}
-.feature-card:hover { transform: translateY(-2px); filter: brightness(1.06); }
-.feature-card .icon-medallion { flex: 0 0 auto; margin: 0 auto 21px; color: var(--color-gold-light); border-color: rgba(212,175,124,.52); }
-.feature-card h3 { max-width: 100%; margin-bottom: 12px; color: var(--color-cream); font-size: clamp(1.15rem, 1.45vw, 1.34rem); line-height: 1.2; letter-spacing: -.01em; }
-.feature-card p { max-width: 255px; margin-bottom: 0; color: rgba(251,249,246,.84); font-size: .82rem; line-height: 1.74; }
 
 /* 03 · About */
 .about {
@@ -404,10 +365,6 @@ p { margin-bottom: 18px; }
   .about__photo .about__scene { top: -8%; left: -27.5%; width: 155%; height: 116%; }
   .about__quote { grid-column: 1; grid-row: 2; max-width: 540px; margin: 0; }
   .card-grid--four { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .advantages .feature-card { min-height: 252px; padding: 25px 22px 23px; }
-  .advantages .feature-card .icon-medallion { width: 50px; height: 50px; margin-bottom: 17px; }
-  .advantages .feature-card h3 { font-size: clamp(1.16rem, 1.75vw, 1.3rem); }
-  .advantages .feature-card p { font-size: .8rem; }
   .price-card { min-height: 400px; }
   .site-footer__main { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
@@ -454,51 +411,10 @@ p { margin-bottom: 18px; }
   .hero__note { width: 100%; max-width: 100%; flex-wrap: wrap; margin-top: 20px; font-size: .6rem; }
   .scroll-cue { right: 18px; bottom: 16px; }
   .card-grid--four, .card-grid--three { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
-  .feature-card { min-height: 245px; padding: 23px 16px; }
-  .feature-card h3 { font-size: 1.15rem; }
-  .feature-card p, .request-card p, .outcome-card p { font-size: .71rem; }
+  .request-card p, .outcome-card p { font-size: .71rem; }
   .icon-medallion { width: 47px; height: 47px; margin-bottom: 17px; }
   .icon-medallion svg { width: 28px; height: 28px; }
   /* A quieter, more editorial treatment for the mobile "Why me?" section. */
-  .advantages {
-    padding-block: 58px;
-    color: var(--color-cream);
-    background-color: var(--color-night);
-    background-image:
-      linear-gradient(100deg, rgba(23,21,18,.78), rgba(23,21,18,.64) 48%, rgba(23,21,18,.80)),
-      radial-gradient(ellipse at 8% 0%, rgba(212,175,124,.09), transparent 48%),
-      radial-gradient(ellipse at 94% 100%, rgba(212,175,124,.045), transparent 46%),
-      url("./assets/why-me/background-texture.png");
-    background-position: center, center, center, center;
-    background-size: cover;
-  }
-  .advantages::before {
-    display: block;
-    top: 2%;
-    right: 3%;
-    width: 76px;
-    opacity: .24;
-  }
-  .advantages::after {
-    display: block;
-    width: 42%;
-    height: 68px;
-    background-size: 58% auto, 100% 100%;
-    opacity: .17;
-  }
-  .advantages .section-heading { max-width: 100%; margin: 0 0 25px; text-align: left; }
-  .advantages .section-heading h2 { margin-bottom: 14px; font-size: clamp(2.05rem, 7.6vw, 2.8rem); line-height: 1.1; }
-  .advantages .section-heading .eyebrow { margin-bottom: 13px; font-size: .63rem; letter-spacing: .18em; }
-  .advantages .section-heading .ornament-line { display: none; }
-  .advantages .section-heading__lead { max-width: 40ch; margin: 0; color: rgba(251,249,246,.79); font-size: .86rem; line-height: 1.76; }
-  .advantages .card-grid--four { grid-template-columns: minmax(0,1fr); gap: 0; counter-reset: benefit; }
-  .advantages .feature-card { display: grid; grid-template-columns: 30px minmax(0,1fr); align-items: start; gap: 5px 12px; min-height: 0; padding: 21px 2px; border: 0; border-bottom: 1px solid rgba(212,175,124,.22); border-radius: 0; background: transparent; box-shadow: none; text-align: left; counter-increment: benefit; transition: none; }
-  .advantages .feature-card:hover { transform: none; filter: none; }
-  .advantages .feature-card:last-child { border-bottom: 0; }
-  .advantages .feature-card::before { content: "0" counter(benefit); grid-column: 1; grid-row: 1 / span 2; padding-top: 4px; color: var(--color-gold-light); font-size: .66rem; font-weight: 600; letter-spacing: .1em; }
-  .advantages .feature-card .icon-medallion { display: none; }
-  .advantages .feature-card h3 { grid-column: 2; margin-bottom: 4px; color: var(--color-cream); font-size: clamp(1.1rem, 4.2vw, 1.24rem); line-height: 1.25; }
-  .advantages .feature-card p { grid-column: 2; max-width: 48ch; margin: 0; color: rgba(251,249,246,.81); font-size: .84rem; line-height: 1.72; }
   .about__grid { grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto auto; gap: 28px; }
   .about__copy { grid-column: 1; grid-row: 1; }
   .about__photo { grid-column: 1; grid-row: 2; width: min(100%, 370px); padding: 0; }
@@ -553,8 +469,6 @@ p { margin-bottom: 18px; }
   .mobile-portrait-block__figure { height: 350px; }
   .hero__lead { font-size: .78rem; }
   .card-grid--four, .card-grid--three { grid-template-columns: 1fr; }
-  .feature-card { min-height: auto; padding: 24px 20px; }
-  .feature-card p { max-width: 310px; margin-inline: auto; }
   .request-card { min-height: auto; padding: 22px 20px; }
   .price-card { min-height: auto; }
   .price-card__price { margin-top: 18px; }
@@ -580,4 +494,23 @@ p { margin-bottom: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Value strip responsive match */
+
+@media (max-width: 760px) {
+  .value-strip { padding: 29px 0 33px; }
+  .value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 27px 12px; }
+  .value-item { padding: 0 5px; }
+  .value-item h2 { font-size: 17px; }
+  .value-item p { font-size: 11px; }
+}
+@media (max-width: 420px) {
+  .value-grid { gap: 22px 8px; }
+  .value-item { padding: 0 4px; }
+  .value-item h2 { font-size: 18px; }
+  .value-item p { max-width: 260px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .value-grid { grid-template-columns: 1fr; max-width: 280px; margin-inline: auto; gap: 24px; }
 }
