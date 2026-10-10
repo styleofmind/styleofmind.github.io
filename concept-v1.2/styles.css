@@ -232,16 +232,23 @@ a:focus-visible,summary:focus-visible{outline:2px solid #94702d;outline-offset:4
 /* DIKIDI booking modal: align the outer shell with the site and keep it responsive. */
 div[class*="dikidi-"][class*="-modal"]{backdrop-filter:blur(5px)}
 div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{border:1px solid rgba(217,180,92,.42)!important;border-radius:18px!important;box-shadow:0 28px 80px rgba(0,0,0,.46)!important}
+div[class*="dikidi-"][class*="-modal"] .olga-dikidi-dialog{display:flex!important;flex-direction:column!important;overflow:visible!important}
+.olga-dikidi-header{position:relative;z-index:2;flex:0 0 72px;min-height:72px;width:100%;box-sizing:border-box;padding:10px 22px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;background:linear-gradient(110deg,#111923,#202b34);border-bottom:1px solid rgba(217,180,92,.46);border-radius:16px 16px 0 0;text-align:left}
+.olga-dikidi-header__eyebrow{display:block;color:#c7b17f;font:700 8px/1.2 Arial,Helvetica,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.olga-dikidi-header__title{display:block;width:100%;color:#fffaf1;font:16px/1.25 Georgia,"Times New Roman",serif;font-weight:400;overflow-wrap:anywhere}
+div[class*="dikidi-"][class*="-modal"] .olga-dikidi-dialog iframe{display:block!important;flex:1 1 auto!important;min-height:0!important;height:calc(100% - 72px)!important;max-width:100%!important}
 div[class*="dikidi-"][class*="-modal"] div[class*="-close"]{display:grid!important;place-items:center;width:36px!important;height:36px!important;border:1px solid var(--gold)!important;border-radius:50%!important;background:var(--night)!important;color:var(--gold-light)!important;text-shadow:none!important;font-size:28px!important;line-height:1!important;right:-42px!important;top:-42px!important}
 @media(max-width:800px){
   div[class*="dikidi-"][class*="-modal"]{box-sizing:border-box!important;padding:0 12px!important;overflow-x:hidden!important}
   div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{box-sizing:border-box!important;width:calc(100vw - 32px)!important;max-width:740px!important;height:min(670px,calc(100vh - 100px))!important;height:min(670px,calc(100dvh - 100px))!important;margin:50px auto 24px!important}
-  div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"] iframe{box-sizing:border-box!important;width:100%!important;height:100%!important;max-width:100%!important}
+  div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"] iframe{box-sizing:border-box!important;width:100%!important;height:calc(100% - 72px)!important;flex:1 1 auto!important;min-height:0!important;max-width:100%!important}
   div[class*="dikidi-"][class*="-modal"] div[class*="-close"]{right:0!important;top:-42px!important}
 }
 @media(max-width:360px){
   div[class*="dikidi-"][class*="-modal"]{padding:0 8px!important}
   div[class*="dikidi-"][class*="-modal"] div[class*="-dialog"]{width:calc(100vw - 16px)!important}
+  .olga-dikidi-header{padding:8px 14px;flex-basis:72px;min-height:72px}
+  .olga-dikidi-header__title{font-size:14px;line-height:1.2}
 }
 @media (max-width:950px){
   .page-width{width:min(100% - 42px,760px)}.header-inner{width:calc(100% - 38px)}
