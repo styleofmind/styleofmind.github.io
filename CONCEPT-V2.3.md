@@ -1,4 +1,4 @@
-# Style of Mind — concept-v3.1
+# Style of Mind — concept-v2.3
 
 Snapshot date: 2026-10-08
 
@@ -44,4 +44,4 @@ background + woman/object + decorative light/lines + real HTML typography/naviga
 
 Then use the same layer-first approach for the remaining sections and perform visual comparison against the section reference crops.
 
-This branch name is intentionally: concept-v3.1.
+The published concept is available at /concept-v2.3/.
