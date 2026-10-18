@@ -48,8 +48,8 @@ async function waitForProduction() {
             body.includes("font-display: optional;")) {
           const pageResponse = await client.get(productionBase + pagePath + "?audit=" + Date.now(), { timeout: 15000 });
           const pageBody = await pageResponse.text();
-          if (pageResponse.status() === 200 &&
-              pageBody.includes('aria-label="Style of Mind — Ольга Сусленникова — на главную"')) {
+          const brandTag = pageBody.match(/<a class="brand" href="#hero"([^>]*)>/);
+          if (pageResponse.status() === 200 && brandTag && !/\baria-label\s*=/.test(brandTag[1])) {
             console.log("Published HTML and CSS match the current fixes.");
             return;
           }
