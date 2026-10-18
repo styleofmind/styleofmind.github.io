@@ -46,8 +46,13 @@ async function waitForProduction() {
             body.includes("width: 92%;") &&
             body.includes("object-fit: contain;") &&
             body.includes("font-display: optional;")) {
-          console.log("Published CSS matches current layout/font fixes.");
-          return;
+          const pageResponse = await client.get(productionBase + pagePath + "?audit=" + Date.now(), { timeout: 15000 });
+          const pageBody = await pageResponse.text();
+          if (pageResponse.status() === 200 &&
+              pageBody.includes('aria-label="Style of Mind — Ольга Сусленникова — на главную"')) {
+            console.log("Published HTML and CSS match the current fixes.");
+            return;
+          }
         }
       } catch (error) {
         lastStatus = String(error);
@@ -290,7 +295,7 @@ async function checkViewport(browser, target, width) {
     metrics.clippedText.length === 0;
   result.pass = result.httpStatus === 200 &&
     firstPartyFailed.length === 0 && firstPartyBad.length === 0 &&
-    pageErrors.length === 0 && noLayoutProblems &&
+    consoleErrors.length === 0 && pageErrors.length === 0 && noLayoutProblems &&
     (!metrics || (metrics.fonts.montserratAvailable && metrics.fonts.playfairAvailable)) &&
     (!mobileMenu || !mobileMenu.failed) &&
     a11y.criticalOrSerious === 0;
