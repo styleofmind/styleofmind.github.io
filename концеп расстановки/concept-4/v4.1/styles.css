@@ -394,7 +394,7 @@ p { margin-bottom: 18px; }
 
 /* 09 · Final CTA */
 .final-cta { padding-block: clamp(76px, 9vw, 126px); color: var(--color-dark); background-image: linear-gradient(90deg, rgba(251,249,246,.30) 0%, rgba(251,249,246,.08) 50%, rgba(251,249,246,.02) 100%), url("./assets/backgrounds/section-09.jpg"); background-position: center; background-size: cover; }
-.final-cta__inner { display: grid; grid-template-columns: minmax(0,.95fr) minmax(250px,.7fr); grid-template-rows: auto auto; align-items: center; gap: 34px clamp(36px,6vw,82px); }
+.final-cta__inner { display: grid; grid-template-columns: minmax(0,.95fr) minmax(250px,.7fr); align-items: center; gap: 34px clamp(36px,6vw,82px); }
 .final-cta__copy { grid-column: 1; grid-row: 1; max-width: 530px; }
 .final-cta__copy h2 { font-size: clamp(3rem,5.5vw,5rem); }
 .final-cta__copy > p:not(.eyebrow) { max-width: 430px; color: #514a40; font-size: .91rem; }
@@ -403,12 +403,12 @@ p { margin-bottom: 18px; }
 .final-cta__quote-mark { display: block; margin-bottom: 14px; color: var(--color-gold-ink); font-size: 1.55rem; }
 .final-cta__quote blockquote { margin: 0 0 18px; color: #4c4236; font: 400 clamp(1.25rem,2vw,1.8rem)/1.45 var(--font-heading); }
 .final-cta__quote > p { margin: 0; color: #76634d; font-size: .66rem; letter-spacing: .09em; text-transform: uppercase; }
-.final-cta__details { grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; padding: 21px 0 0; border: 0; border-top: 1px solid rgba(175,133,75,.42); background: transparent; }
-.final-cta__details > div { display: flex; align-items: center; gap: 12px; padding: 0 12px; border: 0; }
-.final-cta__details > div > span { display: grid; width: 38px; height: 38px; place-items: center; flex: 0 0 auto; color: var(--color-gold-ink); border: 1px solid rgba(175,133,75,.55); border-radius: 50%; }
-.final-cta__details p { display: grid; gap: 2px; margin: 0; line-height: 1.5; }
-.final-cta__details strong { font-size: .78rem; font-weight: 600; }
-.final-cta__details small { color: #686056; font-size: .68rem; }
+
+.booking-meta { padding: 18px 0; border-block: 1px solid rgba(184,146,91,.24); background: #f1eadf; }
+.booking-meta__inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 760px; }
+.booking-meta__item { display: flex; align-items: baseline; gap: 10px; margin: 0; padding-left: 20px; border-left: 1px solid rgba(175,133,75,.45); line-height: 1.5; }
+.booking-meta__item strong { color: var(--color-dark); font-size: .84rem; font-weight: 600; }
+.booking-meta__item span { color: var(--color-muted); font-size: .78rem; }
 
 /* 10 · Reviews */
 .reviews { background-image: linear-gradient(rgba(17,14,11,.43), rgba(17,14,11,.50)), url("./assets/backgrounds/section-10.jpg"); color: var(--color-cream); }
@@ -570,12 +570,14 @@ p { margin-bottom: 18px; }
   .outcomes__grid { width: 100%; }
   .outcomes__quote { position: static; width: 100%; max-width: 520px; margin: 24px auto 0; padding-left: 14px; }
   .final-cta { background-position: 61% center; }
-  .final-cta__inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: 32px; }
+  .final-cta__inner { grid-template-columns: 1fr; gap: 32px; }
   .final-cta__copy { grid-column: 1; grid-row: 1; max-width: 500px; }
   .final-cta__copy h2 { font-size: clamp(3rem, 12vw, 4.3rem); }
   .final-cta__quote { grid-column: 1; grid-row: 2; justify-self: start; max-width: 520px; }
-  .final-cta__details { grid-column: 1; grid-row: 3; grid-template-columns: 1fr; max-width: none; margin: 0; padding-top: 20px; }
-  .final-cta__details > div { padding: 8px 0; }
+  .booking-meta { padding: 7px 0; }
+  .booking-meta__inner { grid-template-columns: 1fr; gap: 0; }
+  .booking-meta__item { padding: 11px 0; border-left: 0; }
+  .booking-meta__item + .booking-meta__item { border-top: 1px solid rgba(184,146,91,.22); }
   .review-cards { columns: 1; }
   .review-card { margin-bottom: 14px; padding: 22px; }
   .faq__layout { grid-template-columns: 1fr; gap: 35px; padding-right: 0; }
@@ -662,7 +664,6 @@ p { margin-bottom: 18px; }
 .method__principles > div > span,
 .outcomes__grid .outcome-card > span,
 .final-cta__quote-mark,
-.final-cta__details > div:nth-child(3) > span,
 .faq__ornament,
 .footer-about__star {
   animation: star-twinkle 4.8s ease-in-out infinite;
@@ -687,6 +688,5 @@ p { margin-bottom: 18px; }
 .method__principles > div:nth-child(4) > span,
 .outcomes__grid .outcome-card:nth-child(4) > span,
 .final-cta__quote-mark { --star-delay: 3.1s; }
-.outcomes__grid .outcome-card:nth-child(5) > span,
-.final-cta__details > div:nth-child(3) > span { --star-delay: .9s; }
+.outcomes__grid .outcome-card:nth-child(5) > span { --star-delay: .9s; }
 .outcomes__grid .outcome-card:nth-child(6) > span { --star-delay: 2.8s; }
