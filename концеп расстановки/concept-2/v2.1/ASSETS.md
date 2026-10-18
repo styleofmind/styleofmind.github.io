@@ -79,6 +79,7 @@ Concept V2 находится в разработке и не является p
 ## Objects
 
 - [olga-about-720.webp](../images/olga-about-720.webp) — прозрачный WebP-портрет Ольги Сусленниковой; используется в блоке «Обо мне» концепта v2.2.
+- [olga-hero-glasses-480.webp](../images/olga-hero-glasses-480.webp), [olga-hero-glasses-840.webp](../images/olga-hero-glasses-840.webp), [olga-hero-glasses-1123.webp](../images/olga-hero-glasses-1123.webp) — адаптивные размеры главного портрета из Hero концепта v4.2; используются только в Hero v2.2.
 
 - [hero-portrait.webp](../images/hero-portrait.webp) — портретный объект для hero.
 - [olga-cutout-real.webp](../images/olga-cutout-real.webp) — вырезанный реальный портретный объект.
