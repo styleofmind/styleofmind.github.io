@@ -206,20 +206,6 @@ p { margin-bottom: 18px; }
   background: #eee5d9;
   box-shadow: var(--shadow-soft);
 }
-.about__photo .about__scene {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center 46%;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  transform: none;
-}
 .about__photo::after {
   position: absolute;
   z-index: 0;
