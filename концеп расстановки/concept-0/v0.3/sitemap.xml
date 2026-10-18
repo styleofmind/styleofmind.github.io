@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Только страницы, открытые для индексации.
-       pages/blog.html, pages/presentation.html и pages/privacy.html содержат
-       <meta name="robots" content="noindex,follow"> и в карту сайта не включаются. -->
-  <url><loc>https://styleofmind.github.io/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-0/v0.3/</loc></url>
-</urlset>

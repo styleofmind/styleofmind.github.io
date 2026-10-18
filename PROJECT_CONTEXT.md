@@ -1,38 +1,28 @@
-# Project Context — compact handoff
+# Project Context
 
-## Current state
-- Repository: `styleofmind/styleofmind.github.io`
-- Branch: `main`
-- Current working concept: `концеп расстановки/concept-0/v0.3`
-- Standalone landing concept: концеп лендинга/ (independent working copy based on concept 4.1).- `концеп расстановки/concept-0/v0.2` remains the frozen baseline; do not modify it.
-- `концеп расстановки/concept-0/v0.3` is the working copy for further changes.
+## Текущее состояние
+- Репозиторий: `styleofmind/styleofmind.github.io`
+- Ветка: `main`
+- Рабочая версия концепта расстановок 0: `концеп расстановки/concept-0/v0.2` (папка бывшей версии v0.3).
+- Концепт расстановок 2: `концеп расстановки/concept-2/v2.2` (папка бывшей версии v2.3).
+- Отдельный концепт лендинга: `концеп лендинга/`.
+- Устаревшие содержимое версий concept-0/v0.2 и concept-2/v2.2 удалено; номера v0.2 и v2.2 теперь обозначают перенумерованные актуальные версии.
 
-## What has been done
-- Created `концеп расстановки/concept-0/v0.2` as a copy of `концеп расстановки/concept-0/v0.1`.
-- Created `концеп расстановки/concept-0/v0.3` as a copy of v0.2; version metadata was updated and images were moved into shared family folders with identical files deduplicated.
-- Refined visual direction: fewer decorative effects, calmer hierarchy, preserved Lora/Lato, sand/green/gold palette and character.
-- Removed popup and GSAP/ScrollTrigger dependencies.
-- Reduced motion/parallax/autoplay behavior and added accessible focus states/skip link.
-- Reworked carousel controls to real buttons.
-- Rewrote exaggerated method/health/result claims into cautious, descriptive wording.
-- Clarified confidentiality wording and cookie consent behavior.
-- Fixed sitemap URLs and added `robots.txt`.
-- Removed unused JPEG duplicates from certificates/rasstanovki; page uses WebP versions.
-- Added root `PLAN.md`.
+## Что уже сделано
+- Каталог главной сгруппирован по направлениям «Расстановки» и «Лендинг», далее — по концептам и версиям.
+- Концепт 0 продолжен из v0.3, перенесён на адрес v0.2; SEO-ссылки, sitemap и robots.txt согласованы с новым путём.
+- Концепт 2 продолжен из v2.3, перенесён на адрес v2.2; документация и имя файла концепта обновлены.
+- Удалены старые папки concept-0/v0.2 и concept-2/v2.2.
+- Концепт 4.2 хранится отдельно от 4.1; версии имеют собственные ресурсы и документы.
+- Сохранены доступность интерфейса, настройки cookies и более осторожные формулировки содержания в концепте 4.1.
 
-## Important current facts
-- Remaining image optimization is **not completed**: large WebP files should be checked/re-encoded later, but the current GitHub connector cannot safely fetch binary WebP data for local recompression.
-- Do not claim WebP recompression has been done.
-- A web check of the published URL previously returned an internal access error; this did not prove that GitHub Pages itself was down.
+## Ограничения и факты
+- Оптимизация всех крупных WebP не завершена; не считать повторное сжатие выполненным без замеров.
+- Само наличие файлов в Git не подтверждает, что GitHub Pages уже опубликовал последнюю версию.
+- Наличие директории и локальные проверки не заменяют визуальный браузерный QA.
 
-## Next steps
-1. Check GitHub Pages deployment/status and confirm `концеп расстановки/concept-0/v0.3` availability before publishing.
-2. If published correctly, do real visual/mobile QA from hero to footer.
-3. Then optimize only the largest WebP files, preserving certificate readability and dimensions.
-4. Re-check accessibility, reduced motion, keyboard controls, links, sitemap and robots.txt.
-5. Avoid another redesign; prefer small, evidence-based improvements.
-
-## Reference
-- Last content change before the pause: `51623897731e301e0f73986e0985688f3af21063`.
-- Last repository change: `e7a6d3125cc3259af5f3334ecd4377892778f30` (added `PLAN.md`).
-- Detailed history remains in Git commits; this file is the compact handoff and should be treated as the source of truth for resuming work.
+## Следующие проверки
+1. Проверить результат публикации GitHub Pages и открыть главную, обновлённые версии v0.2 и v2.2.
+2. Провести визуальный QA на мобильной и настольной ширине.
+3. Проверить оставшиеся большие WebP и оптимизировать только при подтверждённом выигрыше без потери качества.
+4. Проверить ссылки, sitemap, robots.txt, keyboard focus и reduced-motion.

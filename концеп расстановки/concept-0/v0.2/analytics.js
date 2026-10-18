@@ -225,8 +225,9 @@
       const target = event.target;
       const bookingLink = target && target.closest ? target.closest('a[data-booking]') : null;
       if (bookingLink) {
+        const bookingSection = bookingLink.closest('section');
         track('booking_click', {
-          location: bookingLink.closest('section')?.id || 'unknown'
+          location: (bookingSection && bookingSection.id) || (bookingLink.closest('header') ? 'header' : 'unknown')
         });
       }
 
@@ -234,8 +235,9 @@
         ? target.closest('a[href*="t.me/olgastyleofmind"]')
         : null;
       if (telegramLink) {
+        const telegramSection = telegramLink.closest('section,footer');
         track('telegram_click', {
-          location: telegramLink.closest('section,footer')?.id || 'unknown'
+          location: (telegramSection && telegramSection.id) || (telegramLink.closest('footer') ? 'footer' : 'unknown')
         });
       }
     }, { passive: true });
@@ -247,7 +249,7 @@
       const wasAllowed = analyticsAllowed;
       analyticsAllowed = false;
       setYandexOptOut(true);
-      if (googleConsentInitialized) updateGoogleConsent(false);
+      updateGoogleConsent(false);
       clearAnalyticsData();
       // A reload tears down already-executed vendor code after a withdrawal.
       if (wasAllowed) window.location.reload();
