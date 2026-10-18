@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { chromium, request as playwrightRequest } from "playwright";
+import { chromium, firefox, webkit, request as playwrightRequest } from "playwright";
 
 const require = createRequire(import.meta.url);
 const axePath = require.resolve("axe-core/axe.min.js");
@@ -11,6 +11,10 @@ const productionBase = "https://styleofmind.github.io";
 const localWidths = [320,360,390,420,430,760,761,768,1024,1100,1101,1240,1241,1440,1920];
 const targets = [
   { name: "local", base: localBase, widths: localWidths },
+  { name: "production", base: productionBase, widths: [390,768,1440] }
+];
+const crossBrowserTargets = [
+  { name: "local", base: localBase, widths: [320,390,768,1024,1440] },
   { name: "production", base: productionBase, widths: [390,768,1440] }
 ];
 
@@ -65,7 +69,7 @@ async function waitForProduction() {
   }
 }
 
-async function checkViewport(browser, target, width) {
+async function checkViewport(browser, target, width, engineName) {
   const height = width <= 430 ? 844 : width <= 768 ? 1024 : 900;
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   const consoleErrors = [];
@@ -280,7 +284,7 @@ async function checkViewport(browser, target, width) {
   const firstPartyFailed = failedRequests.filter(x => x.url.startsWith(target.base));
   const firstPartyBad = badResponses.filter(x => x.url.startsWith(target.base));
   const result = {
-    target:target.name, width, height, url, httpStatus:response ? response.status() : null,
+    browser:engineName, target:target.name, width, height, url, httpStatus:response ? response.status() : null,
     consoleErrors,pageErrors,failedRequests,badResponses,firstPartyFailed,firstPartyBad,
     metrics,a11y,mobileMenu,pass:false
   };
@@ -302,7 +306,7 @@ async function checkViewport(browser, target, width) {
   report.checks.push(result);
 
   console.log(
-    (result.pass ? "PASS " : "FAIL ") + target.name + " " + width +
+    (result.pass ? "PASS " : "FAIL ") + engineName + " " + target.name + " " + width +
     "px HTTP=" + result.httpStatus +
     " overflow=" + (metrics ? metrics.document.horizontalOverflow : "n/a") +
     " brokenImages=" + (metrics ? metrics.brokenImages.length : "n/a") +
@@ -311,7 +315,7 @@ async function checkViewport(browser, target, width) {
     " seriousA11y=" + a11y.criticalOrSerious
   );
 
-  if (metrics && target.name === "local" && [320,390,768,1440].includes(width)) {
+  if (metrics && engineName === "chromium" && target.name === "local" && [320,390,768,1440].includes(width)) {
     const screenshot = path.join("site-audit", "local-" + width + ".png");
     await page.screenshot({ path:screenshot, fullPage:true, animations:"disabled" });
     report.screenshots.push(screenshot);
@@ -347,23 +351,33 @@ async function checkViewport(browser, target, width) {
 }
 
 await waitForProduction();
-const browser = await chromium.launch({ headless:true });
-try {
-  for (const target of targets) {
-    for (const width of target.widths) await checkViewport(browser,target,width);
+const engines = [
+  { name: "chromium", launcher: chromium, targets },
+  { name: "firefox", launcher: firefox, targets: crossBrowserTargets },
+  { name: "webkit", launcher: webkit, targets: crossBrowserTargets }
+];
+for (const engine of engines) {
+  const browser = await engine.launcher.launch({ headless:true });
+  try {
+    for (const target of engine.targets) {
+      for (const width of target.widths) {
+        await checkViewport(browser,target,width,engine.name);
+      }
+    }
+  } finally {
+    await browser.close();
   }
-} finally {
-  await browser.close();
 }
 report.summary = {
   total:report.checks.length,
   passed:report.checks.filter(c=>c.pass).length,
   failed:report.checks.filter(c=>!c.pass).length,
   failures:report.errors.length,
-  viewportResults:report.checks.map(c=>({target:c.target,width:c.width,pass:c.pass})),
+  browsers:[...new Set(report.checks.map(c=>c.browser))],
+  viewportResults:report.checks.map(c=>({browser:c.browser,target:c.target,width:c.width,pass:c.pass})),
   screenshots:report.screenshots,
   a11yViolations:report.checks.filter(c=>c.a11y && c.a11y.violations?.length).map(c=>({
-    target:c.target,width:c.width,violations:c.a11y.violations.map(v=>({id:v.id,impact:v.impact,nodeCount:v.nodeCount}))
+    browser:c.browser,target:c.target,width:c.width,violations:c.a11y.violations.map(v=>({id:v.id,impact:v.impact,nodeCount:v.nodeCount}))
   }))
 };
 await fs.writeFile("site-audit/browser-report.json", JSON.stringify(report,null,2), "utf8");
