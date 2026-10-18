@@ -2,7 +2,7 @@
 
 Самостоятельный визуальный концепт страницы Ольги Сусленниковой.
 
-**Просмотр:** https://styleofmind.github.io/concepts/concept-4/v4.1/
+**Просмотр:** https://styleofmind.github.io/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/
 
 Это отдельная версия для проверки дизайна и содержания. Она не заменяет основную страницу сайта.
 
@@ -44,7 +44,7 @@
 Из корня репозитория:
 
 ```powershell
-python -m http.server 4174 --bind 127.0.0.1 --directory "C:\_PROGET_OLGA\styleofmind.github.io\concepts\concept-4\v4.1"
+python -m http.server 4174 --bind 127.0.0.1 --directory "C:\_PROGET_OLGA\styleofmind.github.io\концеп расстановки\concept-4\v4.1"
 ```
 
 Открыть `http://127.0.0.1:4174/`. Проверка запускается из каталога версии командой `./CHECK_CONCEPT.ps1`.

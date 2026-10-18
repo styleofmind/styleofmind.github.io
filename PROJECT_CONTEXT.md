@@ -3,13 +3,13 @@
 ## Current state
 - Repository: `styleofmind/styleofmind.github.io`
 - Branch: `main`
-- Current working concept: `concepts/concept-0/v0.3`
-- `concepts/concept-0/v0.2` remains the frozen baseline; do not modify it.
-- `concepts/concept-0/v0.3` is the working copy for further changes.
+- Current working concept: `концеп расстановки/concept-0/v0.3`
+- `концеп расстановки/concept-0/v0.2` remains the frozen baseline; do not modify it.
+- `концеп расстановки/concept-0/v0.3` is the working copy for further changes.
 
 ## What has been done
-- Created `concepts/concept-0/v0.2` as a copy of `concepts/concept-0/v0.1`.
-- Created `concepts/concept-0/v0.3` as a copy of v0.2; version metadata was updated and images were moved into shared family folders with identical files deduplicated.
+- Created `концеп расстановки/concept-0/v0.2` as a copy of `концеп расстановки/concept-0/v0.1`.
+- Created `концеп расстановки/concept-0/v0.3` as a copy of v0.2; version metadata was updated and images were moved into shared family folders with identical files deduplicated.
 - Refined visual direction: fewer decorative effects, calmer hierarchy, preserved Lora/Lato, sand/green/gold palette and character.
 - Removed popup and GSAP/ScrollTrigger dependencies.
 - Reduced motion/parallax/autoplay behavior and added accessible focus states/skip link.
@@ -26,7 +26,7 @@
 - A web check of the published URL previously returned an internal access error; this did not prove that GitHub Pages itself was down.
 
 ## Next steps
-1. Check GitHub Pages deployment/status and confirm `concepts/concept-0/v0.3` availability before publishing.
+1. Check GitHub Pages deployment/status and confirm `концеп расстановки/concept-0/v0.3` availability before publishing.
 2. If published correctly, do real visual/mobile QA from hero to footer.
 3. Then optimize only the largest WebP files, preserving certificate readability and dimensions.
 4. Re-check accessibility, reduced motion, keyboard controls, links, sitemap and robots.txt.
