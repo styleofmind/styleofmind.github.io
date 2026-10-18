@@ -7,7 +7,9 @@
   <title>Политика обработки персональных данных | Ольга Сусленникова</title>
   <meta name="description" content="Политика обработки персональных данных сайта Ольги Сусленниковой.">
   <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="../../../assets/fonts/lora-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/lato-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../assets/fonts/fonts.css">
   <style>
     :root{
       --bg-sand:#f5efe6;
@@ -219,6 +221,7 @@
       .footer-inner{align-items:flex-start}
     }
   .brand-mobile{display:none}
+  @media (max-width:360px){.policy-section h2{font-size:1.25rem;letter-spacing:-.035em}}
 
 @media (max-width:767px){.brand-full{display:none}.brand-mobile{display:inline}}
 </style>
