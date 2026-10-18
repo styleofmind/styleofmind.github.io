@@ -1,6 +1,0 @@
-/* Новый дизайн будет создан с нуля. */
-:root { color-scheme: light; }
-* { box-sizing: border-box; }
-html { min-height: 100%; }
-body { margin: 0; min-height: 100vh; }
-.landing-canvas { min-height: 100vh; }
