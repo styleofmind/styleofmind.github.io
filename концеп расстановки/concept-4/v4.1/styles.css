@@ -412,11 +412,11 @@ p { margin-bottom: 18px; }
 .reviews { background-image: linear-gradient(rgba(17,14,11,.43), rgba(17,14,11,.50)), url("./assets/backgrounds/section-10.jpg"); color: var(--color-cream); }
 .reviews .section-heading__lead { color: rgba(251,249,246,.68); }
 .reviews .ornament-line::after { background: var(--color-night); }
-.review-cards { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
-.review-card { min-height: 225px; padding: 24px 25px; border: 1px solid rgba(212,175,124,.45); border-radius: var(--radius); background: rgba(18,15,12,.42); }
+.review-cards { columns: 3; column-gap: 18px; }
+.review-card { display: inline-block; width: 100%; margin: 0 0 18px; padding: 25px 26px; border: 1px solid rgba(212,175,124,.45); border-radius: var(--radius); background: rgba(18,15,12,.42); break-inside: avoid; vertical-align: top; }
 .review-card > span { display: block; margin-bottom: 4px; color: var(--color-gold-light); font: 400 3.2rem/.85 var(--font-heading); }
 .review-card h3 { font-size: 1.3rem; }
-.review-card p { margin-bottom: 20px; color: rgba(251,249,246,.72); font-size: .75rem; }
+.review-card p { margin-bottom: 18px; color: rgba(251,249,246,.78); font-size: .82rem; line-height: 1.75; }
 .review-card small { color: var(--color-gold-light); font-size: .62rem; }
 .reviews__note { margin: 22px 0 0; color: rgba(251,249,246,.55); font-size: .67rem; text-align: center; }
 .reviews__actions { display: flex; justify-content: center; margin-top: 24px; }
@@ -474,7 +474,7 @@ p { margin-bottom: 18px; }
   .outcomes__grid { width: 100%; }
   .outcomes__quote { position: static; width: 100%; max-width: 580px; margin: 28px auto 0; }
   .faq__layout { padding-right: clamp(72px,10vw,120px); }
-  .review-cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .review-cards { columns: 2; }
   .value-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .card-grid--four { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .price-card { min-height: 400px; }
@@ -569,8 +569,8 @@ p { margin-bottom: 18px; }
   .final-cta__quote { grid-column: 1; grid-row: 2; justify-self: start; max-width: 520px; }
   .final-cta__details { grid-column: 1; grid-row: 3; grid-template-columns: 1fr; max-width: none; margin: 0; padding-top: 20px; }
   .final-cta__details > div { padding: 8px 0; }
-  .review-cards { grid-template-columns: 1fr; }
-  .review-card { min-height: 170px; }
+  .review-cards { columns: 1; }
+  .review-card { margin-bottom: 14px; padding: 22px; }
   .faq__layout { grid-template-columns: 1fr; gap: 35px; padding-right: 0; }
   .faq__intro { max-width: 560px; }
   .faq__ornament { display: none; }
