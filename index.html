@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ee">
   <meta name="description" content="Каталог концептов Style of Mind: концепты сайта расстановок и лендинга.">
+  <link rel="canonical" href="https://styleofmind.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Концепты — Style of Mind">
+  <meta property="og:description" content="Каталог концептов сайта: направления, концепты и версии.">
+  <meta property="og:url" content="https://styleofmind.github.io/">
   <title>Концепты — Style of Mind</title>
   <style>
     :root {
@@ -294,7 +299,7 @@
       <button class="screenshot-tab" type="button" data-screenshot-size="phone" aria-pressed="false">Телефон</button>
     </div>
     <div class="screenshot-stage" id="screenshot-stage">
-      <img class="screenshot-image" id="screenshot-image" alt="" hidden decoding="async">
+      <img class="screenshot-image" id="screenshot-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" hidden decoding="async">
       <p class="screenshot-error" id="screenshot-error" role="status" hidden>Не удалось загрузить скриншот. Попробуйте выбрать другой размер экрана.</p>
     </div>
     <div class="screenshot-dialog__footer">
@@ -307,6 +312,7 @@
       const dialog = document.getElementById('screenshot-dialog');
       const title = document.getElementById('screenshot-dialog-title');
       const image = document.getElementById('screenshot-image');
+      const placeholder = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
       const error = document.getElementById('screenshot-error');
       const status = document.getElementById('screenshot-status');
       const openLink = document.getElementById('screenshot-open');
@@ -349,7 +355,7 @@
       tabs.forEach((tab) => tab.addEventListener('click', () => selectSize(tab.dataset.screenshotSize)));
       closeButton.addEventListener('click', () => dialog.close());
       dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-      dialog.addEventListener('close', () => { image.removeAttribute('src'); image.hidden = true; });
+      dialog.addEventListener('close', () => { image.src = placeholder; image.hidden = true; error.hidden = true; });
     })();
   </script>
 </body>
