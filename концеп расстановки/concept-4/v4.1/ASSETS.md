@@ -8,7 +8,7 @@
 |---|---|
 | `assets/backgrounds/` | `section-01.jpg`–`section-12.jpg`, `section-08-composed.jpg`, `section-11-composed.jpg` и `about-watercolor-background.jpg` |
 | `assets/identity/` | `brand-mark.svg` |
-| `assets/portraits/` | `olga-hero-glasses.png`, `olga-hero.png` (social preview), `olga-about.png` — портрет в очках на прозрачном фоне |
+| `assets/portraits/` | PNG-оригиналы `olga-hero-glasses.png`, `olga-about.png` и `olga-hero.png` (social preview); адаптивные WebP-варианты `olga-hero-glasses-{480,840,1123}.webp` и `olga-about-{480,720,1024}.webp` для быстрой загрузки с PNG-fallback |
 | `assets/scenes/` | `about-arch-interior.png` — графический фон блока «Обо мне» |
 | `assets/why-me/` | Текстура, ботанический элемент, рамка и золотые декоративные детали |
 | `assets/references/` | `style-guide-olga-suslennikova.png` — визуальный эталон |
