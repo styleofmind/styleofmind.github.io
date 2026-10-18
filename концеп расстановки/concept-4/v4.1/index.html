@@ -59,7 +59,12 @@
       <figure class="hero__portrait">
         <span class="portrait-orbit portrait-orbit--one" aria-hidden="true"></span>
         <span class="portrait-orbit portrait-orbit--two" aria-hidden="true"></span>
-        <img src="./assets/portraits/olga-hero-glasses.png" alt="Профессиональный портрет женщины в очках" width="1123" height="1401" fetchpriority="high">
+        <picture>
+            <source type="image/webp"
+              srcset="./assets/portraits/olga-hero-glasses-480.webp 480w, ./assets/portraits/olga-hero-glasses-840.webp 840w, ./assets/portraits/olga-hero-glasses-1123.webp 1123w"
+              sizes="(max-width: 760px) min(100vw - 36px, 360px), (max-width: 1100px) 480px, (max-width: 1240px) 430px, 480px">
+            <img src="./assets/portraits/olga-hero-glasses.png" alt="Профессиональный портрет женщины в очках" width="1123" height="1401" fetchpriority="high">
+          </picture>
       </figure>
       <aside class="hero__aside">
         <span class="hero__aside-star" aria-hidden="true">✧</span>
@@ -78,7 +83,12 @@
       <figure class="mobile-portrait-block__figure">
         <span class="mobile-portrait-block__orbit mobile-portrait-block__orbit--one" aria-hidden="true"></span>
         <span class="mobile-portrait-block__orbit mobile-portrait-block__orbit--two" aria-hidden="true"></span>
-        <img src="./assets/portraits/olga-hero-glasses.png" alt="Ольга Сусленникова в чёрной одежде с белым горошком" width="1123" height="1401" loading="lazy">
+        <picture>
+          <source type="image/webp"
+            srcset="./assets/portraits/olga-hero-glasses-480.webp 480w, ./assets/portraits/olga-hero-glasses-840.webp 840w, ./assets/portraits/olga-hero-glasses-1123.webp 1123w"
+            sizes="(max-width: 760px) min(100vw - 36px, 360px), (max-width: 1100px) 480px, (max-width: 1240px) 430px, 480px">
+          <img src="./assets/portraits/olga-hero-glasses.png" alt="Ольга Сусленникова в чёрной одежде с белым горошком" width="1123" height="1401" loading="lazy">
+        </picture>
       </figure>
       <p class="mobile-portrait-block__caption">Ольга Сусленникова <span>Клинический психолог</span></p>
     </section>
@@ -133,7 +143,12 @@
         </div>
         <div class="about__visual">
           <figure class="about__photo">
-            <img class="about__portrait" src="./assets/portraits/olga-about.png" alt="Ольга Сусленникова в очках и чёрной рубашке" loading="lazy">
+            <picture>
+              <source type="image/webp"
+                srcset="./assets/portraits/olga-about-480.webp 480w, ./assets/portraits/olga-about-720.webp 720w, ./assets/portraits/olga-about-1024.webp 1024w"
+                sizes="(max-width: 430px) 340px, (max-width: 760px) 380px, (max-width: 860px) 330px, (max-width: 1100px) 405px, 440px">
+              <img class="about__portrait" src="./assets/portraits/olga-about.png" alt="Ольга Сусленникова в очках и чёрной рубашке" width="1024" height="1536" loading="lazy">
+            </picture>
           </figure>
           <aside class="about__quote">
             <span aria-hidden="true">“</span>

@@ -18,6 +18,18 @@ def main() -> None:
     if not features.check("webp"):
         raise RuntimeError("Pillow was installed without WebP support")
 
+    background_path = ASSETS.parent / "backgrounds" / "section-01.jpg"
+    if background_path.is_file():
+        with Image.open(background_path) as background:
+            background.load()
+            print(json.dumps({
+                "heroBackground": str(background_path.name),
+                "dimensions": list(background.size),
+                "mode": background.mode,
+                "format": background.format,
+                "bytes": background_path.stat().st_size,
+            }, ensure_ascii=False))
+
     results = []
     for source_name, widths in TARGETS:
         source_path = ASSETS / source_name
