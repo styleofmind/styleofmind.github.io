@@ -26,3 +26,9 @@ test-results/
 !/концеп расстановки/concept-4/v4.1/assets/scenes/**
 !/концеп расстановки/concept-4/v4.1/assets/why-me/
 !/концеп расстановки/concept-4/v4.1/assets/why-me/**
+
+# Local concept screenshots and browser previews are development artifacts.
+/Скрины сайта/
+/концеп расстановки/concept-4/v4.2/previews/
+# Source boards and montage sheets are retained locally, not deployed.
+/концеп расстановки/concept-4/v4.2/assets/страница листы/
