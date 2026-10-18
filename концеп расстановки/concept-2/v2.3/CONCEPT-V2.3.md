@@ -44,4 +44,4 @@ background + woman/object + decorative light/lines + real HTML typography/naviga
 
 Then use the same layer-first approach for the remaining sections and perform visual comparison against the section reference crops.
 
-The published concept is available at /concepts/concept-2/v2.3/.
+The published concept is available at /%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-2/v2.3/.
