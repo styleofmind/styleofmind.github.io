@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#171512">
+  <meta name="description" content="Правовая информация и проекты документов сайта Style of Mind — Ольга Сусленникова.">
+  <title>Правовая информация | Style of Mind</title>
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    .legal-header { padding: 22px 0; border-bottom: 1px solid rgba(175,133,75,.3); background: var(--color-cream); }
+    .legal-header__inner { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .legal-header__inner > a:first-child { color:var(--color-dark); font:400 1.1rem/1.3 var(--font-heading); text-decoration:none; }
+    .legal-main { min-height:70vh; padding:clamp(48px,8vw,86px) 0 82px; background:var(--color-cream); }
+    .legal-wrap { max-width:850px; }
+    .legal-main h1 { margin:0 0 18px; color:var(--color-dark); font:400 clamp(2.2rem,5vw,3.8rem)/1.1 var(--font-heading); }
+    .legal-lead { max-width:700px; margin:0 0 26px; color:#625b51; font-size:.92rem; line-height:1.75; }
+    .legal-status { margin:0 0 38px; padding:18px 21px; border-left:2px solid var(--color-gold); background:rgba(212,175,124,.12); color:#625b51; font-size:.8rem; line-height:1.75; }
+    .legal-status strong { display:block; margin-bottom:6px; color:var(--color-dark); font:400 1.3rem/1.3 var(--font-heading); }
+    .legal-document { padding:28px 0 32px; border-top:1px solid rgba(126,111,85,.24); scroll-margin-top:24px; }
+    .legal-document h2 { margin:0 0 14px; color:var(--color-dark); font:400 clamp(1.65rem,3vw,2.2rem)/1.2 var(--font-heading); }
+    .legal-document p, .legal-document li { max-width:740px; color:#625b51; font-size:.84rem; line-height:1.8; }
+    .legal-document ul { padding-left:1.25rem; }
+    .legal-placeholder { margin-top:18px; padding:13px 16px; border:1px solid rgba(157,120,56,.3); color:#70572d; background:rgba(212,175,124,.12); font-size:.75rem; line-height:1.7; }
+    .legal-back { display:inline-block; margin-top:14px; color:var(--color-dark); }
+    @media(max-width:600px){ .legal-status{padding:15px}.legal-header__inner{gap:12px}.legal-header__inner > a:first-child{font-size:1rem} }
+  </style>
+</head>
+<body>
+  <header class="legal-header">
+    <div class="container legal-header__inner">
+      <a href="./index.html">Style of Mind · Ольга Сусленникова</a>
+      <a class="button button--outline" href="./index.html">На главную ↑</a>
+    </div>
+  </header>
+  <main class="legal-main">
+    <div class="container legal-wrap">
+      <p class="eyebrow">Правовая информация</p>
+      <h1>Документы сайта</h1>
+      <p class="legal-lead">На этой странице размещены проекты документов об обработке персональных данных и использовании аналитических cookies. Перед публикацией тексты необходимо дополнить сведениями об операторе и проверить с учётом фактической работы сайта.</p>
+      <aside class="legal-status">
+        <strong>Проекты документов — не финальная редакция</strong>
+        Тексты ниже являются рабочими шаблонами. Перед публикацией укажите недостающие сведения, проверьте используемые сервисы и утвердите содержание. Пока это не сделано, страница не должна считаться окончательным комплектом юридических документов.
+      </aside>
+
+      <section class="legal-document" id="privacy" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Политика обработки персональных данных</h2>
+        <p><strong>Оператор:</strong> [укажите Ф. И. О. или наименование оператора и необходимые реквизиты]. <strong>Контакт для обращений:</strong> [укажите рабочий адрес электронной почты или другой канал связи]. Эти сведения необходимо заполнить до публикации политики.</p>
+        <p>Персональные данные могут обрабатываться, если вы добровольно сообщаете их при обращении или оформлении записи. В зависимости от выбранного способа связи это могут быть контактные данные и сведения, которые вы указываете в сообщении. Не отправляйте через сайт данные, которые не нужны для обращения.</p>
+        <p>Предполагаемые цели обработки: ответ на обращение, согласование записи и формата встречи, обеспечение работы сайта, а также получение статистики об использовании сайта при наличии согласия на аналитические cookies.</p>
+        <p>Яндекс Метрика и Google Analytics подключаются на этом сайте только после выбора «Разрешить аналитику». Сервис записи Dikidi и мессенджер Telegram являются сторонними сервисами: при переходе к ним обработка данных может осуществляться по правилам соответствующего сервиса.</p>
+        <p>Сроки хранения данных, порядок их удаления, применяемые меры защиты и порядок реализации обращений должны быть определены оператором и внесены в финальную редакцию документа.</p>
+        <div class="legal-placeholder">Нужно заполнить: данные оператора и контакт для обращений; фактические сроки хранения; сведения о получателях данных и применяемых мерах защиты. Перед публикацией требуется правовая проверка.</div>
+      </section>
+
+      <section class="legal-document" id="consent" aria-labelledby="consent-title">
+        <h2 id="consent-title">Согласие на использование аналитических cookies</h2>
+        <p>На сайте используются аналитические сервисы Яндекс Метрика и Google Analytics. Они загружаются только после нажатия кнопки «Разрешить аналитику». Если вы выбираете «Только необходимые», аналитические скрипты не запускаются, а основные функции сайта и переход к записи остаются доступными.</p>
+        <p>Выбор сохраняется в браузере на срок до 180 дней. Изменить решение можно с помощью ссылки «Настройки cookies» внизу сайта. При отказе от аналитики после её разрешения сайт отключает аналитические счётчики и очищает доступные аналитические cookies и локальные записи.</p>
+        <p>Сведения, которые могут собирать аналитические сервисы, и условия их обработки определяются настройками сервисов и их собственными документами. Перед публикацией необходимо проверить актуальные идентификаторы счётчиков и добавить ссылки на применимые политики провайдеров.</p>
+        <div class="legal-placeholder">Это проект текста согласия. Перед публикацией проверьте настройки счётчиков, перечень используемых технологий, ссылки на документы провайдеров и соответствие фактической обработке данных.</div>
+      </section>
+
+      <a class="button button--outline legal-back" href="./index.html">Вернуться на сайт</a>
+    </div>
+  </main>
+  <footer class="site-footer section--dark">
+    <div class="container">
+      <div class="site-footer__bottom">
+        <span>© 2026 Ольга Сусленникова</span>
+        <a href="./index.html">На главную ↑</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

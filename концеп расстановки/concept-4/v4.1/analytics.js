@@ -296,7 +296,7 @@
     button.type = 'button';
     button.id = 'analyticsSettingsTrigger';
     button.className = 'footer-analytics-settings';
-    button.textContent = 'Cookies';
+    button.textContent = 'Настройки cookies';
     button.setAttribute('aria-label', 'Открыть настройки cookies');
     button.title = 'Настройки cookies';
     button.addEventListener('click', () => {
