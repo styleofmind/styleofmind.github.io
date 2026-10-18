@@ -298,12 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     cat.style.pointerEvents = 'auto';
     cat.addEventListener('click', openEgg);
-    cat.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        openEgg();
-      }
-    });
+
   }
 
   // Cats are interactive on desktop and mobile, including when reduced motion is enabled.

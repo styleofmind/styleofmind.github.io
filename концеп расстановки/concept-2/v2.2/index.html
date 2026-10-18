@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
@@ -6,9 +6,8 @@
   <meta name="theme-color" content="#0b171e">
   <meta name="description" content="Style of Mind — психологическая практика. Системные расстановки, отношения, семейные сценарии и индивидуальная работа.">
   <title>Style of Mind — психолог · расстановки</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="../../assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/playfair-display-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -42,7 +41,7 @@
       </button>
     </div>
 
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu" id="mobile-menu" inert>
       <nav aria-label="Мобильная навигация">
         <a href="#about">Обо мне</a>
         <a href="#method">Метод</a>

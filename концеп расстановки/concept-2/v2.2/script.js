@@ -8,14 +8,14 @@ document.documentElement.classList.add('js');
   const closeMenu = () => {
     if (!mobileMenu) return;
     mobileMenu.classList.remove('open');
-    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenu.inert = true;
     menuToggle?.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('menu-open');
   };
 
   menuToggle?.addEventListener('click', () => {
     const open = mobileMenu.classList.toggle('open');
-    mobileMenu.setAttribute('aria-hidden', String(!open));
+    mobileMenu.inert = !open;
     menuToggle.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('menu-open', open);
   });
