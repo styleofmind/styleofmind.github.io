@@ -643,3 +643,49 @@ p { margin-bottom: 18px; }
   .faq-item__answer { padding-right: 28px; }
   .site-footer__main { gap: 28px 12px; }
 }
+
+/* Subtle twinkle for decorative star glyphs. */
+@keyframes star-twinkle {
+  0%, 100% { opacity: .72; text-shadow: 0 0 0 rgba(212,175,124,0); }
+  50% { opacity: 1; text-shadow: 0 0 6px rgba(212,175,124,.34); }
+}
+.tiny-star,
+.hero__aside-star,
+.value-item:first-child .line-icon,
+.value-item:nth-child(4) .line-icon,
+.about__facts > div > span,
+.method__principles > div > span,
+.price-card--featured .price-card__icon,
+.pricing__condition-icon,
+.outcomes__grid .outcome-card > span,
+.final-cta__quote-mark,
+.final-cta__details > div:nth-child(3) > span,
+.faq__ornament,
+.footer-about__star {
+  animation: star-twinkle 4.8s ease-in-out infinite;
+  animation-delay: var(--star-delay, 0s);
+}
+.tiny-star { --star-delay: .3s; }
+.hero__aside-star,
+.faq__ornament { --star-delay: 1.4s; }
+.value-item:first-child .line-icon,
+.about__facts > div:nth-child(1) > span,
+.method__principles > div:nth-child(1) > span,
+.outcomes__grid .outcome-card:nth-child(1) > span { --star-delay: .6s; }
+.value-item:nth-child(4) .line-icon,
+.about__facts > div:nth-child(2) > span,
+.method__principles > div:nth-child(2) > span,
+.outcomes__grid .outcome-card:nth-child(2) > span { --star-delay: 1.6s; }
+.about__facts > div:nth-child(3) > span,
+.method__principles > div:nth-child(3) > span,
+.outcomes__grid .outcome-card:nth-child(3) > span,
+.footer-about__star { --star-delay: 2.3s; }
+.about__facts > div:nth-child(4) > span,
+.method__principles > div:nth-child(4) > span,
+.outcomes__grid .outcome-card:nth-child(4) > span,
+.final-cta__quote-mark { --star-delay: 3.1s; }
+.price-card--featured .price-card__icon,
+.pricing__condition-icon,
+.outcomes__grid .outcome-card:nth-child(5) > span,
+.final-cta__details > div:nth-child(3) > span { --star-delay: .9s; }
+.outcomes__grid .outcome-card:nth-child(6) > span { --star-delay: 2.8s; }
