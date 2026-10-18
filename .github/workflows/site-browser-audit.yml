@@ -63,7 +63,7 @@ jobs:
           export CHROME_PATH="$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')"
           npx lighthouse "http://127.0.0.1:8765/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/" \
             --output=json --output-path=site-audit/lighthouse-desktop.json \
-            --form-factor=desktop \
+            --preset=desktop \
             --only-categories=performance,accessibility,best-practices,seo \
             --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage"
 
