@@ -48,7 +48,18 @@ jobs:
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-480.webp" \
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-720.webp" \
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-1024.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01-mobile.webp"
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01-mobile.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/about-watercolor-background.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-04.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-05.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-06.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-07.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-08-composed.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-09.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-10.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-11-composed.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-12.webp"
           if git diff --cached --quiet; then
             echo "No optimized portrait files to add."
             exit 0
