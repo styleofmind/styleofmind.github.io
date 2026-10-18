@@ -76,6 +76,7 @@ linear-gradient(180deg,rgba(2,9,13,.02),rgba(2,9,13,.18) 72%,rgba(2,9,13,.52) 10
 .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:36px 0}.trust-card{text-align:center;padding:0 10px}.circle-icon{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 12px;color:var(--gold2);font-size:20px}.trust-card h2{font:500 18px/1.1 var(--serif);margin:0 0 10px}.trust-card p{max-width:230px;margin:0 auto;color:rgba(248,242,233,.61);font-size:10px}
 .about{padding:86px 0}.about-layout{position:relative;z-index:1;display:grid;grid-template-columns:300px minmax(0,1fr) 240px;gap:70px;align-items:center}
 .arch-image{width:300px;height:355px;overflow:hidden;border-radius:155px 155px 0 0;box-shadow:0 20px 45px rgba(62,44,27,.12);background:#d8c5a4}.arch-image img{width:100%;height:100%;object-fit:cover}
+.arch-image.about-portrait{background:#eee5d9}.arch-image.about-portrait img{object-fit:contain;object-position:center bottom}
 .arch-image.small{width:240px;height:285px}
 .about h2{font-size:52px;line-height:1.02;margin:0 0 16px}.about-copy>p:not(.eyebrow){font-size:13px;color:#565c59;max-width:600px}.about-copy>p:not(.eyebrow)+p:not(.eyebrow){margin-top:10px}.hand-note{font-family:"Segoe Script","Brush Script MT",cursive;color:#7a684f;font-size:14px;line-height:1.38;transform:rotate(-4deg)}
 .method{padding:88px 0;background:
