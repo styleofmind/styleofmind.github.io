@@ -61,10 +61,11 @@
         <span class="portrait-orbit portrait-orbit--one" aria-hidden="true"></span>
         <span class="portrait-orbit portrait-orbit--two" aria-hidden="true"></span>
         <picture>
-            <source type="image/webp"
+            <source media="(min-width: 761px)" type="image/webp"
               srcset="./assets/portraits/olga-hero-glasses-480.webp 480w, ./assets/portraits/olga-hero-glasses-840.webp 840w, ./assets/portraits/olga-hero-glasses-1123.webp 1123w"
-              sizes="(max-width: 760px) min(100vw - 36px, 360px), (max-width: 1100px) 480px, (max-width: 1240px) 430px, 480px">
-            <img src="./assets/portraits/olga-hero-glasses.png" alt="Профессиональный портрет женщины в очках" width="1123" height="1401" fetchpriority="high">
+              sizes="(max-width: 1100px) 480px, (max-width: 1240px) 430px, 480px">
+            <source media="(min-width: 761px)" srcset="./assets/portraits/olga-hero-glasses.png">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" aria-hidden="true" width="1123" height="1401" fetchpriority="high">
           </picture>
       </figure>
       <aside class="hero__aside">

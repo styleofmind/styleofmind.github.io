@@ -57,8 +57,10 @@ async function waitForProduction() {
           const hasMobilePreload = pageBody.includes('href="./assets/backgrounds/section-01-mobile.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 760px)"');
           const hasResponsivePortraits = pageBody.includes("olga-hero-glasses-480.webp") &&
             pageBody.includes("olga-about-480.webp");
+          const desktopPortraitIsMediaGated = pageBody.includes('<source media="(min-width: 761px)" type="image/webp"');
+          const desktopPortraitHasTinyFallback = pageBody.includes('src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="');
           if (pageResponse.status() === 200 && brandTag && !/\baria-label\s*=/.test(brandTag[1]) &&
-              hasMobilePreload && hasResponsivePortraits) {
+              hasMobilePreload && hasResponsivePortraits && desktopPortraitIsMediaGated && desktopPortraitHasTinyFallback) {
             const mobileAsset = await client.get(productionBase + pagePath + "assets/backgrounds/section-01-mobile.webp", { timeout: 15000 });
             if (mobileAsset.status() === 200) {
               console.log("Published HTML, CSS and mobile background asset match current fixes.");
@@ -238,6 +240,9 @@ async function checkViewport(browser, target, width, engineName) {
       const heroBackground = getComputedStyle(document.querySelector(".hero")).backgroundImage;
       const portraitImages = images.filter(image => /olga-(?:hero-glasses|about)\.png$/.test(image.src || ""));
       const portraitDeliveryFailures = portraitImages.filter(image => !/\.webp(?:$|\?)/.test(image.currentSrc || ""));
+      const desktopHeroImage = document.querySelector(".hero__portrait img");
+      const desktopHeroCurrentSrc = desktopHeroImage ? desktopHeroImage.currentSrc : "";
+      const desktopHeroDeliveryFailure = innerWidth > 760 && !/\.webp(?:$|\?)/.test(desktopHeroCurrentSrc);
       const mobileHeroBackgroundExpected = innerWidth <= 760
         ? heroBackground.includes("section-01-mobile.webp")
         : heroBackground.includes("section-01.jpg");
@@ -252,7 +257,7 @@ async function checkViewport(browser, target, width, engineName) {
           horizontalOverflow: doc.scrollWidth > innerWidth + 1 || body.scrollWidth > innerWidth + 1 },
         images, brokenImages, missingAnchors: Array.from(new Set(missingAnchors)),
         heroBackground, mobileHeroBackgroundExpected, mobileBackgroundBytes, desktopBackgroundLoaded,
-        portraitDeliveryFailures,
+        portraitDeliveryFailures, desktopHeroCurrentSrc, desktopHeroDeliveryFailure,
         boxes, aboutOverlap, aboutFlowIssues, outcomesOverlap, outOfViewport, clippedText,
         fonts: {
           status: document.fonts.status,
@@ -320,6 +325,7 @@ async function checkViewport(browser, target, width, engineName) {
     metrics.clippedText.length === 0 &&
     metrics.mobileHeroBackgroundExpected &&
     metrics.portraitDeliveryFailures.length === 0 &&
+    !metrics.desktopHeroDeliveryFailure &&
     (width <= 760 ? metrics.mobileBackgroundBytes > 0 && !metrics.desktopBackgroundLoaded : metrics.desktopBackgroundLoaded);
   result.pass = result.httpStatus === 200 &&
     firstPartyFailed.length === 0 && firstPartyBad.length === 0 &&
@@ -357,7 +363,9 @@ async function checkViewport(browser, target, width, engineName) {
         mobileHeroBackgroundExpected:metrics.mobileHeroBackgroundExpected,
         mobileBackgroundBytes:metrics.mobileBackgroundBytes,
         desktopBackgroundLoaded:metrics.desktopBackgroundLoaded,
-        portraitDeliveryFailures:metrics.portraitDeliveryFailures
+        portraitDeliveryFailures:metrics.portraitDeliveryFailures,
+        desktopHeroCurrentSrc:metrics.desktopHeroCurrentSrc,
+        desktopHeroDeliveryFailure:metrics.desktopHeroDeliveryFailure
       } : null,
       a11y: { criticalOrSerious:a11y.criticalOrSerious, violations:a11y.violations },
       mobileMenu
