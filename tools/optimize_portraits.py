@@ -14,6 +14,21 @@ QUALITY = 88
 METHOD = 6
 ALPHA_QUALITY = 100
 
+BACKGROUND_FILES = [
+    "about-watercolor-background.jpg",
+    "section-01.jpg",
+    "section-04.jpg",
+    "section-05.jpg",
+    "section-06.jpg",
+    "section-07.jpg",
+    "section-08-composed.jpg",
+    "section-09.jpg",
+    "section-10.jpg",
+    "section-11-composed.jpg",
+    "section-12.jpg",
+]
+BACKGROUND_QUALITY = 86
+
 def main() -> None:
     if not features.check("webp"):
         raise RuntimeError("Pillow was installed without WebP support")
@@ -123,7 +138,39 @@ def main() -> None:
                 if output is not image:
                     output.close()
 
-    print(json.dumps({"quality": QUALITY, "mobileHeroBackground": mobile_background_result, "results": results}, ensure_ascii=False, indent=2))
+    background_results = []
+    background_dir = ASSETS.parent / "backgrounds"
+    for source_name in BACKGROUND_FILES:
+        source_path = background_dir / source_name
+        if not source_path.is_file():
+            raise FileNotFoundError(source_path)
+        with Image.open(source_path) as opened:
+            image = ImageOps.exif_transpose(opened).convert("RGB")
+            image.load()
+            output_path = background_dir / f"{Path(source_name).stem}.webp"
+            image.save(output_path, format="WEBP", quality=BACKGROUND_QUALITY, method=6)
+        with Image.open(output_path) as verify:
+            verify.load()
+            if verify.size != image.size:
+                raise RuntimeError(f"{output_path.name} dimensions do not match {source_name}")
+        original_bytes = source_path.stat().st_size
+        output_bytes = output_path.stat().st_size
+        background_results.append({
+            "source": source_name,
+            "output": output_path.name,
+            "dimensions": list(image.size),
+            "originalBytes": original_bytes,
+            "outputBytes": output_bytes,
+            "reductionPercent": round((1 - output_bytes / original_bytes) * 100, 1),
+        })
+
+    print(json.dumps({
+        "quality": QUALITY,
+        "backgroundQuality": BACKGROUND_QUALITY,
+        "mobileHeroBackground": mobile_background_result,
+        "responsivePortraits": results,
+        "backgroundVariants": background_results,
+    }, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()
