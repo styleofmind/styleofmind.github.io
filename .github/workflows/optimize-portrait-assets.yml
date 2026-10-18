@@ -47,7 +47,8 @@ jobs:
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-1123.webp" \
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-480.webp" \
             "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-720.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-1024.webp"
+            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-1024.webp" \
+            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01-mobile.webp"
           if git diff --cached --quiet; then
             echo "No optimized portrait files to add."
             exit 0

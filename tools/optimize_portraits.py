@@ -19,16 +19,47 @@ def main() -> None:
         raise RuntimeError("Pillow was installed without WebP support")
 
     background_path = ASSETS.parent / "backgrounds" / "section-01.jpg"
+    mobile_background_result = None
     if background_path.is_file():
-        with Image.open(background_path) as background:
-            background.load()
+        with Image.open(background_path) as opened_background:
+            opened_background.load()
+            source_width, source_height = opened_background.size
             print(json.dumps({
                 "heroBackground": str(background_path.name),
-                "dimensions": list(background.size),
-                "mode": background.mode,
-                "format": background.format,
+                "dimensions": list(opened_background.size),
+                "mode": opened_background.mode,
+                "format": opened_background.format,
                 "bytes": background_path.stat().st_size,
             }, ensure_ascii=False))
+
+            # The mobile hero uses background-size: cover and background-position: 58%.
+            # Its tall viewport only shows a narrow strip of this wide panorama.
+            crop_width = min(source_width, round(source_height * 0.614))
+            crop_center = round(source_width * 0.5675)
+            crop_left = max(0, min(source_width - crop_width, round(crop_center - crop_width / 2)))
+            crop_right = crop_left + crop_width
+            mobile_crop = opened_background.crop((crop_left, 0, crop_right, source_height))
+            mobile_background_path = background_path.parent / "section-01-mobile.webp"
+            mobile_crop.save(
+                mobile_background_path,
+                format="WEBP",
+                quality=86,
+                method=6,
+            )
+            with Image.open(mobile_background_path) as verify_background:
+                verify_background.load()
+                if verify_background.size != (crop_width, source_height):
+                    raise RuntimeError("Mobile hero background dimensions failed validation")
+            mobile_background_result = {
+                "source": background_path.name,
+                "output": mobile_background_path.name,
+                "sourceDimensions": [source_width, source_height],
+                "crop": [crop_left, 0, crop_right, source_height],
+                "outputDimensions": [crop_width, source_height],
+                "originalBytes": background_path.stat().st_size,
+                "outputBytes": mobile_background_path.stat().st_size,
+                "reductionPercent": round((1 - mobile_background_path.stat().st_size / background_path.stat().st_size) * 100, 1),
+            }
 
     results = []
     for source_name, widths in TARGETS:
@@ -92,7 +123,7 @@ def main() -> None:
                 if output is not image:
                     output.close()
 
-    print(json.dumps({"quality": QUALITY, "results": results}, ensure_ascii=False, indent=2))
+    print(json.dumps({"quality": QUALITY, "mobileHeroBackground": mobile_background_result, "results": results}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()
