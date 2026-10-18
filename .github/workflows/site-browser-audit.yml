@@ -1,0 +1,99 @@
+name: Site browser QA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'концеп расстановки/concept-4/v4.1/**'
+      - 'tools/site_browser_audit.mjs'
+      - '.github/workflows/site-browser-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-browser-qa
+  cancel-in-progress: false
+
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install browser QA tools
+        run: npm install --no-save playwright axe-core lighthouse
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/site-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8765/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/site-server.log
+          exit 1
+
+      - name: Run responsive layout and accessibility checks
+        run: node tools/site_browser_audit.mjs
+
+      - name: Run Lighthouse mobile
+        run: |
+          export CHROME_PATH="$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')"
+          npx lighthouse "http://127.0.0.1:8765/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/" \
+            --output=json --output-path=site-audit/lighthouse-mobile.json \
+            --form-factor=mobile \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage"
+
+      - name: Run Lighthouse desktop
+        run: |
+          export CHROME_PATH="$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')"
+          npx lighthouse "http://127.0.0.1:8765/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/" \
+            --output=json --output-path=site-audit/lighthouse-desktop.json \
+            --form-factor=desktop \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage"
+
+      - name: Print Lighthouse summary
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            for (const mode of ["mobile", "desktop"]) {
+              const file = "site-audit/lighthouse-" + mode + ".json";
+              if (!fs.existsSync(file)) { console.log(mode + ": report missing"); continue; }
+              const r = JSON.parse(fs.readFileSync(file, "utf8"));
+              const cats = r.categories || {}, audits = r.audits || {};
+              const score = name => cats[name] && cats[name].score != null ? Math.round(cats[name].score * 100) : "n/a";
+              const metric = name => audits[name] ? audits[name].displayValue || audits[name].numericValue : "n/a";
+              console.log(mode, JSON.stringify({
+                performance:score("performance"), accessibility:score("accessibility"),
+                bestPractices:score("best-practices"), seo:score("seo"),
+                FCP:metric("first-contentful-paint"), LCP:metric("largest-contentful-paint"),
+                CLS:metric("cumulative-layout-shift"), TBT:metric("total-blocking-time"),
+                speedIndex:metric("speed-index")
+              }));
+            }
+          '
+
+      - name: Upload audit reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-browser-audit
+          path: site-audit/
+          if-no-files-found: warn
+          retention-days: 14
