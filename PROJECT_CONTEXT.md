@@ -4,7 +4,7 @@
 - Repository: `styleofmind/styleofmind.github.io`
 - Branch: `main`
 - Current working concept: `концеп расстановки/concept-0/v0.3`
-- `концеп расстановки/concept-0/v0.2` remains the frozen baseline; do not modify it.
+- Standalone landing concept: концеп лендинга/ (independent working copy based on concept 4.1).- `концеп расстановки/concept-0/v0.2` remains the frozen baseline; do not modify it.
 - `концеп расстановки/concept-0/v0.3` is the working copy for further changes.
 
 ## What has been done
