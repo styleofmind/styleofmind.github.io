@@ -8,12 +8,12 @@
 |---|---|
 | `assets/backgrounds/` | `section-01.jpg`–`section-12.jpg`, `section-08-composed.jpg`, `section-11-composed.jpg` и `about-watercolor-background.jpg` |
 | `assets/identity/` | `brand-mark.svg` |
-| `assets/portraits/` | `olga-hero-glasses.png`, `olga-hero.png` (social preview), `olga-about.png` |
+| `assets/portraits/` | `olga-hero-glasses.png`, `olga-hero.png` (social preview), `olga-about.png` — студийный портрет в очках на чёрном фоне |
 | `assets/scenes/` | `about-arch-interior.png` — графический фон блока «Обо мне» |
 | `assets/why-me/` | Текстура, ботанический элемент, рамка и золотые декоративные детали |
 | `assets/references/` | `style-guide-olga-suslennikova.png` — визуальный эталон |
 
-Все локальные изображения, на которые ссылаются HTML и CSS, проверены. Двенадцать основных фонов оптимизированы в JPEG; для блоков 8 и 11 дополнительно используются собранные композиции с интерьерными деталями справа. Портреты и прозрачные декоративные PNG/SVG сохранены с прозрачностью.
+Все локальные изображения, на которые ссылаются HTML и CSS, проверены. Двенадцать основных фонов оптимизированы в JPEG; для блоков 8 и 11 дополнительно используются собранные композиции с интерьерными деталями справа. `olga-about.png` — студийный портрет с чёрным фоном; в блоке «Обо мне» он кадрируется через `object-fit: cover` в вертикальную рамку. Прозрачность сохраняется у PNG/SVG, используемых как портретные вырезки и декоративные элементы.
 
 ## Локальный архив, исключённый из Git
 
