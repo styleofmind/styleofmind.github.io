@@ -511,7 +511,11 @@ p { margin-bottom: 18px; }
 .about__photo > picture { display: contents; }
 
   /* Use normal mobile background scrolling to avoid repainting fixed artwork while scrolling. */
-  .hero { min-height: auto; background-position: 58% center; }
+  .hero {
+    min-height: auto;
+    background-image: url("./assets/backgrounds/section-01-mobile.webp");
+    background-position: 58% center;
+  }
   .hero__shade { background: linear-gradient(90deg, rgba(18,15,12,.75), rgba(18,15,12,.25)), linear-gradient(0deg, rgba(15,12,9,.65), transparent 65%); }
   .hero__grid { min-height: auto; grid-template-columns: minmax(0,1fr); align-items: start; gap: 0; padding-top: 70px; padding-bottom: 64px; }
   .hero__copy { grid-column: 1; grid-row: 1; align-self: start; width: 100%; min-width: 0; max-width: 100%; padding: 48px 0 15px; }
