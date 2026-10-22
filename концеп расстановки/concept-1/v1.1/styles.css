@@ -163,6 +163,9 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .experience-list article>span{flex:0 0 39px;width:39px;height:39px;border-radius:50%;display:grid;place-items:center;color:#a9823e;border:1px solid rgba(157,120,56,.38);font:21px var(--serif)}
 .experience-list h3{font:19px/1.2 var(--serif);font-weight:400;margin:1px 0 6px}
 .experience-list p{font-size:12px;line-height:1.55;margin:0;color:#70716b}
+.experience-accent{grid-column:2;margin:4px 0 0;padding:18px 0 0;border-top:1px solid rgba(157,120,56,.32);font:italic 18px/1.5 var(--serif);color:#8b744d}
+@media(max-width:720px){.experience-accent{grid-column:auto;font-size:16px}}
+
 .reviews-section{padding:90px 0 94px;background:#eee6da}
 .reviews-section .section-heading{max-width:700px}
 .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
