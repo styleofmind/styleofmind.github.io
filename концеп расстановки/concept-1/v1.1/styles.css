@@ -275,3 +275,17 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media(max-width:520px){.offer-popup{right:12px;bottom:12px;width:calc(100vw - 24px);padding:24px 20px 19px;border-radius:17px}.offer-popup h2{font-size:24px}.offer-popup__price{font-size:23px}.offer-popup>p:not(.offer-popup__eyebrow):not(.offer-popup__price){font-size:12px}}
 @media(prefers-reduced-motion:reduce){.offer-popup{animation:none}}
 
+
+/* Фото-карусель в разделе «Как проходит расстановка» */
+.process-photo-gallery{position:relative;width:min(100%,1080px);margin:30px auto 0}
+.process-photo-gallery__track{display:flex;align-items:stretch;gap:16px;width:100%;padding:0 2px 14px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;touch-action:pan-x;cursor:grab}
+.process-photo-gallery__track::-webkit-scrollbar{display:none}
+.process-photo-gallery__track.is-dragging{cursor:grabbing;scroll-behavior:auto;user-select:none}
+.process-photo-gallery__track img{display:block;flex:0 0 clamp(270px,28vw,350px);width:clamp(270px,28vw,350px);height:220px;object-fit:cover;border:1px solid rgba(217,180,92,.22);border-radius:16px;background:#111923;box-shadow:0 12px 28px rgba(0,0,0,.18);pointer-events:none;user-select:none;-webkit-user-drag:none}
+.process-photo-gallery__arrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:46px;height:46px;margin-top:-29px;border:1px solid rgba(217,180,92,.35);border-radius:50%;background:rgba(17,25,35,.92);color:#f1d49a;font-size:30px;line-height:1;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.process-photo-gallery__arrow--prev{left:-20px}
+.process-photo-gallery__arrow--next{right:-20px}
+.process-photo-gallery__arrow:disabled{opacity:.28;cursor:default}
+.process-photo-gallery__arrow:focus-visible,.process-photo-gallery__track:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
+@media(max-width:720px){.process-photo-gallery{width:calc(100% + 8px);margin:24px -4px 0}.process-photo-gallery__track{gap:12px;padding-bottom:10px}.process-photo-gallery__track img{flex-basis:78vw;width:78vw;height:190px}.process-photo-gallery__arrow{width:38px;height:38px;margin-top:-24px;font-size:25px}.process-photo-gallery__arrow--prev{left:4px}.process-photo-gallery__arrow--next{right:4px}}
+@media(prefers-reduced-motion:reduce){.process-photo-gallery__track{scroll-behavior:auto}}
