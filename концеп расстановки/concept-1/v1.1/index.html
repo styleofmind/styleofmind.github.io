@@ -435,23 +435,22 @@
         if (event.key === 'End') { event.preventDefault(); track.scrollTo({left:track.scrollWidth, behavior:reducedMotion.matches ? 'auto' : 'smooth'}); }
       });
 
-      // Вертикальное и горизонтальное колесо мыши прокручивают галерею вбок.
+      // Прокрутка следует фактическому расстоянию жеста, без перелистывания по карточкам.
       gallery.addEventListener('wheel', event => {
         if (!canScroll()) return;
 
-        // Вертикальный жест тачпада тоже листает фотографии по горизонтали.
         const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
         if (!delta) return;
 
         const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? track.clientWidth : 1;
         const current = track.scrollLeft;
         const max = Math.max(0, track.scrollWidth - track.clientWidth);
-        const target = Math.max(0, Math.min(max, current + delta * scale));
+        const distance = Math.max(-current, Math.min(max - current, delta * scale));
+        if (Math.abs(distance) < 0.5) return;
 
-        // У края передаём жест странице, не перехватывая вертикальную прокрутку.
-        if (Math.abs(target - current) < 0.5) return;
+        // Используем нативную прокрутку без повторного запуска smooth-анимации.
         event.preventDefault();
-        track.scrollLeft = target;
+        track.scrollBy({left: distance, behavior: 'auto'});
       }, {passive:false});
 
       let pointerId = null, startX = 0, startScroll = 0, moved = false;
