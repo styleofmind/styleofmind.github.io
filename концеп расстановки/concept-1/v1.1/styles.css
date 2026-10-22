@@ -278,7 +278,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 
 /* Фото-карусель в разделе «Как проходит расстановка» */
 .process-photo-gallery{position:relative;width:min(100%,1080px);margin:30px auto 0}
-.process-photo-gallery__track{display:flex;align-items:stretch;gap:16px;width:100%;padding:0 2px 14px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;scroll-behavior:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;cursor:grab}
+.process-photo-gallery__track{display:flex;align-items:stretch;gap:16px;width:100%;padding:0 2px 14px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;scroll-behavior:auto;scroll-snap-type:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;cursor:grab}
 .process-photo-gallery__track::-webkit-scrollbar{display:none}
 .process-photo-gallery__track.is-dragging{cursor:grabbing;scroll-behavior:auto;user-select:none}
 .process-photo-gallery__track img{display:block;flex:0 0 clamp(270px,28vw,350px);width:clamp(270px,28vw,350px);height:220px;object-fit:cover;scroll-snap-align:start;border:1px solid rgba(217,180,92,.22);border-radius:16px;background:#111923;box-shadow:0 12px 28px rgba(0,0,0,.18);pointer-events:none;user-select:none;-webkit-user-drag:none}
