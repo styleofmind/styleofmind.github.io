@@ -39,7 +39,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .mobile-menu nav a{padding:10px;border-radius:8px;font-size:13px}
 .mobile-menu nav a:hover{background:rgba(255,255,255,.06)}
 .hero{min-height:590px;display:flex;flex-direction:column}
-.hero-inner{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:0;min-height:0;padding-bottom:12px;position:relative;z-index:2}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.7fr);align-items:center;gap:clamp(28px,5vw,72px);min-height:0;padding-bottom:12px;position:relative;z-index:2}
 .hero-copy{padding:60px 0 12px;max-width:760px;position:relative;z-index:3}
 .eyebrow{margin:0 0 14px;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#8a7d68}
 .eyebrow-gold{color:var(--gold-light)}
@@ -47,7 +47,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .hero h1 span{color:var(--gold-light);white-space:nowrap}
 .hero-lead{max-width:510px;font:18px/1.55 var(--serif);color:#eee9df;margin:0 0 12px}
 .hero-note{max-width:480px;color:var(--muted-light);font-size:13px;margin:0 0 28px}
-.hero-art{width:min(100%,290px);aspect-ratio:9/16;height:auto;align-self:center;justify-self:center;position:relative;display:block;overflow:hidden;border-radius:22px;isolation:isolate;box-shadow:0 16px 46px rgba(0,0,0,.24)}
+.hero-art{width:min(100%,290px);aspect-ratio:9/16;height:auto;align-self:center;justify-self:end;position:relative;display:block;overflow:hidden;border-radius:22px;isolation:isolate;box-shadow:0 16px 46px rgba(0,0,0,.24)}
 .hero-video{position:absolute;top:0;left:-38.8889%;z-index:2;display:block;width:177.7778%;height:100%;border:0;border-radius:0;background:#111923}
 .hero-halo{position:absolute;z-index:1;width:110%;height:85%;left:-5%;bottom:-8%;border-radius:50%;background:radial-gradient(ellipse at 52% 43%,rgba(225,184,112,.22),rgba(146,108,69,.08) 45%,transparent 74%);pointer-events:none}
 .hero-bottom{display:flex;align-items:center;gap:15px;padding:0 0 20px;color:rgba(245,239,230,.48);font-size:9px;letter-spacing:.14em;text-transform:uppercase;position:relative;z-index:3}
