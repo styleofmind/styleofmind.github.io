@@ -317,5 +317,50 @@
       <div class="footer-legal"><a href="https://t.me/olgastyleofmind" target="_blank" rel="noopener noreferrer">Telegram ↗</a><span>Концепт отдельной страницы · 2026</span></div>
     </div>
   </footer>
+
+  <!-- Ненавязчивое предложение диагностической сессии -->
+  <aside class="offer-popup" id="diagnosticOfferPopup" role="dialog" aria-labelledby="diagnosticOfferTitle" aria-describedby="diagnosticOfferText" hidden>
+    <button class="offer-popup__close" type="button" aria-label="Закрыть предложение">×</button>
+    <p class="offer-popup__eyebrow">Первый шаг</p>
+    <h2 id="diagnosticOfferTitle">Диагностическая сессия</h2>
+    <p class="offer-popup__price">1 200 ₽ <span>вместо 3 500 ₽</span></p>
+    <p id="diagnosticOfferText">Обсудим ваш запрос, составим генограмму и поговорим о формате расстановки. Это отдельная необязательная встреча — решение о дальнейших шагах останется за вами.</p>
+    <a class="button button-gold offer-popup__action" href="https://dikidi.ru/#widget=218868" target="_blank" rel="noopener noreferrer">Записаться на диагностику <span aria-hidden="true">↗</span></a>
+  </aside>
+  <script>
+    (() => {
+      const popup = document.getElementById('diagnosticOfferPopup');
+      if (!popup) return;
+      const closeButton = popup.querySelector('.offer-popup__close');
+      const storageKey = 'styleOfMindDiagnosticOfferShown_v1';
+      let shown = false;
+      try {
+        if (sessionStorage.getItem(storageKey)) return;
+      } catch (_) {}
+      const show = () => {
+        if (shown) return;
+        shown = true;
+        popup.hidden = false;
+        try { sessionStorage.setItem(storageKey, '1'); } catch (_) {}
+      };
+      const close = () => { popup.hidden = true; };
+      let scrollTimer;
+      window.addEventListener('scroll', () => {
+        if (shown) return;
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(() => {
+          const doc = document.documentElement;
+          const maxScroll = doc.scrollHeight - window.innerHeight;
+          if (maxScroll > 0 && window.scrollY / maxScroll >= 0.5) show();
+        }, 120);
+      }, { passive: true });
+      window.setTimeout(show, 45000);
+      closeButton.addEventListener('click', close);
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !popup.hidden) close();
+      });
+    })();
+  </script>
+
 </body>
 </html>
