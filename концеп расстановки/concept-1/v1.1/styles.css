@@ -155,16 +155,33 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .process-card p{font-size:12px;line-height:1.6;color:#c4c6c2;margin:0}
 .process-footnote{margin:23px 0 0;font-size:11px;color:#abb0ae}
 .process-stars i:nth-child(1){left:6%;top:22%}.process-stars i:nth-child(2){left:35%;top:14%;animation-delay:-3s}.process-stars i:nth-child(3){right:18%;top:26%;animation-delay:-5s}.process-stars i:nth-child(4){right:6%;top:72%;animation-delay:-1s}.process-stars i:nth-child(5){left:72%;bottom:11%;animation-delay:-6s}
-.experience-section{padding:82px 0 88px}
-.experience-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(40px,8vw,100px);align-items:start}
-.experience-heading p:not(.eyebrow){font:18px/1.5 var(--serif);color:#62665f;max-width:360px}
-.experience-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 26px}
-.experience-list article{display:flex;gap:15px;border-bottom:1px solid rgba(126,111,85,.2);padding-bottom:17px}
-.experience-list article>span{flex:0 0 39px;width:39px;height:39px;border-radius:50%;display:grid;place-items:center;color:#a9823e;border:1px solid rgba(157,120,56,.38);font:21px var(--serif)}
-.experience-list h3{font:19px/1.2 var(--serif);font-weight:400;margin:1px 0 6px}
-.experience-list p{font-size:12px;line-height:1.55;margin:0;color:#70716b}
-.experience-accent{grid-column:2;margin:4px 0 0;padding:18px 0 0;border-top:1px solid rgba(157,120,56,.32);font:italic 18px/1.5 var(--serif);color:#8b744d}
-@media(max-width:720px){.experience-accent{grid-column:auto;font-size:16px}}
+/* Блок «Что вы почувствуете» — разметка и композиция как в concept-0/v0.1.
+   Цвет фона оставлен от оформления v1.1. */
+.feel-rasstanovki{padding:clamp(4.25rem,7vw,6rem) 0}
+.feel-rasstanovki__container{width:min(100%,860px);margin:0 auto;padding:0 40px}
+.feel-rasstanovki__title{max-width:24ch;margin:0 0 1rem;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:clamp(2rem,3.2vw,3rem);line-height:1.16;letter-spacing:-.025em;color:var(--ink)}
+.feel-rasstanovki__subtitle{max-width:68ch;margin:0 0 2.25rem;color:var(--muted);font-size:17px;line-height:1.65}
+.feel-rasstanovki__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.1rem 2.5rem;margin-bottom:2.5rem}
+.feel-rasstanovki__item:nth-child(-n+3){grid-column:span 2}
+.feel-rasstanovki__item:nth-child(4){grid-column:2 / span 2}
+.feel-rasstanovki__item:nth-child(5){grid-column:4 / span 2}
+.feel-rasstanovki__item{display:flex;align-items:flex-start;gap:12px;min-width:0}
+.feel-rasstanovki__check{flex:0 0 22px;width:22px;height:22px;margin-top:.08rem;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(130,144,131,.16);color:#687b69;font-size:12px;line-height:1;font-weight:700}
+.feel-rasstanovki__text{min-width:0;color:var(--ink);font-size:16px;line-height:1.55}
+.feel-rasstanovki__accent{max-width:58ch;margin:0 auto;color:#8b744d;font-family:Georgia,"Times New Roman",serif;font-size:18px;font-style:italic;line-height:1.55;text-align:center}
+@media(max-width:1024px){.feel-rasstanovki__container{padding:0 32px}}
+@media(max-width:767px){
+  .feel-rasstanovki{padding:3.6rem 0}
+  .feel-rasstanovki__container{padding:0 20px}
+  .feel-rasstanovki__title{font-size:clamp(1.9rem,8.5vw,2.35rem)}
+  .feel-rasstanovki__subtitle{font-size:16px;margin-bottom:1.8rem}
+  .feel-rasstanovki__grid{grid-template-columns:1fr;gap:.9rem;margin-bottom:2.1rem}
+  .feel-rasstanovki__item:nth-child(-n+5){grid-column:auto}
+  .feel-rasstanovki__text{font-size:15.5px}
+  .feel-rasstanovki__accent{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.feel-rasstanovки *, .feel-rasstanovki *::before, .feel-rasstanovki *::after{animation:none!important;transition:none!important}}
+
 
 .reviews-section{padding:90px 0 94px;background:#eee6da}
 .reviews-section .section-heading{max-width:700px}
