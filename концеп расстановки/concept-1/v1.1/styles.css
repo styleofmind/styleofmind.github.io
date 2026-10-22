@@ -255,19 +255,3 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media(max-width:520px){.offer-popup{right:12px;bottom:12px;width:calc(100vw - 24px);padding:24px 20px 19px;border-radius:17px}.offer-popup h2{font-size:24px}.offer-popup__price{font-size:23px}.offer-popup>p:not(.offer-popup__eyebrow):not(.offer-popup__price){font-size:12px}}
 @media(prefers-reduced-motion:reduce){.offer-popup{animation:none}}
 
-
-/* Блок «Что вы почувствуете после расстановки»: форма из v0.1, фон v1.1 */
-.feel-rasstanovki__container{width:min(100%,860px);margin:0 auto;padding:0 40px}
-.feel-rasstanovki__title{max-width:24ch;margin:0 0 1rem;font:400 clamp(34px,4vw,53px)/1.08 var(--serif);letter-spacing:-.025em;color:var(--ink)}
-.feel-rasstanovki__subtitle{max-width:68ch;margin:0 0 2.25rem;color:#676b66;font-size:15px;line-height:1.65}
-.feel-rasstanovki__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.1rem 2.5rem;margin-bottom:2.5rem}
-.feel-rasstanovki__item{display:flex;align-items:flex-start;gap:12px;min-width:0}
-.feel-rasstanovki__item:nth-child(-n+3){grid-column:span 2}
-.feel-rasstanovki__item:nth-child(4){grid-column:2 / span 2}
-.feel-rasstanovki__item:nth-child(5){grid-column:4 / span 2}
-.feel-rasstanovki__check{flex:0 0 22px;width:22px;height:22px;margin-top:.08rem;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(157,120,56,.13);color:#8b6a32;font-size:12px;line-height:1;font-weight:700}
-.feel-rasstanovki__text{min-width:0;margin:0;color:var(--ink);font-size:14px;line-height:1.6}
-.feel-rasstanovki__accent{max-width:58ch;margin:0 auto;color:#8b6a32;font:italic 18px/1.55 var(--serif);text-align:center}
-@media(max-width:1024px){.feel-rasstanovki__container{padding:0 32px}.feel-rasstanovki__grid{column-gap:1.5rem}}
-@media(max-width:720px){.feel-rasstanovki__container{padding:0}.feel-rasstanovki__title{font-size:clamp(33px,9vw,44px)}.feel-rasstanovki__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}.feel-rasstanovki__item:nth-child(n){grid-column:auto}.feel-rasstanovki__accent{font-size:17px}}
-@media(max-width:420px){.feel-rasstanovki__grid{grid-template-columns:1fr;gap:16px}.feel-rasstanovki__text{font-size:14px}}
