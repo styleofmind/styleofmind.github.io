@@ -207,7 +207,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (max-width:720px){
   html{scroll-padding-top:72px}.site-header{height:68px}.desktop-nav,.header-booking{display:none}.mobile-menu{display:block}
   .brand-name{font-size:23px}.brand-star{font-size:29px}.page-width{width:calc(100% - 38px)}
-  .hero{min-height:0}.hero-inner{grid-template-columns:1fr;min-height:0;gap:0}.hero-copy{padding:70px 0 10px;max-width:560px}
+  .hero{min-height:0}.hero-inner{grid-template-columns:1fr;min-height:0;gap:0}.hero-copy{padding:34px 0 10px;max-width:560px}
   .hero h1{font-size:clamp(47px,12vw,68px)}.hero-lead{font-size:17px;max-width:440px}.hero-art{height:280px;width:100%;max-width:480px;margin:-10px auto 0;overflow:hidden}
   .hero-art svg{width:100%;height:340px}.hero-art-caption{bottom:14px;right:4px;font-size:10px}
   .hero-bottom{padding:0 0 17px;font-size:8px}.value-strip{padding:29px 0 33px}
@@ -229,7 +229,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (max-width:420px){
   .page-width{width:calc(100% - 30px)}.header-inner{width:calc(100% - 28px)}
   .brand-name{font-size:21px}.brand-subtitle{font-size:8px}
-  .hero-copy{padding-top:56px}.hero h1{font-size:46px}.hero-art{height:238px}
+  .hero-copy{padding-top:24px}.hero h1{font-size:46px}.hero-art{height:238px}
   .value-grid{gap:22px 8px}.topic-grid{grid-template-columns:1fr}.topic-card{min-height:0}
   .experience-list{grid-template-columns:1fr}.final-actions{flex-direction:column}.final-actions .button{width:100%}
 }
