@@ -180,7 +180,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .feel-rasstanovki__text{font-size:15.5px}
   .feel-rasstanovki__accent{font-size:16px}
 }
-@media(prefers-reduced-motion:reduce){.feel-rasstanovки *, .feel-rasstanovki *::before, .feel-rasstanovki *::after{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.feel-rasstanovki *, .feel-rasstanovki *::before, .feel-rasstanovki *::after{animation:none!important;transition:none!important}}
 
 
 .reviews-section{padding:90px 0 94px;background:#eee6da}
