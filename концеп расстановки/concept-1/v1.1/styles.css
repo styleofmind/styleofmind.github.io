@@ -39,8 +39,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .mobile-menu nav a{padding:10px;border-radius:8px;font-size:13px}
 .mobile-menu nav a:hover{background:rgba(255,255,255,.06)}
 .hero{min-height:590px;display:flex;flex-direction:column}
-.hero-inner{display:grid;grid-template-columns:1fr .92fr;align-items:center;gap:20px;min-height:520px;position:relative;z-index:2}
-.hero-copy{padding:60px 0 42px;max-width:580px;position:relative;z-index:3}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:0;min-height:0;padding-bottom:12px;position:relative;z-index:2}
+.hero-copy{padding:60px 0 12px;max-width:760px;position:relative;z-index:3}
 .eyebrow{margin:0 0 14px;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#8a7d68}
 .eyebrow-gold{color:var(--gold-light)}
 .hero h1{font:clamp(48px,6vw,78px)/.98 var(--serif);letter-spacing:-.035em;margin:0 0 22px;font-weight:400;color:#fffaf1}
