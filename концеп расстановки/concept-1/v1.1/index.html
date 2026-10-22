@@ -401,49 +401,80 @@
     (() => {
       const gallery = document.querySelector('.process-photo-gallery');
       if (!gallery) return;
+
       const track = gallery.querySelector('.process-photo-gallery__track');
       const prev = gallery.querySelector('.process-photo-gallery__arrow--prev');
       const next = gallery.querySelector('.process-photo-gallery__arrow--next');
       if (!track || !prev || !next) return;
 
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const canScroll = () => track.scrollWidth > track.clientWidth + 2;
       const update = () => {
         const max = Math.max(0, track.scrollWidth - track.clientWidth);
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max - 2;
+        prev.disabled = max <= 2 || track.scrollLeft <= 2;
+        next.disabled = max <= 2 || track.scrollLeft >= max - 2;
       };
       const move = direction => {
         const firstImage = track.querySelector('img');
-        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap) || 16;
         const step = firstImage ? firstImage.getBoundingClientRect().width + gap : track.clientWidth * .75;
-        track.scrollBy({left: direction * step * 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+        track.scrollBy({left: direction * step, behavior: reducedMotion.matches ? 'auto' : 'smooth'});
       };
+
       prev.addEventListener('click', () => move(-1));
       next.addEventListener('click', () => move(1));
       track.addEventListener('scroll', update, {passive:true});
       window.addEventListener('resize', update);
+      if ('ResizeObserver' in window) new ResizeObserver(update).observe(track);
+
       track.addEventListener('keydown', event => {
         if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
         if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+        if (event.key === 'Home') { event.preventDefault(); track.scrollTo({left:0, behavior:reducedMotion.matches ? 'auto' : 'smooth'}); }
+        if (event.key === 'End') { event.preventDefault(); track.scrollTo({left:track.scrollWidth, behavior:reducedMotion.matches ? 'auto' : 'smooth'}); }
       });
 
-      let dragging = false, startX = 0, startScroll = 0;
+      // Вертикальное и горизонтальное колесо мыши прокручивают галерею вбок.
+      track.addEventListener('wheel', event => {
+        if (!canScroll()) return;
+        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+        if (!delta) return;
+        event.preventDefault();
+        track.scrollLeft += delta * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? track.clientWidth : 1);
+      }, {passive:false});
+
+      let pointerId = null, startX = 0, startScroll = 0, moved = false;
+      const stopDragging = event => {
+        if (pointerId === null || (event && event.pointerId !== pointerId)) return;
+        pointerId = null;
+        track.classList.remove('is-dragging');
+        update();
+      };
+
       track.addEventListener('pointerdown', event => {
-        if (event.pointerType === 'touch' || event.button !== 0) return;
-        dragging = true;
+        if (event.pointerType === 'touch' || event.button !== 0 || !canScroll()) return;
+        pointerId = event.pointerId;
         startX = event.clientX;
         startScroll = track.scrollLeft;
+        moved = false;
         track.classList.add('is-dragging');
-        track.setPointerCapture?.(event.pointerId);
+        try { track.setPointerCapture(event.pointerId); } catch (_) {}
       });
       track.addEventListener('pointermove', event => {
-        if (!dragging) return;
-        event.preventDefault();
-        track.scrollLeft = startScroll - (event.clientX - startX);
+        if (pointerId === null || event.pointerId !== pointerId) return;
+        const distance = event.clientX - startX;
+        if (Math.abs(distance) > 3) moved = true;
+        if (moved) {
+          event.preventDefault();
+          track.scrollLeft = startScroll - distance;
+        }
       });
-      const stopDragging = () => { dragging = false; track.classList.remove('is-dragging'); };
       track.addEventListener('pointerup', stopDragging);
       track.addEventListener('pointercancel', stopDragging);
       track.addEventListener('lostpointercapture', stopDragging);
+      track.addEventListener('dragstart', event => event.preventDefault());
+
       update();
     })();
   </script>
