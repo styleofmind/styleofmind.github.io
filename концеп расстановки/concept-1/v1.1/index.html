@@ -247,6 +247,19 @@
           <article class="process-card"><span class="process-count">04</span><h3>Завершение</h3><p>Подводим итоги и рассматриваем возможные дальнейшие шаги без обязательства продолжать.</p></article>
         </div>
         <p class="process-footnote">Реакции и выводы индивидуальны. Упражнение не служит способом проверить факты о других людях или предсказать события.</p>
+
+        <div class="process-photo-gallery" aria-label="Фотографии расстановок">
+          <button type="button" class="process-photo-gallery__arrow process-photo-gallery__arrow--prev" aria-label="Предыдущие фотографии" disabled>‹</button>
+          <div class="process-photo-gallery__track" role="group" aria-label="Фотографии расстановок и фигурок" tabindex="0">
+            <img alt="Расстановка офлайн — пример 1" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-offline-01.webp">
+            <img alt="Расстановка онлайн — пример" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-online-02.webp">
+            <img alt="Расстановка офлайн — пример 2" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-offline-02.webp">
+            <img alt="Расстановка офлайн — пример 3" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-offline-03.webp">
+            <img alt="Расстановка на фигурках — пример 1" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-figures-01.webp">
+            <img alt="Расстановка на фигурках — пример 2" decoding="async" loading="lazy" src="../../concept-0/images/systemic-constellations-figures-02.webp">
+          </div>
+          <button type="button" class="process-photo-gallery__arrow process-photo-gallery__arrow--next" aria-label="Следующие фотографии">›</button>
+        </div>
       </div>
     </section>
 
@@ -380,6 +393,58 @@
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && !popup.hidden) close();
       });
+    })();
+  </script>
+
+
+  <script>
+    (() => {
+      const gallery = document.querySelector('.process-photo-gallery');
+      if (!gallery) return;
+      const track = gallery.querySelector('.process-photo-gallery__track');
+      const prev = gallery.querySelector('.process-photo-gallery__arrow--prev');
+      const next = gallery.querySelector('.process-photo-gallery__arrow--next');
+      if (!track || !prev || !next) return;
+
+      const update = () => {
+        const max = Math.max(0, track.scrollWidth - track.clientWidth);
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max - 2;
+      };
+      const move = direction => {
+        const firstImage = track.querySelector('img');
+        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+        const step = firstImage ? firstImage.getBoundingClientRect().width + gap : track.clientWidth * .75;
+        track.scrollBy({left: direction * step * 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+      };
+      prev.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+      track.addEventListener('scroll', update, {passive:true});
+      window.addEventListener('resize', update);
+      track.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+      });
+
+      let dragging = false, startX = 0, startScroll = 0;
+      track.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'touch' || event.button !== 0) return;
+        dragging = true;
+        startX = event.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        track.setPointerCapture?.(event.pointerId);
+      });
+      track.addEventListener('pointermove', event => {
+        if (!dragging) return;
+        event.preventDefault();
+        track.scrollLeft = startScroll - (event.clientX - startX);
+      });
+      const stopDragging = () => { dragging = false; track.classList.remove('is-dragging'); };
+      track.addEventListener('pointerup', stopDragging);
+      track.addEventListener('pointercancel', stopDragging);
+      track.addEventListener('lostpointercapture', stopDragging);
+      update();
     })();
   </script>
 
