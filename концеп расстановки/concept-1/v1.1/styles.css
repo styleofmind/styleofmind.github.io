@@ -462,3 +462,11 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .certificate-carousel { grid-template-columns: 30px minmax(0, 1fr) 30px; gap: 4px; }
   .certificate-slide { height: 280px; }
 }
+
+
+/* Certificate gallery: wheel navigation, no counters or arrow controls. */
+.certificate-carousel { display: block; max-width: 860px; }
+.certificate-carousel__viewport { width: 100%; }
+.certificate-gallery-status__count,
+.certificate-gallery-status__hint { display: none !important; }
+.certificate-lightbox { padding-left: 22px; padding-right: 22px; }
