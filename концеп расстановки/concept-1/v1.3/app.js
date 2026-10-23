@@ -257,7 +257,6 @@
     frame.setAttribute('allowfullscreen', '');
     frame.setAttribute('loading', 'eager');
     frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation allow-forms');
     frame.src = embedUrl;
 
     frame.addEventListener('load', clearTimer, { once: true });
