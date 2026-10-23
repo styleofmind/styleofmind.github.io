@@ -640,6 +640,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   color: var(--muted, #656760);
   font-size: 14px;
   line-height: 1.75;
+  text-align: right;
 }
 .requests .card-grid--three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .requests .request-card {
