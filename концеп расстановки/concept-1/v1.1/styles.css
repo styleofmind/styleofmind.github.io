@@ -399,3 +399,31 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .certificate-carousel__track:active{cursor:grabbing}
 @media(max-width:720px){.certificate-gallery-status{margin-top:10px;font-size:11px;gap:7px 10px}.certificate-gallery-status__hint{max-width:72%;line-height:1.4}}
 @media(prefers-reduced-motion:reduce){.certificate-gallery-status__progress>span{transition:none}.certificate-carousel__track{scroll-behavior:auto}}
+
+ 
+/* Hero responsive tuning: prevent the layout jump around 935–950 px. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, .78fr);
+    gap: clamp(20px, 2.6vw, 30px);
+  }
+  .hero-copy {
+    min-width: 0;
+    padding-top: clamp(38px, 5vw, 60px);
+    padding-bottom: clamp(28px, 4vw, 42px);
+  }
+  .hero h1 {
+    font-size: clamp(44px, 5.6vw, 62px);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero-art {
+    height: clamp(390px, 44vw, 490px);
+    min-width: 0;
+  }
+  .hero-art picture,
+  .hero-art .hero-portrait {
+    max-width: 100%;
+  }
+}
