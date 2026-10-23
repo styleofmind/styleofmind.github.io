@@ -260,6 +260,17 @@
     });
     prev.disabled = active === 0;
     next.disabled = active === slides.length - 1;
+    const currentLabel = section.querySelector('[data-certificate-current]');
+    const totalLabel = section.querySelector('[data-certificate-total]');
+    const progress = section.querySelector('.certificate-gallery-status__progress');
+    const progressFill = section.querySelector('[data-certificate-progress]');
+    if (currentLabel) currentLabel.textContent = String(active + 1);
+    if (totalLabel) totalLabel.textContent = String(slides.length);
+    if (progress) {
+      progress.setAttribute('aria-valuemax', String(slides.length));
+      progress.setAttribute('aria-valuenow', String(active + 1));
+    }
+    if (progressFill) progressFill.style.transform = `scaleX(${(active + 1) / slides.length})`;
     scrollThumbnailIntoView(thumbnails[active]);
   };
 
