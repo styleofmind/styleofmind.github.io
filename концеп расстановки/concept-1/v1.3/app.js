@@ -204,23 +204,7 @@
     })();
 
 
-// Navigation menu for the Concept 4.1 hero header.
-(() => {
-  const toggle = document.querySelector('.menu-toggle-v41');
-  const nav = document.querySelector('.site-nav-v41');
-  if (!toggle || !nav) return;
-  toggle.addEventListener('click', () => {
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    nav.classList.toggle('is-open', !isOpen);
-  });
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      toggle.setAttribute('aria-expanded', 'false');
-      nav.classList.remove('is-open');
-    });
-  });
-})();
+
 
 /* Галерея сертификатов: единое активное состояние для документа и миниатюры */
 (() => {
