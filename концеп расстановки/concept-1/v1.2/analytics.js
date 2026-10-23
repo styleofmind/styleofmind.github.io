@@ -197,15 +197,7 @@
       const target = event.target instanceof Element ? event.target : null;
       if (!target) return;
 
-      const bookingLink = target.closest('a[href*="dikidi.ru"]');
-      if (bookingLink) {
-        trackEvent('booking_click', {
-          location: bookingLink.closest('section')?.id || 'unknown'
-        });
-        return;
-      }
-
-      const telegramLink = target.closest('a[href*="t.me/olgastyleofmind"]');
+      const telegramLink = target.closest('a[href*="t.me/olga_styleofmind"], a[href*="t.me/olgastyleofmind"]');
       if (telegramLink) {
         trackEvent('telegram_click', {
           location: telegramLink.closest('section, footer')?.id || 'unknown'
