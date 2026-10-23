@@ -199,26 +199,71 @@
     })();
 
 
-/* Надёжное воспроизведение Kinescope: создаём обычный iframe по нажатию. */
+/* Kinescope player: click-to-load, retry and external fallback. */
 (() => {
   const preview = document.querySelector('.hero-video-preview');
   if (!preview) return;
 
+  const videoId = 'eWhaw3CwffKhViyhnev9AA';
+  const embedUrl = `https://kinescope.io/embed/${videoId}?autoplay=1&playsinline=1`;
+  const directUrl = `https://kinescope.io/${videoId}`;
+  const container = preview.closest('.hero-art, .hero-v41__portrait') || preview.parentElement;
+  if (!container) return;
+
+  let frame = null;
+  let fallback = null;
+  let loadTimer = null;
+
+  const clearTimer = () => {
+    if (loadTimer !== null) {
+      window.clearTimeout(loadTimer);
+      loadTimer = null;
+    }
+  };
+
+  const showFallback = () => {
+    if (fallback) return;
+    fallback = document.createElement('div');
+    fallback.className = 'hero-video-fallback';
+    fallback.setAttribute('role', 'status');
+    fallback.style.cssText = 'position:absolute;inset:auto 8px 8px;z-index:6;padding:12px;border-radius:10px;background:rgba(17,25,35,.96);color:#fff;font:14px/1.45 system-ui,sans-serif;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.3)';
+    fallback.innerHTML = '<p style="margin:0 0 8px">Видео загружается дольше обычного.</p><a href="' + directUrl + '" target="_blank" rel="noopener noreferrer" style="color:#f2d5a0;text-decoration:underline">Открыть видео на Kinescope</a><button type="button" style="display:block;margin:10px auto 0;padding:7px 12px;border:1px solid #f2d5a0;border-radius:6px;background:transparent;color:#fff;cursor:pointer">Повторить загрузку</button>';
+    fallback.querySelector('button').addEventListener('click', () => {
+      fallback.remove();
+      fallback = null;
+      if (frame) {
+        frame.src = 'about:blank';
+        frame.src = embedUrl;
+      }
+      startFallbackTimer();
+    });
+    container.appendChild(fallback);
+  };
+
+  const startFallbackTimer = () => {
+    clearTimer();
+    loadTimer = window.setTimeout(showFallback, 12000);
+  };
+
   preview.addEventListener('click', () => {
-    if (preview.disabled) return;
+    if (frame) return;
     preview.disabled = true;
 
-    const frame = document.createElement('iframe');
+    frame = document.createElement('iframe');
     frame.id = 'hero-kinescope-player';
     frame.className = 'hero-video';
     frame.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
-    frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
-    frame.allowFullscreen = true;
-    frame.loading = 'eager';
-    frame.referrerPolicy = 'strict-origin-when-cross-origin';
-    frame.src = 'https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA?autoplay=1';
+    frame.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;');
+    frame.setAttribute('allowfullscreen', '');
+    frame.setAttribute('loading', 'eager');
+    frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation allow-forms');
+    frame.src = embedUrl;
 
+    frame.addEventListener('load', clearTimer, { once: true });
+    frame.addEventListener('error', showFallback);
     preview.replaceWith(frame);
+    startFallbackTimer();
   });
 })();
 
