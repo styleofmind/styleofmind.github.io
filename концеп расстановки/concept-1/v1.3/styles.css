@@ -971,3 +971,49 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
     margin: 8px -4px 0;
   }
 }
+
+/* Certificate carousel arrows match the constellation photo gallery controls. */
+.certificate-carousel {
+  grid-template-columns: 46px minmax(0, 1fr) 46px;
+  gap: 12px;
+}
+.certificate-carousel__arrow {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(217, 180, 92, .35);
+  border-radius: 50%;
+  background: rgba(17, 25, 35, .92);
+  color: #f1d49a;
+  font-size: 30px;
+  line-height: 1;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .22);
+}
+.certificate-carousel__arrow:hover:not(:disabled) {
+  background: rgba(17, 25, 35, .78);
+}
+.certificate-carousel__arrow:disabled {
+  opacity: .28;
+  cursor: default;
+}
+.certificate-carousel__arrow:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+@media (max-width: 720px) {
+  .certificate-carousel {
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    gap: 6px;
+  }
+  .certificate-carousel__arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 25px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .certificate-carousel__arrow {
+    transition: none;
+  }
+}
+
