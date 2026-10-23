@@ -214,6 +214,8 @@
   const track = section.querySelector('.certificate-carousel__track');
   const slides = [...section.querySelectorAll('.certificate-slide')];
   const thumbnails = [...section.querySelectorAll('.certificate-thumbnail')];
+  const previousArrow = section.querySelector('.certificate-carousel__arrow--prev');
+  const nextArrow = section.querySelector('.certificate-carousel__arrow--next');
   const dialog = section.querySelector('.certificate-lightbox');
   const largeImage = dialog?.querySelector('.certificate-lightbox__image');
   if (!track || !slides.length || !dialog || !largeImage) return;
@@ -241,6 +243,8 @@
       slide.classList.toggle('is-active', selected);
       slide.setAttribute('aria-pressed', String(selected));
     });
+    if (previousArrow) previousArrow.disabled = active <= 0;
+    if (nextArrow) nextArrow.disabled = active >= slides.length - 1;
     thumbnails.forEach((thumbnail, i) => {
       const selected = i === active;
       thumbnail.classList.toggle('is-active', selected);
@@ -295,6 +299,8 @@
 
   slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
   thumbnails.forEach((thumbnail, i) => thumbnail.addEventListener('click', () => setActive(i)));
+  previousArrow?.addEventListener('click', () => setActive(active - 1));
+  nextArrow?.addEventListener('click', () => setActive(active + 1));
   track.addEventListener('scroll', syncFromTrack, { passive: true });
   track.addEventListener('wheel', event => {
     const max = Math.max(0, track.scrollWidth - track.clientWidth);
