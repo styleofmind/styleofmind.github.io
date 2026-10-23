@@ -337,6 +337,16 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media(prefers-reduced-motion:reduce){.certificate-slide{transition:none}}
 
 
+/* Independent twinkling stars layered over the desktop portrait */
+.hero-portrait-stars{position:absolute;z-index:3;inset:0;overflow:hidden;pointer-events:none}
+.hero-portrait-stars i{position:absolute;display:block;width:4px;height:4px;border-radius:50%;background:#f7e2b5;box-shadow:0 0 9px 2px rgba(217,180,92,.5);opacity:.25;animation:twinkle 7s ease-in-out infinite}
+.hero-portrait-stars i:nth-child(1){left:25%;top:22%;animation-delay:-1.4s}
+.hero-portrait-stars i:nth-child(2){left:73%;top:17%;width:3px;height:3px;animation-delay:-4.3s}
+.hero-portrait-stars i:nth-child(3){left:16%;top:43%;width:3px;height:3px;animation-delay:-2.8s}
+.hero-portrait-stars i:nth-child(4){right:18%;top:39%;animation-delay:-5.2s}
+.hero-portrait-stars i:nth-child(5){left:31%;top:61%;width:2px;height:2px;animation-delay:-.7s}
+.hero-portrait-stars i:nth-child(6){right:27%;top:68%;width:3px;height:3px;animation-delay:-3.5s}
+.hero-portrait-stars i:nth-child(7){left:50%;top:11%;width:2px;height:2px;animation-delay:-6s}
 /* Desktop portrait in the hero; the separate block remains mobile-only */
 .hero-portrait{position:relative;z-index:2;display:block;align-self:stretch;width:min(88%,460px);height:100%;margin:0 auto 0}
 .hero-portrait img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 16px 34px rgba(0,0,0,.24));-webkit-mask-image:linear-gradient(to bottom,#000 91%,transparent 100%);mask-image:linear-gradient(to bottom,#000 91%,transparent 100%)}
