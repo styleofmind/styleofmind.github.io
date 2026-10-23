@@ -525,3 +525,15 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media(max-width:720px){.hero-art{width:min(100%,290px);margin:10px auto 12px;transform:none;align-self:center}}
 @media(prefers-reduced-motion:reduce){.hero-art .hero-video-play,.hero-art .hero-video-play>span{transition:none}}
 
+
+
+/* Галерея сертификатов: счётчик, индикатор прогресса и удобная прокрутка */
+.certificate-gallery-status{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:8px 14px;width:min(100%,760px);margin:14px auto 0;color:#766b5a;font-size:12px}
+.certificate-gallery-status__count{font-variant-numeric:tabular-nums;white-space:nowrap;color:#8b682f;font-weight:600;letter-spacing:.04em}
+.certificate-gallery-status__hint{justify-self:end;text-align:right}
+.certificate-gallery-status__progress{grid-column:1/-1;display:block;height:3px;overflow:hidden;border-radius:99px;background:rgba(119,94,59,.14)}
+.certificate-gallery-status__progress>span{display:block;width:100%;height:100%;background:#b69a68;transform:scaleX(.1);transform-origin:left center;transition:transform .25s ease}
+.certificate-carousel__track{touch-action:pan-x;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;cursor:grab}
+.certificate-carousel__track:active{cursor:grabbing}
+@media(max-width:720px){.certificate-gallery-status{margin-top:10px;font-size:11px;gap:7px 10px}.certificate-gallery-status__hint{max-width:72%;line-height:1.4}}
+@media(prefers-reduced-motion:reduce){.certificate-gallery-status__progress>span{transition:none}.certificate-carousel__track{scroll-behavior:auto}}
