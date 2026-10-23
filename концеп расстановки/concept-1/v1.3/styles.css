@@ -640,6 +640,11 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 .requests .section-heading--split h2 {
   margin-bottom: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.025em;
 }
 .requests .section-heading__aside {
   max-width: 460px;
