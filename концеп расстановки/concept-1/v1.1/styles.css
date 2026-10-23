@@ -319,6 +319,17 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .certificate-carousel__arrow:focus-visible,.certificate-slide:focus-visible,.certificate-lightbox button:focus-visible{outline:2px solid #b69a68;outline-offset:3px}
 .certificate-carousel__footer{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:12px;color:#746b5e;font-size:12px}
 .certificate-carousel__count{font-variant-numeric:tabular-nums;color:#4b4031;font-weight:600}
+
+/* Миниатюры сертификатов под основным документом */
+.certificate-thumbnails{display:flex;gap:10px;width:min(100%,760px);margin:18px auto 0;padding:3px 2px 8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:rgba(182,154,104,.45) transparent;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.certificate-thumbnail{flex:0 0 88px;display:grid;place-items:center;height:76px;padding:4px;border:1px solid rgba(119,94,59,.16);border-radius:7px;background:rgba(255,255,255,.55);cursor:pointer;opacity:.72;transition:opacity .18s,border-color .18s,background-color .18s}
+.certificate-thumbnail img{display:block;width:100%;height:100%;object-fit:contain}
+.certificate-thumbnail:hover{opacity:1;border-color:rgba(119,94,59,.45)}
+.certificate-thumbnail.is-active{opacity:1;border-color:#b69a68;background:#fff;box-shadow:0 0 0 1px rgba(182,154,104,.22)}
+.certificate-thumbnail:focus-visible{outline:2px solid #b69a68;outline-offset:3px}
+@media(max-width:720px){.certificate-thumbnails{gap:8px;margin-top:14px;padding-bottom:7px}.certificate-thumbnail{flex-basis:72px;height:64px}}
+@media(prefers-reduced-motion:reduce){.certificate-thumbnails{scroll-behavior:auto}.certificate-thumbnail{transition:none}}
+
 .certificate-lightbox{position:fixed;inset:0;width:min(94vw,1100px);max-width:none;height:min(92dvh,900px);max-height:none;padding:54px 58px 38px;border:0;border-radius:8px;background:#201e1b;color:#fff;overflow:visible}
 .certificate-lightbox::backdrop{background:rgba(12,11,10,.88)}
 .certificate-lightbox__image{display:block;width:100%;height:100%;object-fit:contain}
