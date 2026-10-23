@@ -172,7 +172,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .method-steps{display:grid;gap:17px;position:relative;z-index:2}
 .method-step{display:grid;grid-template-columns:50px 1fr;align-items:center;gap:17px;padding-bottom:14px;border-bottom:1px solid rgba(217,180,92,.16)}
 .method-step:last-child{border-bottom:0}
-.method-step span{width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(217,180,92,.7);border-radius:50%;color:var(--gold-light);font:600 14px var(--sans)}
+.method-step span{width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(217,180,92,.7);border-radius:50%;color:var(--gold-light);font:16px var(--serif)}
 .process-count{width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(217,180,92,.7);border-radius:50%;color:var(--gold-light);font:16px var(--serif)}
 .method-step p{margin:0;max-width:340px;color:#e7e4dc;font:400 15px/1.75 var(--sans)}
 .lotus-art{width:220px;height:180px;position:absolute;right:8%;bottom:-45px;opacity:.55;filter:drop-shadow(0 0 22px rgba(217,180,92,.25))}
@@ -833,7 +833,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   display: block;
   margin: 0 0 7px;
   color: var(--gold-light, #e1c58c);
-  font: 600 18px/1.4 var(--sans);
+  font: 400 19px/1.35 var(--serif);
 }
 @media (max-width: 760px) {
   .method-steps { gap: 10px; }
@@ -848,7 +848,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
     font-size: 13px;
   }
   .method-step p { font-size: 14px; line-height: 1.7; }
-  .method-step p strong { margin-bottom: 6px; font-size: 15px; }
+  .method-step p strong { margin-bottom: 6px; font-size: 17px; }
 }
 
 
@@ -1201,8 +1201,8 @@ h3,
   color: #d8dbd7;
 }
 .method-step p strong {
-  font: 600 17px/1.45 var(--sans);
-  letter-spacing: 0;
+  font: 500 18px/1.4 var(--serif);
+  letter-spacing: -.01em;
 }
 .method-steps-title {
   font-family: var(--sans);
@@ -1279,7 +1279,7 @@ h3,
     line-height: 1.7;
   }
   .method-step p strong {
-    font-size: 15px;
+    font-size: 17px;
   }
   .section-lead {
     font-size: 15px;
