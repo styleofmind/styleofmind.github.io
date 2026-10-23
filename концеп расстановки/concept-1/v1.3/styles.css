@@ -457,6 +457,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 
 
 /* External fallback remains available if the embedded player is blocked. */
-.hero-art .hero-video-external{position:absolute;right:8px;bottom:8px;left:8px;z-index:5;margin:0;text-align:center;font-size:11px;line-height:1.35}
-.hero-art .hero-video-external a{display:inline-block;padding:5px 8px;border-radius:6px;background:rgba(17,25,35,.88);color:#f2d5a0;text-decoration:underline}
+.hero-art .hero-video-external{position:absolute;right:0;bottom:0;left:0;z-index:5;margin:0;padding:18px 8px 8px;text-align:center;font-size:10px;line-height:1.35;background:linear-gradient(180deg,transparent,rgba(17,25,35,.68));}
+.hero-art .hero-video-external a{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid rgba(242,213,160,.28);border-radius:999px;background:rgba(17,25,35,.48);color:rgba(255,250,241,.88);font-size:10px;font-weight:500;text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease}
+.hero-art .hero-video-external a:hover{background:rgba(17,25,35,.82);border-color:rgba(242,213,160,.6);color:#f2d5a0}
 .hero-art .hero-video-external a:focus-visible{outline:2px solid #f2d5a0;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.hero-art .hero-video-external a{transition:none}}
