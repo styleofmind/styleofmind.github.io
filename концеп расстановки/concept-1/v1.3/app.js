@@ -199,54 +199,105 @@
     })();
 
 
-/* Подготовка плеера при наведении на компьютере; на мобильных — по нажатию. */
+/* Прогрев Kinescope через IFrame API: по наведению на компьютере, по нажатию на мобильных. */
 (() => {
   const preview = document.querySelector('.hero-video-preview');
   if (!preview) return;
 
+  const portrait = preview.parentElement;
+  const videoUrl = 'https://kinescope.io/eWhaw3CwffKhViyhnev9AA';
+  const desktop = window.matchMedia('(hover: hover) and (pointer: fine)');
   let frame = null;
-  let warmed = false;
-  const videoUrl = 'https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA';
-  const configureFrame = (iframe) => {
-    iframe.className = 'hero-video';
-    iframe.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
-    iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
-    iframe.allowFullscreen = true;
-    iframe.loading = 'eager';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  let player = null;
+  let apiPromise = null;
+  let playerPromise = null;
+  let activated = false;
+
+  const loadApi = () => {
+    if (window.Kinescope && window.Kinescope.IframePlayerFactory) {
+      return Promise.resolve(window.Kinescope.IframePlayerFactory);
+    }
+    if (apiPromise) return apiPromise;
+
+    apiPromise = new Promise((resolve, reject) => {
+      const previousReady = window.onKinescopeIframeAPIReady;
+      window.onKinescopeIframeAPIReady = (factory) => {
+        if (typeof previousReady === 'function') previousReady(factory);
+        resolve(factory);
+      };
+      const script = document.createElement('script');
+      script.src = 'https://player.kinescope.io/latest/iframe.player.js';
+      script.async = true;
+      script.onerror = () => reject(new Error('Не удалось загрузить Kinescope Player API'));
+      document.head.appendChild(script);
+    });
+    return apiPromise;
+  };
+
+  const preparePlayer = () => {
+    if (playerPromise) return playerPromise;
+
+    frame = document.createElement('iframe');
+    frame.id = 'hero-kinescope-player';
+    frame.className = 'hero-video';
+    frame.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
+    frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
+    frame.allowFullscreen = true;
+    frame.loading = 'eager';
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.tabIndex = -1;
+    frame.setAttribute('aria-hidden', 'true');
+    frame.style.visibility = 'hidden';
+    portrait.appendChild(frame);
+
+    playerPromise = loadApi().then((factory) => factory.create(frame.id, {
+      url: videoUrl,
+      size: { width: '100%', height: '100%' },
+      behavior: { preload: 'metadata', playsInline: true },
+      ui: { language: 'ru', controls: true, mainPlayButton: true }
+    })).then((instance) => {
+      player = instance;
+      return player;
+    }).catch((error) => {
+      playerPromise = null;
+      if (frame && frame.isConnected) frame.remove();
+      frame = null;
+      throw error;
+    });
+
+    return playerPromise;
   };
 
   const warmPlayer = () => {
-    if (frame || warmed || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    warmed = true;
-    frame = document.createElement('iframe');
-    configureFrame(frame);
-    frame.tabIndex = -1;
-    frame.setAttribute('aria-hidden', 'true');
-    frame.src = videoUrl + '?autoplay=0&preload=1';
-    frame.style.visibility = 'hidden';
-    preview.parentElement.appendChild(frame);
+    if (!desktop.matches || playerPromise || activated) return;
+    preparePlayer().catch(() => {});
   };
 
   preview.addEventListener('pointerenter', warmPlayer, { once: true });
   preview.addEventListener('focus', warmPlayer, { once: true });
 
-  preview.addEventListener('click', () => {
-    if (!frame) {
-      frame = document.createElement('iframe');
-      configureFrame(frame);
-      frame.src = videoUrl + '?autoplay=1&preload=1';
-      preview.replaceWith(frame);
-      return;
+  preview.addEventListener('click', async () => {
+    if (activated) return;
+    activated = true;
+    preview.disabled = true;
+    try {
+      const activePlayer = await preparePlayer();
+      frame.style.visibility = 'visible';
+      frame.removeAttribute('aria-hidden');
+      frame.removeAttribute('tabindex');
+      preview.remove();
+      await activePlayer.play();
+    } catch (error) {
+      activated = false;
+      preview.disabled = false;
+      if (frame) {
+        frame.style.visibility = 'hidden';
+        frame.setAttribute('aria-hidden', 'true');
+        frame.tabIndex = -1;
+      }
+      console.error('[Kinescope] Не удалось запустить видео:', error);
     }
-
-    // После прогрева включаем автозапуск; браузер может повторно загрузить iframe.
-    frame.src = videoUrl + '?autoplay=1&preload=1';
-    frame.style.visibility = 'visible';
-    frame.removeAttribute('aria-hidden');
-    frame.removeAttribute('tabindex');
-    preview.remove();
-  }, { once: true });
+  });
 })();
 
 
