@@ -1005,3 +1005,17 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .method-section .method-copy p:not(.eyebrow) { font-size: 15px; }
   .method-section .method-principles { margin-top: 18px; }
 }
+
+/* Arrangement photos now belong to the method section. */
+.method-section .method-grid > .process-photo-gallery {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 16px auto 0;
+}
+@media (max-width: 720px) {
+  .method-section .method-grid > .process-photo-gallery {
+    width: calc(100% + 8px);
+    margin: 8px -4px 0;
+  }
+}
