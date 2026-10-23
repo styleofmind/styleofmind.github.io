@@ -1218,3 +1218,9 @@ h3,
     line-height: 1.85;
   }
 }
+
+
+/* Extra breathing room between the hero statement and the supporting line. */
+.hero-copy .hero-lead {
+  margin-bottom: 26px;
+}
