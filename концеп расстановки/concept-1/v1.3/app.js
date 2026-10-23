@@ -223,12 +223,10 @@
   if (!section) return;
   const track = section.querySelector('.certificate-carousel__track');
   const slides = [...section.querySelectorAll('.certificate-slide')];
-  const prev = section.querySelector('.certificate-carousel__arrow--prev');
-  const next = section.querySelector('.certificate-carousel__arrow--next');
   const thumbnails = [...section.querySelectorAll('.certificate-thumbnail')];
   const dialog = section.querySelector('.certificate-lightbox');
   const largeImage = dialog?.querySelector('.certificate-lightbox__image');
-  if (!track || !slides.length || !prev || !next || !dialog || !largeImage) return;
+  if (!track || !slides.length || !dialog || !largeImage) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
@@ -258,8 +256,6 @@
       thumbnail.classList.toggle('is-active', selected);
       thumbnail.setAttribute('aria-pressed', String(selected));
     });
-    prev.disabled = active === 0;
-    next.disabled = active === slides.length - 1;
     const currentLabel = section.querySelector('[data-certificate-current]');
     const totalLabel = section.querySelector('[data-certificate-total]');
     const progress = section.querySelector('.certificate-gallery-status__progress');
@@ -309,24 +305,21 @@
 
   slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
   thumbnails.forEach((thumbnail, i) => thumbnail.addEventListener('click', () => setActive(i)));
-  prev.addEventListener('click', () => setActive(active - 1));
-  next.addEventListener('click', () => setActive(active + 1));
   track.addEventListener('scroll', syncFromTrack, { passive: true });
-  track.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); setActive(active - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); setActive(active + 1); }
-    if (event.key === 'Home') { event.preventDefault(); setActive(0); }
-    if (event.key === 'End') { event.preventDefault(); setActive(slides.length - 1); }
-  });
+  track.addEventListener('wheel', event => {
+    const max = Math.max(0, track.scrollWidth - track.clientWidth);
+    if (max <= 2) return;
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    if (!delta) return;
+    const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? track.clientWidth : 1;
+    const distance = Math.max(-track.scrollLeft, Math.min(max - track.scrollLeft, delta * scale));
+    if (Math.abs(distance) < 0.5) return;
+    event.preventDefault();
+    track.scrollBy({ left: distance, behavior: 'auto' });
+  }, { passive: false });
 
   dialog.querySelector('.certificate-lightbox__close')?.addEventListener('click', () => dialog.close());
-  dialog.querySelector('.certificate-lightbox__arrow--prev')?.addEventListener('click', () => showLarge(active - 1));
-  dialog.querySelector('.certificate-lightbox__arrow--next')?.addEventListener('click', () => showLarge(active + 1));
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-  dialog.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); showLarge(active - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); showLarge(active + 1); }
-  });
 
   syncActive(0);
 })();
