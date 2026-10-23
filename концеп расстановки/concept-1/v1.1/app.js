@@ -265,7 +265,7 @@
     if (scrollSlide) {
       programmaticScroll = true;
       track.scrollTo({
-        left: slides[active].offsetLeft,
+        left: active * track.clientWidth,
         behavior: reducedMotion.matches ? 'auto' : 'smooth'
       });
       window.clearTimeout(scrollTimer);
@@ -274,20 +274,11 @@
   };
 
   const syncFromTrack = () => {
+    if (programmaticScroll) return;
     window.clearTimeout(scrollTimer);
     scrollTimer = window.setTimeout(() => {
-      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
-      let nearestIndex = 0;
-      let nearestDistance = Infinity;
-      slides.forEach((slide, index) => {
-        const rect = slide.getBoundingClientRect();
-        const distance = Math.abs(rect.left + rect.width / 2 - trackCenter);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestIndex = index;
-        }
-      });
-      programmaticScroll = false;
+      const pageWidth = track.clientWidth || 1;
+      const nearestIndex = Math.round(track.scrollLeft / pageWidth);
       syncActive(nearestIndex);
     }, 90);
   };
