@@ -177,6 +177,11 @@
           </div>
           <button class="certificate-carousel__arrow certificate-carousel__arrow--next" type="button" aria-label="Следующий сертификат">›</button>
         </div>
+        <div class="certificate-gallery-status" aria-live="polite">
+          <span class="certificate-gallery-status__count"><span data-certificate-current>1</span><span aria-hidden="true"> / </span><span data-certificate-total>10</span></span>
+          <span class="certificate-gallery-status__hint">Листайте стрелками или выберите миниатюру</span>
+          <span class="certificate-gallery-status__progress" role="progressbar" aria-label="Просмотр сертификатов" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1"><span data-certificate-progress></span></span>
+        </div>
         <div class="certificate-thumbnails" aria-label="Выбрать сертификат">
           <button class="certificate-thumbnail is-active" type="button" data-certificate-index="0" aria-label="Выбрать сертификат 1" aria-pressed="true"><img src="../../concept-0/images/certificate-1.webp" alt="" loading="lazy"></button>
           <button class="certificate-thumbnail" type="button" data-certificate-index="1" aria-label="Выбрать сертификат 2" aria-pressed="false"><img src="../../concept-0/images/certificate-2.webp" alt="" loading="lazy"></button>
