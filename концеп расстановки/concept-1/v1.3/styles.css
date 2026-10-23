@@ -643,6 +643,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .requests .section-heading__aside {
   max-width: 460px;
   margin: 0 0 5px;
+  padding-left: 26px;
+  border-left: 1px solid rgba(184, 146, 91, .55);
   color: var(--muted, #656760);
   font-size: 14px;
   line-height: 1.75;
@@ -685,6 +687,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .requests { padding: 68px 0 58px; }
   .requests .container { width: calc(100% - 36px); }
   .requests .section-heading--split { grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+  .requests .section-heading__aside { padding: 16px 0 0; border-left: 0; border-top: 1px solid rgba(184, 146, 91, .55); }
   .requests .card-grid--three { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .requests .request-card { min-height: 0; padding: 20px 16px; }
   .requests .request-card h3 { font-size: 18px; }
