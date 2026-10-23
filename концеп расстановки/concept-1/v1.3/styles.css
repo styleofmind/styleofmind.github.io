@@ -1,10 +1,42 @@
-/* Локальный Playfair Display из набора шрифтов концепции 4.1. */
+/* Локальные шрифты v1.3. Лицензии сохранены в assets/fonts/. */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./assets/fonts/montserrat-cyrillic-ext.woff2") format("woff2");
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./assets/fonts/montserrat-cyrillic.woff2") format("woff2");
+  unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./assets/fonts/montserrat-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./assets/fonts/montserrat-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 @font-face {
   font-family: "Playfair Display";
   font-style: normal;
   font-weight: 400 600;
   font-display: swap;
-  src: url("../../concept-4/v4.1/assets/fonts/playfair-display-cyrillic.woff2") format("woff2");
+  src: url("./assets/fonts/playfair-display-cyrillic.woff2") format("woff2");
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 @font-face {
@@ -12,7 +44,7 @@
   font-style: normal;
   font-weight: 400 600;
   font-display: swap;
-  src: url("../../concept-4/v4.1/assets/fonts/playfair-display-latin-ext.woff2") format("woff2");
+  src: url("./assets/fonts/playfair-display-latin-ext.woff2") format("woff2");
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
@@ -20,15 +52,15 @@
   font-style: normal;
   font-weight: 400 600;
   font-display: swap;
-  src: url("../../concept-4/v4.1/assets/fonts/playfair-display-latin.woff2") format("woff2");
+  src: url("./assets/fonts/playfair-display-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2215,U+FEFF,U+FFFD;
 }
 
 :root{
   --night:#111923;--night-2:#17212b;--night-3:#202b34;--cream:#f5efe6;--cream-2:#eee5d8;
   --ink:#242b2d;--muted:#6f716f;--muted-light:#c3c4bf;--gold:#d9b45c;--gold-light:#f0d9a6;
-  --line:rgba(217,180,92,.35);--white:#fffaf1;--sage:#829083;--serif:Georgia,"Times New Roman",serif;
-  --sans:Arial,Helvetica,sans-serif;--radius:20px;--shadow:0 20px 60px rgba(8,13,20,.22)
+  --line:rgba(217,180,92,.35);--white:#fffaf1;--sage:#829083;--serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Montserrat",Arial,Helvetica,sans-serif;--radius:20px;--shadow:0 20px 60px rgba(8,13,20,.22)
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
@@ -281,7 +313,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 @media (min-width:721px) and (max-width:950px){.hero-art{transform:translateX(-18px)}}
 /* Tablet header: switch to the compact menu before the brand, links and CTA become cramped. */
-@media (min-width:721px) and (max-width:900px){html{scroll-padding-top:72px}.site-header{height:68px}.desktop-nav,.header-booking{display:none}.mobile-menu{display:block}.brand-name{font-size:23px}}
+@media (min-width:721px) and (max-width:980px){html{scroll-padding-top:72px}.site-header{height:68px}.desktop-nav,.header-booking{display:none}.mobile-menu{display:block}.brand-name{font-size:23px}}
 @media (max-width:720px){
   html{scroll-padding-top:72px}.site-header{height:68px}.desktop-nav,.header-booking{display:none}.mobile-menu{display:block}
   .brand-name{font-size:23px}.brand-star{font-size:29px}.page-width{width:calc(100% - 38px)}
@@ -1014,6 +1046,250 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (prefers-reduced-motion: reduce) {
   .certificate-carousel__arrow {
     transition: none;
+  }
+}
+
+/* ==========================================================================
+   Единая визуальная система v1.3
+   Playfair Display — заголовки и акцентные фразы.
+   Montserrat — текст, навигация и элементы интерфейса.
+   ========================================================================== */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.72;
+}
+button,
+input,
+select,
+textarea {
+  font-family: var(--sans);
+}
+img {
+  max-width: 100%;
+}
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+.section-title {
+  text-wrap: balance;
+}
+.eyebrow {
+  font-size: 10px;
+  line-height: 1.55;
+  letter-spacing: .19em;
+}
+.brand-name {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+.brand-subtitle {
+  letter-spacing: .15em;
+}
+.desktop-nav {
+  font-size: 13px;
+  font-weight: 500;
+}
+.section-title {
+  font: 400 clamp(2rem, 4vw, 3.3rem)/1.12 var(--serif);
+  letter-spacing: -.025em;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -.025em;
+  line-height: 1.02;
+}
+.hero-lead {
+  font: 400 clamp(18px, 1.45vw, 20px)/1.65 var(--serif);
+}
+.hero-note {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.button {
+  min-height: 48px;
+  font: 600 13px/1.2 var(--sans);
+  letter-spacing: .01em;
+}
+.button-outline {
+  border-color: rgba(217, 180, 92, .64);
+}
+.value-item h2 {
+  font: 400 20px/1.2 var(--serif);
+}
+.value-item p {
+  font-size: 13px;
+  line-height: 1.68;
+  color: #c9cbc6;
+}
+.about-copy > p:not(.eyebrow) {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.intro-text {
+  font: 400 clamp(19px, 2vw, 22px)/1.6 var(--serif) !important;
+}
+.section-lead {
+  font-size: 16px;
+  line-height: 1.75;
+}
+.topic-card {
+  border-color: rgba(126, 111, 85, .22);
+  border-radius: 16px;
+  background: rgba(255, 252, 246, .72);
+  box-shadow: 0 5px 18px rgba(36, 43, 45, .025);
+}
+.topic-card p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.requests .request-card {
+  border-radius: 8px;
+  background: rgba(255, 253, 249, .82);
+  box-shadow: 0 6px 20px rgba(36, 43, 45, .035);
+}
+.requests .request-card p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.format-card {
+  border-radius: 16px;
+}
+.format-card > p {
+  font-size: 13px;
+  line-height: 1.75;
+}
+.format-meta {
+  font-size: 13px;
+}
+.check-list li {
+  font-size: 15px;
+  line-height: 1.75;
+}
+.offer-caption {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.offer-small {
+  font-size: 11px;
+  line-height: 1.65;
+}
+.method-section .method-description {
+  font-family: var(--serif);
+  line-height: 1.68;
+}
+.method-intro-note {
+  font-size: 14px;
+  line-height: 1.75;
+}
+.method-step {
+  border-radius: 14px;
+  border-color: rgba(217, 180, 92, .23);
+  background: linear-gradient(125deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .022));
+}
+.method-step p {
+  font: 400 15px/1.75 var(--sans);
+  color: #d8dbd7;
+}
+.method-step p strong {
+  font: 500 18px/1.4 var(--serif);
+  letter-spacing: -.01em;
+}
+.method-steps-title {
+  font-family: var(--sans);
+  font-weight: 600;
+}
+.process-card p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.feel-rasstanovki__title {
+  font-family: var(--serif);
+  font-weight: 500;
+}
+.feel-rasstanovki__subtitle {
+  font-size: 16px;
+  line-height: 1.75;
+}
+.feel-rasstanovki__text {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.review-card {
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(36, 43, 45, .055);
+}
+.review-card p {
+  font: 400 17px/1.65 var(--serif);
+}
+.review-card footer {
+  font-size: 12px;
+}
+.review-card footer span {
+  font-size: 11px;
+}
+.faq-intro > p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.75;
+}
+.faq-list details p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.site-footer nav {
+  font-size: 12px;
+}
+.footer-legal {
+  font-size: 11px;
+  line-height: 1.6;
+}
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
+}
+::selection {
+  color: #fffaf1;
+  background: #80603b;
+}
+@media (max-width: 760px) {
+  .eyebrow {
+    letter-spacing: .15em;
+  }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .value-item p,
+  .topic-card p,
+  .requests .request-card p,
+  .format-card > p {
+    font-size: 13px;
+  }
+  .method-step p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-step p strong {
+    font-size: 17px;
+  }
+  .section-lead {
+    font-size: 15px;
+  }
+  .review-card p {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  p {
+    text-wrap: initial;
   }
 }
 
