@@ -1,3 +1,8 @@
+/* Защита от повторной инициализации: при повторном подключении app.js обработчики не дублируются. */
+(function () {
+  const key = '__styleOfMindV11AppInitialized';
+  if (window[key]) return;
+  window[key] = true;
 /* Поведение страницы «Расставить точки над МЫ». */
 
 /* Всплывающее предложение диагностики */
@@ -307,4 +312,6 @@
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
 
   syncActive(0);
+})();
+
 })();
