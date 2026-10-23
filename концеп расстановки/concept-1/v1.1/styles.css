@@ -432,3 +432,33 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (min-width: 1101px) {
   .hero-art { transform: translateX(-28px); }
 }
+
+ 
+/* Certificates: lock the main carousel to exactly one document per page. */
+.certificate-carousel__viewport { min-width: 0; width: 100%; overflow: hidden; }
+.certificate-carousel__track {
+  display: flex;
+  width: 100%;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  scroll-padding: 0;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+.certificate-carousel__track > .certificate-slide {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.certificate-slide img { box-sizing: border-box; object-fit: contain; }
+@media (max-width: 720px) {
+  .certificate-carousel { grid-template-columns: 30px minmax(0, 1fr) 30px; gap: 4px; }
+  .certificate-slide { height: 280px; }
+}
