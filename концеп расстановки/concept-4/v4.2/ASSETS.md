@@ -8,7 +8,7 @@
 |---|---|
 | assets/backgrounds/ | section-01.jpg–section-12.jpg, section-08-composed.jpg, section-11-composed.jpg и about-watercolor-background.jpg |
 | assets/identity/ | brand-mark.svg |
-| assets/fonts/ | Локальные файлы шрифтов Montserrat и Playfair Display в WOFF2 и соответствующие тексты лицензий OFL |
+| /fonts/ | Локальные файлы шрифтов Montserrat и Playfair Display в WOFF2 и соответствующие тексты лицензий OFL |
 | assets/portraits/ | PNG-оригиналы портретов; адаптивные WebP-варианты для загрузки с PNG-fallback |
 | assets/scenes/ | about-arch-interior.png — графический фон блока «Обо мне» |
 | assets/why-me/ | Текстура, ботанический элемент, рамка и золотые декоративные детали |
