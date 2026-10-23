@@ -627,12 +627,16 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 .requests .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
 /* Шапка блока запросов — типографика и композиция как в v4.1. */
+.requests .section-heading {
+  max-width: none;
+  margin: 0 0 44px;
+  text-align: left;
+}
 .requests .section-heading--split {
   display: grid;
   grid-template-columns: 1fr minmax(260px, .7fr);
   align-items: end;
   gap: 60px;
-  margin-bottom: 44px;
 }
 .requests .section-heading--split h2 {
   margin-bottom: 0;
@@ -675,15 +679,14 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .requests .card-grid--three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .requests .request-card { min-height: 210px; }
 }
+@media (max-width: 760px) {
+  .requests .section-heading { margin-bottom: 32px; }
+  .requests .section-heading--split { grid-template-columns: 1fr; gap: 18px; }
+  .requests .section-heading__aside { max-width: 620px; }
+}
 @media (max-width: 640px) {
   .requests { padding: 68px 0 58px; }
   .requests .container { width: calc(100% - 36px); }
-  .requests .section-heading--split {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-bottom: 32px;
-  }
-  .requests .section-heading__aside { max-width: 620px; }
   .requests .card-grid--three { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .requests .request-card { min-height: 0; padding: 20px 16px; }
   .requests .request-card h3 { font-size: 18px; }
