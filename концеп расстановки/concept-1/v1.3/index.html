@@ -118,7 +118,8 @@
           <p class="section-lead">Документы о профессиональном обучении и подготовке.</p>
         </div>
         <div class="certificate-carousel" aria-label="Галерея сертификатов">
-<div class="certificate-carousel__viewport">
+          <button class="certificate-carousel__arrow certificate-carousel__arrow--prev" type="button" aria-label="Предыдущий сертификат" disabled>‹</button>
+          <div class="certificate-carousel__viewport">
             <div class="certificate-carousel__track" tabindex="0" aria-label="Сертификаты. Прокручивайте колёсиком мыши или выберите миниатюру">
               <button class="certificate-slide is-active" type="button" data-certificate-index="0" aria-label="Показать сертификат 1" aria-pressed="true"><img src="../../concept-0/images/certificate-1.webp" alt="Сертификат 1" loading="lazy"></button>
               <button class="certificate-slide" type="button" data-certificate-index="1" aria-label="Показать сертификат 2" aria-pressed="false"><img src="../../concept-0/images/certificate-2.webp" alt="Сертификат 2" loading="lazy"></button>
@@ -132,13 +133,12 @@
               <button class="certificate-slide" type="button" data-certificate-index="9" aria-label="Показать сертификат 10" aria-pressed="false"><img src="../../concept-0/images/certificate-10.webp" alt="Сертификат 10" loading="lazy"></button>
             </div>
           </div>
-</div>
-        <div class="certificate-gallery-status" aria-live="polite">
-<span aria-hidden="true"> / </span></span>
-<span class="certificate-gallery-status__progress" role="progressbar" aria-label="Просмотр сертификатов" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1"><span data-certificate-progress></span></span>
+          <button class="certificate-carousel__arrow certificate-carousel__arrow--next" type="button" aria-label="Следующий сертификат">›</button>
         </div>
-      <button class="certificate-carousel__arrow certificate-carousel__arrow--next" type="button" aria-label="Следующий сертификат">›</button>
-      <div class="certificate-thumbnails" aria-label="Выбрать сертификат">
+        <div class="certificate-gallery-status" aria-live="polite">
+          <span class="certificate-gallery-status__progress" role="progressbar" aria-label="Просмотр сертификатов" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1"><span data-certificate-progress></span></span>
+        </div>
+        <div class="certificate-thumbnails" aria-label="Выбрать сертификат">
           <button class="certificate-thumbnail is-active" type="button" data-certificate-index="0" aria-label="Выбрать сертификат 1" aria-pressed="true"><img src="../../concept-0/images/certificate-1.webp" alt="" loading="lazy"></button>
           <button class="certificate-thumbnail" type="button" data-certificate-index="1" aria-label="Выбрать сертификат 2" aria-pressed="false"><img src="../../concept-0/images/certificate-2.webp" alt="" loading="lazy"></button>
           <button class="certificate-thumbnail" type="button" data-certificate-index="2" aria-label="Выбрать сертификат 3" aria-pressed="false"><img src="../../concept-0/images/certificate-3.webp" alt="" loading="lazy"></button>
@@ -150,9 +150,7 @@
           <button class="certificate-thumbnail" type="button" data-certificate-index="8" aria-label="Выбрать сертификат 9" aria-pressed="false"><img src="../../concept-0/images/certificate-9.webp" alt="" loading="lazy"></button>
           <button class="certificate-thumbnail" type="button" data-certificate-index="9" aria-label="Выбрать сертификат 10" aria-pressed="false"><img src="../../concept-0/images/certificate-10.webp" alt="" loading="lazy"></button>
         </div>
-        
-      </div>
-      <dialog class="certificate-lightbox" aria-label="Просмотр сертификата">
+        <dialog class="certificate-lightbox" aria-label="Просмотр сертификата">
         <button class="certificate-lightbox__close" type="button" aria-label="Закрыть просмотр">×</button>
 <img class="certificate-lightbox__image" src="../../concept-0/images/certificate-1.webp" alt="Сертификат 1">
 </dialog>
