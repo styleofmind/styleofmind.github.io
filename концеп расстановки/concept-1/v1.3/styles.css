@@ -1294,3 +1294,36 @@ h3,
   }
 }
 
+
+
+/* Шаблон страницы политики конфиденциальности */
+.privacy-template {
+  min-height: calc(100vh - 148px);
+  background: var(--cream);
+  color: var(--ink);
+}
+.privacy-template__inner {
+  padding-top: clamp(72px, 10vw, 120px);
+  padding-bottom: clamp(100px, 14vw, 160px);
+}
+.privacy-template__title {
+  max-width: 850px;
+  margin: 0;
+  color: var(--ink);
+  font: 400 clamp(36px, 5vw, 58px)/1.12 var(--serif);
+  letter-spacing: -.025em;
+}
+.privacy-template__content {
+  min-height: 320px;
+  margin-top: 32px;
+}
+@media (max-width: 720px) {
+  .privacy-template__inner {
+    padding-top: 64px;
+    padding-bottom: 88px;
+  }
+  .privacy-template__content {
+    min-height: 280px;
+    margin-top: 24px;
+  }
+}
