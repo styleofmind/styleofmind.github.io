@@ -300,3 +300,38 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .process-photo-gallery__arrow:focus-visible,.process-photo-gallery__track:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
 @media(max-width:720px){.process-photo-gallery{width:calc(100% + 8px);margin:24px -4px 0}.process-photo-gallery__track{gap:12px;padding-bottom:10px}.process-photo-gallery__track img{flex-basis:78vw;width:78vw;height:190px}.process-photo-gallery__arrow{width:38px;height:38px;margin-top:-24px;font-size:25px}.process-photo-gallery__arrow--prev{left:4px}.process-photo-gallery__arrow--next{right:4px}}
 @media(prefers-reduced-motion:reduce){.process-photo-gallery__track,.review-carousel__track{scroll-behavior:auto}}
+
+
+/* Галерея сертификатов */
+.certificates-section{padding:88px 0 96px;background:#f7f2ea;color:#29251f}
+.certificates-section .section-heading{max-width:720px;margin:0 auto 34px;text-align:center}
+.certificate-carousel{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;align-items:center;gap:18px;max-width:940px;margin:0 auto}
+.certificate-carousel__viewport{min-width:0;overflow:hidden}
+.certificate-carousel__track{display:flex;justify-content:center;gap:14px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:4px 2px 12px}
+.certificate-carousel__track::-webkit-scrollbar{display:none}
+.certificate-slide{flex:0 0 min(66%,460px);height:360px;padding:10px;border:1px solid rgba(119,94,59,.2);border-radius:12px;background:#fff;box-shadow:0 12px 34px rgba(48,37,24,.09);cursor:pointer;scroll-snap-align:center;opacity:.62;transition:opacity .2s,border-color .2s,transform .2s}
+.certificate-slide img{display:block;width:100%;height:100%;object-fit:contain}
+.certificate-slide.is-active{opacity:1;border-color:#b69a68;transform:translateY(-2px)}
+.certificate-carousel__arrow,.certificate-lightbox__arrow{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(119,94,59,.35);border-radius:50%;background:transparent;color:inherit;font-size:30px;line-height:1;cursor:pointer}
+.certificate-carousel__arrow:disabled{opacity:.28;cursor:default}
+.certificate-carousel__footer{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:14px;color:#746b5e;font-size:13px}
+.certificate-carousel__count{font-variant-numeric:tabular-nums;color:#4b4031;font-weight:600}
+.certificate-lightbox{position:fixed;inset:0;width:min(94vw,1100px);max-width:none;height:min(92dvh,900px);max-height:none;padding:58px 68px 42px;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:#201e1b;color:#fff;overflow:visible}
+.certificate-lightbox::backdrop{background:rgba(12,11,10,.86);backdrop-filter:blur(5px)}
+.certificate-lightbox__image{display:block;width:100%;height:100%;object-fit:contain}
+.certificate-lightbox__close{position:absolute;top:10px;right:14px;border:0;background:transparent;color:#fff;font-size:34px;cursor:pointer}
+.certificate-lightbox__arrow{position:absolute;top:50%;transform:translateY(-50%);border-color:#827865;color:#fff;background:rgba(255,255,255,.06)}
+.certificate-lightbox__arrow--prev{left:12px}.certificate-lightbox__arrow--next{right:12px}
+.certificate-lightbox__count{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#d7cbb7;font-size:13px}
+@media(max-width:720px){
+ .certificates-section{padding:66px 0 72px}
+ .certificate-carousel{grid-template-columns:36px minmax(0,1fr) 36px;gap:8px}
+ .certificate-carousel__arrow{width:36px;height:36px;font-size:25px}
+ .certificate-slide{flex-basis:88%;height:300px;padding:7px}
+ .certificate-carousel__track{justify-content:flex-start;gap:10px}
+ .certificate-carousel__footer{flex-direction:column;gap:5px;text-align:center}
+ .certificate-lightbox{width:100vw;height:100dvh;padding:62px 42px 46px;border-radius:0}
+ .certificate-lightbox__arrow{width:34px;height:34px;font-size:24px}
+ .certificate-lightbox__arrow--prev{left:4px}.certificate-lightbox__arrow--next{right:4px}
+}
+@media(prefers-reduced-motion:reduce){.certificate-slide{transition:none}}

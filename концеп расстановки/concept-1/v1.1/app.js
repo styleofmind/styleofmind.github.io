@@ -200,3 +200,50 @@
 
 
 
+
+
+/* Галерея сертификатов */
+(() => {
+  const section = document.querySelector('.certificates-section');
+  if (!section) return;
+  const track = section.querySelector('.certificate-carousel__track');
+  const slides = [...section.querySelectorAll('.certificate-slide')];
+  const prev = section.querySelector('.certificate-carousel__arrow--prev');
+  const next = section.querySelector('.certificate-carousel__arrow--next');
+  const count = section.querySelector('.certificate-carousel__count');
+  const dialog = section.querySelector('.certificate-lightbox');
+  const largeImage = dialog.querySelector('.certificate-lightbox__image');
+  const largeCount = dialog.querySelector('.certificate-lightbox__count');
+  let active = 0;
+  const setActive = (index, scroll = true) => {
+    active = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === active);
+      slide.setAttribute('aria-pressed', String(i === active));
+    });
+    prev.disabled = active === 0;
+    next.disabled = active === slides.length - 1;
+    count.textContent = `${active + 1} из ${slides.length}`;
+    if (scroll) slides[active].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+  };
+  const showLarge = index => {
+    setActive(index, false);
+    const image = slides[active].querySelector('img');
+    largeImage.src = image.src;
+    largeImage.alt = image.alt;
+    largeCount.textContent = `${active + 1} из ${slides.length}`;
+    if (!dialog.open) dialog.showModal();
+  };
+  slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
+  prev.addEventListener('click', () => setActive(Math.max(0, active - 1)));
+  next.addEventListener('click', () => setActive(Math.min(slides.length - 1, active + 1)));
+  dialog.querySelector('.certificate-lightbox__close').addEventListener('click', () => dialog.close());
+  dialog.querySelector('.certificate-lightbox__arrow--prev').addEventListener('click', () => showLarge(Math.max(0, active - 1)));
+  dialog.querySelector('.certificate-lightbox__arrow--next').addEventListener('click', () => showLarge(Math.min(slides.length - 1, active + 1)));
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); showLarge(Math.max(0, active - 1)); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); showLarge(Math.min(slides.length - 1, active + 1)); }
+  });
+  setActive(0, false);
+})();
