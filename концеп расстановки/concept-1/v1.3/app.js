@@ -199,20 +199,53 @@
     })();
 
 
-/* Обложка видео: загружаем плеер только после нажатия. */
+/* Подготовка плеера при наведении на компьютере; на мобильных — по нажатию. */
 (() => {
   const preview = document.querySelector('.hero-video-preview');
   if (!preview) return;
+
+  let frame = null;
+  let warmed = false;
+  const videoUrl = 'https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA';
+  const configureFrame = (iframe) => {
+    iframe.className = 'hero-video';
+    iframe.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'eager';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  };
+
+  const warmPlayer = () => {
+    if (frame || warmed || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    warmed = true;
+    frame = document.createElement('iframe');
+    configureFrame(frame);
+    frame.tabIndex = -1;
+    frame.setAttribute('aria-hidden', 'true');
+    frame.src = videoUrl + '?autoplay=0&preload=1';
+    frame.style.visibility = 'hidden';
+    preview.parentElement.appendChild(frame);
+  };
+
+  preview.addEventListener('pointerenter', warmPlayer, { once: true });
+  preview.addEventListener('focus', warmPlayer, { once: true });
+
   preview.addEventListener('click', () => {
-    const frame = document.createElement('iframe');
-    frame.className = 'hero-video';
-    frame.src = 'https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA?autoplay=1';
-    frame.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
-    frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
-    frame.allowFullscreen = true;
-    frame.loading = 'eager';
-    frame.referrerPolicy = 'strict-origin-when-cross-origin';
-    preview.replaceWith(frame);
+    if (!frame) {
+      frame = document.createElement('iframe');
+      configureFrame(frame);
+      frame.src = videoUrl + '?autoplay=1&preload=1';
+      preview.replaceWith(frame);
+      return;
+    }
+
+    // После прогрева включаем автозапуск; браузер может повторно загрузить iframe.
+    frame.src = videoUrl + '?autoplay=1&preload=1';
+    frame.style.visibility = 'visible';
+    frame.removeAttribute('aria-hidden');
+    frame.removeAttribute('tabindex');
+    preview.remove();
   }, { once: true });
 })();
 
