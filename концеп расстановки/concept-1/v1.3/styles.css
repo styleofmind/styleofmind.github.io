@@ -626,29 +626,21 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   background: linear-gradient(rgba(251,249,246,.14), rgba(251,249,246,.32)), #f5f1e9;
 }
 .requests .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+/* Шапка блока запросов — типографика и композиция как в v4.1. */
 .requests .section-heading--split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr);
+  grid-template-columns: 1fr minmax(260px, .7fr);
   align-items: end;
   gap: 60px;
-  margin-bottom: 38px;
+  margin-bottom: 44px;
 }
 .requests .section-heading--split h2 {
   margin-bottom: 0;
-  max-width: 620px;
-  font-size: clamp(42px, 4.8vw, 62px);
-  line-height: 1.04;
-  letter-spacing: -.035em;
 }
 .requests .section-heading__aside {
   max-width: 460px;
   margin: 0 0 5px;
-  padding-left: 26px;
-  border-left: 1px solid rgba(184, 146, 91, .55);
-  color: var(--muted, #656760);
-  font-size: 14px;
-  line-height: 1.75;
-  text-align: right;
+  color: var(--muted, #686158);
 }
 .requests .card-grid--three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .requests .request-card {
@@ -686,8 +678,12 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (max-width: 640px) {
   .requests { padding: 68px 0 58px; }
   .requests .container { width: calc(100% - 36px); }
-  .requests .section-heading--split { grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
-  .requests .section-heading__aside { padding: 16px 0 0; border-left: 0; border-top: 1px solid rgba(184, 146, 91, .55); }
+  .requests .section-heading--split {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .requests .section-heading__aside { max-width: 620px; }
   .requests .card-grid--three { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .requests .request-card { min-height: 0; padding: 20px 16px; }
   .requests .request-card h3 { font-size: 18px; }
