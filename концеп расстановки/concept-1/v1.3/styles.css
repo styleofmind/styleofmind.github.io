@@ -1005,9 +1005,11 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   }
 }
 
-/* Certificate carousel arrows match the constellation photo gallery controls. */
+/* Certificate carousel arrows sit on the left and right of the active document. */
 .certificate-carousel {
+  display: grid;
   grid-template-columns: 46px minmax(0, 1fr) 46px;
+  align-items: center;
   gap: 12px;
 }
 .certificate-carousel__arrow {
