@@ -211,6 +211,7 @@
   const prev = section.querySelector('.certificate-carousel__arrow--prev');
   const next = section.querySelector('.certificate-carousel__arrow--next');
   const count = section.querySelector('.certificate-carousel__count');
+  const thumbnails = [...section.querySelectorAll('.certificate-thumbnail')];
   const dialog = section.querySelector('.certificate-lightbox');
   const largeImage = dialog.querySelector('.certificate-lightbox__image');
   const largeCount = dialog.querySelector('.certificate-lightbox__count');
@@ -220,6 +221,10 @@
     slides.forEach((slide, i) => {
       slide.classList.toggle('is-active', i === active);
       slide.setAttribute('aria-pressed', String(i === active));
+    });
+    thumbnails.forEach((thumbnail, i) => {
+      thumbnail.classList.toggle('is-active', i === active);
+      thumbnail.setAttribute('aria-pressed', String(i === active));
     });
     prev.disabled = active === 0;
     next.disabled = active === slides.length - 1;
@@ -235,6 +240,7 @@
     if (!dialog.open) dialog.showModal();
   };
   slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
+  thumbnails.forEach((thumbnail, i) => thumbnail.addEventListener('click', () => setActive(i)));
   prev.addEventListener('click', () => setActive(Math.max(0, active - 1)));
   next.addEventListener('click', () => setActive(Math.min(slides.length - 1, active + 1)));
   dialog.querySelector('.certificate-lightbox__close').addEventListener('click', () => dialog.close());
