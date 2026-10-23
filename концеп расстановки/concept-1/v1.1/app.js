@@ -202,7 +202,7 @@
 
 
 
-/* Галерея сертификатов */
+/* Галерея сертификатов: единое активное состояние для документа и миниатюры */
 (() => {
   const section = document.querySelector('.certificates-section');
   if (!section) return;
@@ -212,53 +212,104 @@
   const next = section.querySelector('.certificate-carousel__arrow--next');
   const thumbnails = [...section.querySelectorAll('.certificate-thumbnail')];
   const dialog = section.querySelector('.certificate-lightbox');
-  const largeImage = dialog.querySelector('.certificate-lightbox__image');
+  const largeImage = dialog?.querySelector('.certificate-lightbox__image');
+  if (!track || !slides.length || !prev || !next || !dialog || !largeImage) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
+  let scrollTimer = 0;
+  let programmaticScroll = false;
+
   const scrollThumbnailIntoView = thumbnail => {
     const container = section.querySelector('.certificate-thumbnails');
     if (!container || !thumbnail) return;
     const containerRect = container.getBoundingClientRect();
     const thumbnailRect = thumbnail.getBoundingClientRect();
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (thumbnailRect.left < containerRect.left) {
-      container.scrollBy({ left: thumbnailRect.left - containerRect.left - 8, behavior: reducedMotion ? 'auto' : 'smooth' });
-    } else if (thumbnailRect.right > containerRect.right) {
-      container.scrollBy({ left: thumbnailRect.right - containerRect.right + 8, behavior: reducedMotion ? 'auto' : 'smooth' });
-    }
+    let distance = 0;
+    if (thumbnailRect.left < containerRect.left) distance = thumbnailRect.left - containerRect.left - 8;
+    else if (thumbnailRect.right > containerRect.right) distance = thumbnailRect.right - containerRect.right + 8;
+    if (distance) container.scrollBy({ left: distance, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
   };
-  const setActive = (index, scroll = true) => {
-    active = (index + slides.length) % slides.length;
+
+  const syncActive = index => {
+    active = Math.max(0, Math.min(slides.length - 1, index));
     slides.forEach((slide, i) => {
-      slide.classList.toggle('is-active', i === active);
-      slide.setAttribute('aria-pressed', String(i === active));
+      const selected = i === active;
+      slide.classList.toggle('is-active', selected);
+      slide.setAttribute('aria-pressed', String(selected));
     });
     thumbnails.forEach((thumbnail, i) => {
-      thumbnail.classList.toggle('is-active', i === active);
-      thumbnail.setAttribute('aria-pressed', String(i === active));
+      const selected = i === active;
+      thumbnail.classList.toggle('is-active', selected);
+      thumbnail.setAttribute('aria-pressed', String(selected));
     });
-    scrollThumbnailIntoView(thumbnails[active]);
     prev.disabled = active === 0;
     next.disabled = active === slides.length - 1;
-    if (scroll) slides[active].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+    scrollThumbnailIntoView(thumbnails[active]);
   };
+
+  const setActive = (index, scrollSlide = true) => {
+    const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
+    syncActive(nextIndex);
+    if (scrollSlide) {
+      programmaticScroll = true;
+      track.scrollTo({
+        left: slides[active].offsetLeft,
+        behavior: reducedMotion.matches ? 'auto' : 'smooth'
+      });
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => { programmaticScroll = false; }, reducedMotion.matches ? 0 : 450);
+    }
+  };
+
+  const syncFromTrack = () => {
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(() => {
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let nearestIndex = 0;
+      let nearestDistance = Infinity;
+      slides.forEach((slide, index) => {
+        const rect = slide.getBoundingClientRect();
+        const distance = Math.abs(rect.left + rect.width / 2 - trackCenter);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestIndex = index;
+        }
+      });
+      programmaticScroll = false;
+      syncActive(nearestIndex);
+    }, 90);
+  };
+
   const showLarge = index => {
-    setActive(index, false);
+    setActive(index);
     const image = slides[active].querySelector('img');
-    largeImage.src = image.src;
+    if (!image) return;
+    largeImage.src = image.currentSrc || image.src;
     largeImage.alt = image.alt;
     if (!dialog.open) dialog.showModal();
   };
+
   slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
   thumbnails.forEach((thumbnail, i) => thumbnail.addEventListener('click', () => setActive(i)));
-  prev.addEventListener('click', () => setActive(Math.max(0, active - 1)));
-  next.addEventListener('click', () => setActive(Math.min(slides.length - 1, active + 1)));
-  dialog.querySelector('.certificate-lightbox__close').addEventListener('click', () => dialog.close());
-  dialog.querySelector('.certificate-lightbox__arrow--prev').addEventListener('click', () => showLarge(Math.max(0, active - 1)));
-  dialog.querySelector('.certificate-lightbox__arrow--next').addEventListener('click', () => showLarge(Math.min(slides.length - 1, active + 1)));
+  prev.addEventListener('click', () => setActive(active - 1));
+  next.addEventListener('click', () => setActive(active + 1));
+  track.addEventListener('scroll', syncFromTrack, { passive: true });
+  track.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); setActive(active - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); setActive(active + 1); }
+    if (event.key === 'Home') { event.preventDefault(); setActive(0); }
+    if (event.key === 'End') { event.preventDefault(); setActive(slides.length - 1); }
+  });
+
+  dialog.querySelector('.certificate-lightbox__close')?.addEventListener('click', () => dialog.close());
+  dialog.querySelector('.certificate-lightbox__arrow--prev')?.addEventListener('click', () => showLarge(active - 1));
+  dialog.querySelector('.certificate-lightbox__arrow--next')?.addEventListener('click', () => showLarge(active + 1));
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
   dialog.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); showLarge(Math.max(0, active - 1)); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); showLarge(Math.min(slides.length - 1, active + 1)); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); showLarge(active - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); showLarge(active + 1); }
   });
-  setActive(0, false);
+
+  syncActive(0);
 })();
