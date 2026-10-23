@@ -241,6 +241,11 @@
       const selected = i === active;
       slide.classList.toggle('is-active', selected);
       slide.setAttribute('aria-pressed', String(selected));
+      const image = slide.querySelector('img');
+      if (selected && image && image.dataset.carouselSrc) {
+        image.src = image.dataset.carouselSrc;
+        delete image.dataset.carouselSrc;
+      }
     });
     if (previousArrow) previousArrow.disabled = active <= 0;
     if (nextArrow) nextArrow.disabled = active >= slides.length - 1;
@@ -252,14 +257,12 @@
     const currentLabel = section.querySelector('[data-certificate-current]');
     const totalLabel = section.querySelector('[data-certificate-total]');
     const progress = section.querySelector('.certificate-gallery-status__progress');
-    const progressFill = section.querySelector('[data-certificate-progress]');
     if (currentLabel) currentLabel.textContent = String(active + 1);
     if (totalLabel) totalLabel.textContent = String(slides.length);
     if (progress) {
-      progress.setAttribute('aria-valuemax', String(slides.length));
-      progress.setAttribute('aria-valuenow', String(active + 1));
+      progress.max = slides.length;
+      progress.value = active + 1;
     }
-    if (progressFill) progressFill.style.transform = `scaleX(${(active + 1) / slides.length})`;
     scrollThumbnailIntoView(thumbnails[active]);
   };
 
@@ -291,7 +294,7 @@
     setActive(index);
     const image = slides[active].querySelector('img');
     if (!image) return;
-    largeImage.src = image.currentSrc || image.src;
+    largeImage.src = slides[active].dataset.fullSrc || image.currentSrc || image.src;
     largeImage.alt = image.alt;
     if (!dialog.open) dialog.showModal();
   };
@@ -338,6 +341,15 @@
     player.referrerPolicy = 'strict-origin-when-cross-origin';
     preview.replaceWith(player);
   }, { once: true });
+})();
+
+/* Close the compact navigation after an in-page destination is selected. */
+(() => {
+  const mobileMenu = document.querySelector('.mobile-menu');
+  if (!mobileMenu) return;
+  mobileMenu.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => { mobileMenu.open = false; });
+  });
 })();
 
 })();
