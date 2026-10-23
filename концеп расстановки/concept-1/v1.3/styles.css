@@ -147,7 +147,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .lotus-art span:nth-child(1){transform:translateX(-50%) rotate(0deg)}.lotus-art span:nth-child(2){transform:translateX(-50%) rotate(-27deg)}.lotus-art span:nth-child(3){transform:translateX(-50%) rotate(27deg)}.lotus-art span:nth-child(4){transform:translateX(-50%) rotate(-53deg) scale(.83)}.lotus-art span:nth-child(5){transform:translateX(-50%) rotate(53deg) scale(.83)}.lotus-art span:nth-child(6){transform:translateX(-50%) rotate(-77deg) scale(.62)}.lotus-art span:nth-child(7){transform:translateX(-50%) rotate(77deg) scale(.62)}.lotus-art span:nth-child(8){transform:translateX(-50%) rotate(90deg) scale(.48)}
 .lotus-art i{position:absolute;left:50%;bottom:10px;width:14px;height:14px;border-radius:50%;background:#e5c37f;transform:translateX(-50%);box-shadow:0 0 25px 8px rgba(217,180,92,.23)}
 .method-footnote{grid-column:1/-1;margin:10px 0 0;padding-top:16px;border-top:1px solid rgba(217,180,92,.18);font-size:11px;color:#aeb3b2;max-width:800px}
-.topics-section{padding:94px 0 100px}
+.topics-section:not(.requests){padding:94px 0 100px}
 .section-heading{max-width:730px;margin-bottom:38px}
 .section-heading .section-lead{max-width:690px}
 .section-lead{font-size:15px;line-height:1.65;color:#686b66;margin:0}
@@ -287,7 +287,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .hero h1{font-size:clamp(47px,12vw,68px)}.hero-lead{font-size:17px;max-width:440px}.hero-art{align-self:center;width:min(100%,290px);height:auto;max-width:290px;margin:10px auto 12px;transform:none}
   .hero-bottom{padding:0 0 17px;font-size:8px}.value-strip{padding:29px 0 33px}
   .value-grid{grid-template-columns:repeat(2,1fr);gap:27px 12px}.value-item{padding:0 5px}.value-item h2{font-size:17px}.value-item p{font-size:11px}
-  .about-section,.topics-section,.diagnostic-section,.reviews-section,.faq-section{padding:68px 0}
+  .about-section,.topics-section:not(.requests),.diagnostic-section,.reviews-section,.faq-section{padding:68px 0}
   .about-grid,.method-grid,.diagnostic-grid,.experience-grid,.faq-layout{grid-template-columns:1fr;gap:32px}
   .about-art{min-height:0;order:2}.arch-art{height:300px;width:min(80%,330px)}.about-copy{order:1}.about-quote{margin-top:25px}
   .section-title{font-size:clamp(33px,9vw,44px)}.intro-text{font-size:19px!important}
