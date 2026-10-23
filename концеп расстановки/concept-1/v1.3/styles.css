@@ -928,7 +928,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 
 
-/* Компоновка секции метода: заголовок и вводная слева, шаги ниже на всю ширину. */
+/* Компоновка секции метода: вводный блок по центру сверху, шаги и фотографии ниже. */
 .method-section .method-grid {
   grid-template-columns: minmax(0, 1fr);
   row-gap: 34px;
@@ -936,33 +936,39 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 .method-section .method-copy {
   position: relative;
-  max-width: 850px;
+  max-width: 900px;
   width: 100%;
-  margin: 0;
-  padding: 0 0 28px;
-  text-align: left;
+  margin: 0 auto;
+  padding: 0 0 30px;
+  text-align: center;
   border-right: 0;
-  border-bottom: 1px solid rgba(217, 180, 92, .22);
+  border-bottom: 1px solid rgba(217, 180, 92, .2);
+}
+.method-section .method-copy .method-label {
+  margin-bottom: 14px;
+  letter-spacing: .2em;
+  font-size: 10px;
 }
 .method-section .method-copy::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
   bottom: -1px;
-  width: 78px;
+  transform: translateX(-50%);
+  width: 72px;
   height: 2px;
-  background: linear-gradient(90deg, var(--gold, #c6a469), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold, #c6a469), transparent);
 }
 .method-section .method-copy .section-title {
-  margin-bottom: 18px;
-  font-size: clamp(38px, 4vw, 56px);
+  margin-bottom: 20px;
+  font-size: clamp(40px, 4.4vw, 58px);
 }
-.method-section .method-copy p:not(.eyebrow) {
-  max-width: 700px;
-  margin-left: 0;
-  margin-right: auto;
-  font-size: 16px;
-  line-height: 1.75;
+.method-section .method-copy .method-description {
+  max-width: 730px;
+  margin: 0 auto;
+  color: #d2d2cc;
+  font: clamp(17px, 1.8vw, 20px)/1.7 var(--serif);
+  text-wrap: balance;
 }
 .method-section .method-copy .method-intro-note {
   margin-top: 14px;
@@ -973,18 +979,30 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .method-principles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
 }
 .method-principles span {
-  padding: 8px 11px;
-  border: 1px solid rgba(217, 180, 92, .28);
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px;
+  border: 1px solid rgba(217, 180, 92, .22);
+  border-radius: 3px;
   color: #e7d4ad;
   font-size: 11px;
-  letter-spacing: .025em;
-  background: rgba(217, 180, 92, .055);
+  letter-spacing: .07em;
+  background: linear-gradient(135deg, rgba(217, 180, 92, .07), rgba(217, 180, 92, .015));
+}
+.method-principles span::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  flex: 0 0 4px;
+  border-radius: 50%;
+  background: var(--gold, #c6a469);
+  box-shadow: 0 0 8px rgba(217, 180, 92, .3);
 }
 .method-section .method-steps-wrap {
   min-width: 0;
@@ -993,7 +1011,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 .method-section .method-steps-title {
   margin-bottom: 24px;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 640px) {
   .method-section { padding: 68px 0 58px; }
