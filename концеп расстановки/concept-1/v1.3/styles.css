@@ -628,9 +628,12 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 /* Блок запросов, перенесённый из v4.1 */
 .requests {
   padding: 78px 0 72px;
-  background: linear-gradient(rgba(251,249,246,.14), rgba(251,249,246,.32)), #f5f1e9;
+  background-color: #fbf9f6;
+  background-image: linear-gradient(rgba(251,249,246,.13), rgba(251,249,246,.32)), url("../../concept-4/v4.1/assets/backgrounds/section-05.jpg");
+  background-position: center;
+  background-size: cover;
 }
-.requests .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+.requests .container { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
 .requests .section-heading--split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr);
