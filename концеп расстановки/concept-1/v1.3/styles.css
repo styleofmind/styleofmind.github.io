@@ -111,11 +111,6 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .text-link:hover{color:#9a742e}
 .about-quote{margin:38px 0 0 auto;max-width:330px;padding-left:20px;border-left:1px solid var(--gold);font:italic 17px/1.5 var(--serif);color:#8b744d}
 .method-section{padding:100px 0 84px;background:radial-gradient(ellipse at 87% 52%,rgba(166,120,65,.17),transparent 34%),linear-gradient(110deg,#111923,#17212b 55%,#131b25)}
-.method-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:42px 100px;align-items:center;position:relative;z-index:1}
-.method-copy{max-width:535px}
-.method-copy .section-title{max-width:570px}
-.method-copy p:not(.eyebrow){color:#c9cbc6;font-size:14px;max-width:520px}
-.method-copy .button{margin-top:17px}
 .method-steps{display:grid;gap:17px;position:relative;z-index:2}
 .method-step{display:grid;grid-template-columns:50px 1fr;align-items:center;gap:17px;padding-bottom:14px;border-bottom:1px solid rgba(217,180,92,.16)}
 .method-step:last-child{border-bottom:0}
@@ -867,19 +862,22 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 }
 
 
-/* Компоновка секции метода: вводный блок по центру сверху, шаги и фотографии ниже. */
+/* Секция метода: вводный текст выровнен слева, ниже идут шаги и фотографии. */
 .method-section .method-grid {
+  display: grid;
   grid-template-columns: minmax(0, 1fr);
-  row-gap: 34px;
+  gap: 34px;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
 .method-section .method-copy {
   position: relative;
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding: 0 0 30px;
-  text-align: center;
+  text-align: left;
   border-right: 0;
   border-bottom: 1px solid rgba(217, 180, 92, .2);
 }
@@ -891,20 +889,21 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .method-section .method-copy::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: 0;
   bottom: -1px;
-  transform: translateX(-50%);
+  transform: none;
   width: 72px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold, #c6a469), transparent);
+  background: linear-gradient(90deg, var(--gold, #c6a469), transparent);
 }
 .method-section .method-copy .section-title {
+  max-width: 570px;
   margin-bottom: 20px;
   font-size: clamp(40px, 4.4vw, 58px);
 }
 .method-section .method-copy .method-description {
   max-width: 730px;
-  margin: 0 auto;
+  margin: 0;
   color: #d2d2cc;
   font: clamp(17px, 1.8vw, 20px)/1.7 var(--serif);
   text-wrap: balance;
@@ -918,7 +917,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .method-principles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-top: 25px;
 }
