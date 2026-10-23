@@ -1338,3 +1338,14 @@ h3,
     margin-top: 24px;
   }
 }
+
+
+/* Пометка демонстрационных карточек отзывов до замены реальными отзывами. */
+.review-card--sample footer {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+}
+.review-card--sample footer span {
+  line-height: 1.4;
+}
