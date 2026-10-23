@@ -367,3 +367,19 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 .hero-v41__portrait .hero-video-preview:focus-visible{outline:3px solid var(--gold-light);outline-offset:-5px}
 .hero-v41__portrait .hero-video{position:absolute;inset:0;z-index:4;display:block;width:100%;height:100%;border:0;border-radius:0;background:#111923}
 @media(prefers-reduced-motion:reduce){.hero-v41__portrait .hero-video-play,.hero-v41__portrait .hero-video-play>span{transition:none}}
+
+
+/* Desktop hero: reduce the first-screen height without changing its copy or mobile layout. */
+@media (min-width: 761px) {
+  .hero-v41 { min-height: clamp(500px, 43vw, 620px); }
+  .hero-v41__grid { min-height: calc(clamp(500px, 43vw, 620px) - 42px); }
+  .hero-v41__copy { padding-top: 22px; padding-bottom: 34px; }
+  .hero-v41__copy h1 { margin-bottom: 18px; }
+  .hero-v41 .hero-lead { margin-bottom: 16px; line-height: 1.7; }
+  .hero-v41 .hero-note { margin-top: 18px; }
+  .hero-v41__portrait { min-height: 350px; }
+  .hero-v41__portrait img { max-height: 520px; }
+  .hero-v41__aside { padding-top: 20px; padding-bottom: 26px; }
+  .hero-v41__aside p { font-size: 1.18rem; }
+  .hero-v41__bottom { padding-bottom: 16px; }
+}
