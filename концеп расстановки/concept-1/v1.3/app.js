@@ -328,3 +328,24 @@
 
   syncActive(0);
 })();
+
+
+/* Видео в первом экране: сначала выглядит как портретная фотография, плеер загружается по нажатию. */
+(() => {
+  const preview = document.getElementById('hero-kinescope-preview');
+  if (!preview) return;
+  preview.addEventListener('click', () => {
+    const src = preview.dataset.videoSrc;
+    if (!src) return;
+    const player = document.createElement('iframe');
+    player.className = 'hero-video';
+    player.id = 'hero-kinescope-player';
+    player.src = src;
+    player.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
+    player.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
+    player.allowFullscreen = true;
+    player.loading = 'eager';
+    player.referrerPolicy = 'strict-origin-when-cross-origin';
+    preview.replaceWith(player);
+  }, { once: true });
+})();
