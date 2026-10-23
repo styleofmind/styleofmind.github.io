@@ -214,6 +214,18 @@
   const dialog = section.querySelector('.certificate-lightbox');
   const largeImage = dialog.querySelector('.certificate-lightbox__image');
   let active = 0;
+  const scrollThumbnailIntoView = thumbnail => {
+    const container = section.querySelector('.certificate-thumbnails');
+    if (!container || !thumbnail) return;
+    const containerRect = container.getBoundingClientRect();
+    const thumbnailRect = thumbnail.getBoundingClientRect();
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (thumbnailRect.left < containerRect.left) {
+      container.scrollBy({ left: thumbnailRect.left - containerRect.left - 8, behavior: reducedMotion ? 'auto' : 'smooth' });
+    } else if (thumbnailRect.right > containerRect.right) {
+      container.scrollBy({ left: thumbnailRect.right - containerRect.right + 8, behavior: reducedMotion ? 'auto' : 'smooth' });
+    }
+  };
   const setActive = (index, scroll = true) => {
     active = (index + slides.length) % slides.length;
     slides.forEach((slide, i) => {
@@ -224,6 +236,7 @@
       thumbnail.classList.toggle('is-active', i === active);
       thumbnail.setAttribute('aria-pressed', String(i === active));
     });
+    scrollThumbnailIntoView(thumbnails[active]);
     prev.disabled = active === 0;
     next.disabled = active === slides.length - 1;
     if (scroll) slides[active].scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
