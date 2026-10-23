@@ -427,3 +427,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
     max-width: 100%;
   }
 }
+
+/* Wide desktop: keep the hero portrait visually balanced instead of drifting toward the right edge. */
+@media (min-width: 1101px) {
+  .hero-art { transform: translateX(-28px); }
+}
