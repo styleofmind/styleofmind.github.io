@@ -888,3 +888,16 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .requests .request-card { transition: none; }
   .requests .request-card:hover { transform: none; }
 }
+
+
+/* Заголовок внутри колонки с карточками метода */
+.method-steps-wrap { min-width: 0; }
+.method-steps-title {
+  margin: 0 0 22px;
+  color: #fffaf1;
+  font: 400 clamp(25px, 2.5vw, 34px)/1.2 var(--serif, Georgia, serif);
+  letter-spacing: -.015em;
+}
+@media (max-width: 760px) {
+  .method-steps-title { margin-bottom: 16px; font-size: 25px; }
+}
