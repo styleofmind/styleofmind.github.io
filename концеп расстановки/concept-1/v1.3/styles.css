@@ -693,3 +693,20 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
 @media (max-width: 420px) {
   .requests .card-grid--three { grid-template-columns: 1fr; }
 }
+
+
+/* Подпись «Как проходит расстановка» оформлена как компактная кнопка-метка */
+.method-copy .method-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 9px 15px;
+  margin: 0 0 18px;
+  border: 1px solid rgba(198, 164, 105, .7);
+  border-radius: 999px;
+  color: var(--gold, #c6a469);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
