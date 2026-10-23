@@ -1013,6 +1013,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   gap: 12px;
 }
 .certificate-carousel__arrow {
+  position: relative;
+  z-index: 2;
   width: 46px;
   height: 46px;
   padding: 0;
@@ -1023,6 +1025,13 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   font-size: 30px;
   line-height: 1;
   box-shadow: 0 8px 22px rgba(0, 0, 0, .22);
+}
+/* Увеличенная область нажатия на 50% без изменения видимого размера кнопок. */
+.certificate-carousel__arrow::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: inherit;
 }
 .certificate-carousel__arrow:hover:not(:disabled) {
   background: rgba(17, 25, 35, .78);
