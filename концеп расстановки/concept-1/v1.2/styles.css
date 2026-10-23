@@ -22,7 +22,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid #94702d;outline-offset:4
 .site-header{height:78px;position:sticky;top:0;z-index:50;background:rgba(17,25,35,.94);color:var(--white);border-bottom:1px solid rgba(217,180,92,.12);backdrop-filter:blur(14px)}
 .header-inner{width:min(1280px,calc(100% - 56px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.brand-star{font-size:34px;line-height:1;color:var(--gold);text-shadow:0 0 18px rgba(217,180,92,.5);font-weight:400}
+.brand-star{display:block;width:34px;height:41px;flex:0 0 auto;line-height:0}.brand-star img{display:block;width:100%;height:100%;object-fit:contain}
 .brand-copy{display:flex;flex-direction:column;line-height:1.05}
 .brand-name{font:27px/1 var(--serif);letter-spacing:.02em}
 .brand-subtitle{margin-top:6px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#c8c5bc}
@@ -200,7 +200,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid #94702d;outline-offset:4
 .final-orbit{position:absolute;width:760px;height:240px;left:50%;bottom:-120px;transform:translateX(-50%) rotate(-12deg);border:1px solid rgba(217,180,92,.12);border-radius:50%;pointer-events:none}
 .site-footer{background:#0d141c;color:#c5c4bd;border-top:1px solid rgba(217,180,92,.14);padding:23px 0 15px}
 .footer-inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px 25px}
-.footer-brand .brand-name{font-size:22px}.footer-brand .brand-star{font-size:27px}
+.footer-brand .brand-name{font-size:22px}.footer-brand .brand-star{width:27px;height:32.4px}
 .site-footer nav{display:flex;gap:20px;flex-wrap:wrap;font-size:11px}
 .footer-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-size:10px;color:#969b98}
 .footer-meta a{color:#e6d2a5}
@@ -259,7 +259,7 @@ div[class*="dikidi-"][class*="-modal"] div[class*="-close"]{display:grid!importa
 }
 @media (max-width:720px){
   html{scroll-padding-top:72px}.site-header{height:68px}.desktop-nav,.header-booking{display:none}.mobile-menu{display:block}
-  .brand-name{font-size:23px}.brand-star{font-size:29px}.page-width{width:calc(100% - 38px)}
+  .brand-name{font-size:23px}.brand-star{width:29px;height:35px}.page-width{width:calc(100% - 38px)}
   .hero{min-height:0}.hero-inner{grid-template-columns:1fr;min-height:0;gap:0}.hero-copy{padding:70px 0 10px;max-width:560px}
   .hero h1{font-size:clamp(47px,12vw,68px)}.hero-lead{font-size:17px;max-width:440px}.hero-art{height:280px;width:100%;max-width:480px;margin:-10px auto 0;overflow:hidden}
   .hero-art svg{width:100%;height:340px}.hero-art-caption{bottom:14px;right:4px;font-size:10px}
