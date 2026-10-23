@@ -510,3 +510,18 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
  .certificate-lightbox__arrow--prev{left:2px}.certificate-lightbox__arrow--next{right:2px}
 }
 @media(prefers-reduced-motion:reduce){.certificate-slide,.certificate-carousel__track{transition:none;scroll-behavior:auto}}
+
+/* Портретное видео в hero: до нажатия выглядит как аккуратная фотография. */
+.hero-art{width:min(100%,290px);aspect-ratio:9/16;height:auto;align-self:end;justify-self:center;overflow:hidden;border-radius:22px;isolation:isolate;box-shadow:0 16px 46px rgba(0,0,0,.24);background:#111923}
+.hero-art .hero-video-preview{position:absolute;inset:0;z-index:3;display:block;width:100%;height:100%;margin:0;padding:0;overflow:hidden;border:0;border-radius:inherit;background:#111923;cursor:pointer}
+.hero-art .hero-video-poster{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;filter:none;-webkit-mask-image:none;mask-image:none}
+.hero-art .hero-video-play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(17,25,35,.02),rgba(17,25,35,.2));transition:background .2s ease}
+.hero-art .hero-video-play>span{position:relative;display:block;width:62px;height:62px;border:1px solid rgba(255,250,241,.85);border-radius:50%;background:rgba(17,25,35,.58);box-shadow:0 5px 24px rgba(0,0,0,.25);transition:transform .2s ease}
+.hero-art .hero-video-play>span:after{position:absolute;top:50%;left:53%;content:"";transform:translate(-35%,-50%);border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid #fffaf1}
+.hero-art .hero-video-preview:hover .hero-video-play{background:rgba(17,25,35,.08)}
+.hero-art .hero-video-preview:hover .hero-video-play>span{transform:scale(1.06)}
+.hero-art .hero-video-preview:focus-visible{outline:3px solid var(--gold-light);outline-offset:-5px}
+.hero-art .hero-video{position:absolute;inset:0;z-index:4;display:block;width:100%;height:100%;border:0;border-radius:inherit;background:#111923}
+@media(max-width:720px){.hero-art{width:min(100%,290px);margin:10px auto 12px;transform:none;align-self:center}}
+@media(prefers-reduced-motion:reduce){.hero-art .hero-video-play,.hero-art .hero-video-play>span{transition:none}}
+
