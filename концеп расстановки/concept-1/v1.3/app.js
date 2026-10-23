@@ -1,3 +1,8 @@
+/* Защита от повторной инициализации: при повторном подключении app.js обработчики не дублируются. */
+(function () {
+  const key = '__styleOfMindV13AppInitialized';
+  if (window[key]) return;
+  window[key] = true;
 /* Поведение страницы «Расставить точки над МЫ». */
 
 /* Всплывающее предложение диагностики */
@@ -343,4 +348,6 @@
     player.referrerPolicy = 'strict-origin-when-cross-origin';
     preview.replaceWith(player);
   }, { once: true });
+})();
+
 })();
