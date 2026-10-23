@@ -383,3 +383,12 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offs
   .hero-v41__aside p { font-size: 1.18rem; }
   .hero-v41__bottom { padding-bottom: 16px; }
 }
+
+/* Desktop: show more of the video portrait in the preview instead of cropping it tightly. */
+@media (min-width: 761px) {
+  .hero-v41__portrait .hero-video-poster {
+    object-fit: contain;
+    object-position: center center;
+    background: #111923;
+  }
+}
