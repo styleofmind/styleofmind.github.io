@@ -14,7 +14,7 @@ Install or restore the Python dependencies:
 Run the existing responsive smoke test (Chromium, four viewport sizes, screenshots and JSON report):
 
 ```powershell
-.\.venv\Scripts\python.exe .\tools\site_tools.py audit --page 'концеп расстановки/concept-4/v4.1/index.html' --out-dir "$env:TEMP\styleofmind-audit"
+.\.venv\Scripts\python.exe .\tools\site_tools.py audit --page 'концеп расстановки/concept-1/v1.3/index.html' --out-dir "$env:TEMP\styleofmind-audit-v1.3"
 ```
 
 The Python image stack includes Pillow, OpenCV, scikit-image, ImageHash, imageio, NumPy, SciPy, and pandas for image validation, dimensions, similarity/duplicate analysis, image processing and tabular reports. `exifread` reads photo metadata. `pytesseract` connects to the Tesseract OCR executable installed at `C:\Program Files\Tesseract-OCR\tesseract.exe`; the `eng` and `rus` language data are available.
@@ -32,6 +32,9 @@ Install/update these tools with:
 
 ```powershell
 npm install --global lighthouse html-validate stylelint stylelint-config-standard axe-core
+
+# Local module dependencies for tools/site_browser_audit.mjs; not used by the published site
+npm install --no-save --no-package-lock playwright axe-core lighthouse
 ```
 
 Example Lighthouse report (save it outside the repository):
@@ -43,7 +46,7 @@ lighthouse 'https://styleofmind.github.io/' --output html --output-path "$env:TE
 HTML validation example:
 
 ```powershell
-html-validate '.\концеп расстановки\concept-4\v4.1\index.html'
+html-validate '.\концеп расстановки\concept-1\v1.3\index.html'
 ```
 
 For Stylelint, the project stylesheet should be checked using the `stylelint-config-standard` configuration; CSS lint rules may need tailoring where a stylesheet intentionally uses a project-specific pattern.

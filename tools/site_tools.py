@@ -15,7 +15,7 @@ from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PAGE = "концеп расстановки/concept-1/v1.2/index.html"
+DEFAULT_PAGE = "концеп расстановки/concept-1/v1.3/index.html"
 DEFAULT_REPORT_DIR = PROJECT_ROOT / "site-audit"
 VIEWPORTS = [
     ("desktop", 1440, 900),
@@ -149,7 +149,7 @@ def run_audit(page_arg: str, out_arg: str) -> int:
                         setTimeout(done, 8000);
                     })));
                 }""")
-                screenshot = out_dir / f"concept-v1.2-{label}.png"
+                screenshot = out_dir / f"{page_file.parent.name}-{label}.png"
                 page.screenshot(path=str(screenshot), full_page=True)
 
                 details = page.evaluate("""() => {
@@ -237,7 +237,7 @@ def main() -> int:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     preview = subparsers.add_parser("preview", help="serve a local page and open it in the default browser")
-    preview.add_argument("--page", default="концеп расстановки/concept-1/v1.2", help="site directory or HTML file, relative to the project root")
+    preview.add_argument("--page", default="концеп расстановки/concept-1/v1.3", help="site directory or HTML file, relative to the project root")
     preview.add_argument("--port", type=int, default=8000, help="local HTTP port (default: 8000)")
 
     audit = subparsers.add_parser("audit", help="check layout in Chromium and save screenshots plus a JSON report")
