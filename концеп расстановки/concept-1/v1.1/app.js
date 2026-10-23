@@ -199,19 +199,4 @@
     })();
 
 
-/* Обложка видео: загружаем плеер только после нажатия. */
-(() => {
-  const preview = document.querySelector('.hero-video-preview');
-  if (!preview) return;
-  preview.addEventListener('click', () => {
-    const frame = document.createElement('iframe');
-    frame.className = 'hero-video';
-    frame.src = 'https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA?autoplay=1';
-    frame.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
-    frame.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
-    frame.allowFullscreen = true;
-    frame.loading = 'eager';
-    frame.referrerPolicy = 'strict-origin-when-cross-origin';
-    preview.replaceWith(frame);
-  }, { once: true });
-})();
+
