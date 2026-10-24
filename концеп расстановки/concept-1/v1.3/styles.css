@@ -1267,3 +1267,11 @@ h3,
   color: #656760;
 }
 
+/* Карточки тем: немного компактнее текст описаний на телефонах. */
+@media (max-width: 640px) {
+  .requests .request-card p {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+}
+
