@@ -1257,3 +1257,13 @@ h3,
   }
 }
 
+/* Дополнительные темы обращения — оформление перенесено из v1.1. */
+.topics-note {
+  margin: 25px 0 0;
+  padding: 16px 20px;
+  border-left: 2px solid var(--gold);
+  background: rgba(255, 255, 255, .35);
+  font-size: 12px;
+  color: #656760;
+}
+
