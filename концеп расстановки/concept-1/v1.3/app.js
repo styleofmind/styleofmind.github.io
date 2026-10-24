@@ -5,6 +5,20 @@
   window[key] = true;
 /* Поведение страницы «Расставить точки над МЫ». */
 
+/* Telegram: сообщения хранятся читаемым русским текстом в HTML.
+   При загрузке страницы кодируем их для параметра text в ссылке Telegram. */
+(() => {
+  const telegramLinks = document.querySelectorAll('a[data-telegram-message]');
+
+  telegramLinks.forEach(link => {
+    const message = link.dataset.telegramMessage;
+    if (!message) return;
+
+    link.href = `https://t.me/olga_styleofmind?text=${encodeURIComponent(message)}`;
+  });
+})();
+
+
 /* Всплывающее предложение диагностики */
 (() => {
       const popup = document.getElementById('diagnosticOfferPopup');
