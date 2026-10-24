@@ -2319,8 +2319,6 @@ summary:focus-visible {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-}
 
 /* Галерея сертификатов, перенесённая из v1.1 */
 
