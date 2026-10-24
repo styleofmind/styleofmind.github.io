@@ -26,7 +26,7 @@
   let gtmLoaded = false;
 
   const validConsent = (value) =>
-    value === CONSENT_ACCEPTED || value === CONSENT_ESSENTIAL ? value : null;
+  value === CONSENT_ACCEPTED || value === CONSENT_ESSENTIAL ? value : null;
 
   function readConsent() {
     let storageValue = null;
@@ -68,15 +68,15 @@
     try {
       const secure = location.protocol === 'https:' ? '; Secure' : '';
       document.cookie = CONFIG.consentKey + '=' + encodeURIComponent(value) +
-        '; Max-Age=' + Math.floor(CONSENT_LIFETIME_MS / 1000) +
-        '; Path=/; SameSite=Lax' + secure;
+      '; Max-Age=' + Math.floor(CONSENT_LIFETIME_MS / 1000) +
+      '; Path=/; SameSite=Lax' + secure;
     } catch (_) {}
   }
 
   function clearAnalyticsCookies() {
     const names = document.cookie.split(';')
-      .map((item) => item.split('=')[0].trim())
-      .filter((name) => /^(_ga(?:_|$)|_gid$|_gat(?:_|$)|_gcl_|_gac_|_ym(?:_|$|\d))/.test(name));
+    .map((item) => item.split('=')[0].trim())
+    .filter((name) => /^(_ga(?:_|$)|_gid$|_gat(?:_|$)|_gcl_|_gac_|_ym(?:_|$|\d))/.test(name));
     const paths = new Set(['/']);
     let current = '';
     location.pathname.split('/').filter(Boolean).forEach((part) => {
@@ -89,7 +89,7 @@
       document.cookie = name + '=; Max-Age=0; Path=' + path + '; SameSite=Lax' + secure;
       try {
         document.cookie = name + '=; Max-Age=0; Path=' + path +
-          '; Domain=' + location.hostname + '; SameSite=Lax' + secure;
+        '; Domain=' + location.hostname + '; SameSite=Lax' + secure;
       } catch (_) {}
     }));
     try {
@@ -115,7 +115,7 @@
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' +
-      encodeURIComponent(CONFIG.googleAnalyticsId);
+    encodeURIComponent(CONFIG.googleAnalyticsId);
     script.onerror = () => {
       googleLoaded = false;
       console.warn('[analytics] Не удалось загрузить Google Analytics.');
@@ -134,7 +134,7 @@
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtm.js?id=' +
-      encodeURIComponent(CONFIG.googleTagManagerId);
+    encodeURIComponent(CONFIG.googleTagManagerId);
     script.onerror = () => {
       gtmLoaded = false;
       console.warn('[analytics] Не удалось загрузить Google Tag Manager.');
@@ -154,7 +154,7 @@
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://mc.yandex.ru/metrika/tag.js?id=' +
-      encodeURIComponent(CONFIG.yandexMetrikaId);
+    encodeURIComponent(CONFIG.yandexMetrikaId);
     script.onerror = () => {
       yandexLoaded = false;
       window['disableYaCounter' + CONFIG.yandexMetrikaId] = true;
