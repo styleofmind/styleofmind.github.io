@@ -20,7 +20,7 @@
   let googleConsentInitialized = false;
 
   const validConsent = (value) =>
-    value === 'all' || value === 'essential' ? value : null;
+  value === 'all' || value === 'essential' ? value : null;
 
   const readConsent = () => {
     let localValue = null;
@@ -232,8 +232,8 @@
       }
 
       const telegramLink = target && target.closest
-        ? target.closest('a[href*="t.me/olgastyleofmind"]')
-        : null;
+      ? target.closest('a[href*="t.me/olgastyleofmind"]')
+      : null;
       if (telegramLink) {
         const telegramSection = telegramLink.closest('section,footer');
         track('telegram_click', {
