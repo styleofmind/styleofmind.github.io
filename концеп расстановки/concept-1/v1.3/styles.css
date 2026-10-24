@@ -1147,3 +1147,88 @@ h3,
     line-height: 1.85;
   }
 }
+
+
+/* Композиция блока расстановки: общий центр, этапы в сбалансированной сетке. */
+.method-section .method-copy {
+  max-width: 900px;
+  margin-inline: auto;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.method-section .method-copy::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.method-section .method-copy .section-title,
+.method-section .method-copy .method-description,
+.method-section .method-copy .method-intro-note {
+  max-width: 780px;
+  margin-inline: auto;
+}
+.method-section .method-copy .section-title {
+  margin-bottom: 20px;
+}
+.method-section .method-copy .method-intro-note {
+  margin-top: 14px;
+}
+.method-section .method-steps-wrap {
+  max-width: 1080px;
+  margin-inline: auto;
+}
+.method-section .method-steps-title {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  justify-content: center;
+  margin: 0 auto 26px;
+}
+.method-section .method-steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.method-section .method-step {
+  min-width: 0;
+  height: 100%;
+  padding: 20px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+}
+.method-section .method-step p {
+  max-width: none;
+}
+.method-section .process-photo-gallery {
+  margin-top: 28px;
+}
+@media (max-width: 760px) {
+  .method-section .method-copy {
+    text-align: left;
+  }
+  .method-section .method-copy::after {
+    left: 0;
+    transform: none;
+  }
+  .method-section .method-copy .section-title,
+  .method-section .method-copy .method-description,
+  .method-section .method-copy .method-intro-note {
+    max-width: none;
+  }
+  .method-section .method-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .method-section .method-step {
+    padding: 15px 14px;
+  }
+  .method-section .method-steps-title {
+    margin-bottom: 18px;
+  }
+  .method-section .process-photo-gallery {
+    margin-top: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-section .method-steps-title::after {
+    transition: none;
+  }
+}
