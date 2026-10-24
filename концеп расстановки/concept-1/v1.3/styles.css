@@ -1232,3 +1232,28 @@ h3,
     transition: none;
   }
 }
+
+/* Разделяем определение метода и описание процесса мягким акцентом. */
+.method-section .method-copy .method-description--detail {
+  margin-top: 22px;
+  padding-top: 18px;
+}
+.method-section .method-copy .method-description--detail::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: 0 auto 14px;
+  background: linear-gradient(90deg, var(--gold, #c6a469), rgba(217, 180, 92, .18));
+}
+@media (max-width: 760px) {
+  .method-section .method-copy .method-description--detail {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+  .method-section .method-copy .method-description--detail::before {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
