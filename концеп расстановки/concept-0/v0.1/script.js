@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       const secure = window.location.protocol === 'https:' ? '; Secure' : '';
       document.cookie = COOKIE_KEY + '=' + encodeURIComponent(value) +
-        '; max-age=15552000; path=/; SameSite=Lax' + secure;
+      '; max-age=15552000; path=/; SameSite=Lax' + secure;
     } catch(e) {}
   };
 
