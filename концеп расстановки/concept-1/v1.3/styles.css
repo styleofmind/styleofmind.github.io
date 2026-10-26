@@ -1549,6 +1549,30 @@ summary:focus-visible {
   max-width: 720px;
 }
 
+.faq-list details ul {
+  max-width: 720px;
+  margin: 0 0 18px;
+  padding-left: 21px;
+  color: #646a65;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.faq-list details li {
+  padding-left: 3px;
+  margin: 0 0 7px;
+}
+
+.faq-list details li:last-child {
+  margin-bottom: 0;
+}
+
+.faq-list details p strong,
+.faq-list details li strong {
+  color: #414a45;
+  font-weight: 600;
+}
+
 .final-section {
   padding: 100px 0 90px;
   text-align: center;
