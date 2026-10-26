@@ -2231,6 +2231,17 @@ summary:focus-visible {
   user-select: none;
 }
 
+
+/* Portrait photos of figurines are rotated left for landscape display.
+   The original image files remain unchanged. */
+.process-photo-gallery__track img.process-photo-gallery__image--rotated {
+  flex-basis: 350px;
+  width: 220px;
+  height: 350px;
+  object-fit: contain;
+  transform: rotate(-90deg);
+}
+
 .process-photo-gallery__track img {
   display: block;
   flex: 0 0 clamp(270px, 28vw, 350px);
@@ -2300,6 +2311,13 @@ summary:focus-visible {
     flex-basis: 78vw;
     width: 78vw;
     height: 190px;
+  }
+
+  .process-photo-gallery__track img.process-photo-gallery__image--rotated {
+    flex-basis: 78vw;
+    width: 190px;
+    height: 78vw;
+    object-fit: contain;
   }
 
   .process-photo-gallery__arrow {
