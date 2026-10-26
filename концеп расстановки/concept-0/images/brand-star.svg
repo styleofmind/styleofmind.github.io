@@ -43,7 +43,9 @@
     .brand-main-star {
       transform-box: fill-box;
       transform-origin: center;
-      animation: brand-star-glow 5.5s ease-in-out infinite;
+      animation:
+        brand-star-appear .9s cubic-bezier(.2, .75, .25, 1) both,
+        brand-star-glow 5.5s ease-in-out 1s infinite;
     }
 
     .brand-sparkle {
@@ -59,6 +61,11 @@
     @keyframes brand-halo-breathe {
       0%, 100% { opacity: .62; }
       50% { opacity: 1; }
+    }
+
+    @keyframes brand-star-appear {
+      0% { opacity: 0; transform: scale(.82); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     @keyframes brand-star-glow {
