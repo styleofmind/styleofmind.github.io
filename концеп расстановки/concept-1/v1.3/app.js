@@ -6,6 +6,20 @@
 
   /* Поведение страницы «Расставить точки над МЫ». */
 
+  /* Во время загрузки показываем мягко пульсирующий фавикон, после полной загрузки — статичный. */
+  (() => {
+    const icon = document.querySelector('link[rel="icon"]');
+    if (!icon) return;
+    const showStaticIcon = () => {
+      icon.href = new URL('favicon.svg', document.baseURI).href;
+    };
+    if (document.readyState === 'complete') {
+      showStaticIcon();
+    } else {
+      window.addEventListener('load', showStaticIcon, { once: true });
+    }
+  })();
+
   /* Telegram: сообщения хранятся читаемым русским текстом в HTML.
    При загрузке страницы кодируем их для параметра text в ссылке Telegram. */
 
