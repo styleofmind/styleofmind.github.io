@@ -14,13 +14,62 @@
     <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="3.2"/>
     </filter>
+    <filter id="soft-glow-strong" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4.6"/>
+    </filter>
   </defs>
+  <style>
+    .brand-halo {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: brand-halo-breathe 5.5s ease-in-out infinite;
+    }
+
+    .brand-main-star {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: brand-star-glow 5.5s ease-in-out infinite;
+    }
+
+    .brand-sparkle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: brand-sparkle-twinkle 4.8s ease-in-out infinite;
+    }
+
+    .brand-sparkle-last {
+      animation-delay: 1.4s;
+    }
+
+    @keyframes brand-halo-breathe {
+      0%, 100% { opacity: .62; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes brand-star-glow {
+      0%, 100% { filter: url(#soft-glow); }
+      50% { filter: url(#soft-glow-strong); }
+    }
+
+    @keyframes brand-sparkle-twinkle {
+      0%, 100% { opacity: .72; }
+      50% { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .brand-halo,
+      .brand-main-star,
+      .brand-sparkle {
+        animation: none;
+      }
+    }
+  </style>
   <circle cx="80" cy="96" r="60" fill="none" stroke="#d9b45c" stroke-width="1.15" stroke-opacity=".78"/>
   <circle cx="80" cy="96" r="60" fill="none" stroke="#fff1c7" stroke-width=".45" stroke-opacity=".7"/>
   <path d="M80 10V182M8 96H152" fill="none" stroke="#d9b45c" stroke-width=".45" stroke-opacity=".52"/>
-  <circle cx="80" cy="96" r="27" fill="url(#star-halo)" filter="url(#soft-glow)"/>
-  <path d="M80 12C83.1 78.6 85.2 92.9 150 96C85.2 99.1 83.1 113.4 80 180C76.9 113.4 74.8 99.1 10 96C74.8 92.9 76.9 78.6 80 12Z" fill="url(#star-fill)"/>
+  <circle class="brand-halo" cx="80" cy="96" r="27" fill="url(#star-halo)" filter="url(#soft-glow)"/>
+  <path class="brand-main-star" d="M80 12C83.1 78.6 85.2 92.9 150 96C85.2 99.1 83.1 113.4 80 180C76.9 113.4 74.8 99.1 10 96C74.8 92.9 76.9 78.6 80 12Z" fill="url(#star-fill)"/>
   <circle cx="80" cy="96" r="3.2" fill="#fffdf1" opacity=".96"/>
-  <path d="M137 27C138.2 35.4 140 37.8 148 39C140 40.2 138.2 42.6 137 51C135.8 42.6 134 40.2 126 39C134 37.8 135.8 35.4 137 27Z" fill="url(#star-fill)"/>
-  <path d="M141 140C142.2 148.4 144 150.8 152 152C144 153.2 142.2 155.6 141 164C139.8 155.6 138 153.2 130 152C138 150.8 139.8 148.4 141 140Z" fill="url(#star-fill)"/>
+  <path class="brand-sparkle" d="M137 27C138.2 35.4 140 37.8 148 39C140 40.2 138.2 42.6 137 51C135.8 42.6 134 40.2 126 39C134 37.8 135.8 35.4 137 27Z" fill="url(#star-fill)"/>
+  <path class="brand-sparkle brand-sparkle-last" d="M141 140C142.2 148.4 144 150.8 152 152C144 153.2 142.2 155.6 141 164C139.8 155.6 138 153.2 130 152C138 150.8 139.8 148.4 141 140Z" fill="url(#star-fill)"/>
 </svg>
