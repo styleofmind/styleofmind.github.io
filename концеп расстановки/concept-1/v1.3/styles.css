@@ -666,6 +666,12 @@ summary:focus-visible {
   border-bottom: 1px solid rgba(217, 180, 92, .14);
 }
 
+.value-strip .section-heading {
+  max-width: none;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
 .value-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
