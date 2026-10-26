@@ -14,8 +14,23 @@
     <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="3.2"/>
     </filter>
-    <filter id="soft-glow-strong" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="4.6"/>
+    <filter id="star-glow-soft" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="blur"/>
+      <feFlood flood-color="#f5d991" flood-opacity=".42" result="glow-color"/>
+      <feComposite in="glow-color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="star-glow-strong" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#f5d991" flood-opacity=".58" result="glow-color"/>
+      <feComposite in="glow-color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
   <style>
@@ -47,8 +62,8 @@
     }
 
     @keyframes brand-star-glow {
-      0%, 100% { filter: url(#soft-glow); }
-      50% { filter: url(#soft-glow-strong); }
+      0%, 100% { filter: url(#star-glow-soft); }
+      50% { filter: url(#star-glow-strong); }
     }
 
     @keyframes brand-sparkle-twinkle {
