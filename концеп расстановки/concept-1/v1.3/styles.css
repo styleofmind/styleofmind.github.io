@@ -1202,6 +1202,13 @@ summary:focus-visible {
   margin: 0 0 24px;
 }
 
+.diagnostic-duration {
+  margin: 0 0 14px;
+  color: #c1c4bf;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
 .offer-small {
   font-size: 10px;
   line-height: 1.5;
