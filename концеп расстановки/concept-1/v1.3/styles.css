@@ -1583,7 +1583,14 @@ summary:focus-visible {
 .final-section {
   padding: 100px 0 90px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 90%, rgba(192, 145, 77, .22), transparent 43%), linear-gradient(115deg, #101720, #17232c 52%, #111923);
+}
+
+.final-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(8, 22, 29, .96), rgba(8, 22, 29, .82)),
+    url("../images/золотая_орбита_безмятежности.png") center / cover no-repeat;
 }
 
 .final-inner {
