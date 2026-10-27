@@ -2171,6 +2171,13 @@ summary:focus-visible {
   line-height: 1.7;
 }
 
+.offer-popup__duration {
+  margin: 0 0 14px;
+  color: var(--muted-light);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
 .offer-popup__action {
   width: 100%;
   min-height: 46px;
