@@ -1098,6 +1098,18 @@ summary:focus-visible {
   align-items: center;
 }
 
+/* На широких экранах карточка первого сеанса располагается по центру. */
+@media (min-width: 981px) {
+  .diagnostic-grid {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .diagnostic-offer {
+    width: min(100%, 440px);
+  }
+}
+
 .diagnostic-copy {
   max-width: 670px;
 }
