@@ -1597,7 +1597,7 @@ summary:focus-visible {
 }
 
 .final-inner .section-title {
-  font-size: clamp(38px, 5.1vw, 61px);
+  font-size: clamp(32px, 4.2vw, 50px);
   color: #fff8ed;
   margin-bottom: 19px;
 }
@@ -2017,7 +2017,7 @@ summary:focus-visible {
   }
 
   .final-inner .section-title {
-    font-size: clamp(35px, 9vw, 48px);
+    font-size: clamp(29px, 7.5vw, 38px);
   }
 
   .final-inner>p:not(.eyebrow) {
