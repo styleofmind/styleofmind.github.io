@@ -589,3 +589,8 @@ Telegram ↗
 ## Footer update
 
 The «Расстановки» caption has been removed. The last footer item displays the current year automatically via JavaScript.
+
+
+## Footer layout update
+
+The privacy policy link and automatically updated copyright year are placed in a separate bottom footer row, below the brand and navigation row.

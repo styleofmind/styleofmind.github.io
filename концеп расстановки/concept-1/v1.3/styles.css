@@ -4561,3 +4561,29 @@ h3,
     min-height: 0;
   }
 }
+
+
+/* Secondary legal row */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(217, 180, 92, .14);
+  color: #969b98;
+  font-size: 10px;
+}
+
+.footer-bottom a {
+  color: #e6d2a5;
+}
+
+@media (max-width: 520px) {
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
