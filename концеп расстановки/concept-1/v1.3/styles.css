@@ -1003,6 +1003,18 @@ summary:focus-visible {
   max-width: 760px;
 }
 
+.formats-section .section-heading {
+  position: relative;
+  z-index: 1;
+}
+
+.formats-section .section-title {
+  font-size: 48px;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  margin: 0;
+}
+
 .format-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
