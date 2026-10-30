@@ -4164,9 +4164,10 @@ h3,
 
 .about-copy__content > .feel-rasstanovki__accent {
   max-width: 62ch;
-  margin: 30px auto;
+  margin: 30px 0;
   font-size: 19px;
   line-height: 1.6;
+  text-align: left;
 }
 
 @media (max-width: 760px) {
@@ -4181,8 +4182,9 @@ h3,
   }
 
   .about-copy__content > .feel-rasstanovki__accent {
-    margin: 26px auto;
+    margin: 26px 0;
     font-size: 16px;
     line-height: 1.6;
+    text-align: left;
   }
 }
