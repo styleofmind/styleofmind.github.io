@@ -992,7 +992,7 @@ summary:focus-visible {
   padding: 94px 0 76px;
   background:
     linear-gradient(90deg, rgba(8, 22, 29, .96), rgba(8, 22, 29, .79)),
-    url("assets/formats-background.png") center/cover no-repeat;
+    url("assets/formats-background.webp") center/cover no-repeat;
 }
 
 .section-heading-dark .section-lead {
