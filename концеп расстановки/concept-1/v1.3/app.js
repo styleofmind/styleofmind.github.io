@@ -39,20 +39,33 @@
     const closeButton = popup.querySelector('.offer-popup__close');
     const storageKey = 'styleOfMindDiagnosticOfferShown_v1';
     let shown = false;
+    let videoActive = false;
+    let scrollThresholdReached = false;
+    let timerElapsed = false;
     try {
       if (sessionStorage.getItem(storageKey)) return;
     } catch (_) {}
     const show = () => {
-      if (shown) return;
+      if (shown || videoActive) return;
       shown = true;
       popup.hidden = false;
       try {
         sessionStorage.setItem(storageKey, '1');
       } catch (_) {}
     };
+    const tryShow = () => {
+      if (!videoActive && (scrollThresholdReached || timerElapsed)) show();
+    };
     const close = () => {
       popup.hidden = true;
     };
+    document.addEventListener('styleofmind:video-playing', () => {
+      videoActive = true;
+    });
+    document.addEventListener('styleofmind:video-ended', () => {
+      videoActive = false;
+      tryShow();
+    });
     let scrollTimer;
     window.addEventListener('scroll', () => {
       if (shown) return;
@@ -60,12 +73,18 @@
       scrollTimer = window.setTimeout(() => {
         const doc = document.documentElement;
         const maxScroll = doc.scrollHeight - window.innerHeight;
-        if (maxScroll > 0 && window.scrollY / maxScroll >= 0.5) show();
+        if (maxScroll > 0 && window.scrollY / maxScroll >= 0.5) {
+          scrollThresholdReached = true;
+          tryShow();
+        }
       }, 120);
     }, {
       passive: true
     });
-    window.setTimeout(show, 45000);
+    window.setTimeout(() => {
+      timerElapsed = true;
+      tryShow();
+    }, 45000);
     closeButton.addEventListener('click', close);
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && !popup.hidden) close();
@@ -420,17 +439,37 @@
     syncActive(0);
   })();
 
-  /* Видео в первом экране: сначала выглядит как портретная фотография, плеер загружается по нажатию. */
+  /* Видео в первом экране: плеер загружается по нажатию и сообщает о завершении просмотра. */
   (() => {
     const preview = document.getElementById('hero-kinescope-preview');
     if (!preview) return;
     preview.addEventListener('click', () => {
       const src = preview.dataset.videoSrc;
       if (!src) return;
+
+      // Сразу блокируем предложение, не дожидаясь загрузки и старта плеера.
+      document.dispatchEvent(new Event('styleofmind:video-playing'));
+
+      // Подключаем официальный Kinescope IFrame API для события Ended.
+      window.onKinescopeIframeAPIReady = playerFactory => {
+        playerFactory.on(playerFactory.Events.Created, ({ data: playerInstance }) => {
+          playerInstance.on(playerInstance.Events.Ended, () => {
+            document.dispatchEvent(new Event('styleofmind:video-ended'));
+          });
+        });
+      };
+
+      const apiScript = document.createElement('script');
+      apiScript.src = 'https://player.kinescope.io/latest/iframe.player.js?auto';
+      apiScript.async = true;
+      document.head.appendChild(apiScript);
+
+      const playerUrl = new URL(src, document.baseURI);
+      playerUrl.searchParams.set('enableIframeApi', '');
       const player = document.createElement('iframe');
       player.className = 'hero-video';
       player.id = 'hero-kinescope-player';
-      player.src = src;
+      player.src = playerUrl.href;
       player.title = 'Видео Ольги Сусленниковой о системных семейных расстановках';
       player.allow =
         'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;';
