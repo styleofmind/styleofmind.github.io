@@ -990,7 +990,9 @@ summary:focus-visible {
 
 .formats-section {
   padding: 94px 0 76px;
-  background: radial-gradient(ellipse at 50% 100%, rgba(138, 101, 53, .15), transparent 52%), #111923;
+  background:
+    linear-gradient(90deg, rgba(8, 22, 29, .96), rgba(8, 22, 29, .79)),
+    url("../../concept-3/images/золотая_космическая_россыпь_на_тёмном_фоне.png") center/cover no-repeat;
 }
 
 .section-heading-dark .section-lead {
