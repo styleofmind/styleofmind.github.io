@@ -4158,17 +4158,6 @@ h3,
   line-height: 1.78;
 }
 
-.about-copy__content > p:nth-of-type(7) {
-  margin-top: 26px;
-  margin-bottom: 7px;
-  color: #424a43;
-  font-weight: 500;
-}
-
-.about-copy__content > p:last-child {
-  margin-bottom: 0;
-}
-
 .about-copy__content > .feel-rasstanovki__accent {
   max-width: 650px;
   margin: 28px 0 30px;
@@ -4190,11 +4179,6 @@ h3,
     margin-bottom: 16px;
     font-size: 15.5px;
     line-height: 1.75;
-  }
-
-  .about-copy__content > p:nth-of-type(7) {
-    margin-top: 20px;
-    margin-bottom: 6px;
   }
 
   .about-copy__content > .feel-rasstanovki__accent {
