@@ -4339,12 +4339,47 @@ h3,
   margin-top: 6px;
 }
 
+.formats-section .format-grid .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 23px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.formats-section .format-grid .button-gold {
+  color: #172229;
+  background: linear-gradient(120deg, #e8c78e, #f4dec0);
+  border: 0;
+  box-shadow: 0 10px 30px rgba(213, 167, 93, .18);
+}
+
+.formats-section .format-grid .button-outline {
+  color: #f6eee2;
+  background: transparent;
+  border: 1px solid rgba(213, 167, 93, .42);
+  box-shadow: none;
+}
+
+.formats-section .format-grid .button-outline:hover {
+  background: rgba(213, 167, 93, .08);
+}
+
 .formats-section .diagnostic-offer .button {
   margin-top: 15px;
-  background: #26353b;
-  color: #f6ead9;
-  border-color: #26353b;
+  color: #26353b;
+  border: 1px solid rgba(38, 53, 59, .35);
+  background: rgba(255, 252, 246, .16);
   box-shadow: none;
+}
+
+.formats-section .diagnostic-offer .button:hover {
+  background: rgba(255, 252, 246, .35);
 }
 
 @media (min-width: 761px) and (max-width: 1100px) {
