@@ -4138,3 +4138,51 @@ h3,
     top: 17px;
   }
 }
+
+
+/* v1.3: типографика и ритм блока «Обо мне». */
+.about-copy {
+  width: 100%;
+  max-width: 820px;
+}
+
+.about-copy__content {
+  max-width: 780px;
+  margin-top: 24px;
+}
+
+.about-copy__content > p {
+  margin: 0 0 18px;
+  color: #555955;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.about-copy__content > p:last-child {
+  margin-bottom: 0;
+}
+
+.about-copy__content > .feel-rasstanovki__accent {
+  max-width: 62ch;
+  margin: 30px auto;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .about-copy__content {
+    margin-top: 20px;
+  }
+
+  .about-copy__content > p {
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .about-copy__content > .feel-rasstanovki__accent {
+    margin: 26px auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
