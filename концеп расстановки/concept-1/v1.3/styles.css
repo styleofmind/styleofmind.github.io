@@ -1159,8 +1159,9 @@ summary:focus-visible {
 
 .diagnostic-offer {
   position: relative;
-  background: #17212b;
+  background: rgba(21, 44, 52, .42);
   color: #fffaf1;
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 35px 32px;
   box-shadow: 0 24px 48px rgba(31, 37, 41, .13);
