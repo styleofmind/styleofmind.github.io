@@ -1092,7 +1092,7 @@ summary:focus-visible {
   padding: 92px 0;
   background:
     linear-gradient(90deg, rgba(8,22,29,.96), rgba(8,22,29,.82)),
-    url("../../concept-3/v3.1/images/золотая_орбита_безмятежности.png") center/cover no-repeat;
+    url("../../concept-3/images/золотая_орбита_безмятежности.png") center/cover no-repeat;
 }
 
 .diagnostic-grid {
