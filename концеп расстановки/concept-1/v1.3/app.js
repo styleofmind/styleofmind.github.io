@@ -61,6 +61,7 @@
     };
     document.addEventListener('styleofmind:video-playing', () => {
       videoActive = true;
+      popup.hidden = true;
     });
     document.addEventListener('styleofmind:video-ended', () => {
       videoActive = false;
