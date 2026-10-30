@@ -459,11 +459,6 @@
         });
       };
 
-      const apiScript = document.createElement('script');
-      apiScript.src = 'https://player.kinescope.io/latest/iframe.player.js?auto';
-      apiScript.async = true;
-      document.head.appendChild(apiScript);
-
       const playerUrl = new URL(src, document.baseURI);
       playerUrl.searchParams.set('enableIframeApi', '');
       const player = document.createElement('iframe');
@@ -477,6 +472,11 @@
       player.loading = 'eager';
       player.referrerPolicy = 'strict-origin-when-cross-origin';
       preview.replaceWith(player);
+
+      const apiScript = document.createElement('script');
+      apiScript.src = 'https://player.kinescope.io/latest/iframe.player.js?auto';
+      apiScript.async = true;
+      document.head.appendChild(apiScript);
     }, {
       once: true
     });
