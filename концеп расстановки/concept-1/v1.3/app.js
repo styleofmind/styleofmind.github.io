@@ -8,6 +8,10 @@
 
   /* Во время загрузки показываем мягко пульсирующий фавикон, после полной загрузки — статичный. */
   (() => {
+    document.querySelectorAll('[data-current-year]').forEach(node => {
+      node.textContent = new Date().getFullYear();
+    });
+
     const icon = document.querySelector('link[rel="icon"]');
     if (!icon) return;
     const showStaticIcon = () => {
