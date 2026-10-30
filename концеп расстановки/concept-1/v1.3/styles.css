@@ -4274,3 +4274,36 @@ h3,
   background: rgba(21, 44, 52, .42);
   box-shadow: none;
 }
+
+/* v1.3: четыре предложения собраны в единую сетку. */
+.formats-section .format-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.formats-section .format-grid > .diagnostic-offer {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.formats-section .format-grid > .diagnostic-offer .button {
+  margin-top: auto;
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .formats-section .format-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 760px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .formats-section .format-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 490px;
+    margin-inline: auto;
+  }
+}
+
