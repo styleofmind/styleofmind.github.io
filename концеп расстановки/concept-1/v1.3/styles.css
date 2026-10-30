@@ -4167,10 +4167,6 @@ h3,
 
 .about-copy__content > p:last-child {
   margin-bottom: 0;
-  color: #705a36;
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.55;
 }
 
 .about-copy__content > .feel-rasstanovki__accent {
@@ -4199,11 +4195,6 @@ h3,
   .about-copy__content > p:nth-of-type(7) {
     margin-top: 20px;
     margin-bottom: 6px;
-  }
-
-  .about-copy__content > p:last-child {
-    font-size: 16px;
-    line-height: 1.55;
   }
 
   .about-copy__content > .feel-rasstanovki__accent {
