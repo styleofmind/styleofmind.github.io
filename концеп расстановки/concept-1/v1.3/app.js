@@ -53,8 +53,14 @@
         sessionStorage.setItem(storageKey, '1');
       } catch (_) {}
     };
+    const formatsSection = document.querySelector('.formats-section');
+    const formatsAreVisible = () => {
+      if (!formatsSection) return false;
+      const rect = formatsSection.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    };
     const tryShow = () => {
-      if (!videoActive && (scrollThresholdReached || timerElapsed)) show();
+      if (!videoActive && !formatsAreVisible() && (scrollThresholdReached || timerElapsed)) show();
     };
     const close = () => {
       popup.hidden = true;
@@ -76,8 +82,8 @@
         const maxScroll = doc.scrollHeight - window.innerHeight;
         if (maxScroll > 0 && window.scrollY / maxScroll >= 0.5) {
           scrollThresholdReached = true;
-          tryShow();
         }
+        tryShow();
       }, 120);
     }, {
       passive: true
