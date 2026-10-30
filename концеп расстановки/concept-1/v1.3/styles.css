@@ -4093,3 +4093,48 @@ h3,
     line-height: 1.58;
   }
 }
+
+
+/* FAQ: compact typography and spacing. */
+.faq-section {
+  padding: 78px 0 84px;
+}
+
+.faq-intro .section-title {
+  font-size: clamp(32px, 3.4vw, 42px);
+}
+
+.faq-list summary {
+  padding: 16px 34px 16px 0;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.faq-list summary:after {
+  top: 19px;
+}
+
+.faq-list details p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 760px) {
+  .faq-section {
+    padding: 62px 0 68px;
+  }
+
+  .faq-intro .section-title {
+    font-size: 32px;
+  }
+
+  .faq-list summary {
+    padding: 15px 32px 15px 0;
+    font-size: 16px;
+  }
+
+  .faq-list summary:after {
+    top: 17px;
+  }
+}
