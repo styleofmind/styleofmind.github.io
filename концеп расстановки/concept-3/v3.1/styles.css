@@ -1572,37 +1572,3 @@ url("../images/золотая_орбита_безмятежности.png") cent
   }
 
 }
-
-
-/* Diagnostic session price: compact 1.3-style presentation. */
-.diagnostic-price {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-}
-
-.diagnostic-price strong {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 9px;
-  font-size: 27px;
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.diagnostic-price strong span {
-  font: 11px/1.4 var(--sans);
-  color: #8b857b;
-  text-decoration: line-through;
-  white-space: nowrap;
-}
-
-.diagnostic-price small {
-  display: block;
-  font-size: 10px;
-  line-height: 1.5;
-  color: #77736c;
-  letter-spacing: .02em;
-}
