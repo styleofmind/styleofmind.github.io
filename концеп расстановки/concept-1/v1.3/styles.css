@@ -4051,3 +4051,45 @@ h3,
   grid-template-columns: minmax(0, 1fr);
   gap: 0;
 }
+
+/* v1.3: компактный блок «Принципы работы» на мобильных экранах. */
+@media (max-width: 760px) {
+  .value-strip {
+    padding: 25px 0 29px;
+  }
+
+  .value-strip .section-heading {
+    margin-bottom: 18px;
+  }
+
+  .value-strip .section-heading .eyebrow {
+    font-size: 9px;
+    letter-spacing: .14em;
+  }
+
+  .value-grid {
+    gap: 22px 10px;
+  }
+
+  .value-item {
+    padding: 0 4px;
+  }
+
+  .value-item .line-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+
+  .value-item h2 {
+    margin-bottom: 7px;
+    font-size: 18px;
+    line-height: 1.15;
+  }
+
+  .value-item p {
+    font-size: 12px;
+    line-height: 1.58;
+  }
+}
