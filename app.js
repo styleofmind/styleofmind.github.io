@@ -4,17 +4,30 @@
   if (window[key]) return;
   window[key] = true;
 
-  /* Necessary-storage notice */
+  /* Privacy notice: show until dismissed, then persist the choice locally. */
   (() => {
     const notice = document.getElementById('cookieNotice');
     const closeButton = document.getElementById('cookieNoticeClose');
     if (!notice || !closeButton) return;
+
     const storageKey = 'styleOfMindPrivacyNoticeDismissed_v1';
-    try { if (localStorage.getItem(storageKey) === '1') return; } catch (_) {}
-    notice.hidden = false;
+    let dismissed = false;
+    try {
+      dismissed = window.localStorage.getItem(storageKey) === '1';
+    } catch (_) {
+      // Storage can be unavailable in private or restricted browser contexts.
+    }
+
+    notice.hidden = dismissed;
+    if (dismissed) return;
+
     closeButton.addEventListener('click', () => {
       notice.hidden = true;
-      try { localStorage.setItem(storageKey, '1'); } catch (_) {}
+      try {
+        window.localStorage.setItem(storageKey, '1');
+      } catch (_) {
+        // The notice still closes for this page view if storage is blocked.
+      }
     });
   })();
 
