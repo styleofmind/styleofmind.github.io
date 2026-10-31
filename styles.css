@@ -3815,41 +3815,52 @@ h3,
 /* Compact header: keep the brand and menu inside narrow phone screens. */
 
 @media (max-width: 364px) {
-  .header-inner {
-    gap: 8px;
+  .site-header .header-inner {
+    width: calc(100% - 20px);
+    gap: 6px;
   }
 
-  .brand {
+  .site-header .brand {
     min-width: 0;
     flex: 1 1 auto;
-    gap: 8px;
+    gap: 5px;
   }
 
-  .brand-star {
-    width: 28px;
-    height: 34px;
+  .site-header .brand-star {
+    width: 24px;
+    height: 30px;
   }
 
-  .brand-copy {
+  .site-header .brand-copy {
     min-width: 0;
   }
 
-  .brand-name {
-    font-size: 18px;
+  .site-header .brand-name {
+    font-size: clamp(10px, 4vw, 14px);
+    line-height: 1.05;
     letter-spacing: 0;
     white-space: nowrap;
   }
 
-  .brand-subtitle {
-    display: none;
+  .site-header .brand-subtitle {
+    display: block;
+    margin-top: 3px;
+    font-size: clamp(6px, 2.2vw, 8px);
+    line-height: 1.1;
+    letter-spacing: .08em;
+    white-space: nowrap;
   }
 
-  .mobile-menu {
+  .site-header .mobile-menu {
     flex: 0 0 auto;
   }
 
-  .mobile-menu summary {
-    padding: 9px;
+  .site-header .mobile-menu summary {
+    display: flex;
+    min-width: 36px;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 8px;
   }
 }
 
@@ -4582,13 +4593,13 @@ h3,
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: 6px;
-    font-size: 9px;
+    font-size: clamp(8px, 3.4vw, 9px);
     line-height: 1.2;
     white-space: nowrap;
   }
 
   .footer-bottom > * {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     min-width: 0;
     white-space: nowrap;
   }
@@ -4885,7 +4896,7 @@ h3,
   }
 
   .site-header .brand-name {
-    font-size: clamp(11.75px, 4.9vw, 13.72px);
+    font-size: clamp(10px, 4vw, 14px);
   }
 
   .site-header .mobile-menu summary {
@@ -4896,6 +4907,62 @@ h3,
     max-width: 100%;
     padding: 10px 8px;
     gap: 8px;
+    font-size: 11px;
+  }
+}
+
+/* Keep the mobile menu icon compact when the full label does not fit. */
+@media (max-width: 299px) {
+  .site-header .mobile-menu__label {
+    display: none;
+  }
+
+  .site-header .mobile-menu summary > span[aria-hidden="true"] {
+    font-size: 16px;
+    line-height: 1;
+  }
+}
+
+/* Privacy page: keep the title and header brand inside narrow viewports. */
+@media (max-width: 720px) {
+  .privacy-template__title {
+    font-size: clamp(24px, 7vw, 36px);
+    line-height: 1.15;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 520px) {
+  .privacy-page .site-header .header-inner {
+    gap: 6px;
+  }
+
+  .privacy-page .site-header .brand {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .privacy-page .site-header .brand-star {
+    width: 24px;
+    height: 30px;
+  }
+
+  .privacy-page .site-header .brand-copy {
+    min-width: 0;
+  }
+
+  .privacy-page .site-header .brand-name {
+    font-size: clamp(10px, 4.4vw, 15px);
+    line-height: 1.05;
+    white-space: normal;
+  }
+
+  .privacy-page .site-header .button {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 9px 8px;
     font-size: 11px;
   }
 }
