@@ -1,533 +1,1527 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f3ee">
-  <meta name="description" content="Каталог концептов Style of Mind: концепты сайта расстановок и лендинга.">
-  <link rel="canonical" href="https://styleofmind.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Концепты — Style of Mind">
-  <meta property="og:description" content="Каталог концептов сайта: направления, концепты и версии.">
-  <meta property="og:url" content="https://styleofmind.github.io/">
-  <title>Концепты — Style of Mind</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f5f3ee;
-      --ink: #252923;
-      --muted: #777970;
-      --line: #deded5;
-      --card: #fbfaf7;
-      --accent: #4b6251;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    .page-shell { width: min(980px, calc(100% - 48px)); margin: 0 auto; }
-    .site-header { padding: clamp(42px, 8vw, 82px) 0 36px; }
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 650;
-      letter-spacing: .16em;
-      line-height: 1.5;
-      text-transform: uppercase;
-    }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      margin-bottom: 14px;
-      font: 400 clamp(42px, 7vw, 68px)/.98 Georgia, "Times New Roman", serif;
-      letter-spacing: -.055em;
-    }
-    .header-note { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .header-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .header-link {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 16px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--card);
-      color: var(--ink);
-      font-size: 13px;
-      text-decoration: none;
-      transition: border-color .16s ease, background .16s ease;
-    }
-    .header-link:hover { border-color: var(--accent); background: #fff; }
-    .header-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .header-link--primary { border-color: var(--accent); background: var(--accent); color: #fff; }
-    .header-link--primary:hover { background: #3b5040; }
-    .collection { padding: 26px 0 14px; border-top: 1px solid var(--line); }
-    .collection-heading {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 6px;
-    }
-    .collection-heading h2 {
-      margin: 0;
-      font: 400 clamp(27px, 4vw, 36px)/1.15 Georgia, "Times New Roman", serif;
-      letter-spacing: -.035em;
-    }
-    .collection-count { margin: 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
-    .concept { display: grid; grid-template-columns: minmax(130px, .38fr) minmax(0, 1fr); gap: 26px; padding: 23px 0; border-bottom: 1px solid var(--line); }
-    .concept-heading h3 { margin: 0 0 5px; font: 400 25px/1.2 Georgia, "Times New Roman", serif; letter-spacing: -.035em; }
-    .concept-heading p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-    .version-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; align-content: start; }
-    .version-card {
-      display: flex;
-      min-width: 0;
-      min-height: 68px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 15px 16px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--card);
-      color: inherit;
-      text-decoration: none;
-      transition: border-color .16s ease, background .16s ease;
-    }
-    .version-card:hover { border-color: #aeb8aa; background: #fff; }
-    .version-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .version-number { font: 400 25px/1 Georgia, "Times New Roman", serif; letter-spacing: -.035em; }
-    .arrow { flex: 0 0 auto; color: var(--muted); font-size: 17px; transition: transform .16s ease, color .16s ease; }
-    .version-card:hover .arrow { transform: translate(2px, -2px); color: var(--accent); }
-    .version-entry { display: grid; grid-template-columns: minmax(0, 1fr) 38px; gap: 6px; min-width: 0; align-items: stretch; }
-    .version-entry .version-card { min-width: 0; padding-right: 12px; }
-    .screenshot-trigger {
-      display: grid; width: 38px; min-height: 68px; place-items: center; padding: 0;
-      border: 1px solid var(--line); border-radius: 4px; background: var(--card); color: var(--muted);
-      cursor: pointer; transition: border-color .16s ease, background .16s ease, color .16s ease;
-    }
-    .screenshot-trigger:hover { border-color: var(--accent); background: #fff; color: var(--accent); }
-    .screenshot-trigger:focus-visible, .screenshot-dialog button:focus-visible, .screenshot-dialog a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .screenshot-trigger svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-    .screenshot-dialog {
-      width: min(1120px, calc(100% - 24px)); max-width: none; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px);
-      padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px;
-      background: var(--card); color: var(--ink); box-shadow: 0 24px 80px rgba(24, 29, 25, .28);
-    }
-    .screenshot-dialog[open] { display: flex; flex-direction: column; }
-    .screenshot-dialog::backdrop { background: rgba(20, 24, 21, .68); backdrop-filter: blur(4px); }
-    .screenshot-dialog__header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
-    .screenshot-dialog__title { margin: 0; font: 400 clamp(19px, 2.5vw, 25px)/1.2 Georgia, "Times New Roman", serif; }
-    .screenshot-dialog__close { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; }
-    .screenshot-dialog__close:hover { border-color: var(--accent); background: #fff; }
-    .screenshot-tabs { display: flex; flex-wrap: wrap; gap: 7px; padding: 12px 20px; }
-    .screenshot-tab { min-height: 38px; padding: 8px 15px; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; }
-    .screenshot-tab[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
-    .screenshot-stage { height: min(68vh, 720px); min-height: 180px; overflow: auto; padding: 14px; background: #e9e8e1; overscroll-behavior: contain; }
-    .screenshot-image { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; box-shadow: 0 2px 12px rgba(32, 35, 30, .12); }
-    .screenshot-image[hidden], .screenshot-error[hidden] { display: none; }
-    .screenshot-error { margin: 24px; color: #8a302b; font-size: 14px; }
-    .screenshot-dialog__footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    .screenshot-open { color: var(--accent); font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .collection--landing { padding-bottom: 8px; }
-    .collection--landing .concept { border-bottom: 0; }
-    .site-footer { margin-top: 15px; padding: 17px 0 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
-    .site-footer p { margin: 0; }
-    @media (max-width: 720px) {
-      .page-shell { width: calc(100% - 36px); }
-      .site-header { padding-bottom: 29px; }
-      .concept { grid-template-columns: 1fr; gap: 14px; padding: 21px 0; }
-      .version-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-    @media (max-width: 460px) {
-      .page-shell { width: calc(100% - 28px); }
-      .collection-heading { align-items: flex-start; }
-      .collection-count { padding-top: 7px; }
-      .version-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
-      .version-card { min-height: 62px; padding: 13px; }
-      .version-entry { grid-template-columns: minmax(0, 1fr) 34px; gap: 5px; }
-      .screenshot-trigger { width: 34px; min-height: 62px; }
-      .version-number { font-size: 23px; }
-      .screenshot-dialog { width: calc(100% - 14px); max-height: calc(100vh - 14px); max-height: calc(100dvh - 14px); border-radius: 8px; }
-      .screenshot-dialog__header { padding: 12px 14px; }
-      .screenshot-tabs { padding: 10px 12px; }
-      .screenshot-stage { height: min(62vh, 620px); padding: 8px; }
-      .screenshot-dialog__footer { align-items: flex-start; flex-direction: column; padding: 10px 14px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; }
-    }
-  </style>
-  <link rel="stylesheet" href="/fonts/fonts.css">
-  <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-</head>
-<body>
-  <main class="page-shell">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <meta
+      name="theme-color"
+      content="#111923"
+    >
+    <link
+      rel="icon"
+      href="favicon-loading.svg"
+      type="image/svg+xml"
+    >
+    <meta
+      name="description"
+      content="Системные семейные расстановки по вопросам отношений — индивидуально и в группе, онлайн в Zoom и очно в Санкт-Петербурге. Ольга Сусленникова, клинический психолог."
+    >
+    <title>
+Расставить точки над «МЫ» | Ольга Сусленникова
+    </title>
+    <link
+      rel="preconnect"
+      href="https://kinescope.io"
+      crossorigin
+    >
+    <link
+      rel="preload"
+      as="image"
+      href="assets/hero-video-poster.webp"
+      type="image/webp"
+      fetchpriority="high"
+    >
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/montserrat-cyrillic.woff2"
+      type="font/woff2"
+      crossorigin
+    >
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/playfair-display-cyrillic.woff2"
+      type="font/woff2"
+      crossorigin
+    >
+    <link
+      rel="stylesheet"
+      href="/fonts/fonts.css"
+    >
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    >
+  </head>
+  <body>
+    <a
+      class="skip-link"
+      href="#main"
+    >
+Перейти к содержанию
+    </a>
     <header class="site-header">
-      <p class="eyebrow">Style of Mind / Каталог</p>
-      <h1>Концепты</h1>
-      <p class="header-note">Направление → концепт → версия</p>
-      <nav class="header-links" aria-label="Разделы каталога">
+      <div class="header-inner">
         <a
-          class="header-link header-link--primary"
-          href="#constellations"
-        >Расстановки <span>9 версий</span></a>
+          class="brand"
+          href="#top"
+        >
+        <span
+          class="brand-star"
+          aria-hidden="true"
+        >
+          <img
+            src="/assets/brand/brand-star.svg"
+            alt=""
+            width="34"
+            height="41"
+          >
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">
+Ольга Сусленникова
+          </span>
+          <span class="brand-subtitle">
+клинический психолог
+          </span>
+        </span>
+        </a>
+        <nav
+          class="desktop-nav"
+          aria-label="Основная навигация"
+        >
+          <a
+            href="#about"
+          >
+Обо мне
+          </a>
+          <a
+            href="#method"
+          >
+Метод
+          </a>
+          <a
+            href="#formats"
+          >
+Форматы
+          </a>
+          <a
+            href="#reviews"
+          >
+Отзывы
+          </a>
+          <a
+            href="#faq"
+          >
+FAQ
+          </a>
+        </nav>
         <a
-          class="header-link"
-          href="#landing"
-        >Лендинг <span>2 версии</span></a>
-      </nav>
+          class="button button-outline header-booking"
+          href="https://t.me/olga_styleofmind"
+          data-telegram-message="Здравствуйте! Хочу обсудить запись на расстановку и подходящий формат работы."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+Записаться <span aria-hidden="true">↗</span>
+        </a>
+        <details class="mobile-menu">
+          <summary aria-label="Меню">
+Меню <span aria-hidden="true">☰</span>
+          </summary>
+          <nav aria-label="Мобильная навигация">
+            <a
+              href="#about"
+            >
+Обо мне
+            </a>
+            <a
+              href="#method"
+            >
+Метод
+            </a>
+            <a
+              href="#formats"
+            >
+Форматы
+            </a>
+            <a
+              href="#reviews"
+            >
+Отзывы
+            </a>
+            <a
+              href="#faq"
+            >
+FAQ
+            </a>
+            <a
+              href="https://t.me/olga_styleofmind"
+              data-telegram-message="Здравствуйте! Хочу обсудить запись на расстановку и подходящий формат работы."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+Записаться ↗
+            </a>
+          </nav>
+        </details>
+      </div>
     </header>
 
-    <section class="collection" id="constellations" aria-labelledby="constellations-title">
-      <div class="collection-heading">
-        <h2 id="constellations-title">Расстановки</h2>
-        <p class="collection-count">9 версий</p>
-      </div>
+    <main id="main">
 
-      <section class="concept" aria-label="Расстановки — концепт 0">
-        <div class="concept-heading">
-          <h3 id="concept-0-title">Концепт 0</h3>
-          <p>Две версии</p>
+      <!-- 01. HERO -->
+      <section
+        class="hero dark-section"
+        id="top"
+        aria-labelledby="hero-title"
+      >
+        <div
+          class="hero-stars"
+          aria-hidden="true"
+        >
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
         </div>
-        <nav class="version-list" aria-label="Версии концепта 0">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-0/v0.1/"
-              aria-label="Концепт 0, версия 0.1"
-            ><span class="version-number">0.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-0/v0.1"
-              data-screenshot-label="Концепт 0, версия 0.1"
-              aria-label="Открыть скриншоты: Концепт 0, версия 0.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
+
+        <div
+          class="hero-orbit hero-orbit-a"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div
+          class="hero-orbit hero-orbit-b"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="hero-inner page-width">
+          <div class="hero-copy">
+            <p class="eyebrow eyebrow-gold">
+глубина · осознанность · выбор
+            </p>
+            <h1 id="hero-title">
+Расставить<br>точки над <span>«МЫ»</span>
+            </h1>
+            <p class="hero-lead">
+Проблемы в отношениях подрывают уверенность в себе и влияют на все сферы жизни.
+            </p>
+            <p class="hero-note">
+Одна расстановка может кардинальным образом изменить ситуацию.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button button-gold"
+                href="https://t.me/olga_styleofmind"
+                data-telegram-message="Здравствуйте! Хочу обсудить запись на расстановку и подходящий формат работы."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+Записаться <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-0/v0.2/"
-              aria-label="Концепт 0, версия 0.2"
-            ><span class="version-number">0.2</span><span class="arrow" aria-hidden="true">↗</span></a>
+          <div class="hero-art">
+            <div
+              class="hero-halo"
+              aria-hidden="true"
+            >
+            </div>
             <button
-              class="screenshot-trigger"
+              class="hero-video-preview"
               type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-0/v0.2"
-              data-screenshot-label="Концепт 0, версия 0.2"
-              aria-label="Открыть скриншоты: Концепт 0, версия 0.2"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
+              id="hero-kinescope-preview"
+              aria-label="Воспроизвести видео Ольги Сусленниковой"
+              data-video-src="https://kinescope.io/embed/eWhaw3CwffKhViyhnev9AA?autoplay=1"
+            >
+            <img
+              class="hero-video-poster"
+              src="assets/hero-video-poster.webp"
+              alt="Ольга Сусленникова — видео о системных семейных расстановках"
+              width="720"
+              height="1280"
+              fetchpriority="high"
+            >
+            <span class="hero-video-play" aria-hidden="true"><span></span></span>
+            </button>
           </div>
-        </nav>
+        </div>
+
+        <div class="hero-bottom page-width">
+          <span>
+01 / 12
+          </span>
+          <span>
+листайте, чтобы узнать больше <b aria-hidden="true">↓</b>
+          </span>
+          <span class="hero-bottom-line">
+          </span>
+        </div>
       </section>
 
-      <section class="concept" aria-labelledby="concept-1-title">
-        <div class="concept-heading">
-          <h3 id="concept-1-title">Концепт 1</h3>
-          <p>Три версии</p>
+      <!-- 02. VALUE -->
+      <section
+        class="value-strip dark-section"
+        aria-label="Принципы работы"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">
+Принципы работы
+          </p>
         </div>
-        <nav class="version-list" aria-label="Версии концепта 1">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-1/v1.1/"
-              aria-label="Концепт 1, версия 1.1"
-            ><span class="version-number">1.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-1/v1.1"
-              data-screenshot-label="Концепт 1, версия 1.1"
-              aria-label="Открыть скриншоты: Концепт 1, версия 1.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-1/v1.2/"
-              aria-label="Концепт 1, версия 1.2"
-            ><span class="version-number">1.2</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-1/v1.2"
-              data-screenshot-label="Концепт 1, версия 1.2"
-              aria-label="Открыть скриншоты: Концепт 1, версия 1.2"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-1/v1.3/"
-              aria-label="Концепт 1, версия 1.3"
-            ><span class="version-number">1.3</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-1/v1.3"
-              data-screenshot-label="Концепт 1, версия 1.3"
-              aria-label="Открыть скриншоты: Концепт 1, версия 1.3"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-        </nav>
+
+        <div class="page-width value-grid">
+          <article class="value-item">
+            <span
+              class="line-icon"
+              aria-hidden="true"
+            >
+              <svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5 14.7 9.3 21.5 12 14.7 14.7 12 21.5 9.3 14.7 2.5 12 9.3 9.3Z"/></svg>
+            </span>
+            <h2>
+Открытость
+            </h2>
+            <p>
+Широта взглядов и безоценочность.
+            </p>
+          </article>
+          <article class="value-item">
+            <span
+              class="line-icon"
+              aria-hidden="true"
+            >
+              <svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 20c1-7 5-12 14-16-1 8-5 13-12 14"/><path d="M7 18c3-4 6-6 10-9"/></svg>
+            </span>
+            <h2>
+Безопасность
+            </h2>
+            <p>
+Атмосфера, где можно быть собой.
+            </p>
+          </article>
+          <article class="value-item">
+            <span
+              class="line-icon"
+              aria-hidden="true"
+            >
+              <svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+            </span>
+            <h2>
+Поддержка
+            </h2>
+            <p>
+Я рядом с вами в вашей точке А.
+            </p>
+          </article>
+          <article class="value-item">
+            <span
+              class="line-icon"
+              aria-hidden="true"
+            >
+              <svg class="line-icon-svg" viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4M5.3 5.3l2.8 2.8M15.9 15.9l2.8 2.8M18.7 5.3l-2.8 2.8M8.1 15.9l-2.8 2.8"/><circle cx="12" cy="12" r="2.4"/></svg>
+            </span>
+            <h2>
+Результат
+            </h2>
+            <p>
+Фокус на решении и движении вперёд.
+            </p>
+          </article>
+        </div>
       </section>
 
-      <section class="concept" aria-labelledby="concept-2-title">
-        <div class="concept-heading">
-          <h3 id="concept-2-title">Концепт 2</h3>
-          <p>Одна версия</p>
-        </div>
-        <nav class="version-list" aria-label="Версии концепта 2">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-2/v2.1/"
-              aria-label="Концепт 2, версия 2.1"
-            ><span class="version-number">2.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-2/v2.1"
-              data-screenshot-label="Концепт 2, версия 2.1"
-              aria-label="Открыть скриншоты: Концепт 2, версия 2.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
+      <!-- 03. ABOUT -->
+      <section
+        class="about-section light-section"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="page-width about-grid">
+          <div class="about-copy">
+            <p class="eyebrow">обо мне</p>
+            <div class="about-copy__content">
+              <p>Меня зовут Ольга Сусленникова. Я клинический психолог, гипнолог, мастер и тренер НЛП, специалист по системным семейным расстановкам.</p>
+              <p class="feel-rasstanovki__accent">Когда кажется, что вы застряли и все привычные способы «собраться» не работают, особенно важно не остаться с этой тяжестью один на один.</p>
+              <p>Более 15 лет я помогаю людям справляться с трудностями, менять мышление и поведение, налаживать отношения и достигать целей.</p>
+              <p>В работе я сочетаю системное видение с элементами коучинга, НЛП и мягкие трансовые техники. Такой подход позволяет одновременно корректировать системные нарушения, перестраивать привычные реакции, стабилизировать эмоциональное состояние и возвращать себе контакт с собой.</p>
+              <p>Профильное образование по клинической психологии помогает мне грамотно оценивать проблему клиента и не работать там, где нужна другая помощь.</p>
+              <p>В работе со мной вы можете рассчитывать на моё бережное внимание, атмосферу безопасности и профессионализм.</p>
+              <p>Записывайтесь на диагностическую консультацию, где мы сможем ближе познакомиться и разобрать вашу ситуацию.</p>
+              <p>Уже после первой встречи вы можете почувствовать себя лучше.</p>
+            </div>
+            <a class="text-link" href="#formats">
+              Посмотреть форматы работы <span aria-hidden="true">→</span>
+            </a>
           </div>
-        </nav>
+        </div>
       </section>
 
-      <section class="concept" aria-labelledby="concept-3-title">
-        <div class="concept-heading">
-          <h3 id="concept-3-title">Концепт 3</h3>
-          <p>Одна версия</p>
-        </div>
-        <nav class="version-list" aria-label="Версии концепта 3">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-3/v3.1/"
-              aria-label="Концепт 3, версия 3.1"
-            ><span class="version-number">3.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-3/v3.1"
-              data-screenshot-label="Концепт 3, версия 3.1"
-              aria-label="Открыть скриншоты: Концепт 3, версия 3.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
+      <section
+        class="certificates-section light-section"
+        id="certificates"
+        aria-labelledby="certificates-title"
+      >
+        <div class="page-width">
+          <div class="section-heading">
+            <p class="eyebrow">
+Дипломы и сертификаты
+            </p>
           </div>
-        </nav>
+          <div
+            class="certificate-carousel"
+            role="group"
+            aria-label="Галерея сертификатов"
+          >
+            <button class="certificate-carousel__arrow certificate-carousel__arrow--prev" type="button" aria-label="Предыдущий сертификат" disabled>‹</button>
+            <div class="certificate-carousel__viewport">
+              <div
+                class="certificate-carousel__track"
+                tabindex="0"
+                aria-label="Галерея сертификатов. Используйте стрелки или выберите миниатюру"
+              >
+                <button
+                  class="certificate-slide is-active"
+                  type="button"
+                  data-certificate-index="0"
+                  data-full-src="/assets/certificates-original/certificate-1.webp"
+                  aria-label="Показать сертификат 1"
+                  aria-pressed="true"
+                >
+                <img
+                  src="assets/certificates/certificate-1.webp"
+                  alt="Сертификат 1"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="1"
+                  data-full-src="/assets/certificates-original/certificate-2.webp"
+                  aria-label="Показать сертификат 2"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-2.webp"
+                  data-carousel-src="assets/certificates/certificate-2.webp"
+                  alt="Сертификат 2"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="2"
+                  data-full-src="/assets/certificates-original/certificate-3.webp"
+                  aria-label="Показать сертификат 3"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-3.webp"
+                  data-carousel-src="assets/certificates/certificate-3.webp"
+                  alt="Сертификат 3"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="3"
+                  data-full-src="/assets/certificates-original/certificate-4.webp"
+                  aria-label="Показать сертификат 4"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-4.webp"
+                  data-carousel-src="assets/certificates/certificate-4.webp"
+                  alt="Сертификат 4"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="4"
+                  data-full-src="/assets/certificates-original/certificate-5.webp"
+                  aria-label="Показать сертификат 5"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-5.webp"
+                  data-carousel-src="assets/certificates/certificate-5.webp"
+                  alt="Сертификат 5"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="5"
+                  data-full-src="/assets/certificates-original/certificate-6.webp"
+                  aria-label="Показать сертификат 6"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-6.webp"
+                  data-carousel-src="assets/certificates/certificate-6.webp"
+                  alt="Сертификат 6"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="6"
+                  data-full-src="/assets/certificates-original/certificate-7.webp"
+                  aria-label="Показать сертификат 7"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-7.webp"
+                  data-carousel-src="assets/certificates/certificate-7.webp"
+                  alt="Сертификат 7"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="7"
+                  data-full-src="/assets/certificates-original/certificate-8.webp"
+                  aria-label="Показать сертификат 8"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-8.webp"
+                  data-carousel-src="assets/certificates/certificate-8.webp"
+                  alt="Сертификат 8"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="8"
+                  data-full-src="/assets/certificates-original/certificate-9.webp"
+                  aria-label="Показать сертификат 9"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-9.webp"
+                  data-carousel-src="assets/certificates/certificate-9.webp"
+                  alt="Сертификат 9"
+                  loading="lazy"
+                >
+                </button>
+                <button
+                  class="certificate-slide"
+                  type="button"
+                  data-certificate-index="9"
+                  data-full-src="/assets/certificates-original/certificate-10.webp"
+                  aria-label="Показать сертификат 10"
+                  aria-pressed="false"
+                >
+                <img
+                  src="assets/certificate-thumbnails/certificate-10.webp"
+                  data-carousel-src="assets/certificates/certificate-10.webp"
+                  alt="Сертификат 10"
+                  loading="lazy"
+                >
+                </button>
+              </div>
+            </div>
+            <button class="certificate-carousel__arrow certificate-carousel__arrow--next" type="button" aria-label="Следующий сертификат">›</button>
+          </div>
+          <div
+            class="certificate-gallery-status"
+            aria-live="polite"
+          >
+            <progress class="certificate-gallery-status__progress" value="1" max="10" aria-label="Просмотр сертификатов"></progress>
+          </div>
+          <div
+            class="certificate-thumbnails"
+            role="group"
+            aria-label="Выбрать сертификат"
+          >
+            <button
+              class="certificate-thumbnail is-active"
+              type="button"
+              data-certificate-index="0"
+              aria-label="Выбрать сертификат 1"
+              aria-pressed="true"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-1.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="1"
+              aria-label="Выбрать сертификат 2"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-2.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="2"
+              aria-label="Выбрать сертификат 3"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-3.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="3"
+              aria-label="Выбрать сертификат 4"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-4.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="4"
+              aria-label="Выбрать сертификат 5"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-5.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="5"
+              aria-label="Выбрать сертификат 6"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-6.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="6"
+              aria-label="Выбрать сертификат 7"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-7.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="7"
+              aria-label="Выбрать сертификат 8"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-8.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="8"
+              aria-label="Выбрать сертификат 9"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-9.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+            <button
+              class="certificate-thumbnail"
+              type="button"
+              data-certificate-index="9"
+              aria-label="Выбрать сертификат 10"
+              aria-pressed="false"
+            >
+            <img
+              src="assets/certificate-thumbnails/certificate-10.webp"
+              alt=""
+              loading="lazy"
+            >
+            </button>
+          </div>
+          <dialog
+            class="certificate-lightbox"
+            aria-label="Просмотр сертификата"
+          >
+            <button class="certificate-lightbox__close" type="button" aria-label="Закрыть просмотр">×</button>
+            <img
+              class="certificate-lightbox__image"
+              src="assets/certificates/certificate-1.webp"
+              alt="Сертификат 1"
+            >
+          </dialog>
+        </div>
       </section>
 
-      <section class="concept" aria-labelledby="concept-4-title">
-        <div class="concept-heading">
-          <h3 id="concept-4-title">Концепт 4</h3>
-          <p>Две версии</p>
+      <!-- 04. METHOD -->
+      <section
+        class="method-section dark-section"
+        id="method"
+        aria-labelledby="method-title"
+      >
+        <div
+          class="method-stars"
+          aria-hidden="true"
+        >
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
         </div>
-        <nav class="version-list" aria-label="Версии концепта 4">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/"
-              aria-label="Концепт 4, версия 4.1"
-            ><span class="version-number">4.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-4/v4.1"
-              data-screenshot-label="Концепт 4, версия 4.1"
-              aria-label="Открыть скриншоты: Концепт 4, версия 4.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.2/"
-              aria-label="Концепт 4, версия 4.2"
-            ><span class="version-number">4.2</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/arrangements/concept-4/v4.2"
-              data-screenshot-label="Концепт 4, версия 4.2"
-              aria-label="Открыть скриншоты: Концепт 4, версия 4.2"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-        </nav>
-      </section>
-    </section>
 
-    <section class="collection collection--landing" id="landing" aria-labelledby="landing-title">
-      <div class="collection-heading">
-        <h2 id="landing-title">Лендинг</h2>
-        <p class="collection-count">2 версии</p>
-      </div>
-      <section class="concept" aria-label="Лендинг — концепт 0">
-        <div class="concept-heading">
-          <h3 id="landing-concept-title">Концепт 0</h3>
-          <p>Редакционный стиль</p>
+        <div class="page-width method-grid">
+          <div class="method-copy">
+            <p class="eyebrow eyebrow-gold">
+о методе
+            </p>
+            <p class="method-description">
+Системная расстановка — это возможность посмотреть на свою ситуацию со стороны, исследовать отношения, чувства и повторяющиеся сценарии,
+в которых бывает сложно разобраться самостоятельно.
+            </p>
+          </div>
+          <div class="method-steps-wrap">
+            <h3 class="method-steps-title">
+Как проходит расстановка
+            </h3>
+            <div class="method-steps">
+              <div class="method-step">
+                <span>01</span>
+                <p>
+                  <strong>Обсуждаем запрос</strong>
+Проясняем суть проблемы и определяем фокус работы.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>02</span>
+                <p>
+                  <strong>Выбираем заместителей</strong>
+Участники группы (или фигурки) представляют значимых людей или элементы ситуации.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>03</span>
+                <p>
+                  <strong>Размещаем в пространстве</strong>
+Вы располагаете заместителей так, как подсказывает ваше внутреннее ощущение.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>04</span>
+                <p>
+                  <strong>Наблюдаем за происходящим</strong>
+Обращаем внимание на ощущения, движения и реакции заместителей.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>05</span>
+                <p>
+                  <strong>Исследуем взаимосвязи</strong>
+Находим системные нарушения, влияющие на нынешнюю ситуацию.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>06</span>
+                <p>
+                  <strong>Находим решение</strong>
+Меняем конфигурацию и характер взаимодействия элементов в системе.
+                </p>
+              </div>
+              <div class="method-step">
+                <span>07</span>
+                <p>
+                  <strong>Интегрируем результат</strong>
+У вас появляется новое внутреннее состояние и ощущение возможности двигаться вперёд.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="process-photo-gallery"
+            id="process"
+            role="group"
+            aria-label="Фотографии расстановок"
+          >
+            <button
+              type="button"
+              class="process-photo-gallery__arrow process-photo-gallery__arrow--prev"
+              aria-label="Предыдущие фотографии"
+              disabled>‹</button
+            >
+            <div
+              class="process-photo-gallery__track"
+              role="group"
+              aria-label="Фотографии расстановок и фигурок"
+              tabindex="0"
+            >
+            <img
+              alt="Расстановка офлайн — пример 1"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/01-constellations-offline.webp"
+            >
+
+            <img
+              alt="Расстановка офлайн — пример 2"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/02-constellations-offline-case.webp"
+            >
+
+            <img
+              alt="Расстановка онлайн — пример 1"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/03-constellations-online.webp"
+            >
+
+            <img
+              alt="Расстановка онлайн — пример 2"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/04-constellations-online.webp"
+            >
+
+            <img
+              alt="Расстановка на фигурках — пример 1"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/05-constellations-figures.webp"
+            >
+
+            <img
+              alt="Расстановка на фигурках — пример 2"
+              decoding="async"
+              loading="lazy"
+              src="assets/process-photos/06-constellations-figures-detail.webp"
+            >
+          </div>
+          <button
+            type="button"
+            class="process-photo-gallery__arrow process-photo-gallery__arrow--next"
+            aria-label="Следующие фотографии">›</button
+          >
         </div>
-        <nav class="version-list" aria-label="Концепт лендинга">
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/concept-0/v0.1/index.html"
-              aria-label="Открыть концепт 0, версия 0.1"
-            ><span class="version-number">0.1</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/landing/concept-0/v0.1"
-              data-screenshot-label="Лендинг · концепт 0, версия 0.1"
-              aria-label="Открыть скриншоты: Лендинг · концепт 0, версия 0.1"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-          <div class="version-entry">
-            <a
-              class="version-card"
-              href="./%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%D0%B0/concept-0/v0.2/index.html"
-              aria-label="Открыть концепт 0, версия 0.2"
-            ><span class="version-number">0.2</span><span class="arrow" aria-hidden="true">↗</span></a>
-            <button
-              class="screenshot-trigger"
-              type="button"
-              data-screenshots="./catalog-screenshots/landing/concept-0/v0.2"
-              data-screenshot-label="Лендинг · концепт 0, версия 0.2"
-              aria-label="Открыть скриншоты: Лендинг · концепт 0, версия 0.2"
-              title="Скриншоты"
-            ><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5"></rect><circle cx="7" cy="7.5" r="1.4"></circle><path d="m3.5 14 4.2-4.1 3.1 2.7 2.5-2.2 3.2 3.5"></path></svg></button>
-          </div>
-        </nav>
+        </div>
       </section>
-    </section>
+
+      <!-- 05. TOPICS -->
+      <section
+        class="topics-section light-section requests"
+        id="topics"
+        aria-labelledby="topics-title"
+      >
+        <div class="container">
+          <header class="section-heading section-heading--split">
+            <div>
+              <h2 id="topics-title">
+С какими запросами<br>можно обратиться
+              </h2>
+            </div>
+            <p class="section-heading__aside">
+Вы можете прийти с любым жизненным вопросом, который вызывает тревогу, внутренний конфликт или ощущение застоя.
+            </p>
+          </header>
+          <div class="card-grid card-grid--three">
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 14h32v21H8zM8 19l16 11 16-11"></path><path d="M16 10h16"></path></svg></span>
+              <h3>
+Отношения в паре
+              </h3>
+              <p>
+Конфликты, дистанция, трудности с доверием, близостью и взаимопониманием.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="13" r="6"></circle><circle cx="12" cy="34" r="5"></circle><circle cx="36" cy="34" r="5"></circle><path d="M21 19 14 29M27 19l7 10M17 34h14"></path></svg></span>
+              <h3>
+Семья и близкие
+              </h3>
+              <p>
+Отношения с родителями, детьми и родственниками, семейные роли и ожидания.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M12 10 36 38M36 10 12 38M8 24h32"></path></svg></span>
+              <h3>
+Расставание и развод
+              </h3>
+              <p>
+Переживания, связанные с завершением отношений, трудности с принятием перемен.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 11h11v11H10zM27 26h11v11H27zM21 16h6a7 7 0 0 1 7 7v3M27 32h-6a7 7 0 0 1-7-7v-3"></path></svg></span>
+              <h3>
+Повторяющиеся ситуации
+              </h3>
+              <p>
+Похожие ссоры, одни и те же трудности
+— хотя хочется, чтобы всё складывалось иначе.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 7c-8 0-14 6-14 14 0 5 3 8 7 12v5h14v-5c4-4 7-7 7-12 0-8-6-14-14-14Z"></path><path d="M18 43h12M20 16l4-4 4 4M24 12v14"></path></svg></span>
+              <h3>
+Эмоциональное состояние
+              </h3>
+              <p>
+Тревога, внутреннее напряжение и противоречивые чувства.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6 40 15v18l-16 9L8 33V15z"></path><path d="M24 6v18l16-9M24 24 8 15M24 24v18"></path></svg></span>
+              <h3>
+Сложный жизненный выбор
+              </h3>
+              <p>
+Сомнения, страх ошибиться и трудности с выбором, когда непонятно, какой шаг сделать дальше.
+              </p>
+            </article>
+            <article class="request-card">
+              <span class="request-card__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 39h32M12 39V25l12-7 12 7v14M24 18V7M18 13l6-6 6 6"></path></svg></span>
+              <h3>
+Личные границы и понимание себя
+              </h3>
+              <p>
+Самооценка, личные границы, понимание своих потребностей и того, что для вас важно.
+              </p>
+            </article>
+          </div>
+          <p class="topics-note">
+С помощью системных расстановок можно также решать запросы, связанные со здоровьем
+(психосоматикой), лишним весом, химическими и нехимическими зависимостями, деньгами.
+          </p>
+          <p class="feel-rasstanovki__accent">
+Это уникальная помогающая практика, работающая там, где другие методы бессильны.
+          </p>
+        </div>
+      </section>
+
+      <!-- 06. FORMATS -->
+      <section
+        class="formats-section dark-section"
+        id="formats"
+        aria-labelledby="formats-title"
+      >
+        <div class="page-width">
+          <div class="section-heading section-heading-dark">
+            <p class="eyebrow eyebrow-gold">
+форматы и стоимость
+            </p>
+            <h2
+              class="section-title"
+              id="formats-title"
+            >
+Выберите удобный<br>формат работы
+            </h2>
+          </div>
+          <div class="format-grid">
+            <article class="format-card">
+              <span class="format-number">01 / индивидуально</span>
+              <div
+                class="format-icon"
+                aria-hidden="true"
+              >
+<svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <h3>
+Индивидуальная расстановка онлайн
+              </h3>
+              <p>
+Работа с вашим запросом на фигурках в комфортном режиме.
+              </p>
+              <div class="format-meta">
+                <span>
+1–1,5 часа
+                </span>
+                <strong>
+5 000 ₽
+                </strong>
+              </div>
+              <a
+                class="button button-outline button-full"
+                href="https://t.me/olga_styleofmind"
+                data-telegram-message="Здравствуйте! Хочу записаться на индивидуальную расстановку на фигурках (онлайн в Zoom, 5 000 ₽)."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+Выбрать время <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <article class="format-card format-card-featured">
+              <span class="format-number">02 / группа онлайн</span>
+              <div
+                class="format-icon"
+                aria-hidden="true"
+              >
+                <svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+              </div>
+              <h3>
+В группе онлайн
+              </h3>
+              <p>
+Групповой формат онлайн в Zoom с участием других людей (заместителей).
+              </p>
+              <div class="format-meta">
+                <span>
+1,5–2 часа
+                </span>
+                <strong>
+7 000 ₽
+                </strong>
+              </div>
+              <a
+                class="button button-gold button-full"
+                href="https://t.me/olga_styleofmind"
+                data-telegram-message="Здравствуйте! Хочу узнать о записи на групповую расстановку онлайн с заместителями (7 000 ₽)."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+Выбрать время <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <article class="format-card">
+              <span class="format-number">03 / группа очно</span>
+              <div
+                class="format-icon"
+                aria-hidden="true"
+              >
+<svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="8.2" r="1.4" fill="currentColor" stroke="none"/><circle cx="8.6" cy="14.2" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.4" cy="14.2" r="1.4" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <h3>
+В группе очно
+              </h3>
+              <p>
+Групповая работа с заместителями в СПб. Дату и место уточняйте при записи.
+              </p>
+              <div class="format-meta">
+                <span>
+1,5–2 часа
+                </span>
+                <strong>
+12 000 ₽
+                </strong>
+              </div>
+              <a
+                class="button button-outline button-full"
+                href="https://t.me/olga_styleofmind"
+                data-telegram-message="Здравствуйте! Хочу узнать о записи на очную групповую расстановку в Санкт-Петербурге (12 000 ₽)."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+Выбрать время <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          <aside class="diagnostic-offer">
+            <div
+              class="offer-glint"
+              aria-hidden="true"
+            >
+              <svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5 14.7 9.3 21.5 12 14.7 14.7 12 21.5 9.3 14.7 2.5 12 9.3 9.3Z"/></svg>
+            </div>
+            <p class="offer-label">
+первый сеанс
+            </p>
+            <h3>
+Знакомство и обсуждение запроса
+            </h3>
+            <p class="offer-price">
+              <strong>
+2 000 ₽
+              </strong>
+              <span>
+4 500 ₽
+              </span>
+            </p>
+            <p class="offer-caption">
+Скидка на первую диагностическую сессию. Обычная стоимость — 4 500 ₽.
+            </p>
+            <p class="diagnostic-duration">~40 минут, онлайн в Zoom</p>
+            <a
+              class="button button-gold button-full"
+              href="https://t.me/olga_styleofmind"
+              data-telegram-message="Здравствуйте! Хочу записаться на диагностическую сессию за 2 000 ₽. Подскажите, пожалуйста, свободное время."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+Записаться на сессию <span aria-hidden="true">↗</span>
+            </a>
+          </aside>
+          </div>
+          <p class="booking-note">
+            <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5 14.7 9.3 21.5 12 14.7 14.7 12 21.5 9.3 14.7 2.5 12 9.3 9.3Z"/></svg></span>
+Для подтверждения записи необходима предоплата. Отменить запись можно не позднее чем за 24
+часа до начала встречи.
+          </p>
+        </div>
+      </section>
+
+      <!-- 07. DIAGNOSTIC -->
+
+
+      <!-- 08. EXPERIENCE -->
+      <section
+        aria-labelledby="feelings-title"
+        class="feel-rasstanovki light-section"
+      >
+        <div class="feel-rasstanovki__container">
+          <h2
+            class="feel-rasstanovki__title"
+            id="feelings-title"
+          >
+Что вы почувствуете после расстановки
+          </h2>
+          <p class="feel-rasstanovki__subtitle">
+Вот что говорят клиенты о своём состоянии после расстановки:
+          </p>
+          <div class="feel-rasstanovki__grid">
+            <div class="feel-rasstanovki__item">
+              <div class="feel-rasstanovki__check">
+✓
+              </div>
+              <div class="feel-rasstanovki__text">
+Ясность — вы вдруг видите причину, которую не замечали годами
+              </div>
+            </div>
+            <div class="feel-rasstanovki__item">
+              <div class="feel-rasstanovki__check">
+✓
+              </div>
+              <div class="feel-rasstanovki__text">
+Облегчение — тяжесть, которую вы несли, уходит
+              </div>
+            </div>
+            <div class="feel-rasstanovki__item">
+              <div class="feel-rasstanovki__check">
+✓
+              </div>
+              <div class="feel-rasstanovki__text">
+Свобода — вы больше не обязаны повторять привычные сценарии
+              </div>
+            </div>
+            <div class="feel-rasstanovki__item">
+              <div class="feel-rasstanovki__check">
+✓
+              </div>
+              <div class="feel-rasstanovki__text">
+Спокойствие — внутри наступает порядок
+              </div>
+            </div>
+            <div class="feel-rasstanovki__item">
+              <div class="feel-rasstanovki__check">
+✓
+              </div>
+              <div class="feel-rasstanovki__text">
+Любовь — к себе и своему роду, без груза вины
+              </div>
+            </div>
+          </div>
+          <p class="feel-rasstanovki__accent">
+Расстановка — это встреча с правдой. И эта правда делает вас свободнее.
+          </p>
+        </div>
+      </section>
+
+      <!-- 09. REVIEWS -->
+      <section
+        class="reviews-section light-section"
+        id="reviews"
+        aria-labelledby="reviews-title"
+      >
+        <div class="page-width">
+          <div class="section-heading">
+            <p class="eyebrow">
+отзывы клиентов
+            </p>
+            <h2
+              class="section-title"
+              id="reviews-title"
+            >
+Личный опыт — разные истории
+            </h2>
+            <p class="section-lead">
+Впечатления от работы индивидуальны. Отзывы не гарантируют аналогичный результат.
+            </p>
+          </div>
+          <div
+            class="review-carousel"
+            role="group"
+            aria-label="Карусель отзывов"
+          >
+            <button class="review-carousel__arrow review-carousel__arrow--prev" type="button" aria-label="Предыдущие отзывы" disabled>‹</button>
+            <div
+              class="review-carousel__track"
+              tabindex="0"
+              aria-label="Отзывы. Используйте стрелки клавиатуры для прокрутки"
+            >
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«После расстановки я наконец увидел главное: я искал не девушку, а одобрение. Увидел это — и отпустило. Теперь я просто выбираю себя, учусь опираться на свои желания и смотрю, что будет дальше».
+                </p>
+                <footer>
+Виктор <span>Москва · Отношения в паре</span>
+                </footer>
+              </blockquote>
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«Развод дался очень тяжело, во мне жило много вины и стыда. Расстановка помогла посмотреть на ситуацию со стороны и увидеть, что в разрыве нет единоличного „палача“. Я выдохнула, перестала бесконечно корить себя и смогла наконец начать жить дальше».
+                </p>
+                <footer>
+Ксения <span>Москва · Развод и расставание</span>
+                </footer>
+              </blockquote>
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«Расстановка дала мощный срез ответов и чётко подсветила причину, почему я буксую в теме денег. Появилось понимание, откуда растут ноги у этой проблемы. Путь изменений ещё впереди, но теперь я хотя бы знаю, куда смотреть и над чем работать».
+                </p>
+                <footer>
+Софья <span>Санкт-Петербург · Деньги и внутренние блоки</span>
+                </footer>
+              </blockquote>
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«Я всегда всем во всём уступала, боялась сказать „нет“ и обидеть близких, а внутри копилась жуткая злость. На расстановке на фигурках я физически увидела, как взвалила на себя чужие роли. Огромное облегчение — впервые почувствовать свои границы и занять своё место».
+                </p>
+                <footer>
+Анна <span>Санкт-Петербург · Личные границы</span>
+                </footer>
+              </blockquote>
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«Было ощущение полного застоя, когда ходишь по кругу и не понимаешь, куда двигаться дальше. Формат онлайн-группы с заместителями меня сначала смущал, но атмосфера оказалась очень бережной. Ушёл этот фоновый липкий страх, наступила какая-то внутренняя тишина и ясность».
+                </p>
+                <footer>
+Михаил <span>Онлайн · Тревога и тупик в карьере</span>
+                </footer>
+              </blockquote>
+              <blockquote class="review-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p>
+«Долго не могла сепарироваться от мамы, любые разговоры заканчивались чувством вины. После сессии у меня будто спал тяжёлый груз с плеч. Я впервые посмотрела на маму не как на ребёнка, которого надо спасать, а как на взрослого человека. Стало намного легче дышать».
+                </p>
+                <footer>
+Елена <span>Москва · Отношения с родителями</span>
+                </footer>
+              </blockquote>
+            </div>
+            <button class="review-carousel__arrow review-carousel__arrow--next" type="button" aria-label="Следующие отзывы">›</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. FAQ -->
+      <section
+        class="faq-section light-section"
+        id="faq"
+        aria-labelledby="faq-title"
+      >
+        <div class="page-width faq-layout">
+          <div class="faq-intro">
+            <p class="eyebrow">
+faq
+            </p>
+            <h2
+              class="section-title"
+              id="faq-title"
+            >
+Частые вопросы
+            </h2>
+            <p>
+Ответы помогут заранее понять формат, условия и границы услуги.
+            </p>
+            <a
+              class="text-link"
+              href="https://t.me/olga_styleofmind"
+              data-telegram-message="Здравствуйте! Хочу обсудить запись на расстановку и подходящий формат работы."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+Перейти к записи <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="faq-list">
+
+            <details>
+              <summary>
+                Нужно ли, чтобы второй партнёр был на расстановке про отношения?
+              </summary>
+              <p>
+                Нет. Присутствие обоих партнёров не требуется. Работа с отношениями в этом методе может эффективно проводиться и с одним человеком.
+              </p>
+              <p>
+                Есть отдельный вид расстановок — «расстановка для пары». Обычно применяется для достижения общей цели. Целесообразность такой расстановки можно обсудить на диагностической сессии.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                Это эзотерика?
+              </summary>
+              <p>
+                Нет. Метод не опирается на эзотерические концепции. В его основе лежат идеи системной семейной терапии, психодрамы и феноменологический подход.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                Что эффективнее: групповая работа или индивидуальная?
+              </summary>
+              <p>
+                Оба варианта эффективны. Отличие в том, что в индивидуальной расстановке для «распаковки» и проживания чувств есть только два человека — клиент и терапевт. В группе же дополнительно другие люди могут помочь в этом процессе.
+              </p>
+              <p>
+                На вопрос, какой вариант работы — групповой или индивидуальный — подойдёт именно вам, я смогу ответить на диагностической сессии.
+              </p>
+            </details>
+
+
+            <details>
+              <summary>
+                Расстановка — это всегда про «проработку» мамы с папой?
+              </summary>
+              <p>
+                Нет :) Это один из популярных мифов.
+              </p>
+              <p>
+                В расстановке мы действительно часто ставим маму или папу, но только как «объекты», через которые удобно смотреть на системные психические процессы.
+              </p>
+              <p>
+                В центре внимания расстановки всегда клиент и его личный запрос: отношения, самоощущение, конкретная проблема.
+              </p>
+              <p>
+                Фигуры родителей — лишь инструмент для раскрытия личной темы.
+              </p>
+            </details>
+
+
+            <details>
+              <summary>
+                Нужно ли как-то готовиться к расстановке?
+              </summary>
+              <p>
+                Перед расстановкой я рекомендую записаться на диагностическую сессию, где мы сможем лучше «развернуть» ваш запрос и подготовить почву для продуктивной расстановки (или же подберём другой формат терапии)..
+              </p>
+
+
+                  </p>
+            </details>
+
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. FINAL CTA -->
+      <section
+        class="final-section dark-section"
+        aria-labelledby="final-title"
+      >
+        <div class="final-bg" aria-hidden="true"></div>
+
+        <div
+          class="final-stars"
+          aria-hidden="true"
+        >
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+
+        <div
+          class="final-orbit"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="page-width final-inner">
+          <h2
+            class="section-title"
+            id="final-title"
+          >
+Запишитесь на диагностическую сессию и уже сегодня сделайте первый шаг к счастливым отношениям.
+          </h2>
+          <div class="final-actions">
+            <a
+              class="button button-gold"
+              href="https://t.me/olga_styleofmind"
+              data-telegram-message="Здравствуйте! Хочу обсудить запись на расстановку и подходящий формат работы."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+Записаться на консультацию <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="final-contact">
+            <span>
+Ольга Сусленникова
+            </span>
+            <span>
+Онлайн по всему миру · очно в СПб
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="site-footer">
-      <p>Style of Mind · Каталог концептов</p>
+      <div class="page-width footer-inner">
+        <a
+          class="brand footer-brand"
+          href="#top"
+        >
+        <span
+          class="brand-star"
+          aria-hidden="true"
+        >
+          <img
+            src="/assets/brand/brand-star.svg"
+            alt=""
+            width="34"
+            height="41"
+          >
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">
+Ольга Сусленникова
+          </span>
+          <span class="brand-subtitle">
+клирический психолог
+          </span>
+        </span>
+        </a>
+        <nav aria-label="Навигация в подвале">
+          <a
+            href="#about"
+          >
+Обо мне
+          </a>
+          <a
+            href="#method"
+          >
+Метод
+          </a>
+          <a
+            href="#formats"
+          >
+Форматы
+          </a>
+          <a
+            href="#reviews"
+          >
+Отзывы
+          </a>
+          <a
+            href="#faq"
+          >
+FAQ
+          </a>
+        </nav>
+
+        <div class="footer-legal">
+          <a
+            href="https://t.me/olga_styleofmind"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+Telegram-канал ↗
+          </a>
+        </div>
+      </div>
+      <div class="page-width footer-bottom">
+        <a href="privacy-policy.html">Политика конфиденциальности</a>
+        <span class="footer-date">&copy; <span data-current-year></span></span>
+      </div>
     </footer>
-  </main>
+    <!-- Ненавязчивое предложение диагностической сессии -->
+    <aside
+      class="offer-popup"
+      id="diagnosticOfferPopup"
+      role="dialog"
+      aria-labelledby="diagnosticOfferTitle"
+      aria-describedby="diagnosticOfferText"
+      hidden
+    >
+      <button class="offer-popup__close" type="button" aria-label="Закрыть предложение">×</button>
+      <p class="offer-popup__eyebrow">
+Первый шаг
+      </p>
+      <h2 id="diagnosticOfferTitle">
+Диагностическая сессия
+      </h2>
+      <p class="offer-popup__price">
+2&nbsp;000&nbsp;₽ <span>вместо 4&nbsp;500&nbsp;₽</span>
+      </p>
+      <p id="diagnosticOfferText">
+Познакомимся, обсудим ваш запрос, вы сможете задать интересующие вас вопросы о методе.
 
-  <dialog class="screenshot-dialog" id="screenshot-dialog" aria-labelledby="screenshot-dialog-title">
-    <div class="screenshot-dialog__header">
-      <h2 class="screenshot-dialog__title" id="screenshot-dialog-title">Скриншоты сайта</h2>
-      <button
-        class="screenshot-dialog__close"
-        id="screenshot-dialog-close"
-        type="button"
-        aria-label="Закрыть просмотр скриншотов"
-      >×</button>
-    </div>
-    <div class="screenshot-tabs" role="group" aria-label="Устройство для просмотра">
-      <button
-        class="screenshot-tab"
-        type="button"
-        data-screenshot-size="desktop"
-        aria-pressed="true"
-      >ПК</button>
-      <button
-        class="screenshot-tab"
-        type="button"
-        data-screenshot-size="tablet"
-        aria-pressed="false"
-      >Планшет</button>
-      <button
-        class="screenshot-tab"
-        type="button"
-        data-screenshot-size="phone"
-        aria-pressed="false"
-      >Телефон</button>
-    </div>
-    <div class="screenshot-stage" id="screenshot-stage">
-      <img
-        class="screenshot-image"
-        id="screenshot-image"
-        src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-        alt=""
-        hidden
-        decoding="async"
-      >
-      <p class="screenshot-error" id="screenshot-error" role="status" hidden>Не удалось загрузить скриншот. Попробуйте выбрать другой размер экрана.</p>
-    </div>
-    <div class="screenshot-dialog__footer">
-      <span id="screenshot-status" aria-live="polite">Полная страница · ПК</span>
+      </p>
+      <p class="offer-popup__duration">~40 минут, онлайн в Zoom</p>
       <a
-        class="screenshot-open"
-        id="screenshot-open"
-        href="#"
+        class="button button-gold offer-popup__action"
+        href="https://t.me/olga_styleofmind"
+        data-telegram-message="Здравствуйте! Хочу записаться на диагностическую сессию за 2 000 ₽. Подскажите, пожалуйста, свободное время."
         target="_blank"
-        rel="noopener"
-      >Открыть картинку отдельно ↗</a>
-    </div>
-  </dialog>
-  <script>
-    (() => {
-      const dialog = document.getElementById('screenshot-dialog');
-      const title = document.getElementById('screenshot-dialog-title');
-      const image = document.getElementById('screenshot-image');
-      const placeholder = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-      const error = document.getElementById('screenshot-error');
-      const status = document.getElementById('screenshot-status');
-      const openLink = document.getElementById('screenshot-open');
-      const stage = document.getElementById('screenshot-stage');
-      const closeButton = document.getElementById('screenshot-dialog-close');
-      const tabs = [...dialog.querySelectorAll('[data-screenshot-size]')];
-      const sizes = {
-        desktop: { file: 'desktop.webp', label: 'ПК' },
-        tablet: { file: 'tablet.webp', label: 'Планшет' },
-        phone: { file: 'phone.webp', label: 'Телефон' }
-      };
-      let screenshotBase = '';
-      let screenshotLabel = '';
-
-      function selectSize(size) {
-        const selected = sizes[size] || sizes.desktop;
-        const source = `${screenshotBase}/${selected.file}`;
-        tabs.forEach((tab) => tab.setAttribute('aria-pressed', String(tab.dataset.screenshotSize === size)));
-        status.textContent = `Полная страница · ${selected.label}`;
-        image.alt = `${screenshotLabel} — скриншот для устройства «${selected.label}»`;
-        image.hidden = true;
-        error.hidden = true;
-        stage.scrollTop = 0;
-        stage.scrollLeft = 0;
-        openLink.href = source;
-        image.onload = () => { image.hidden = false; error.hidden = true; };
-        image.onerror = () => { image.hidden = true; error.hidden = false; };
-        image.src = source;
-      }
-
-      document.querySelectorAll('[data-screenshots]').forEach((button) => {
-        button.addEventListener('click', () => {
-          screenshotBase = button.dataset.screenshots;
-          screenshotLabel = button.dataset.screenshotLabel || 'Скриншоты сайта';
-          title.textContent = screenshotLabel;
-          dialog.showModal();
-          selectSize('desktop');
-        });
-      });
-      tabs.forEach((tab) => tab.addEventListener('click', () => selectSize(tab.dataset.screenshotSize)));
-      closeButton.addEventListener('click', () => dialog.close());
-      dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
-      dialog.addEventListener('close', () => { image.src = placeholder; image.hidden = true; error.hidden = true; });
-    })();
-  </script>
-</body>
+        rel="noopener noreferrer"
+      >
+Записаться <span aria-hidden="true">↗</span>
+      </a>
+    </aside>
+    <aside class="cookie-notice" id="cookieNotice" aria-label="Уведомление о конфиденциальности" hidden>
+      <div class="cookie-notice__copy">
+        <p class="cookie-notice__eyebrow">Конфиденциальность</p>
+        <p class="cookie-notice__text">На сайте нет форм заявок и рекламной аналитики. Видео загружается через Kinescope, а для связи вы переходите в Telegram. Необходимые настройки уведомления сохраняются в браузере.</p>
+        <a class="cookie-notice__link" href="privacy-policy.html">Политика конфиденциальности</a>
+      </div>
+      <button class="button cookie-notice__button" id="cookieNoticeClose" type="button">Понятно</button>
+    </aside>
+    <script
+      src="app.js"
+      defer
+    >
+    </script>
+  </body>
 </html>

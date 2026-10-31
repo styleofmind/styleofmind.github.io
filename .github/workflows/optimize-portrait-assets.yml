@@ -42,24 +42,24 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-480.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-840.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-1123.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-480.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-720.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-1024.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01-mobile.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/about-watercolor-background.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-04.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-05.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-06.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-07.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-08-composed.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-09.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-10.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-11-composed.webp" \
-            "концеп расстановки/concept-4/v4.1/assets/backgrounds/section-12.webp"
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-480.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-840.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-hero-glasses-1123.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-480.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-720.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/portraits/olga-about-1024.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01-mobile.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/about-watercolor-background.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-01.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-04.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-05.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-06.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-07.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-08-composed.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-09.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-10.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-11-composed.webp" \
+            "development/концеп расстановки/concept-4/v4.1/assets/backgrounds/section-12.webp"
           if git diff --cached --quiet; then
             echo "No optimized portrait files to add."
             exit 0

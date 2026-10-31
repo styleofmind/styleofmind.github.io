@@ -14,7 +14,7 @@ Install or restore the Python dependencies:
 Run the existing responsive smoke test (Chromium, four viewport sizes, screenshots and JSON report):
 
 ```powershell
-.\.venv\Scripts\python.exe .\tools\site_tools.py audit --page 'концеп расстановки/concept-1/v1.3/index.html' --out-dir "$env:TEMP\styleofmind-audit-v1.3"
+.\.venv\Scripts\python.exe .\tools\site_tools.py audit --page 'development/концеп расстановки/concept-1/v1.3/index.html' --out-dir "$env:TEMP\styleofmind-audit-v1.3"
 ```
 
 The Python image stack includes Pillow, OpenCV, scikit-image, ImageHash, imageio, NumPy, SciPy, and pandas for image validation, dimensions, similarity/duplicate analysis, image processing and tabular reports. `exifread` reads photo metadata. `pytesseract` connects to the Tesseract OCR executable installed at `C:\Program Files\Tesseract-OCR\tesseract.exe`; the `eng` and `rus` language data are available.

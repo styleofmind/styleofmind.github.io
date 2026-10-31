@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .halo { transform-origin: 32px 32px; animation: breathe 1.15s ease-in-out infinite; }
+    .star { transform-origin: 32px 32px; animation: shimmer 1.15s ease-in-out infinite; }
+    @keyframes breathe { 0%,100% { opacity:.18; transform:scale(.88); } 50% { opacity:.72; transform:scale(1.08); } }
+    @keyframes shimmer { 0%,100% { opacity:.82; } 50% { opacity:1; } }
+    @media (prefers-reduced-motion: reduce) { .halo,.star { animation:none; } }
+  </style>
+  <rect width="64" height="64" rx="15" fill="#111923"/>
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#d9b45c" stroke-opacity=".72" stroke-width="1.2"/>
+  <circle class="halo" cx="32" cy="32" r="17" fill="#e7c477" opacity=".3"/>
+  <circle cx="32" cy="32" r="18" fill="none" stroke="#f0d9a6" stroke-opacity=".16" stroke-width=".7"/>
+  <path class="star" d="M32 9C34.2 26.1 35.9 29.8 53 32C35.9 34.2 34.2 37.9 32 55C29.8 37.9 28.1 34.2 11 32C28.1 29.8 29.8 26.1 32 9Z" fill="#e7c477"/>
+  <circle cx="32" cy="32" r="2.2" fill="#fffaf1"/>
+  <circle cx="48.5" cy="17.5" r="1.6" fill="#f0d9a6"/>
+  <circle cx="15.5" cy="46.5" r="1.2" fill="#d9b45c"/>
+</svg>
