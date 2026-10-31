@@ -3858,6 +3858,7 @@ h3,
   .site-header .mobile-menu summary {
     display: flex;
     min-width: 36px;
+    min-height: 44px;
     align-items: center;
     justify-content: center;
     padding: 9px 8px;
@@ -4930,6 +4931,70 @@ h3,
   }
 }
 
+/* Keep the mobile header proportions fluid and match tablet sizing at 720px. */
+@media (max-width: 720px) {
+  .site-header .header-inner {
+    width: calc(100% - clamp(20px, 7vw, 38px));
+    gap: clamp(6px, calc(4.5vw - 4px), 24px);
+  }
+
+  .site-header .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: clamp(5px, 3vw, 12px);
+  }
+
+  .site-header .brand-star {
+    width: clamp(24px, 8.5vw, 34px);
+    height: clamp(29px, 10.25vw, 41px);
+  }
+
+  .site-header .brand-copy {
+    min-width: 0;
+  }
+
+  .site-header .brand-name {
+    font-size: clamp(11.5px, calc(6vw - 3px), 23px);
+    line-height: 1.05;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .site-header .brand-subtitle {
+    display: block;
+    margin-top: clamp(2px, .75vw, 3px);
+    font-size: clamp(6px, 2vw, 8px);
+    line-height: 1.1;
+    letter-spacing: .08em;
+    white-space: nowrap;
+  }
+
+  .site-header .mobile-menu {
+    flex: 0 0 auto;
+  }
+
+  .site-header .mobile-menu summary {
+    display: flex;
+    min-width: 36px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(3px, 1vw, 5px);
+    padding: 9px clamp(6px, 3vw, 12px);
+    font-size: clamp(10px, 3vw, 12px);
+    white-space: nowrap;
+  }
+
+  .site-header .mobile-menu__label {
+    display: inline;
+  }
+
+  .site-header .mobile-menu summary > span[aria-hidden="true"] {
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1;
+  }
+}
+
 /* Privacy page: keep the title and header brand inside narrow viewports. */
 @media (max-width: 720px) {
   .privacy-template__title {
@@ -4971,5 +5036,21 @@ h3,
     min-height: 40px;
     padding: 9px 8px;
     font-size: 11px;
+  }
+}
+
+/* Use the icon-only menu on the smallest phones while preserving a 44px tap target. */
+@media (max-width: 320px) {
+  .site-header .mobile-menu__label {
+    display: none;
+  }
+
+  .site-header .mobile-menu summary {
+    box-sizing: border-box;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
   }
 }
