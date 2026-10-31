@@ -1106,7 +1106,7 @@ summary:focus-visible {
   padding: 92px 0;
   background:
     linear-gradient(90deg, rgba(8,22,29,.96), rgba(8,22,29,.82)),
-    url("/assets/backgrounds/golden-orbit.png") center/cover no-repeat;
+    url("/assets/backgrounds/golden-orbit.webp") center/cover no-repeat;
 }
 
 .diagnostic-grid {
@@ -1630,7 +1630,7 @@ summary:focus-visible {
   inset: 0;
   z-index: 0;
   background: linear-gradient(90deg, rgba(8, 22, 29, .96), rgba(8, 22, 29, .82)),
-    url("/assets/backgrounds/golden-orbit.png") center / cover no-repeat;
+    url("/assets/backgrounds/golden-orbit.webp") center / cover no-repeat;
 }
 
 .final-inner {
