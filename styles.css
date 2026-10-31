@@ -4911,6 +4911,13 @@ h3,
   }
 }
 
+/* Give the final call-to-action a little more height on phones. */
+@media (max-width: 640px) {
+  .final-section {
+    padding: 72px 0;
+  }
+}
+
 /* Keep the mobile menu icon compact when the full label does not fit. */
 @media (max-width: 299px) {
   .site-header .mobile-menu__label {
