@@ -3736,43 +3736,7 @@ h3,
   }
 }
 
-/* Шаблон страницы политики конфиденциальности */
 
-.privacy-template {
-  min-height: calc(100vh - 148px);
-  background: var(--cream);
-  color: var(--ink);
-}
-
-.privacy-template__inner {
-  padding-top: clamp(72px, 10vw, 120px);
-  padding-bottom: clamp(100px, 14vw, 160px);
-}
-
-.privacy-template__title {
-  max-width: 850px;
-  margin: 0;
-  color: var(--ink);
-  font: 400 clamp(36px, 5vw, 58px)/1.12 var(--serif);
-  letter-spacing: -.025em;
-}
-
-.privacy-template__content {
-  min-height: 320px;
-  margin-top: 32px;
-}
-
-@media (max-width: 720px) {
-  .privacy-template__inner {
-    padding-top: 64px;
-    padding-bottom: 88px;
-  }
-
-  .privacy-template__content {
-    min-height: 280px;
-    margin-top: 24px;
-  }
-}
 
 /* Contrast and touch-target adjustments validated against WCAG checks. */
 
@@ -4720,34 +4684,7 @@ h3,
   .cookie-notice__button { padding: 10px 8px; font-size: 11px; }
 }
 
-.privacy-template__content {
-  max-width: 820px;
-  color: #505653;
-  font: 400 14px/1.8 var(--sans);
-}
-.privacy-template__content p { margin: 0 0 16px; }
-.privacy-template__content h2 {
-  margin: 38px 0 12px;
-  color: var(--ink);
-  font: 400 clamp(21px, 2.5vw, 27px)/1.25 var(--serif);
-}
-.privacy-template__content a {
-  color: #596b68;
-  text-decoration: underline;
-  text-decoration-color: rgba(89, 107, 104, .4);
-  text-underline-offset: 3px;
-}
-.privacy-template__content .privacy-template__updated,
-.privacy-template__content .privacy-template__note {
-  color: #77786f;
-  font-size: 12px;
-}
-.privacy-template__content .privacy-template__updated { margin-bottom: 24px; }
-.privacy-template__content .privacy-template__note { margin-top: 36px; }
-@media (max-width: 720px) {
-  .privacy-template__content { font-size: 13px; line-height: 1.75; }
-  .privacy-template__content h2 { margin-top: 30px; }
-}
+
 
 
 .footer-cookie-settings {
@@ -4995,50 +4932,6 @@ h3,
   }
 }
 
-/* Privacy page: keep the title and header brand inside narrow viewports. */
-@media (max-width: 720px) {
-  .privacy-template__title {
-    font-size: clamp(24px, 7vw, 36px);
-    line-height: 1.15;
-    hyphens: auto;
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 520px) {
-  .privacy-page .site-header .header-inner {
-    gap: 6px;
-  }
-
-  .privacy-page .site-header .brand {
-    flex: 1 1 0;
-    min-width: 0;
-    gap: 6px;
-  }
-
-  .privacy-page .site-header .brand-star {
-    width: 24px;
-    height: 30px;
-  }
-
-  .privacy-page .site-header .brand-copy {
-    min-width: 0;
-  }
-
-  .privacy-page .site-header .brand-name {
-    font-size: clamp(10px, 4.4vw, 15px);
-    line-height: 1.05;
-    white-space: normal;
-  }
-
-  .privacy-page .site-header .button {
-    flex: 0 0 auto;
-    min-height: 40px;
-    padding: 9px 8px;
-    font-size: 11px;
-  }
-}
-
 /* Use the icon-only menu on the smallest phones while preserving a 44px tap target. */
 @media (max-width: 320px) {
   .site-header .mobile-menu__label {
@@ -5052,5 +4945,143 @@ h3,
     height: 44px;
     min-height: 44px;
     padding: 0;
+  }
+}
+
+/* Privacy policy: keep all page-specific rules scoped and together. */
+.privacy-page .privacy-template {
+  min-height: calc(100vh - 148px);
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.privacy-page .privacy-template__inner {
+  padding-top: clamp(72px, 10vw, 120px);
+  padding-bottom: clamp(100px, 14vw, 160px);
+}
+
+.privacy-page .privacy-template__title {
+  max-width: 850px;
+  margin: 0;
+  color: var(--ink);
+  font: 400 clamp(36px, 5vw, 58px)/1.12 var(--serif);
+  letter-spacing: -.025em;
+  overflow-wrap: break-word;
+}
+
+.privacy-page .privacy-template__content {
+  width: 100%;
+  max-width: 820px;
+  min-width: 0;
+  margin-top: 32px;
+  color: #505653;
+  font: 400 14px/1.8 var(--sans);
+}
+
+.privacy-page .privacy-template__content p {
+  margin: 0 0 16px;
+  overflow-wrap: break-word;
+}
+
+.privacy-page .privacy-template__content h2 {
+  margin: 38px 0 12px;
+  color: var(--ink);
+  font: 400 clamp(21px, 2.5vw, 27px)/1.25 var(--serif);
+  overflow-wrap: break-word;
+}
+
+.privacy-page .privacy-template__content a {
+  color: #596b68;
+  text-decoration: underline;
+  text-decoration-color: rgba(89, 107, 104, .4);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.privacy-page .privacy-template__content .privacy-template__updated,
+.privacy-page .privacy-template__content .privacy-template__note {
+  color: #77786f;
+  font-size: 12px;
+}
+
+.privacy-page .privacy-template__content .privacy-template__updated {
+  margin-bottom: 24px;
+}
+
+.privacy-page .privacy-template__content .privacy-template__note {
+  margin: 36px 0 0;
+}
+
+.privacy-page .privacy-template__content > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .privacy-page .privacy-template__inner {
+    padding-top: 64px;
+    padding-bottom: 88px;
+  }
+
+  .privacy-page .privacy-template__title {
+    font-size: clamp(22px, 6vw, 36px);
+    line-height: 1.15;
+    hyphens: auto;
+  }
+
+  .privacy-page .privacy-template__content {
+    margin-top: 24px;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .privacy-page .privacy-template__content h2 {
+    margin-top: 30px;
+    font-size: clamp(20px, 5.5vw, 24px);
+  }
+
+  .privacy-page .privacy-template__content .privacy-template__updated,
+  .privacy-page .privacy-template__content .privacy-template__note {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 520px) {
+  .privacy-page .site-header .header-inner {
+    gap: 6px;
+  }
+
+  .privacy-page .site-header .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .privacy-page .site-header .brand-star {
+    width: clamp(22px, 6vw, 30px);
+    height: clamp(27px, 7.5vw, 36px);
+  }
+
+  .privacy-page .site-header .brand-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .privacy-page .site-header .brand-name {
+    font-size: clamp(10px, 4.4vw, 15px);
+    line-height: 1.05;
+    white-space: normal;
+  }
+
+  .privacy-page .site-header .brand-subtitle {
+    font-size: clamp(6px, 1.8vw, 8px);
+    white-space: nowrap;
+  }
+
+  .privacy-page .site-header .button {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 9px 8px;
+    font-size: 11px;
+    white-space: nowrap;
   }
 }
