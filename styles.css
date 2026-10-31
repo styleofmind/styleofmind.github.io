@@ -1621,7 +1621,7 @@ summary:focus-visible {
 }
 
 .final-section {
-  padding: 100px 0 90px;
+  padding: 88px 0;
   text-align: center;
 }
 
@@ -1636,7 +1636,7 @@ summary:focus-visible {
 .final-inner {
   position: relative;
   z-index: 2;
-  max-width: 810px;
+  max-width: 760px;
 }
 
 .final-inner .eyebrow {
@@ -1645,6 +1645,8 @@ summary:focus-visible {
 
 .final-inner .section-title {
   font-size: clamp(32px, 4.2vw, 50px);
+  font-weight: 500;
+  line-height: 1.02;
   color: #fff8ed;
   margin-bottom: 19px;
 }
@@ -2060,7 +2062,7 @@ summary:focus-visible {
   }
 
   .final-section {
-    padding: 75px 0 65px;
+    padding: 64px 0;
   }
 
   .final-inner .section-title {
@@ -2119,13 +2121,6 @@ summary:focus-visible {
     gap: 22px 8px;
   }
 
-  .final-actions {
-    flex-direction: column;
-  }
-
-  .final-actions .button {
-    width: 100%;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
