@@ -42,7 +42,9 @@
         <h2>5. Хостинг GitHub Pages</h2>
         <p>Сайт размещён на GitHub Pages. При обращении к сайту инфраструктура хостинга может обрабатывать технические данные запроса и журналы сервера, включая IP-адрес, дату и время запроса, сведения о браузере и запрошенном ресурсе. Такая обработка регулируется документами GitHub, включая <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">заявление GitHub о конфиденциальности</a>.</p>
         <h2>6. Аналитика и рекламные технологии</h2>
-        <p>На сайте не подключены счётчики веб-аналитики, рекламные пиксели и инструменты поведенческого профилирования. Идентификаторы Google Analytics и Яндекс Метрики в конфигурации не заполнены; соответствующие счётчики не запускаются.</p>
+        <p>На сайте используются Google Analytics 4 (идентификатор потока G-L3K3HMRF2Z) и Яндекс Метрика (счётчик 113093974). Их скрипты загружаются только после выбора «Разрешить аналитику». До этого запросы к сервисам аналитики не отправляются.</p>
+        <p>После согласия сервисы получают просмотры страниц, переходы по ссылкам записи и Telegram, стандартные технические сведения о браузере и устройстве, а также источник перехода. Текст сообщения, подготовленный для Telegram, не передаётся. В Метрике используется существующая автоцель перехода в мессенджер; отдельная дублирующая цель не создаётся. Вебвизор и карта кликов отключены; на сайте нет форм для отправки данных. В Google Analytics оставлены просмотры страниц, а автоматический сбор прокруток, исходящих ссылок, поиска, форм, видео и скачиваний отключён. Рекламные функции и рекламные пиксели не подключены.</p>
+        <p>Выбор сохраняется в браузере на срок до 180 дней. Изменить его можно в любой момент через кнопку «Настройки аналитики» внизу сайта. При отказе после ранее данного согласия счётчики отключаются и страница перезагружается.</p>
         <h2>7. Контроль данных</h2>
         <p>Автор сайта не собирает через сайт заявки или платёжные данные. Посетитель может отказаться от перехода в Telegram и не запускать встроенное видео. Локальные записи можно удалить через настройки браузера, однако это не удаляет сведения, которые могли быть обработаны сторонними сервисами.</p>
         <h2>8. Контакты и обновления</h2>
@@ -73,9 +75,23 @@
     </div>
     <div class="page-width footer-bottom">
       <a href="privacy-policy.html" aria-current="page">Политика конфиденциальности</a>
+      <button class="footer-cookie-settings" id="analyticsSettingsOpen" type="button">Настройки аналитики</button>
       <span class="footer-date">&copy; <span data-current-year></span></span>
     </div>
   </footer>
-  <script src="app.js"></script>
+  <aside class="cookie-notice cookie-notice--consent" id="analyticsConsent" aria-label="Настройки аналитики" aria-live="polite" hidden>
+    <div class="cookie-notice__copy">
+      <p class="cookie-notice__eyebrow">Конфиденциальность</p>
+      <p class="cookie-notice__text">Яндекс Метрика и Google Analytics 4 включаются только после вашего согласия. Тогда учитываются просмотры страниц и переходы по кнопкам записи и Telegram, а также стандартные технические сведения и источник перехода. Текст сообщения в Telegram не отправляется.</p>
+      <a class="cookie-notice__link" href="privacy-policy.html">Политика конфиденциальности</a>
+    </div>
+    <div class="cookie-notice__actions">
+      <button class="button cookie-notice__button cookie-notice__button--secondary" id="analyticsConsentReject" type="button">Только необходимые</button>
+      <button class="button cookie-notice__button" id="analyticsConsentAccept" type="button">Разрешить аналитику</button>
+    </div>
+  </aside>
+  <script src="analytics-config.js" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

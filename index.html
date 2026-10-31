@@ -1508,6 +1508,7 @@ Telegram-канал ↗
       </div>
       <div class="page-width footer-bottom">
         <a href="privacy-policy.html">Политика конфиденциальности</a>
+        <button class="footer-cookie-settings" id="analyticsSettingsOpen" type="button">Настройки аналитики</button>
         <span class="footer-date">&copy; <span data-current-year></span></span>
       </div>
     </footer>
@@ -1545,18 +1546,19 @@ Telegram-канал ↗
 Записаться <span aria-hidden="true">↗</span>
       </a>
     </aside>
-    <aside class="cookie-notice" id="cookieNotice" aria-label="Уведомление о конфиденциальности" hidden>
+    <aside class="cookie-notice cookie-notice--consent" id="analyticsConsent" aria-label="Настройки аналитики" aria-live="polite" hidden>
       <div class="cookie-notice__copy">
         <p class="cookie-notice__eyebrow">Конфиденциальность</p>
-        <p class="cookie-notice__text">На сайте нет форм заявок и рекламной аналитики. Видео загружается через Kinescope, а для связи вы переходите в Telegram. Необходимые настройки уведомления сохраняются в браузере.</p>
+        <p class="cookie-notice__text">Яндекс Метрика и Google Analytics 4 включаются только после вашего согласия. Тогда учитываются просмотры страниц и переходы по кнопкам записи и Telegram, а также стандартные технические сведения и источник перехода. Текст сообщения в Telegram не отправляется.</p>
         <a class="cookie-notice__link" href="privacy-policy.html">Политика конфиденциальности</a>
       </div>
-      <button class="button cookie-notice__button" id="cookieNoticeClose" type="button">Понятно</button>
+      <div class="cookie-notice__actions">
+        <button class="button cookie-notice__button cookie-notice__button--secondary" id="analyticsConsentReject" type="button">Только необходимые</button>
+        <button class="button cookie-notice__button" id="analyticsConsentAccept" type="button">Разрешить аналитику</button>
+      </div>
     </aside>
-    <script
-      src="app.js"
-      defer
-    >
-    </script>
+    <script src="analytics-config.js" defer></script>
+    <script src="analytics.js" defer></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

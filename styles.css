@@ -4691,3 +4691,59 @@ h3,
   .privacy-template__content { font-size: 13px; line-height: 1.75; }
   .privacy-template__content h2 { margin-top: 30px; }
 }
+
+
+/* Consent controls for optional analytics. */
+.cookie-notice--consent {
+  align-items: flex-start;
+}
+
+.cookie-notice__actions {
+  display: flex;
+  flex: 0 0 190px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cookie-notice__actions .cookie-notice__button {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+}
+
+.cookie-notice__button--secondary {
+  color: var(--night-2);
+  background: transparent;
+  border-color: rgba(31, 45, 51, .3);
+}
+
+.cookie-notice__button--secondary:hover {
+  color: var(--white);
+  background: var(--night-3);
+  border-color: var(--night-3);
+}
+
+.footer-cookie-settings {
+  padding: 0;
+  color: #e6d2a5;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: rgba(230, 210, 165, .45);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.footer-cookie-settings:focus-visible {
+  outline: 2px solid #e6d2a5;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .cookie-notice__actions {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}

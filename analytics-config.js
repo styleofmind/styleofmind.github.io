@@ -1,5 +1,5 @@
-/* Идентификаторы систем аналитики. Пустое значение = система не подключена. */
+/* Идентификаторы систем аналитики. Сами счетчики запускаются только после согласия посетителя. */
 window.SITE_ANALYTICS = Object.freeze({
-  googleAnalyticsId: "",
-  yandexMetrikaId: ""
+  googleAnalyticsId: "G-L3K3HMRF2Z",
+  yandexMetrikaId: "113093974"
 });
