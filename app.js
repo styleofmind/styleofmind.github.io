@@ -60,12 +60,22 @@
       } catch (_) {}
     };
     const formatsSection = document.querySelector('.formats-section');
+    const finalSection = document.querySelector('.final-section');
     const formatsAreVisible = () => {
       if (!formatsSection) return false;
       const rect = formatsSection.getBoundingClientRect();
       return rect.bottom > 0 && rect.top < window.innerHeight;
     };
+    const finalSectionIsVisible = () => {
+      if (!finalSection) return false;
+      const rect = finalSection.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    };
     const tryShow = () => {
+      if (finalSectionIsVisible()) {
+        popup.hidden = true;
+        return;
+      }
       if (!videoActive && !formatsAreVisible() && (scrollThresholdReached || timerElapsed)) show();
     };
     const close = () => {
@@ -81,6 +91,10 @@
     });
     let scrollTimer;
     window.addEventListener('scroll', () => {
+      if (finalSectionIsVisible()) {
+        if (shown) popup.hidden = true;
+        return;
+      }
       if (shown) return;
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(() => {

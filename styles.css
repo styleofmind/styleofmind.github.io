@@ -4829,3 +4829,62 @@ h3,
     line-height: 1.02;
   }
 }
+
+/* Extra-small screens: prevent value cards and the footer brand from widening the page. */
+@media (max-width: 280px) {
+  .value-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer-brand .brand-name {
+    font-size: clamp(17px, 7.5vw, 22px);
+  }
+}
+
+/* Keep the diagnostic offer above the fixed cookie notice on narrow screens. */
+@media (max-width: 520px) {
+  .offer-popup {
+    bottom: clamp(185px, calc(315px - 25vw), 255px);
+    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 900px) {
+  .offer-popup {
+    bottom: 190px;
+    max-height: calc(100vh - 225px);
+    overflow-y: auto;
+  }
+}
+
+/* Keep the wordmark clear of the menu on the narrowest supported screens. */
+@media (max-width: 280px) {
+  .site-header .header-inner {
+    gap: 4px;
+  }
+
+  .site-header .brand {
+    gap: 5px;
+  }
+
+  .site-header .brand-star {
+    width: 24px;
+    height: 30px;
+  }
+
+  .site-header .brand-name {
+    font-size: clamp(11.75px, 4.9vw, 13.72px);
+  }
+
+  .site-header .mobile-menu summary {
+    padding: 9px 5px;
+  }
+
+  .final-section .final-actions .button-gold {
+    max-width: 100%;
+    padding: 10px 8px;
+    gap: 8px;
+    font-size: 11px;
+  }
+}
