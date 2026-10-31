@@ -591,6 +591,14 @@ Telegram ↗
 The «Расстановки» caption has been removed. The last footer item displays the current year automatically via JavaScript.
 
 
+## Cookie notice
+
+A compact bottom-left privacy notice uses the site's cream palette and Montserrat typography. It explains that only necessary browser storage is used; closing it saves the dismissal in localStorage for later visits. No analytics or advertising cookies are introduced.
+
 ## Footer layout update
 
 The privacy policy link and automatically updated copyright year are placed in a separate bottom footer row, below the brand and navigation row.
+
+## Analytics configuration
+
+`analytics-config.js` содержит идентификаторы Google Analytics 4 (`googleAnalyticsId`) и Яндекс Метрики (`yandexMetrikaId`). Сейчас оба значения пустые; счётчики не подключены. Заполнение идентификаторов само по себе не включает аналитику: подключение скриптов и обновление политики конфиденциальности нужно выполнить отдельно.

@@ -4,6 +4,20 @@
   if (window[key]) return;
   window[key] = true;
 
+  /* Necessary-storage notice */
+  (() => {
+    const notice = document.getElementById('cookieNotice');
+    const closeButton = document.getElementById('cookieNoticeClose');
+    if (!notice || !closeButton) return;
+    const storageKey = 'styleOfMindPrivacyNoticeDismissed_v1';
+    try { if (localStorage.getItem(storageKey) === '1') return; } catch (_) {}
+    notice.hidden = false;
+    closeButton.addEventListener('click', () => {
+      notice.hidden = true;
+      try { localStorage.setItem(storageKey, '1'); } catch (_) {}
+    });
+  })();
+
   /* Поведение страницы «Расставить точки над МЫ». */
 
   /* Во время загрузки показываем мягко пульсирующий фавикон, после полной загрузки — статичный. */
