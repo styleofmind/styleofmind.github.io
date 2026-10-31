@@ -7,7 +7,7 @@ This repository's local audit environment uses Python in `.venv` plus a small se
 Install or restore the Python dependencies:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r .\requirements-audit.txt
+.\.venv\Scripts\python.exe -m pip install -r .\tools\requirements-audit.txt
 .\.venv\Scripts\python.exe -m playwright install chromium firefox webkit
 ```
 

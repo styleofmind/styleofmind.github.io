@@ -41,11 +41,11 @@ Style of Mind — сайт психолога, который занимаетс
 
 ## Документация для ИИ-агентов
 
-- `AI_DOCS/README.md` — точка входа, назначение сайта и правила работы ИИ.
+- `README.md` — точка входа, назначение сайта и правила работы ИИ.
 - `AI_DOCS/ARCHITECTURE.md` — архитектура статического сайта и карта целевой страницы.
 - `AI_DOCS/OPERATIONS.md` — порядок внесения изменений, проверки и публикации.
 
-При работе над проектом начинать с `AI_DOCS/README.md`, затем читать профильные документы. Подробные процедуры локального запуска и аудита остаются в `LOCAL_PREVIEW.md` и `AUDIT_TOOLING.md`.
+При работе над проектом начинать с `README.md`, затем читать профильные документы. Подробные процедуры локального запуска и аудита остаются в `guides/LOCAL_PREVIEW.md` и `guides/AUDIT_TOOLING.md`.
 
 - All HTML pages in `development/` include `<meta name="robots" content="noindex,nofollow">`. `sitemap.xml` excludes the development directory. `robots.txt` permits crawling so search engines can read the noindex directive.
 

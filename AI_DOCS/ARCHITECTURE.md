@@ -15,9 +15,9 @@ Style of Mind — сайт психолога, который занимаетс
 - `концеп лендинга/` — отдельные варианты лендинга того же проекта; не считать это направлением интерьерного дизайна или другим бизнесом.
 - `development/catalog-screenshots/` — оптимизированные скриншоты для каталога.
 - `tools/site_tools.py` — локальные инструменты предпросмотра и аудита.
-- `check_site.bat`, `open_site_local.bat` — запуск проверок и локального предпросмотра в Windows.
-- `requirements-audit.txt` — зависимости локального аудита, не зависимости публикуемого сайта.
-- `PROJECT_CONTEXT.md`, `PLAN.md`, `LOCAL_PREVIEW.md`, `AUDIT_TOOLING.md` — контекст, план выпуска и инструкции для проверки.
+- `tools/check_site.bat`, `tools/open_site_local.bat` — запуск проверок и локального предпросмотра в Windows.
+- `tools/requirements-audit.txt` — зависимости локального аудита, не зависимости публикуемого сайта.
+- `PROJECT_CONTEXT.md`, `PLAN.md`, `guides/LOCAL_PREVIEW.md`, `guides/AUDIT_TOOLING.md` — контекст, план выпуска и инструкции для проверки.
 - `robots.txt`, `sitemap.xml`, `404.html` — технические страницы и правила индексации.
 
 ## Каталоги концептов
