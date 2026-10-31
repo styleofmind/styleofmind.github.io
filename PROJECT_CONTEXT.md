@@ -58,3 +58,8 @@ Style of Mind — сайт психолога, который занимаетс
 
 ## Analytics scope
 - Analytics scripts are loaded only on the root production homepage after explicit visitor consent. Development concept pages and privacy-policy.html do not load tracking providers.
+
+
+## Production certificates
+- The production gallery contains 12 WebP certificates. assets/certificates/ serves carousel images (max edge 900 px); assets/certificate-thumbnails/ serves thumbnails (max edge 220 px); assets/certificates-original/ contains full-resolution WebP files opened in the lightbox.
+- Certificate photos 1, 4, and 7 are two-page spreads rotated clockwise. Source JPG uploads were removed after WebP generation and validation.
