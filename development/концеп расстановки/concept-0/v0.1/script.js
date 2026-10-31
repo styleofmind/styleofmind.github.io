@@ -1,5 +1,3 @@
-window.YM_COUNTER_ID = 113093974;
-
 document.addEventListener('DOMContentLoaded', function () {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cookieConsent = document.getElementById('cookieConsent');
