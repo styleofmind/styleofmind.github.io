@@ -1564,7 +1564,7 @@ Telegram-канал ↗
       </div>
       <div class="page-width footer-bottom">
         <a href="privacy-policy.html">Политика конфиденциальности</a>
-        <button class="footer-cookie-settings" id="analyticsSettingsOpen" type="button">Настройки аналитики</button>
+        <button class="footer-cookie-settings" id="analyticsSettingsOpen" type="button">Настройки cookie</button>
         <span class="footer-date">&copy; <span data-current-year></span></span>
       </div>
     </footer>
@@ -1602,15 +1602,12 @@ Telegram-канал ↗
 Записаться <span aria-hidden="true">↗</span>
       </a>
     </aside>
-    <aside class="cookie-notice cookie-notice--consent" id="analyticsConsent" aria-label="Согласие на cookies" aria-live="polite" hidden>
-      <div class="cookie-notice__copy">
-        <p class="cookie-notice__eyebrow">Файлы cookie</p>
-        <p class="cookie-notice__text">Разрешите использовать cookie для анализа посещаемости сайта.</p>
-        <a class="cookie-notice__link" href="privacy-policy.html">Подробнее</a>
-      </div>
+    <aside class="cookie-notice" id="analyticsConsent" aria-label="Использование cookie" aria-live="polite" hidden>
+      <p class="cookie-notice__text">Мы используем файлы cookie, чтобы понимать, как посетители пользуются сайтом.</p>
+      <a class="cookie-notice__link" href="privacy-policy.html">Политика конфиденциальности</a>
       <div class="cookie-notice__actions">
         <button class="button cookie-notice__button cookie-notice__button--secondary" id="analyticsConsentReject" type="button">Только необходимые</button>
-        <button class="button cookie-notice__button" id="analyticsConsentAccept" type="button">Разрешить аналитику</button>
+        <button class="button cookie-notice__button" id="analyticsConsentAccept" type="button">Принять</button>
       </div>
     </aside>
     <script src="analytics-config.js" defer></script>
