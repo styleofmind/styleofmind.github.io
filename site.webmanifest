@@ -1,0 +1,19 @@
+{
+  "name": "Ольга Сусленникова — клинический психолог",
+  "short_name": "Ольга Сусленникова",
+  "description": "Системные семейные расстановки. Индивидуально и в группе, онлайн и очно.",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#111923",
+  "theme_color": "#111923",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

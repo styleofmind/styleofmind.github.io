@@ -48,3 +48,10 @@ Style of Mind — сайт психолога, который занимаетс
 При работе над проектом начинать с `AI_DOCS/README.md`, затем читать профильные документы. Подробные процедуры локального запуска и аудита остаются в `LOCAL_PREVIEW.md` и `AUDIT_TOOLING.md`.
 
 - All HTML pages in `development/` include `<meta name="robots" content="noindex,nofollow">`. `sitemap.xml` excludes the development directory. `robots.txt` permits crawling so search engines can read the noindex directive.
+
+## SEO и метаданные production
+- `robots.txt` разрешает обход сайта и указывает на корневой `sitemap.xml`.
+- `sitemap.xml` содержит canonical URL главной страницы; каталог `development/` в карту не включать.
+- Корневой `index.html` содержит `title`, `meta description`, canonical, Open Graph/Twitter metadata и JSON-LD (`Person` + `WebSite`). Для превью используется `assets/og/olga-social-preview.png` — изображение портрета с тёплым светлым фоном. Предыдущий исходный портрет сохранён отдельно как `assets/og/1_olga-social-preview.webp`.
+- `site.webmanifest` описывает название сайта и использует статический `favicon.svg`; анимированный `favicon-loading.svg` остаётся favicon в HTML.
+- Не добавлять в структурированные данные адрес, отзывы, рейтинги или неподтверждённые квалификации.
