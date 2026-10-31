@@ -189,6 +189,6 @@
   if (analyticsEnabled) {
     enableAnalytics();
   } else {
-    setNoticeVisibility(true);
+    setNoticeVisibility(consent === null);
   }
 })();
