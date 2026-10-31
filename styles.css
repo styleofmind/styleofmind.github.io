@@ -4747,3 +4747,12 @@ h3,
     width: 100%;
   }
 }
+
+
+/* Mobile: reduce the formats section heading without changing desktop typography. */
+@media (max-width: 600px) {
+  .formats-section .section-title {
+    font-size: clamp(34px, 10.25vw, 42px);
+    line-height: 1.08;
+  }
+}
