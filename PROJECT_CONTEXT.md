@@ -52,6 +52,6 @@ Style of Mind — сайт психолога, который занимаетс
 ## SEO и метаданные production
 - `robots.txt` разрешает обход сайта и указывает на корневой `sitemap.xml`.
 - `sitemap.xml` содержит canonical URL главной страницы; каталог `development/` в карту не включать.
-- Корневой `index.html` содержит `title`, `meta description`, canonical, Open Graph/Twitter metadata и JSON-LD (`Person` + `WebSite`). Для превью используется `assets/og/olga-social-preview.png` — изображение портрета с тёплым светлым фоном. Предыдущий исходный портрет сохранён отдельно как `assets/og/1_olga-social-preview.webp`.
+- Корневой `index.html` содержит `title`, `meta description`, canonical, Open Graph/Twitter metadata и JSON-LD (`Person` + `WebSite`). Для превью используется `assets/og/olga-social-preview.webp` — WebP-версия изображения портрета с тёплым светлым фоном. Предыдущий исходный портрет сохранён отдельно как `assets/og/1_olga-social-preview.webp`.
 - `site.webmanifest` описывает название сайта и использует статический `favicon.svg`; анимированный `favicon-loading.svg` остаётся favicon в HTML.
 - Не добавлять в структурированные данные адрес, отзывы, рейтинги или неподтверждённые квалификации.
