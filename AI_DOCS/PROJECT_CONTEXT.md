@@ -10,10 +10,10 @@ Style of Mind — сайт психолога, который занимаетс
 ## Репозиторий и публикация
 - Репозиторий: `styleofmind/styleofmind.github.io`.
 - Основная ветка: `main`; публикация выполняется через GitHub Pages.
-- Главная — каталог концептов: `index.html`.
+- Главная production-страница — `index.html` (лендинг специалиста). Каталог экспериментальных концепций находится в `development/index.html`.
 - Каталог разделён на направления «Расстановки» и «Лендинг»; у 10 исходных версий есть отдельная кнопка просмотра скриншотов ПК/планшет/телефон; для новой v1.3 скриншоты ещё не подготовлены.
 - `development/catalog-screenshots/` содержит 30 оптимизированных WebP-снимков; локальные PNG-оригиналы хранятся в игнорируемой Git папке `Скрины сайта/`.
-- `robots.txt` и `sitemap.xml` находятся в корне. Sitemap намеренно содержит только `https://styleofmind.github.io/`, canonical URL каталога.
+- `robots.txt` и `sitemap.xml` находятся в корне. Sitemap содержит canonical production URL главной страницы, страницы политики и отдельных страниц форматов; каталог `development/` в карту не включать.
 - `404.html` показывает страницу «Не найдена» и не перенаправляет автоматически.
 
 ## Актуальные концепты
@@ -57,7 +57,7 @@ Style of Mind — сайт психолога, который занимаетс
 - Не добавлять в структурированные данные адрес, отзывы, рейтинги или неподтверждённые квалификации.
 
 ## Analytics scope
-- The production homepage and privacy-policy.html load `analytics-config.js` and `analytics.js` after explicit visitor consent. Development concept pages do not load the production analytics tag.
+- Production pages `index.html`, `privacy-policy.html`, `online-family-constellations.html`, `group-constellations-spb.html` and `how-family-constellations-work.html` load `analytics-config.js` and `analytics.js` after explicit visitor consent. Development concept pages do not load the production analytics tag.
 - Analytics uses a basic opt-in flow: providers are not loaded before consent; consent is stored for up to 180 days. Google ad storage, ad user data, ad personalization, Google signals and ad personalization signals remain denied.
 - Yandex Metrica is configured in code with Webvisor, clickmap, outbound-link tracking and accurate bounce rate. Account-side Webvisor/scroll-map settings and JavaScript-event goals must also be enabled in the Metrica cabinet.
 - GA4 receives page views and custom interaction events. Enhanced Measurement options are managed separately in the Google Analytics data-stream settings.
