@@ -66,6 +66,8 @@ jobs:
           node --check analytics.js
           node --check analytics-config.js
           node --check tools/seo_checks.mjs
+          node --check tools/site_browser_audit.mjs
+          find development -type f -name '*.js' -exec node --check {} \;
 
       - name: Install browser QA tools
         run: npm install --no-save playwright axe-core lighthouse
