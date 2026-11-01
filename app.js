@@ -410,7 +410,10 @@
       if (scrollSlide) {
         programmaticScroll = true;
         const slide = slides[active];
-        const centeredLeft = slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2;
+        const trackRect = track.getBoundingClientRect();
+        const slideRect = slide.getBoundingClientRect();
+        const centeredLeft = track.scrollLeft + slideRect.left - trackRect.left
+          - (track.clientWidth - slideRect.width) / 2;
         track.scrollTo({
           left: centeredLeft,
           behavior: reducedMotion.matches ? 'auto' : 'smooth'
@@ -425,11 +428,14 @@
       if (programmaticScroll) return;
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(() => {
-        const trackCenter = track.scrollLeft + track.clientWidth / 2;
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + track.clientWidth / 2;
         const nearestIndex = slides.reduce((bestIndex, slide, index) => {
-          const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+          const slideCenter = slide.getBoundingClientRect().left
+            + slide.getBoundingClientRect().width / 2;
           const bestSlide = slides[bestIndex];
-          const bestCenter = bestSlide.offsetLeft + bestSlide.offsetWidth / 2;
+          const bestCenter = bestSlide.getBoundingClientRect().left
+            + bestSlide.getBoundingClientRect().width / 2;
           return Math.abs(slideCenter - trackCenter) < Math.abs(bestCenter - trackCenter)
             ? index
             : bestIndex;
