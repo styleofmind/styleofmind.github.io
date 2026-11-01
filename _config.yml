@@ -1,0 +1,15 @@
+exclude:
+  - AI_DOCS
+  - tools
+  - site-audit
+  - .venv
+  - .idea
+  - .vscode
+  - "Скрины сайта"
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
