@@ -356,6 +356,8 @@
     const nextArrow = section.querySelector('.certificate-carousel__arrow--next');
     const dialog = section.querySelector('.certificate-lightbox');
     const largeImage = dialog?.querySelector('.certificate-lightbox__image');
+    const lightboxPreviousArrow = dialog?.querySelector('.certificate-lightbox__nav--prev');
+    const lightboxNextArrow = dialog?.querySelector('.certificate-lightbox__nav--next');
     if (!track || !slides.length || !dialog || !largeImage) return;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let active = 0;
@@ -374,8 +376,17 @@
         behavior: reducedMotion.matches ? 'auto' : 'smooth'
       });
     };
+    const updateLargeImage = () => {
+      const slide = slides[active];
+      const image = slide?.querySelector('img');
+      if (!image) return;
+      largeImage.src = slide.dataset.fullSrc || image.currentSrc || image.src;
+      largeImage.alt = image.alt;
+    };
     const syncActive = index => {
       active = Math.max(0, Math.min(slides.length - 1, index));
+      if (lightboxPreviousArrow) lightboxPreviousArrow.disabled = active <= 0;
+      if (lightboxNextArrow) lightboxNextArrow.disabled = active >= slides.length - 1;
       slides.forEach((slide, i) => {
         const selected = i === active;
         slide.classList.toggle('is-active', selected);
@@ -407,6 +418,7 @@
     const setActive = (index, scrollSlide = true) => {
       const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
       syncActive(nextIndex);
+      if (dialog.open) updateLargeImage();
       if (scrollSlide) {
         programmaticScroll = true;
         const slide = slides[active];
@@ -445,16 +457,24 @@
     };
     const showLarge = index => {
       setActive(index);
-      const image = slides[active].querySelector('img');
-      if (!image) return;
-      largeImage.src = slides[active].dataset.fullSrc || image.currentSrc || image.src;
-      largeImage.alt = image.alt;
+      updateLargeImage();
       if (!dialog.open) dialog.showModal();
     };
     slides.forEach((slide, i) => slide.addEventListener('click', () => showLarge(i)));
     thumbnails.forEach((thumbnail, i) => thumbnail.addEventListener('click', () => setActive(i)));
     previousArrow?.addEventListener('click', () => setActive(active - 1));
     nextArrow?.addEventListener('click', () => setActive(active + 1));
+    lightboxPreviousArrow?.addEventListener('click', () => setActive(active - 1));
+    lightboxNextArrow?.addEventListener('click', () => setActive(active + 1));
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' && active > 0) {
+        event.preventDefault();
+        setActive(active - 1);
+      } else if (event.key === 'ArrowRight' && active < slides.length - 1) {
+        event.preventDefault();
+        setActive(active + 1);
+      }
+    });
     track.addEventListener('scroll', syncFromTrack, {
       passive: true
     });

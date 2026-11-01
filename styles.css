@@ -5255,3 +5255,57 @@ h3,
     height: 170px;
   }
 }
+
+/* Navigation inside the full-size certificate viewer. */
+.certificate-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .38);
+  border-radius: 50%;
+  background: rgba(32, 30, 27, .78);
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color .18s, opacity .18s;
+}
+
+.certificate-lightbox__nav--prev {
+  left: 8px;
+}
+
+.certificate-lightbox__nav--next {
+  right: 8px;
+}
+
+.certificate-lightbox__nav:hover:not(:disabled) {
+  background: rgba(182, 154, 104, .5);
+}
+
+.certificate-lightbox__nav:disabled {
+  opacity: .22;
+  cursor: default;
+}
+
+@media (max-width: 720px) {
+  .certificate-lightbox__nav {
+    width: 42px;
+    height: 42px;
+    font-size: 30px;
+  }
+
+  .certificate-lightbox__nav--prev {
+    left: 6px;
+  }
+
+  .certificate-lightbox__nav--next {
+    right: 6px;
+  }
+}
