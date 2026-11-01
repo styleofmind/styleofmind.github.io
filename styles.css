@@ -5200,3 +5200,36 @@ h3,
     transition: none;
   }
 }
+
+/* Certificates: remove decorative frames and effects. */
+.certificate-carousel__track > .certificate-slide {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  opacity: .62;
+}
+
+.certificate-carousel__track > .certificate-slide.is-active {
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
+}
+
+.certificate-carousel__arrow {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.certificate-carousel__arrow:hover:not(:disabled) {
+  background: transparent;
+  opacity: .65;
+}
+
+.certificate-gallery-status__progress {
+  display: none;
+}
