@@ -7,15 +7,13 @@ const require = createRequire(import.meta.url);
 const axePath = require.resolve("axe-core/axe.min.js");
 const pagePath = "/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/";
 const localBase = "http://127.0.0.1:8765";
-const productionBase = "https://styleofmind.github.io";
 const localWidths = [320,360,390,420,430,760,761,768,1024,1100,1101,1240,1241,1440,1920];
+// Preview concepts are not deployed at the root domain. Browser layout checks use the checked-out files only.
 const targets = [
-  { name: "local", base: localBase, widths: localWidths },
-  { name: "production", base: productionBase, widths: [390,768,1440] }
+  { name: "local", base: localBase, widths: localWidths }
 ];
 const crossBrowserTargets = [
-  { name: "local", base: localBase, widths: [320,390,768,1024,1440] },
-  { name: "production", base: productionBase, widths: [390,768,1440] }
+  { name: "local", base: localBase, widths: [320,390,768,1024,1440] }
 ];
 
 await fs.mkdir("site-audit", { recursive: true });
@@ -33,50 +31,6 @@ function intersects(a,b) {
   return Boolean(a && b &&
     Math.min(a.right,b.right) - Math.max(a.left,b.left) > 2 &&
     Math.min(a.bottom,b.bottom) - Math.max(a.top,b.top) > 2);
-}
-
-async function waitForProduction() {
-  const client = await playwrightRequest.newContext();
-  const cssUrl = productionBase + pagePath + "styles.css?audit=" + Date.now();
-  const deadline = Date.now() + 150000;
-  let lastStatus = null;
-  try {
-    while (Date.now() < deadline) {
-      try {
-        const response = await client.get(cssUrl, { timeout: 15000 });
-        lastStatus = response.status();
-        const body = await response.text();
-        if (lastStatus === 200 &&
-            body.includes("width: 92%;") &&
-            body.includes("object-fit: contain;") &&
-            body.includes("font-display: optional;") &&
-            body.includes('background-image: url("./assets/backgrounds/section-01-mobile.webp")')) {
-          const pageResponse = await client.get(productionBase + pagePath + "?audit=" + Date.now(), { timeout: 15000 });
-          const pageBody = await pageResponse.text();
-          const brandTag = pageBody.match(/<a class="brand" href="#hero"([^>]*)>/);
-          const hasMobilePreload = pageBody.includes('href="./assets/backgrounds/section-01-mobile.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 760px)"');
-          const hasResponsivePortraits = pageBody.includes("olga-hero-glasses-480.webp") &&
-            pageBody.includes("olga-about-480.webp");
-          const desktopPortraitIsMediaGated = pageBody.includes('<source media="(min-width: 761px)" type="image/webp"');
-          const desktopPortraitHasTinyFallback = pageBody.includes('src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="');
-          if (pageResponse.status() === 200 && brandTag && !/\baria-label\s*=/.test(brandTag[1]) &&
-              hasMobilePreload && hasResponsivePortraits && desktopPortraitIsMediaGated && desktopPortraitHasTinyFallback) {
-            const mobileAsset = await client.get(productionBase + pagePath + "assets/backgrounds/section-01-mobile.webp", { timeout: 15000 });
-            if (mobileAsset.status() === 200) {
-              console.log("Published HTML, CSS and mobile background asset match current fixes.");
-              return;
-            }
-          }
-        }
-      } catch (error) {
-        lastStatus = String(error);
-      }
-      await new Promise(resolve => setTimeout(resolve, 5000));
-    }
-    throw new Error("Published CSS did not match current fixes before timeout; last status: " + lastStatus);
-  } finally {
-    await client.dispose();
-  }
 }
 
 async function checkViewport(browser, target, width, engineName) {
@@ -387,7 +341,6 @@ async function checkViewport(browser, target, width, engineName) {
   return result;
 }
 
-await waitForProduction();
 const engines = [
   { name: "chromium", launcher: chromium, targets },
   { name: "firefox", launcher: firefox, targets: crossBrowserTargets },
