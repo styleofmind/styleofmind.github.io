@@ -37,7 +37,7 @@ function tags(html, name, attribute) {
   const found = [];
   for (const match of html.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = match[0];
-    const key = tag.match(new RegExp(`\\\\b${attribute}\\\\s*=\\\\s*["']([^"']+)["']`, "i"));
+    const key = tag.match(new RegExp(\`\\b\${attribute}\\s*=\\s*["']([^"']+)["']\`, "i"));
     const content = tag.match(/\bcontent\s*=\s*["']([^"']*)["']/i);
     if (key && key[1].toLowerCase() === name.toLowerCase()) found.push(content ? content[1].trim() : "");
   }
