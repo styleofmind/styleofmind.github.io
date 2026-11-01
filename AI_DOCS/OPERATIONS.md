@@ -81,3 +81,13 @@ Style of Mind — сайт психолога, работающего метод
 - `optimize-portrait-assets.yml` срабатывает при изменении скрипта оптимизации или самого workflow. Он имеет `contents: write` и автоматически коммитит/пушит сгенерированные ассеты в `main`. Не запускать и не менять этот workflow, не понимая последствий; избегать циклических триггеров и неожиданных изменений опубликованных ресурсов.
 
 После изменения workflow проверить YAML, ограничения запуска, permissions, список изменяемых файлов и фактический результат Actions. Не считать наличие workflow доказательством успешного последнего запуска.
+
+## GitHub Pages production publishing
+
+The repository root is published through GitHub Pages using Jekyll and `_config.yml`.
+
+- `AI_DOCS/`, `tools/`, `site-audit/`, `.venv/`, IDE settings, local screenshots, dependency manifests and vendor folders are excluded from the generated Pages artifact. Their source files remain in Git where tracked.
+- `development/` remains publishable for intentionally shared concept previews.
+- Public root pages are the landing page, privacy policy, 404 page, robots file, sitemap, site manifest, fonts and referenced assets.
+- After changing publishing exclusions, verify the Pages deployment and confirm that internal documentation/tool paths return 404 while the landing page and privacy policy return 200.
+- Keep `sitemap.xml` and canonical/OG metadata in sync when public pages are added or removed.
