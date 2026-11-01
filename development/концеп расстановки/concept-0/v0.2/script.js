@@ -1,89 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cookieConsent = document.getElementById('cookieConsent');
-  const cookieAccept = document.getElementById('cookieAccept');
-  const cookieReject = document.getElementById('cookieReject');
-  const cookieSettingsTrigger = document.getElementById('cookieSettingsTrigger');
-  const COOKIE_KEY = 'olga_cookie_consent';
-  const COOKIE_EXPIRY_KEY = COOKIE_KEY + '_expires';
-  const CONSENT_TTL_MS = 180 * 24 * 60 * 60 * 1000;
-
-  const validConsent = function(value){
-    return value === 'all' || value === 'essential' ? value : null;
-  };
-  const getCookie = function(){
-    const match = document.cookie.match(/(?:^|; )olga_cookie_consent=([^;]*)/);
-    if (!match) return null;
-    try { return decodeURIComponent(match[1]); } catch(e) { return null; }
-  };
-  const readSavedConsent = function(){
-    const cookieValue = validConsent(getCookie());
-    let storedValue = null;
-    try {
-      const rawValue = localStorage.getItem(COOKIE_KEY);
-      let expiresAt = Number(localStorage.getItem(COOKIE_EXPIRY_KEY));
-      if (validConsent(rawValue)) {
-        if (!expiresAt) {
-          expiresAt = Date.now() + CONSENT_TTL_MS;
-          localStorage.setItem(COOKIE_EXPIRY_KEY, String(expiresAt));
-        }
-        if (Date.now() <= expiresAt) {
-          storedValue = rawValue;
-        } else {
-          localStorage.removeItem(COOKIE_KEY);
-          localStorage.removeItem(COOKIE_EXPIRY_KEY);
-        }
-      } else if (rawValue !== null) {
-        localStorage.removeItem(COOKIE_KEY);
-        localStorage.removeItem(COOKIE_EXPIRY_KEY);
-      }
-    } catch(e) {}
-
-    // Fail closed if the cookie and localStorage contain conflicting choices.
-    if (cookieValue === 'essential' || storedValue === 'essential') return 'essential';
-    if (cookieValue === 'all' || storedValue === 'all') return 'all';
-    return null;
-  };
-  const saveConsent = function(value){
-    try {
-      localStorage.setItem(COOKIE_KEY, value);
-      localStorage.setItem(COOKIE_EXPIRY_KEY, String(Date.now() + CONSENT_TTL_MS));
-    } catch(e) {}
-    try {
-      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-      document.cookie = COOKIE_KEY + '=' + encodeURIComponent(value) +
-      '; max-age=15552000; path=/; SameSite=Lax' + secure;
-    } catch(e) {}
-  };
-
-  window.cookieConsent = readSavedConsent();
-  if (cookieConsent) cookieConsent.hidden = Boolean(window.cookieConsent);
-
-  const openCookieSettings = function(){
-    if (!cookieConsent) return;
-    cookieConsent.hidden = false;
-    // Закрываем промо-окно, чтобы оно не перекрывало диалог настроек.
-    window.dispatchEvent(new CustomEvent('olgaCookieSettingsOpened'));
-    cookieReject?.focus();
-  };
-  cookieSettingsTrigger?.addEventListener('click', openCookieSettings);
-
-  const setConsent = function(value){
-    const nextValue = validConsent(value);
-    if (!nextValue) return;
-    const previousValue = readSavedConsent();
-    saveConsent(nextValue);
-    window.cookieConsent = nextValue;
-    if (cookieConsent) cookieConsent.hidden = true;
-    window.dispatchEvent(new CustomEvent('olgaConsentChanged', {
-      detail: {consent: nextValue, previous: previousValue}
-    }));
-    // Возвращаем фокус, не прокручивая страницу к кнопке настроек в подвале.
-    cookieSettingsTrigger?.focus({preventScroll: true});
-  };
-  cookieAccept?.addEventListener('click', function(){ setConsent('all'); });
-  cookieReject?.addEventListener('click', function(){ setConsent('essential'); });
-
   const desktopMagic = window.innerWidth >= 768 && !prefersReducedMotion;
   document.documentElement.classList.toggle('desktop-magic', desktopMagic);
 
@@ -301,7 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
       egg.classList.add(isMethod ? 'cat-egg--method' : 'cat-egg--approach');
       egg.hidden = false;
       showPose(poseIndex + 1, true);
-      if (window.trackEvent) window.trackEvent(isMethod ? 'cat_method_easter_egg' : 'cat_approach_easter_egg');
       clearTimeout(window.catEggTimer);
       window.catEggTimer = setTimeout(function () { egg.hidden = true; }, 4200);
     }
@@ -324,30 +239,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem(SHOWN_KEY)) return;
     let shown = false;
     let scrollTimer = null;
-    // После выбора cookies даём время закрыть баннер или открыть настройки.
-    let consentReadyAt = window.cookieConsent ? 0 : Number.POSITIVE_INFINITY;
-    window.addEventListener('olgaConsentChanged', function () {
-      consentReadyAt = Date.now() + 3000;
-    });
     const showPopup = function(){
-      // Сначала пользователь выбирает cookie-настройки; промо-окно не перекрывает consent-диалог.
-      if (shown || !window.cookieConsent || Date.now() < consentReadyAt) return;
+      if (shown) return;
       shown = true;
       popup.hidden = false;
       document.documentElement.classList.add('has-offer-popup');
       sessionStorage.setItem(SHOWN_KEY, '1');
-      if (window.trackEvent) window.trackEvent('open_popup');
       closeBtn?.focus();
     };
     const closePopup = function(){
       popup.hidden = true;
       document.documentElement.classList.remove('has-offer-popup');
-      if (window.trackEvent) window.trackEvent('close_popup');
     };
-    window.addEventListener('olgaCookieSettingsOpened', closePopup);
     const maybeShowByScroll = function(){
-      // Не ставим таймер появления, пока посетитель не выбрал cookie-настройки.
-      if (shown || !window.cookieConsent) return;
+      if (shown) return;
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function(){
         const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -377,7 +282,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Промо-окно показывается один раз за сессию: после 50% прокрутки или через 45 с, и только после выбора cookies.
 });
 
 
