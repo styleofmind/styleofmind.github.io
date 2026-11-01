@@ -1,86 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cookieConsent = document.getElementById('cookieConsent');
-  const cookieAccept = document.getElementById('cookieAccept');
-  const cookieReject = document.getElementById('cookieReject');
-  const cookieSettingsTrigger = document.getElementById('cookieSettingsTrigger');
-  const COOKIE_KEY = 'olga_cookie_consent';
-  const COOKIE_EXPIRY_KEY = COOKIE_KEY + '_expires';
-  const CONSENT_TTL_MS = 180 * 24 * 60 * 60 * 1000;
-
-  const validConsent = function(value){
-    return value === 'all' || value === 'essential' ? value : null;
-  };
-  const getCookie = function(){
-    const match = document.cookie.match(/(?:^|; )olga_cookie_consent=([^;]*)/);
-    if (!match) return null;
-    try { return decodeURIComponent(match[1]); } catch(e) { return null; }
-  };
-  const readSavedConsent = function(){
-    const cookieValue = validConsent(getCookie());
-    let storedValue = null;
-    try {
-      const rawValue = localStorage.getItem(COOKIE_KEY);
-      let expiresAt = Number(localStorage.getItem(COOKIE_EXPIRY_KEY));
-      if (validConsent(rawValue)) {
-        if (!expiresAt) {
-          expiresAt = Date.now() + CONSENT_TTL_MS;
-          localStorage.setItem(COOKIE_EXPIRY_KEY, String(expiresAt));
-        }
-        if (Date.now() <= expiresAt) {
-          storedValue = rawValue;
-        } else {
-          localStorage.removeItem(COOKIE_KEY);
-          localStorage.removeItem(COOKIE_EXPIRY_KEY);
-        }
-      } else if (rawValue !== null) {
-        localStorage.removeItem(COOKIE_KEY);
-        localStorage.removeItem(COOKIE_EXPIRY_KEY);
-      }
-    } catch(e) {}
-
-    // Fail closed if the cookie and localStorage contain conflicting choices.
-    if (cookieValue === 'essential' || storedValue === 'essential') return 'essential';
-    if (cookieValue === 'all' || storedValue === 'all') return 'all';
-    return null;
-  };
-  const saveConsent = function(value){
-    try {
-      localStorage.setItem(COOKIE_KEY, value);
-      localStorage.setItem(COOKIE_EXPIRY_KEY, String(Date.now() + CONSENT_TTL_MS));
-    } catch(e) {}
-    try {
-      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-      document.cookie = COOKIE_KEY + '=' + encodeURIComponent(value) +
-      '; max-age=15552000; path=/; SameSite=Lax' + secure;
-    } catch(e) {}
-  };
-
-  window.cookieConsent = readSavedConsent();
-  if (cookieConsent) cookieConsent.hidden = Boolean(window.cookieConsent);
-
-  const openCookieSettings = function(){
-    if (!cookieConsent) return;
-    cookieConsent.hidden = false;
-    cookieReject?.focus();
-  };
-  cookieSettingsTrigger?.addEventListener('click', openCookieSettings);
-
-  const setConsent = function(value){
-    const nextValue = validConsent(value);
-    if (!nextValue) return;
-    const previousValue = readSavedConsent();
-    saveConsent(nextValue);
-    window.cookieConsent = nextValue;
-    if (cookieConsent) cookieConsent.hidden = true;
-    window.dispatchEvent(new CustomEvent('olgaConsentChanged', {
-      detail: {consent: nextValue, previous: previousValue}
-    }));
-    cookieSettingsTrigger?.focus();
-  };
-  cookieAccept?.addEventListener('click', function(){ setConsent('all'); });
-  cookieReject?.addEventListener('click', function(){ setConsent('essential'); });
-
   const desktopMagic = window.innerWidth >= 768 && !prefersReducedMotion;
   document.documentElement.classList.toggle('desktop-magic', desktopMagic);
 
@@ -289,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
       egg.classList.add(isMethod ? 'cat-egg--method' : 'cat-egg--approach');
       egg.hidden = false;
       showPose(poseIndex + 1, true);
-      if (window.trackEvent) window.trackEvent(isMethod ? 'cat_method_easter_egg' : 'cat_approach_easter_egg');
       clearTimeout(window.catEggTimer);
       window.catEggTimer = setTimeout(function () { egg.hidden = true; }, 4200);
     }
@@ -342,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let shown = false, scrollTimer = null;
     function showPopup(){
       if (shown) return;
-      shown = true; popup.hidden = false; sessionStorage.setItem(SHOWN_KEY,'1'); window.trackEvent('open_popup');
+      shown = true; popup.hidden = false; sessionStorage.setItem(SHOWN_KEY,'1'); 
     }
-    function closePopup(){ popup.hidden = true; window.trackEvent('close_popup'); }
+    function closePopup(){ popup.hidden = true;  }
     function maybeShowByScroll(){
       if (shown) return;
       clearTimeout(scrollTimer);
