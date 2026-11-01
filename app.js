@@ -409,8 +409,10 @@
       syncActive(nextIndex);
       if (scrollSlide) {
         programmaticScroll = true;
+        const slide = slides[active];
+        const centeredLeft = slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2;
         track.scrollTo({
-          left: active * track.clientWidth,
+          left: centeredLeft,
           behavior: reducedMotion.matches ? 'auto' : 'smooth'
         });
         window.clearTimeout(scrollTimer);
@@ -423,8 +425,15 @@
       if (programmaticScroll) return;
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(() => {
-        const pageWidth = track.clientWidth || 1;
-        const nearestIndex = Math.round(track.scrollLeft / pageWidth);
+        const trackCenter = track.scrollLeft + track.clientWidth / 2;
+        const nearestIndex = slides.reduce((bestIndex, slide, index) => {
+          const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+          const bestSlide = slides[bestIndex];
+          const bestCenter = bestSlide.offsetLeft + bestSlide.offsetWidth / 2;
+          return Math.abs(slideCenter - trackCenter) < Math.abs(bestCenter - trackCenter)
+            ? index
+            : bestIndex;
+        }, 0);
         syncActive(nearestIndex);
       }, 90);
     };
