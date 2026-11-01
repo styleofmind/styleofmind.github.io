@@ -92,6 +92,14 @@ async function checkProduction() {
     if (canonical.length !== 1 || canonical[0] !== page.url) fail(page.file + ": canonical must be exactly " + page.url);
     if (countHeading(html, 1) !== 1) fail(page.file + ": expected exactly one H1");
 
+    const metaValue = (name, attribute) => tags(html, name, attribute)[0] || "";
+    if (metaValue("og:title", "property") !== title) fail(page.file + ": og:title must match title");
+    if (metaValue("twitter:title", "name") !== title) fail(page.file + ": twitter:title must match title");
+    if (description.length === 1 && metaValue("og:description", "property") !== description[0]) fail(page.file + ": og:description must match meta description");
+    if (description.length === 1 && metaValue("twitter:description", "name") !== description[0]) fail(page.file + ": twitter:description must match meta description");
+    if (metaValue("og:url", "property") !== page.url) fail(page.file + ": og:url must match canonical URL");
+    if (metaValue("og:image", "property") !== metaValue("twitter:image", "name")) fail(page.file + ": Open Graph and Twitter images must match");
+
     for (const [name, attribute] of requiredMeta) {
       const values = tags(html, name, attribute);
       if (values.length !== 1 || !values[0]) fail(page.file + ": expected one non-empty " + name);
@@ -140,6 +148,9 @@ async function checkDevelopment() {
       if (tags(html, name, attribute).length !== 0) fail(relative + ": remove production SEO metadata " + name);
     }
     if (/application\/ld\+json/i.test(html)) fail(relative + ": structured production SEO data is not allowed");
+    if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent/i.test(html)) {
+      fail(relative + ": analytics-consent UI must not exist in a preview");
+    }
     if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
     if (/\b(?:googletagmanager|google-analytics|metrika\/tag\.js|mc\.yandex\.ru)/i.test(html)) {
       fail(relative + ": external analytics script reference found");
@@ -150,6 +161,8 @@ async function checkDevelopment() {
   for (const file of scriptFiles) {
     const source = await readFile(file, "utf8");
     const relative = path.relative(root, file);
+    const base = path.basename(file).toLowerCase();
+    if (/^analytics(?:-config)?\.js$/.test(base)) fail(relative + ": analytics loader/config file is not allowed in development");
     if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
   }
 
