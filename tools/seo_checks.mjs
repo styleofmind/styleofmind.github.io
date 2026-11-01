@@ -105,7 +105,9 @@ async function checkProduction() {
       if (values.length !== 1 || !values[0]) fail(page.file + ": expected one non-empty " + name);
     }
 
-    for (const block of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const jsonLdBlocks = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+    if (page.file !== "privacy-policy.html" && jsonLdBlocks.length === 0) fail(page.file + ": structured data block is missing");
+    for (const block of jsonLdBlocks) {
       try {
         JSON.parse(block[1]);
       } catch (error) {
@@ -163,7 +165,10 @@ async function checkDevelopment() {
     const relative = path.relative(root, file);
     const base = path.basename(file).toLowerCase();
     if (/^analytics(?:-config)?\.js$/.test(base)) fail(relative + ": analytics loader/config file is not allowed in development");
-    if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
+    if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent|olgaConsentChanged/i.test(source)) {
+      fail(relative + ": analytics-consent handlers are not allowed in development");
+    }
+        if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
   }
 
   if (errors.length === 0) pass("Development isolation: " + htmlPassed + " HTML pages; " + scriptFiles.length + " JS files");
