@@ -5,7 +5,7 @@ import { chromium, firefox, webkit, request as playwrightRequest } from "playwri
 
 const require = createRequire(import.meta.url);
 const axePath = require.resolve("axe-core/axe.min.js");
-const pagePath = "/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/";
+const pagePath = "/development/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/";
 const localBase = "http://127.0.0.1:8765";
 const localWidths = [320,360,390,420,430,760,761,768,1024,1100,1101,1240,1241,1440,1920];
 // Preview concepts are not deployed at the root domain. Browser layout checks use the checked-out files only.
