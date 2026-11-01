@@ -1,6 +1,6 @@
 /* Защита от повторной инициализации: при повторном подключении app.js обработчики не дублируются. */
 (function () {
-  const key = '__styleOfMindV13AppInitialized';
+  const key = '__styleOfMindAppInitialized';
   if (window[key]) return;
   window[key] = true;
 

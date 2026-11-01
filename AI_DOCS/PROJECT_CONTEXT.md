@@ -14,6 +14,8 @@ Style of Mind — сайт психолога, который занимаетс
 - Каталог разделён на направления «Расстановки» и «Лендинг»; у 10 исходных версий есть отдельная кнопка просмотра скриншотов ПК/планшет/телефон; для новой v1.3 скриншоты ещё не подготовлены.
 - `development/catalog-screenshots/` содержит 30 оптимизированных WebP-снимков; локальные PNG-оригиналы хранятся в игнорируемой Git папке `Скрины сайта/`.
 - `robots.txt` и `sitemap.xml` находятся в корне. Sitemap содержит canonical production URL главной страницы, страницы политики и отдельных страниц форматов; каталог `development/` в карту не включать.
+- Единственная политика конфиденциальности находится в корне: `privacy-policy.html`. Все копии политик и юридические черновики из `development/` удалены; preview-страницы ссылаются на корневой документ.
+- Корневой `README.md` — презентация Ольги Сусленниковой для посетителей репозитория, а не техническое описание проекта. Корневой `404.html` предлагает перейти на главную или написать Ольге в Telegram.
 - `404.html` показывает страницу «Не найдена» и не перенаправляет автоматически.
 
 ## Актуальные концепты
@@ -47,7 +49,8 @@ Style of Mind — сайт психолога, который занимаетс
 
 При работе над проектом начинать с `README.md`, затем читать профильные документы. Подробные процедуры локального запуска и аудита остаются в `guides/LOCAL_PREVIEW.md` и `guides/AUDIT_TOOLING.md`.
 
-- All HTML pages in `development/` include `<meta name="robots" content="noindex,nofollow">`. `sitemap.xml` excludes the development directory. `robots.txt` permits crawling so search engines can read the noindex directive.
+- All HTML pages in `development/` include `<meta name="robots" content="noindex,nofollow">`; they remain reachable as previews but are excluded from search results. Their production-facing canonical, description, Open Graph, Twitter and JSON-LD metadata is removed. The root sitemap contains only the five production URLs; no nested development `robots.txt` or `sitemap.xml` is used. The root `robots.txt` permits crawling so search engines can read each preview page noindex directive.
+- Development previews do not load GA4, Yandex Metrica, Google Tag Manager, advertising pixels or tracking code, and do not show analytics-consent banners. `sessionStorage` used for local UI state is not analytics. Third-party widgets such as DIKIDI remain subject to their own processing.
 
 ## SEO и метаданные production
 - `robots.txt` разрешает обход сайта и указывает на корневой `sitemap.xml`.
@@ -57,7 +60,7 @@ Style of Mind — сайт психолога, который занимаетс
 - Не добавлять в структурированные данные адрес, отзывы, рейтинги или неподтверждённые квалификации.
 
 ## Analytics scope
-- Production pages `index.html`, `privacy-policy.html`, `online-family-constellations.html`, `group-constellations-spb.html` and `how-family-constellations-work.html` load `analytics-config.js` and `analytics.js` after explicit visitor consent. Development concept pages do not load the production analytics tag.
+- Production pages `index.html`, `privacy-policy.html`, `online-family-constellations.html`, `group-constellations-spb.html` and `how-family-constellations-work.html` load `analytics-config.js` and `analytics.js` after explicit visitor consent. No files from `development/` may import these scripts or initialize provider tags.
 - Analytics uses a basic opt-in flow: providers are not loaded before consent; consent is stored for up to 180 days. Google ad storage, ad user data, ad personalization, Google signals and ad personalization signals remain denied.
 - Yandex Metrica is configured in code with Webvisor, clickmap, outbound-link tracking and accurate bounce rate. Account-side Webvisor/scroll-map settings and JavaScript-event goals must also be enabled in the Metrica cabinet.
 - GA4 receives page views and custom interaction events. Enhanced Measurement options are managed separately in the Google Analytics data-stream settings.

@@ -15,9 +15,13 @@
     .eyebrow { margin: 0 0 18px; color: var(--muted); font-size: 11px; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
     h1 { margin: 0 0 15px; font: 400 clamp(34px, 7vw, 56px)/1.02 Georgia, "Times New Roman", serif; letter-spacing: -.045em; }
     p:not(.eyebrow) { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
-    a { display: inline-flex; min-height: 44px; align-items: center; margin-top: 28px; padding: 12px 16px; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent); color: #fff; font-size: 13px; text-decoration: none; }
-    a:hover { background: #3b5040; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .actions a { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: 12px 17px; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent); color: #fff; font-size: 13px; text-decoration: none; transition: background .2s ease, border-color .2s ease; }
+    .actions a:hover { background: #3b5040; }
+    .actions a.secondary { background: transparent; color: var(--accent); }
+    .actions a.secondary:hover { background: rgba(75,98,81,.08); }
+    .actions a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 520px) { .actions { flex-direction: column; } .actions a { width: 100%; } }
   </style>
   <link rel="stylesheet" href="/fonts/fonts.css">
   <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,11 +30,12 @@
 <body>
   <main>
     <p class="eyebrow">Style of Mind / Ошибка 404</p>
-    <h1>Эта страница не найдена</h1>
-    <p>Возможно, адрес изменился или страница больше не используется.</p>
-    <a
-      href="/"
-    >Вернуться на главную ↗</a>
+    <h1>Жизнь иногда отправляет не туда, куда хочется</h1>
+    <p>Но даже если маршрут сбился, всегда можно найти верный путь. Начните с главной страницы или напишите Ольге — вместе разберёмся, куда двигаться дальше.</p>
+    <nav class="actions" aria-label="Возможные пути">
+      <a href="/">На главную ↗</a>
+      <a class="secondary" href="https://t.me/olga_styleofmind" target="_blank" rel="noopener noreferrer">Написать в Telegram ↗</a>
+    </nav>
   </main>
 </body>
 </html>

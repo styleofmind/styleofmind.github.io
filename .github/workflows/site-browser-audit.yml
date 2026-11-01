@@ -5,7 +5,46 @@ on:
     branches:
       - main
     paths:
-      - 'development/концеп расстановки/concept-4/v4.1/**'
+      - 'index.html'
+      - 'privacy-policy.html'
+      - 'online-family-constellations.html'
+      - 'group-constellations-spb.html'
+      - 'how-family-constellations-work.html'
+      - '404.html'
+      - 'README.md'
+      - 'AI_DOCS/PROJECT_CONTEXT.md'
+      - 'AI_DOCS/PLAN.md'
+      - 'AI_DOCS/ANALYTICS.md'
+      - 'AI_DOCS/OPERATIONS.md'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'analytics-config.js'
+      - 'analytics.js'
+      - 'app.js'
+      - 'development/**'
+      - 'tools/seo_checks.mjs'
+      - 'tools/site_browser_audit.mjs'
+      - '.github/workflows/site-browser-audit.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'privacy-policy.html'
+      - 'online-family-constellations.html'
+      - 'group-constellations-spb.html'
+      - 'how-family-constellations-work.html'
+      - '404.html'
+      - 'README.md'
+      - 'AI_DOCS/PROJECT_CONTEXT.md'
+      - 'AI_DOCS/PLAN.md'
+      - 'AI_DOCS/ANALYTICS.md'
+      - 'AI_DOCS/OPERATIONS.md'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'analytics-config.js'
+      - 'analytics.js'
+      - 'app.js'
+      - 'development/**'
+      - 'tools/seo_checks.mjs'
       - 'tools/site_browser_audit.mjs'
       - '.github/workflows/site-browser-audit.yml'
   workflow_dispatch:
@@ -30,6 +69,18 @@ jobs:
         with:
           node-version: 20
 
+      - name: Verify production SEO and development isolation
+        run: node tools/seo_checks.mjs
+
+      - name: Check production JavaScript syntax
+        run: |
+          node --check app.js
+          node --check analytics.js
+          node --check analytics-config.js
+          node --check tools/seo_checks.mjs
+          node --check tools/site_browser_audit.mjs
+          find development -type f -name '*.js' -exec node --check {} \;
+
       - name: Install browser QA tools
         run: npm install --no-save playwright axe-core lighthouse
 
@@ -52,7 +103,7 @@ jobs:
       - name: Run Lighthouse mobile
         run: |
           export CHROME_PATH="$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')"
-          npx lighthouse "http://127.0.0.1:8765/development/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/" \
+          npx lighthouse "http://127.0.0.1:8765/" \
             --output=json --output-path=site-audit/lighthouse-mobile.json \
             --form-factor=mobile \
             --only-categories=performance,accessibility,best-practices,seo \
@@ -61,7 +112,7 @@ jobs:
       - name: Run Lighthouse desktop
         run: |
           export CHROME_PATH="$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')"
-          npx lighthouse "http://127.0.0.1:8765/development/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%20%D1%80%D0%B0%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8/concept-4/v4.1/" \
+          npx lighthouse "http://127.0.0.1:8765/" \
             --output=json --output-path=site-audit/lighthouse-desktop.json \
             --preset=desktop \
             --only-categories=performance,accessibility,best-practices,seo \

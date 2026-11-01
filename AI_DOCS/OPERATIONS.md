@@ -87,7 +87,7 @@ Style of Mind — сайт психолога, работающего метод
 The repository root is published through GitHub Pages using Jekyll and `_config.yml`.
 
 - `AI_DOCS/`, `tools/`, `site-audit/`, `.venv/`, IDE settings, local screenshots, dependency manifests and vendor folders are excluded from the generated Pages artifact. Their source files remain in Git where tracked.
-- `development/` remains publishable for intentionally shared concept previews.
+- `development/` remains publishable for intentionally shared concept previews, but every HTML page must be `noindex,nofollow`; preview pages must not carry production SEO/social metadata or analytics/tracking scripts. Keep the directory crawlable so search engines can read `noindex`; do not add nested robots or sitemap files.
 - Public root pages are the landing page, privacy policy, 404 page, robots file, sitemap, site manifest, fonts and referenced assets.
 - After changing publishing exclusions, verify the Pages deployment and confirm that internal documentation/tool paths return 404 while the landing page and privacy policy return 200.
 - Keep `sitemap.xml` and canonical/OG metadata in sync when public pages are added or removed.
