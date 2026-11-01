@@ -136,6 +136,9 @@ async function checkDevelopment() {
     if (base === "robots.txt" || base === "sitemap.xml") {
       fail("Nested crawler file is not allowed: " + path.relative(root, file));
     }
+    if (["privacy.html", "privacy-policy.html", "legal.html"].includes(base)) {
+      fail("Duplicate privacy/legal page is not allowed in development: " + path.relative(root, file));
+    }
   }
 
   for (const file of htmlFiles) {
@@ -153,7 +156,10 @@ async function checkDevelopment() {
     if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent/i.test(html)) {
       fail(relative + ": analytics-consent UI must not exist in a preview");
     }
-    if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
+    if (/\\bhref\\s*=\\s*["'](?:\\.\\.?\\/)*(?:pages\\/)?(?:privacy(?:-policy)?\\.html|legal\\.html)(?:#[^"']*)?["']/i.test(html)) {
+      fail(relative + ": preview must link to the single root /privacy-policy.html");
+    }
+        if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
     if (/\b(?:googletagmanager|google-analytics|metrika\/tag\.js|mc\.yandex\.ru)/i.test(html)) {
       fail(relative + ": external analytics script reference found");
     }
@@ -191,9 +197,28 @@ async function checkCrawlerFiles() {
   if (errors.length === 0) pass("Root robots.txt and sitemap.xml");
 }
 
+async function checkPresentationFiles() {
+  const notFound = await readFile(path.join(root, "404.html"), "utf8");
+  const readme = await readFile(path.join(root, "README.md"), "utf8");
+  if (!/жизнь иногда отправляет не туда, куда хочется/i.test(notFound)) fail("404.html must contain the agreed reassuring message");
+  if (!/href=["']\\/["']/.test(notFound)) fail("404.html must link to the homepage");
+  if (!/href=["']https:\\/\\/t\\.me\\/olga_styleofmind["']/.test(notFound)) fail("404.html must link to Olga's Telegram");
+  if (!readme.includes("Ольга Сусленникова")) fail("Root README must present Olga, not the software project");
+  if (!readme.includes("https://t.me/olga_styleofmind")) fail("Root README must link to Telegram");
+  if (!readme.includes("https://styleofmind.github.io/")) fail("Root README must link to the official website");
+  if (!readme.includes("assets/og/olga-social-preview.webp")) fail("Root README must include the existing portrait preview");
+  try {
+    await readFile(path.join(root, "assets/og/olga-social-preview.webp"));
+  } catch {
+    fail("Root README portrait image is missing");
+  }
+  if (errors.length === 0) pass("404 page and personal root README");
+}
+
 await checkProduction();
 await checkDevelopment();
 await checkCrawlerFiles();
+await checkPresentationFiles();
 
 for (const message of passed) console.log("PASS " + message);
 for (const message of errors) console.error("FAIL " + message);
