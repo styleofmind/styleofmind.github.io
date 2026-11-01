@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-    paths: &site_paths
+    paths:
       - 'index.html'
       - 'privacy-policy.html'
       - 'online-family-constellations.html'
@@ -20,7 +20,21 @@ on:
       - 'tools/site_browser_audit.mjs'
       - '.github/workflows/site-browser-audit.yml'
   pull_request:
-    paths: *site_paths
+    paths:
+      - 'index.html'
+      - 'privacy-policy.html'
+      - 'online-family-constellations.html'
+      - 'group-constellations-spb.html'
+      - 'how-family-constellations-work.html'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'analytics-config.js'
+      - 'analytics.js'
+      - 'app.js'
+      - 'development/**'
+      - 'tools/seo_checks.mjs'
+      - 'tools/site_browser_audit.mjs'
+      - '.github/workflows/site-browser-audit.yml'
   workflow_dispatch:
 
 permissions:
