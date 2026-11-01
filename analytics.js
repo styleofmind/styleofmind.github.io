@@ -151,6 +151,14 @@
     yandexInitialized = true;
     window["disableYaCounter" + yandexId] = false;
 
+    // Telegram URLs contain a prefilled message. Track the CTA with our own goal,
+    // but do not send the full destination URL to Metrika link tracking.
+    document.querySelectorAll("a[href]").forEach(anchor => {
+      if (isTelegramLink(anchor)) {
+        anchor.classList.add("ym-disable-tracklink");
+      }
+    });
+
     window.ym = window.ym || function () {
       (window.ym.a = window.ym.a || []).push(arguments);
     };
@@ -316,13 +324,12 @@
     startBehaviorTracking();
   }
 
-  document.addEventListener("click", event => {
-    if (!analyticsEnabled) return;
-    if (event.target === settingsButton || settingsButton?.contains(event.target)) {
+  if (settingsButton) {
+    settingsButton.addEventListener("click", () => {
       setNoticeVisibility(true);
       if (rejectButton) rejectButton.focus();
-    }
-  });
+    });
+  }
 
   if (acceptButton) {
     acceptButton.addEventListener("click", () => {
