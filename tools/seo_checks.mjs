@@ -156,10 +156,9 @@ async function checkDevelopment() {
     if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent/i.test(html)) {
       fail(relative + ": analytics-consent UI must not exist in a preview");
     }
-    if (/\\bhref\\s*=\\s*["'](?:\\.\\.?\\/)*(?:pages\\/)?(?:privacy(?:-policy)?\\.html|legal\\.html)(?:#[^"']*)?["']/i.test(html)) {
-      fail(relative + ": preview must link to the single root /privacy-policy.html");
-    }
-        if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
+    const stalePolicyLinks = ['href="privacy.html"', 'href="./privacy.html"', 'href="pages/privacy.html"', 'href="privacy-policy.html"', 'href="./privacy-policy.html"', 'href="legal.html"', 'href="./legal.html"', 'href="./legal.html#privacy"', 'href="./legal.html#consent"'];
+    if (stalePolicyLinks.some(link => html.includes(link))) fail(relative + ": preview must link to the single root /privacy-policy.html");
+    if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
     if (/\b(?:googletagmanager|google-analytics|metrika\/tag\.js|mc\.yandex\.ru)/i.test(html)) {
       fail(relative + ": external analytics script reference found");
     }
@@ -174,7 +173,7 @@ async function checkDevelopment() {
     if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent|olgaConsentChanged/i.test(source)) {
       fail(relative + ": analytics-consent handlers are not allowed in development");
     }
-        if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
+    if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
   }
 
   if (errors.length === 0) pass("Development isolation: " + htmlPassed + " HTML pages; " + scriptFiles.length + " JS files");
@@ -201,8 +200,8 @@ async function checkPresentationFiles() {
   const notFound = await readFile(path.join(root, "404.html"), "utf8");
   const readme = await readFile(path.join(root, "README.md"), "utf8");
   if (!/жизнь иногда отправляет не туда, куда хочется/i.test(notFound)) fail("404.html must contain the agreed reassuring message");
-  if (!/href=["']\\/["']/.test(notFound)) fail("404.html must link to the homepage");
-  if (!/href=["']https:\\/\\/t\\.me\\/olga_styleofmind["']/.test(notFound)) fail("404.html must link to Olga's Telegram");
+  if (!notFound.includes('href="/"')) fail("404.html must link to the homepage");
+  if (!notFound.includes('href="https://t.me/olga_styleofmind"')) fail("404.html must link to Olga's Telegram");
   if (!readme.includes("Ольга Сусленникова")) fail("Root README must present Olga, not the software project");
   if (!readme.includes("https://t.me/olga_styleofmind")) fail("Root README must link to Telegram");
   if (!readme.includes("https://styleofmind.github.io/")) fail("Root README must link to the official website");
