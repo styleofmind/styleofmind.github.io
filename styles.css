@@ -5203,6 +5203,8 @@ h3,
 
 /* Certificates: remove decorative frames and effects. */
 .certificate-carousel__track > .certificate-slide {
+  position: relative;
+  overflow: hidden;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -5233,4 +5235,23 @@ h3,
 
 .certificate-gallery-status__progress {
   display: none;
+}
+
+/* Rotate only landscape documents inside the compact portrait carousel. */
+.certificate-carousel__track > .certificate-slide.is-landscape img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 220px;
+  max-width: none;
+  aspect-ratio: auto;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+@media (max-width: 720px) {
+  .certificate-carousel__track > .certificate-slide.is-landscape img {
+    width: 250px;
+    height: 170px;
+  }
 }
