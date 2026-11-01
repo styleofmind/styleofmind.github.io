@@ -13,6 +13,14 @@
   const rejectButton = document.getElementById("analyticsConsentReject");
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(googleId || yandexId);
+  const yandexGoalEvents = new Set([
+    "booking_click",
+    "telegram_click",
+    "video_open",
+    "video_complete",
+    "diagnostic_offer_view",
+    "section_navigation"
+  ]);
   const deniedConsent = {
     analytics_storage: "denied",
     ad_storage: "denied",
@@ -30,6 +38,7 @@
   let analyticsEnabled = consent === "granted";
   let googleInitialized = false;
   let yandexInitialized = false;
+  let behaviorTrackingInitialized = false;
 
   if (yandexId) {
     window["disableYaCounter" + yandexId] = !analyticsEnabled;
@@ -76,12 +85,41 @@
     }
   }
 
-  function limitYandexLinkTracking() {
-    document.querySelectorAll("a[href]").forEach(anchor => {
-      if (!isTelegramLink(anchor)) {
-        anchor.classList.add("ym-disable-tracklink");
+  function cleanEventParams(params) {
+    const clean = {};
+    Object.entries(params || {}).forEach(([key, value]) => {
+      if (!/^[a-z][a-z0-9_]{0,39}$/.test(key)) return;
+      if (/(email|phone|message|text|query|href|url|value|name)/i.test(key)) return;
+      if (typeof value === "string" && value.length <= 80) {
+        clean[key] = value;
+      } else if (typeof value === "number" && Number.isFinite(value)) {
+        clean[key] = value;
+      } else if (typeof value === "boolean") {
+        clean[key] = value;
       }
     });
+    return clean;
+  }
+
+  function recordEvent(eventName, params) {
+    if (!analyticsEnabled) return;
+    const safeParams = cleanEventParams(params);
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, safeParams);
+    }
+
+    if (yandexId && typeof window.ym === "function") {
+      window.ym(yandexId, "params", {
+        site_analytics: {
+          event_type: eventName,
+          ...safeParams
+        }
+      });
+      if (yandexGoalEvents.has(eventName)) {
+        window.ym(yandexId, "reachGoal", eventName, safeParams);
+      }
+    }
   }
 
   function initializeGoogleAnalytics() {
@@ -95,7 +133,11 @@
     window.gtag("consent", "default", deniedConsent);
     window.gtag("consent", "update", grantedConsent);
     window.gtag("js", new Date());
-    window.gtag("config", googleId);
+    window.gtag("config", googleId, {
+      send_page_view: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
 
     const script = document.createElement("script");
     script.async = true;
@@ -108,17 +150,19 @@
     if (!yandexId || yandexInitialized) return;
     yandexInitialized = true;
     window["disableYaCounter" + yandexId] = false;
-    limitYandexLinkTracking();
 
     window.ym = window.ym || function () {
       (window.ym.a = window.ym.a || []).push(arguments);
     };
     window.ym.l = window.ym.l || Date.now();
     window.ym(yandexId, "init", {
-      clickmap: false,
+      clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
-      webvisor: false
+      webvisor: true,
+      trackHash: false,
+      sendTitle: true,
+      triggerEvent: true
     });
 
     const script = document.createElement("script");
@@ -127,33 +171,158 @@
     document.head.appendChild(script);
   }
 
+  function getPlacement(element) {
+    if (element.closest("#diagnosticOfferPopup")) return "diagnostic_popup";
+    if (element.closest(".site-header")) return "header";
+    if (element.closest(".site-footer")) return "footer";
+    const section = element.closest("section");
+    if (section) return section.id || "content_section";
+    return "page";
+  }
+
+  function startBehaviorTracking() {
+    if (behaviorTrackingInitialized) return;
+    behaviorTrackingInitialized = true;
+
+    document.addEventListener("click", event => {
+      if (!analyticsEnabled || !event.target || !event.target.closest) return;
+      const target = event.target.closest("a[href], button, [role='button'], summary");
+      if (!target) return;
+
+      const placement = getPlacement(target);
+      if (target.matches("a[href]")) {
+        let url;
+        try {
+          url = new URL(target.href, window.location.href);
+        } catch (_) {
+          return;
+        }
+
+        if (isTelegramLink(target)) {
+          recordEvent(
+            target.hasAttribute("data-telegram-message") ? "booking_click" : "telegram_click",
+            { placement }
+          );
+          return;
+        }
+
+        if (url.protocol === "mailto:" || url.protocol === "tel:") {
+          recordEvent("contact_link_click", {
+            placement,
+            contact_type: url.protocol.slice(0, -1)
+          });
+          return;
+        }
+
+        if (target.hasAttribute("download") || /\.(pdf|docx?|xlsx?|zip)$/i.test(url.pathname)) {
+          const extension = url.pathname.split(".").pop().toLowerCase();
+          recordEvent("file_download", {
+            placement,
+            file_type: extension.slice(0, 8)
+          });
+          return;
+        }
+
+        if (url.origin === window.location.origin && url.hash) {
+          recordEvent("section_navigation", {
+            placement,
+            section_id: url.hash.slice(1, 64)
+          });
+          return;
+        }
+
+        if (url.origin !== window.location.origin) {
+          recordEvent("external_link_click", {
+            placement,
+            link_domain: url.hostname.slice(0, 80)
+          });
+        }
+        return;
+      }
+
+      recordEvent("site_element_click", {
+        placement,
+        element_type: target.tagName.toLowerCase(),
+        element_id: target.id || "no_id"
+      });
+    }, true);
+
+    const sections = Array.from(document.querySelectorAll("main > section"));
+    if ("IntersectionObserver" in window) {
+      const viewedSections = new WeakSet();
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || viewedSections.has(entry.target)) return;
+          viewedSections.add(entry.target);
+          const section = entry.target;
+          const sectionId = section.id || section.getAttribute("aria-label") || "section";
+          recordEvent("section_view", {
+            section_id: String(sectionId).slice(0, 64)
+          });
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => sectionObserver.observe(section));
+    }
+
+    const scrollThresholds = [25, 50, 75, 90];
+    const sentScrollThresholds = new Set();
+    let scrollFramePending = false;
+    function checkScrollDepth() {
+      const root = document.documentElement;
+      const maxScroll = root.scrollHeight - window.innerHeight;
+      const depth = maxScroll > 0
+        ? Math.min(100, Math.round((window.scrollY / maxScroll) * 100))
+        : 100;
+      scrollThresholds.forEach(threshold => {
+        if (depth < threshold || sentScrollThresholds.has(threshold)) return;
+        sentScrollThresholds.add(threshold);
+        recordEvent("scroll_depth", { depth_percent: threshold });
+      });
+    }
+    window.addEventListener("scroll", () => {
+      if (scrollFramePending) return;
+      scrollFramePending = true;
+      window.requestAnimationFrame(() => {
+        scrollFramePending = false;
+        checkScrollDepth();
+      });
+    }, { passive: true });
+    window.addEventListener("resize", checkScrollDepth, { passive: true });
+    checkScrollDepth();
+
+    document.addEventListener("styleofmind:video-playing", () => {
+      recordEvent("video_open", { video_id: "hero_video" });
+    });
+    document.addEventListener("styleofmind:video-ended", () => {
+      recordEvent("video_complete", { video_id: "hero_video" });
+    });
+    document.addEventListener("styleofmind:offer-shown", () => {
+      recordEvent("diagnostic_offer_view", { placement: "diagnostic_popup" });
+    });
+    document.addEventListener("styleofmind:offer-closed", () => {
+      recordEvent("diagnostic_offer_close", { placement: "diagnostic_popup" });
+    });
+
+    const offerPopup = document.getElementById("diagnosticOfferPopup");
+    if (offerPopup && !offerPopup.hidden) {
+      recordEvent("diagnostic_offer_view", { placement: "diagnostic_popup" });
+    }
+  }
+
   function enableAnalytics() {
     if (!analyticsEnabled) return;
     initializeGoogleAnalytics();
     initializeYandexMetrika();
+    startBehaviorTracking();
   }
 
   document.addEventListener("click", event => {
     if (!analyticsEnabled) return;
-    const anchor = event.target.closest && event.target.closest("a[href]");
-    if (!anchor || !isTelegramLink(anchor)) return;
-
-    const eventName = anchor.hasAttribute("data-telegram-message")
-      ? "booking_click"
-      : "telegram_click";
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, {
-        link_type: eventName === "booking_click" ? "booking" : "channel"
-      });
-    }
-  }, true);
-
-  if (settingsButton) {
-    settingsButton.addEventListener("click", () => {
+    if (event.target === settingsButton || settingsButton?.contains(event.target)) {
       setNoticeVisibility(true);
       if (rejectButton) rejectButton.focus();
-    });
-  }
+    }
+  });
 
   if (acceptButton) {
     acceptButton.addEventListener("click", () => {
@@ -162,6 +331,7 @@
       analyticsEnabled = true;
       setNoticeVisibility(false);
       enableAnalytics();
+      recordEvent("analytics_consent_granted", { consent_method: "banner" });
     });
   }
 

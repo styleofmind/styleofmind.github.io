@@ -57,7 +57,10 @@ Style of Mind — сайт психолога, который занимаетс
 - Не добавлять в структурированные данные адрес, отзывы, рейтинги или неподтверждённые квалификации.
 
 ## Analytics scope
-- Analytics scripts are loaded only on the root production homepage after explicit visitor consent. Development concept pages and privacy-policy.html do not load tracking providers.
+- The production homepage and privacy-policy.html load `analytics-config.js` and `analytics.js` after explicit visitor consent. Development concept pages do not load the production analytics tag.
+- Analytics uses a basic opt-in flow: providers are not loaded before consent; consent is stored for up to 180 days. Google ad storage, ad user data, ad personalization, Google signals and ad personalization signals remain denied.
+- Yandex Metrica is configured in code with Webvisor, clickmap, outbound-link tracking and accurate bounce rate. Account-side Webvisor/scroll-map settings and JavaScript-event goals must also be enabled in the Metrica cabinet.
+- GA4 receives page views and custom interaction events. Enhanced Measurement options are managed separately in the Google Analytics data-stream settings.
 
 
 ## Production certificates

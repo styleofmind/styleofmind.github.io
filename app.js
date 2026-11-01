@@ -55,6 +55,7 @@
       if (shown || videoActive) return;
       shown = true;
       popup.hidden = false;
+      document.dispatchEvent(new Event('styleofmind:offer-shown'));
       try {
         sessionStorage.setItem(storageKey, '1');
       } catch (_) {}
@@ -79,7 +80,10 @@
       if (!videoActive && !formatsAreVisible() && (scrollThresholdReached || timerElapsed)) show();
     };
     const close = () => {
-      popup.hidden = true;
+      if (!popup.hidden) {
+        popup.hidden = true;
+        document.dispatchEvent(new Event('styleofmind:offer-closed'));
+      }
     };
     document.addEventListener('styleofmind:video-playing', () => {
       videoActive = true;
