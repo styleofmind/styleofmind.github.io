@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111923">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Скоро здесь появятся интересные и полезные статьи Ольги Сусленниковой о психологии, отношениях и системных семейных расстановках.">
+  <link rel="canonical" href="https://styleofmind.github.io/blog/">
+  <link rel="icon" href="/favicon-loading.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Блог — скоро здесь будут статьи | Ольга Сусленникова</title>
+  <style>
+    .blog-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--night);
+    }
+
+    .blog-page main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: clamp(48px, 9vw, 104px) 24px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(130, 144, 131, .16), transparent 48%),
+        linear-gradient(145deg, #111923 0%, #17232d 55%, #111923 100%);
+      color: var(--white);
+    }
+
+    .blog-page main::before,
+    .blog-page main::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: min(70vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(217, 180, 92, .11);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .blog-page main::before {
+      transform: scale(.72);
+    }
+
+    .blog-page main::after {
+      transform: scale(1.12);
+      border-color: rgba(217, 180, 92, .06);
+    }
+
+    .blog-card {
+      width: min(760px, 100%);
+      padding: clamp(34px, 7vw, 76px) clamp(24px, 7vw, 72px);
+      text-align: center;
+      border: 1px solid rgba(217, 180, 92, .25);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      box-shadow: 0 28px 90px rgba(0, 0, 0, .2);
+      backdrop-filter: blur(8px);
+    }
+
+    .blog-mark {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(217, 180, 92, .5);
+      border-radius: 50%;
+      color: var(--gold-light);
+    }
+
+    .blog-mark svg {
+      width: 27px;
+      height: 27px;
+    }
+
+    .blog-eyebrow {
+      margin: 0 0 18px;
+      color: var(--gold-light);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .blog-title {
+      max-width: 620px;
+      margin: 0 auto;
+      color: var(--white);
+      font: 400 clamp(38px, 7vw, 66px)/1.12 var(--serif);
+      letter-spacing: -.025em;
+    }
+
+    .blog-title span {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .blog-divider {
+      width: 62px;
+      height: 1px;
+      margin: 30px auto;
+      background: var(--gold);
+    }
+
+    .blog-description {
+      max-width: 520px;
+      margin: 0 auto;
+      color: #d0d0c9;
+      font-size: clamp(14px, 2vw, 16px);
+      line-height: 1.9;
+    }
+
+    .blog-note {
+      margin: 16px 0 0;
+      color: #aeb4b1;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+
+    .blog-actions {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .blog-footer {
+      padding: 24px;
+      border-top: 1px solid rgba(217, 180, 92, .14);
+      color: #aeb4b1;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    @media (max-width: 600px) {
+      .blog-page .site-header {
+        height: 70px;
+      }
+
+      .blog-page .header-inner {
+        width: calc(100% - 32px);
+      }
+
+      .blog-page .brand-name {
+        font-size: 23px;
+      }
+
+      .blog-page main {
+        padding: 48px 16px;
+      }
+
+      .blog-card {
+        border-radius: 22px;
+      }
+
+      .blog-actions {
+        display: grid;
+      }
+
+      .blog-actions .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .blog-card {
+        animation: blog-arrive .7s ease both;
+      }
+
+      @keyframes blog-arrive {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body class="blog-page">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Ольга Сусленникова — на главную">
+        <span class="brand-star" aria-hidden="true">
+          <img src="/assets/brand/brand-star.svg" alt="" width="34" height="41">
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">Ольга Сусленникова</span>
+          <span class="brand-subtitle">клинический психолог</span>
+        </span>
+      </a>
+      <a class="button button-outline" href="/">На главную <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-card" aria-labelledby="blog-title">
+      <div class="blog-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v13H7a2 2 0 0 1-2-2V4.5Z"/>
+          <path d="M8 8h6M8 11.5h7M8 15h5"/>
+          <path d="M18 8h1a2 2 0 0 1 2 2v10h-3"/>
+        </svg>
+      </div>
+      <p class="blog-eyebrow">Блог Ольги Сусленниковой</p>
+      <h1 class="blog-title" id="blog-title">Здесь скоро будет <span>о чём почитать</span></h1>
+      <div class="blog-divider" aria-hidden="true"></div>
+      <p class="blog-description">
+        Мы готовим для вас много интересных и полезных статей — о психологии, отношениях, семейных историях и поиске внутренней опоры.
+        Здесь появятся материалы, к которым можно будет возвращаться, чтобы узнавать новое и находить ответы на важные вопросы.
+      </p>
+      <p class="blog-note">Первые публикации скоро появятся здесь.</p>
+      <div class="blog-actions">
+        <a class="button button-gold" href="/">Вернуться на главную <span aria-hidden="true">→</span></a>
+        <a class="button button-outline" href="https://t.me/olga_styleofmind" target="_blank" rel="noopener noreferrer">Telegram-канал <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="blog-footer">
+    © <span id="blog-year">2026</span> Ольга Сусленникова
+  </footer>
+  <script>
+    document.getElementById("blog-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
