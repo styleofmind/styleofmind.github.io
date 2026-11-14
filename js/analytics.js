@@ -4,7 +4,6 @@
   window[guard] = true;
 
   const settings = window.SITE_ANALYTICS || {};
-  const googleId = settings.googleAnalyticsId || "";
   const yandexId = settings.yandexMetrikaId || "";
   const storageKey = "styleOfMindAnalyticsConsent_v1";
   const consentLifetime = 180 * 24 * 60 * 60 * 1000;
@@ -12,7 +11,7 @@
   const acceptButton = document.getElementById("analyticsConsentAccept");
   const rejectButton = document.getElementById("analyticsConsentReject");
   const settingsButton = document.getElementById("analyticsSettingsOpen");
-  const hasAnalytics = Boolean(googleId || yandexId);
+  const hasAnalytics = Boolean(yandexId);
   const yandexGoalEvents = new Set([
     "booking_click",
     "telegram_click",
@@ -21,22 +20,9 @@
     "diagnostic_offer_view",
     "section_navigation"
   ]);
-  const deniedConsent = {
-    analytics_storage: "denied",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied"
-  };
-  const grantedConsent = {
-    analytics_storage: "granted",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied"
-  };
 
   let consent = readConsent();
   let analyticsEnabled = consent === "granted";
-  let googleInitialized = false;
   let yandexInitialized = false;
   let behaviorTrackingInitialized = false;
 
@@ -105,10 +91,6 @@
     if (!analyticsEnabled) return;
     const safeParams = cleanEventParams(params);
 
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, safeParams);
-    }
-
     if (yandexId && typeof window.ym === "function") {
       window.ym(yandexId, "params", {
         site_analytics: {
@@ -120,30 +102,6 @@
         window.ym(yandexId, "reachGoal", eventName, safeParams);
       }
     }
-  }
-
-  function initializeGoogleAnalytics() {
-    if (!googleId || googleInitialized) return;
-    googleInitialized = true;
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () {
-      window.dataLayer.push(arguments);
-    };
-    window.gtag("consent", "default", deniedConsent);
-    window.gtag("consent", "update", grantedConsent);
-    window.gtag("js", new Date());
-    window.gtag("config", googleId, {
-      send_page_view: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=" +
-      encodeURIComponent(googleId);
-    document.head.appendChild(script);
   }
 
   function initializeYandexMetrika() {
@@ -319,7 +277,6 @@
 
   function enableAnalytics() {
     if (!analyticsEnabled) return;
-    initializeGoogleAnalytics();
     initializeYandexMetrika();
     startBehaviorTracking();
   }
@@ -350,9 +307,6 @@
       analyticsEnabled = false;
       setNoticeVisibility(false);
 
-      if (typeof window.gtag === "function") {
-        window.gtag("consent", "update", deniedConsent);
-      }
       if (yandexId) {
         window["disableYaCounter" + yandexId] = true;
       }
