@@ -61,9 +61,9 @@ Style of Mind — сайт психолога, который занимаетс
 
 ## Analytics scope
 - Production pages `index.html`, `privacy-policy.html`, `online-family-constellations.html`, `group-constellations-spb.html` and `how-family-constellations-work.html` load `analytics-config.js` and `analytics.js` after explicit visitor consent. No files from `development/` may import these scripts or initialize provider tags.
-- Analytics uses a basic opt-in flow: providers are not loaded before consent; consent is stored for up to 180 days. Google ad storage, ad user data, ad personalization, Google signals and ad personalization signals remain denied.
+- Analytics uses a basic opt-in flow: Yandex Metrica is not loaded before visitor consent; the choice is stored in the browser for up to 180 days.
+- Google Analytics has been removed from the production site and must not be reintroduced without an explicit product/legal decision.
 - Yandex Metrica is configured in code with Webvisor, clickmap, outbound-link tracking and accurate bounce rate. Account-side Webvisor/scroll-map settings and JavaScript-event goals must also be enabled in the Metrica cabinet.
-- GA4 receives page views and custom interaction events. Enhanced Measurement options are managed separately in the Google Analytics data-stream settings.
 
 
 ## Production certificates
