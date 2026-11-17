@@ -12,13 +12,25 @@
   const rejectButton = document.getElementById("analyticsConsentReject");
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
+
+  // These names must match JavaScript goals created in Yandex Metrika.
   const yandexGoalEvents = new Set([
-    "booking_click",\n    "contact_channel_select",
-    "telegram_click",
-    "video_open",
+    "booking_cta_click",
+    "contact_menu_open",
+    "contact_channel_max",
+    "contact_channel_telegram",
+    "contact_channel_whatsapp",
+    "telegram_blog_click",
+    "contact_email_click",
+    "contact_phone_click",
+    "site_engaged_60s",
+    "scroll_depth_50",
+    "scroll_depth_75",
+    "scroll_depth_90",
+    "section_navigation",
+    "video_play",
     "video_complete",
-    "diagnostic_offer_view",
-    "section_navigation"
+    "diagnostic_offer_view"
   ]);
 
   let consent = readConsent();
@@ -60,15 +72,21 @@
     if (notice) notice.hidden = !visible;
   }
 
-  function isTelegramLink(anchor) {
+  function parseUrl(anchor) {
     try {
-      const url = new URL(anchor.href, window.location.href);
-      return url.protocol === "tg:" ||
-        url.hostname === "t.me" ||
-        url.hostname === "telegram.me";
+      return new URL(anchor.href, window.location.href);
     } catch (_) {
-      return false;
+      return null;
     }
+  }
+
+  function isTelegramLink(anchor) {
+    const url = parseUrl(anchor);
+    return Boolean(url && (
+      url.protocol === "tg:" ||
+      url.hostname === "t.me" ||
+      url.hostname === "telegram.me"
+    ));
   }
 
   function cleanEventParams(params) {
@@ -109,8 +127,7 @@
     yandexInitialized = true;
     window["disableYaCounter" + yandexId] = false;
 
-    // Telegram URLs contain a prefilled message. Track the CTA with our own goal,
-    // but do not send the full destination URL to Metrika link tracking.
+    // Do not let automatic link tracking collect Telegram URLs with prepared messages.
     document.querySelectorAll("a[href]").forEach(anchor => {
       if (isTelegramLink(anchor)) {
         anchor.classList.add("ym-disable-tracklink");
@@ -139,6 +156,8 @@
 
   function getPlacement(element) {
     if (element.closest("#diagnosticOfferPopup")) return "diagnostic_popup";
+    if (element.closest("#contactMenu")) return "floating_contact";
+    if (element.closest(".mobile-menu")) return "mobile_menu";
     if (element.closest(".site-header")) return "header";
     if (element.closest(".site-footer")) return "footer";
     const section = element.closest("section");
@@ -146,9 +165,82 @@
     return "page";
   }
 
+  function getContactChannel(anchor, url) {
+    const channel = anchor.dataset.contactChannel;
+    if (channel === "max" || channel === "telegram" || channel === "whatsapp") {
+      return channel;
+    }
+
+    const contactGroup = anchor.closest('.mobile-menu__group[aria-label="Связаться со мной"]');
+    if (!contactGroup || !url) return "";
+
+    if (url.hostname === "max.ru") return "max";
+    if (url.hostname === "wa.me" || url.hostname === "api.whatsapp.com") return "whatsapp";
+    if (url.hostname === "t.me" || url.hostname === "telegram.me") return "telegram";
+    return "";
+  }
+
+  function isTelegramBlogLink(anchor) {
+    if (anchor.dataset.analyticsEvent === "telegram_blog_click") return true;
+    if (anchor.closest('.mobile-menu__group[aria-label="Мои блоги"]')) return true;
+    return Boolean(
+      anchor.closest(".footer-legal") &&
+      /telegram/i.test(anchor.textContent || "")
+    );
+  }
+
+  function startActiveTimeTracking() {
+    let activeMilliseconds = 0;
+    let activeStartedAt = document.visibilityState === "visible" ? performance.now() : null;
+    let goalSent = false;
+
+    function updateActiveTime(restart) {
+      const now = performance.now();
+      if (activeStartedAt !== null) {
+        activeMilliseconds += now - activeStartedAt;
+        activeStartedAt = null;
+      }
+
+      if (!goalSent && activeMilliseconds >= 60000) {
+        goalSent = true;
+        recordEvent("site_engaged_60s", {
+          active_seconds: 60,
+          engagement_type: "foreground_time"
+        });
+      }
+
+      if (restart && document.visibilityState === "visible" && !goalSent) {
+        activeStartedAt = now;
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      updateActiveTime(true);
+    });
+
+    window.setInterval(() => {
+      if (document.visibilityState === "visible") {
+        updateActiveTime(true);
+      }
+    }, 1000);
+
+    window.addEventListener("pagehide", () => {
+      updateActiveTime(false);
+    }, { once: true });
+  }
+
   function startBehaviorTracking() {
     if (behaviorTrackingInitialized) return;
     behaviorTrackingInitialized = true;
+
+    const contactMenu = document.getElementById("contactMenu");
+    if (contactMenu) {
+      contactMenu.addEventListener("toggle", () => {
+        if (contactMenu.open) {
+          recordEvent("contact_menu_open", { placement: "floating_contact" });
+        }
+      });
+    }
 
     document.addEventListener("click", event => {
       if (!analyticsEnabled || !event.target || !event.target.closest) return;
@@ -156,38 +248,41 @@
       if (!target) return;
 
       const placement = getPlacement(target);
+
       if (target.hasAttribute("data-contact-menu-trigger")) {
-        recordEvent("booking_click", { placement });
-        return;
-      }
-      if (target.hasAttribute("data-contact-channel")) {
-        recordEvent("contact_channel_select", {
+        recordEvent("booking_cta_click", {
           placement,
-          channel: target.dataset.contactChannel || "unknown"
+          cta_id: target.id || "unnamed"
         });
         return;
       }
+
       if (target.matches("a[href]")) {
-        let url;
-        try {
-          url = new URL(target.href, window.location.href);
-        } catch (_) {
+        const url = parseUrl(target);
+        if (!url) return;
+
+        if (isTelegramBlogLink(target)) {
+          recordEvent("telegram_blog_click", { placement });
+          return;
+        }
+
+        const channel = getContactChannel(target, url);
+        if (channel) {
+          recordEvent("contact_channel_" + channel, { placement });
           return;
         }
 
         if (isTelegramLink(target)) {
-          recordEvent(
-            target.hasAttribute("data-telegram-message") ? "booking_click" : "telegram_click",
-            { placement }
-          );
+          recordEvent("telegram_click", { placement });
           return;
         }
 
-        if (url.protocol === "mailto:" || url.protocol === "tel:") {
-          recordEvent("contact_link_click", {
-            placement,
-            contact_type: url.protocol.slice(0, -1)
-          });
+        if (url.protocol === "mailto:") {
+          recordEvent("contact_email_click", { placement });
+          return;
+        }
+        if (url.protocol === "tel:") {
+          recordEvent("contact_phone_click", { placement });
           return;
         }
 
@@ -243,19 +338,23 @@
 
     const scrollThresholds = [25, 50, 75, 90];
     const sentScrollThresholds = new Set();
-    let scrollFramePending = false;
+
     function checkScrollDepth() {
       const root = document.documentElement;
       const maxScroll = root.scrollHeight - window.innerHeight;
       const depth = maxScroll > 0
         ? Math.min(100, Math.round((window.scrollY / maxScroll) * 100))
         : 100;
+
       scrollThresholds.forEach(threshold => {
         if (depth < threshold || sentScrollThresholds.has(threshold)) return;
         sentScrollThresholds.add(threshold);
-        recordEvent("scroll_depth", { depth_percent: threshold });
+        const eventName = "scroll_depth_" + threshold;
+        recordEvent(eventName, { depth_percent: threshold });
       });
     }
+
+    let scrollFramePending = false;
     window.addEventListener("scroll", () => {
       if (scrollFramePending) return;
       scrollFramePending = true;
@@ -268,7 +367,7 @@
     checkScrollDepth();
 
     document.addEventListener("styleofmind:video-playing", () => {
-      recordEvent("video_open", { video_id: "hero_video" });
+      recordEvent("video_play", { video_id: "hero_video" });
     });
     document.addEventListener("styleofmind:video-ended", () => {
       recordEvent("video_complete", { video_id: "hero_video" });
@@ -284,6 +383,8 @@
     if (offerPopup && !offerPopup.hidden) {
       recordEvent("diagnostic_offer_view", { placement: "diagnostic_popup" });
     }
+
+    startActiveTimeTracking();
   }
 
   function enableAnalytics() {
