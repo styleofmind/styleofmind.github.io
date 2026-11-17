@@ -16,6 +16,10 @@
   // These names must match JavaScript goals created in Yandex Metrika.
   const yandexGoalEvents = new Set([
     "booking_cta_click",
+    "booking_menu_open",
+    "booking_channel_max",
+    "booking_channel_telegram",
+    "booking_channel_whatsapp",
     "contact_menu_open",
     "contact_channel_max",
     "contact_channel_telegram",
@@ -249,11 +253,23 @@
 
       const placement = getPlacement(target);
 
-      if (target.hasAttribute("data-contact-menu-trigger")) {
+      if (target.hasAttribute("data-booking-menu-trigger")) {
         recordEvent("booking_cta_click", {
           placement,
           cta_id: target.id || "unnamed"
         });
+        recordEvent("booking_menu_open", {
+          placement,
+          cta_id: target.id || "unnamed"
+        });
+        return;
+      }
+
+      if (target.matches("a[data-booking-channel]")) {
+        const channel = target.dataset.bookingChannel;
+        if (["max", "telegram", "whatsapp"].includes(channel)) {
+          recordEvent("booking_channel_" + channel, { placement });
+        }
         return;
       }
 
