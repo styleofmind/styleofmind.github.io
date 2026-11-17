@@ -11,7 +11,6 @@
   const behaviorButton = document.getElementById("analyticsConsentBehavior");
   const fullButton = document.getElementById("analyticsConsentFull");
   const basicButton = document.getElementById("analyticsConsentBasic");
-  const rejectButton = basicButton;
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
 
@@ -434,10 +433,6 @@
 
   if (fullButton) {
     fullButton.addEventListener("click", () => chooseAnalyticsLevel("full"));
-  }
-
-  if (rejectButton && rejectButton !== basicButton) {
-    rejectButton.addEventListener("click", () => chooseAnalyticsLevel("basic"));
   }
 
   if (!hasAnalytics) return;
