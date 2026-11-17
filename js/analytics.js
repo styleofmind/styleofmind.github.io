@@ -11,6 +11,7 @@
   const behaviorButton = document.getElementById("analyticsConsentBehavior");
   const fullButton = document.getElementById("analyticsConsentFull");
   const basicButton = document.getElementById("analyticsConsentBasic");
+  const optOutButton = document.getElementById("analyticsConsentOptOut");
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
 
@@ -47,13 +48,13 @@
   function readConsent() {
     try {
       const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null");
-      if (!saved || !["granted", "denied", "basic", "behavior", "full"].includes(saved.value)) return null;
+      if (!saved || !["granted", "denied", "basic", "behavior", "full", "off"].includes(saved.value)) return null;
       if (!saved.expiresAt || saved.expiresAt <= Date.now()) {
         window.localStorage.removeItem(storageKey);
         return null;
       }
       if (saved.value === "granted") return "full";
-      if (saved.value === "denied") return "basic";
+      if (saved.value === "denied") return "off";
       return saved.value;
     } catch (_) {
       return null;
@@ -423,6 +424,10 @@
     });
   }
 
+  if (optOutButton) {
+    optOutButton.addEventListener("click", () => chooseAnalyticsLevel("off"));
+  }
+
   if (basicButton) {
     basicButton.addEventListener("click", () => chooseAnalyticsLevel("basic"));
   }
@@ -436,6 +441,6 @@
   }
 
   if (!hasAnalytics) return;
-  enableAnalytics();
+  if (analyticsLevel !== "off") enableAnalytics();
   setNoticeVisibility(consent === null);
 })();
