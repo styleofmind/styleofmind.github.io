@@ -26,15 +26,54 @@
     }
   })();
 
-  /* Telegram: сообщения хранятся читаемым русским текстом в HTML.
-   При загрузке страницы кодируем их для параметра text в ссылке Telegram. */
-
+  /* Выбор канала связи для всех CTA и плавающей кнопки. */
   (() => {
-    const telegramLinks = document.querySelectorAll('a[data-telegram-message]');
-    telegramLinks.forEach(link => {
-      const message = link.dataset.telegramMessage;
-      if (!message) return;
-      link.href = `https://t.me/olga_styleofmind?text=${encodeURIComponent(message)}`;
+    const menu = document.getElementById('contactMenu');
+    if (!menu) return;
+    const options = menu.querySelectorAll('[data-contact-channel]');
+    const channels = {
+      max: 'https://max.ru/olga_styleofmind',
+      telegram: 'https://t.me/olga_styleofmind',
+      whatsapp: 'https://wa.me/'
+    };
+    let currentMessage = 'Здравствуйте! Хочу обсудить запись и подходящий формат работы.';
+
+    document.querySelectorAll('a[data-contact-message]').forEach(link => {
+      link.href = '#contact-options';
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+      link.dataset.contactMenuTrigger = '';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        currentMessage = link.dataset.contactMessage || currentMessage;
+        menu.open = true;
+        menu.querySelector('.contact-menu__link')?.focus();
+      });
+    });
+
+    options.forEach(option => {
+      const channel = option.dataset.contactChannel;
+      option.href = channels[channel] || '#';
+      option.addEventListener('click', () => {
+        if (channel === 'telegram') {
+          option.href = `${channels.telegram}?text=${encodeURIComponent(currentMessage)}`;
+        } else if (channel === 'whatsapp') {
+          // Пока номер не подтверждён, открываем WhatsApp с готовым текстом,
+          // чтобы посетитель мог выбрать контакт вручную.
+          option.href = `${channels.whatsapp}?text=${encodeURIComponent(currentMessage)}`;
+        }
+        menu.open = false;
+      });
+    });
+
+    document.addEventListener('click', event => {
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
     });
   })();
 

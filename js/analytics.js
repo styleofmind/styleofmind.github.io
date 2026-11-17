@@ -13,7 +13,7 @@
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
   const yandexGoalEvents = new Set([
-    "booking_click",
+    "booking_click",\n    "contact_channel_select",
     "telegram_click",
     "video_open",
     "video_complete",
@@ -156,6 +156,17 @@
       if (!target) return;
 
       const placement = getPlacement(target);
+      if (target.hasAttribute("data-contact-menu-trigger")) {
+        recordEvent("booking_click", { placement });
+        return;
+      }
+      if (target.hasAttribute("data-contact-channel")) {
+        recordEvent("contact_channel_select", {
+          placement,
+          channel: target.dataset.contactChannel || "unknown"
+        });
+        return;
+      }
       if (target.matches("a[href]")) {
         let url;
         try {

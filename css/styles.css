@@ -5309,3 +5309,114 @@ h3,
     right: 6px;
   }
 }
+
+
+/* Compact contact chooser: fixed, quiet, and consistent with the existing palette. */
+.contact-menu {
+  position: fixed;
+  right: max(22px, env(safe-area-inset-right));
+  bottom: max(22px, env(safe-area-inset-bottom));
+  z-index: 130;
+  font-family: inherit;
+}
+.contact-menu > summary { list-style: none; }
+.contact-menu > summary::-webkit-details-marker { display: none; }
+.contact-menu__toggle {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid rgba(232, 199, 142, .62);
+  border-radius: 999px;
+  color: #172229;
+  background: linear-gradient(120deg, #e8c78e, #f4dec0);
+  box-shadow: 0 8px 28px rgba(17, 25, 35, .2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.contact-menu__toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(17, 25, 35, .25);
+}
+.contact-menu__toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-menu__panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  display: grid;
+  width: min(260px, calc(100vw - 32px));
+  gap: 7px;
+  padding: 14px;
+  border: 1px solid rgba(217, 180, 92, .24);
+  border-radius: 18px;
+  background: #17232b;
+  box-shadow: 0 16px 48px rgba(10, 16, 22, .28);
+}
+.contact-menu__title {
+  margin: 0 2px 5px;
+  color: #f3e8d4;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.contact-menu__link {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 11px;
+  color: #f7f2e9;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background .18s ease, border-color .18s ease;
+}
+.contact-menu__link:hover {
+  border-color: rgba(232, 199, 142, .45);
+  background: rgba(255, 255, 255, .08);
+}
+.contact-menu__icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  border-radius: 50%;
+  color: #17232b;
+  background: #e8c78e;
+  font-size: 12px;
+  font-weight: 700;
+}
+.contact-menu__arrow { margin-left: auto; color: #d9b45c; }
+.contact-menu__toggle:focus-visible,
+.contact-menu__link:focus-visible {
+  outline: 2px solid #e8c78e;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .contact-menu {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+  .contact-menu__toggle {
+    min-height: 44px;
+    padding: 0 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-menu__toggle,
+  .contact-menu__link { transition: none; }
+}
