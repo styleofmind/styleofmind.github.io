@@ -26,7 +26,7 @@
     }
   })();
 
-  /* Выбор канала связи для всех CTA и плавающей кнопки. */
+  /* Независимое меню плавающей кнопки связи. */
   (() => {
     const menu = document.getElementById('contactMenu');
     if (!menu) return;
@@ -36,45 +36,76 @@
       telegram: 'https://t.me/olga_styleofmind',
       whatsapp: 'https://wa.me/'
     };
-    let currentMessage = 'Здравствуйте! Хочу обсудить запись и подходящий формат работы.';
-
-    document.querySelectorAll('a[data-contact-message]').forEach(link => {
-      link.href = '#contact-options';
-      link.removeAttribute('target');
-      link.removeAttribute('rel');
-      link.dataset.contactMenuTrigger = '';
-      link.addEventListener('click', event => {
-        event.preventDefault();
-        currentMessage = link.dataset.contactMessage || currentMessage;
-        menu.open = true;
-        menu.querySelector('.contact-menu__link')?.focus();
-      });
-    });
+    const message = 'Здравствуйте! Хочу обсудить запись и подходящий формат работы.';
 
     options.forEach(option => {
       const channel = option.dataset.contactChannel;
       option.href = channels[channel] || '#';
       option.addEventListener('click', () => {
         if (channel === 'telegram') {
-          option.href = `${channels.telegram}?text=${encodeURIComponent(currentMessage)}`;
+          option.href = `${channels.telegram}?text=${encodeURIComponent(message)}`;
         } else if (channel === 'whatsapp') {
-          // Пока номер не подтверждён, открываем WhatsApp с готовым текстом,
-          // чтобы посетитель мог выбрать контакт вручную.
-          option.href = `${channels.whatsapp}?text=${encodeURIComponent(currentMessage)}`;
+          option.href = `${channels.whatsapp}?text=${encodeURIComponent(message)}`;
         }
         menu.open = false;
       });
     });
 
     document.addEventListener('click', event => {
-      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-contact-menu-trigger]')) menu.open = false;
+      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-booking-menu-trigger]')) menu.open = false;
     });
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && menu.open) {
+      if (event.key === 'Escape' && menu.open && !document.getElementById('bookingMenu')?.open) {
         menu.open = false;
         menu.querySelector('summary')?.focus();
       }
     });
+  })();
+
+  /* Отдельное модальное меню каналов для кнопок записи. */
+  (() => {
+    const dialog = document.getElementById('bookingMenu');
+    if (!dialog) return;
+    const options = dialog.querySelectorAll('[data-booking-channel]');
+    const closeButton = dialog.querySelector('.booking-menu__close');
+    const channels = {
+      max: 'https://max.ru/olga_styleofmind',
+      telegram: 'https://t.me/olga_styleofmind',
+      whatsapp: 'https://wa.me/'
+    };
+    let currentMessage = '';
+    let lastTrigger = null;
+
+    const updateLinks = () => {
+      options.forEach(option => {
+        const channel = option.dataset.bookingChannel;
+        let url = channels[channel] || '#';
+        if (channel === 'telegram') url += `?text=${encodeURIComponent(currentMessage)}`;
+        if (channel === 'whatsapp') url += `?text=${encodeURIComponent(currentMessage)}`;
+        option.href = url;
+      });
+    };
+
+    document.querySelectorAll('a[data-booking-message]').forEach(link => {
+      link.href = '#booking-options';
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+      link.dataset.bookingMenuTrigger = '';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        currentMessage = link.dataset.bookingMessage || 'Здравствуйте! Хочу записаться на консультацию.';
+        lastTrigger = link;
+        updateLinks();
+        if (!dialog.open) dialog.showModal();
+        dialog.querySelector('[data-booking-channel]')?.focus();
+      });
+    });
+
+    closeButton?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => lastTrigger?.focus());
   })();
 
   /* Всплывающее предложение диагностики */
