@@ -8,8 +8,10 @@
   const storageKey = "styleOfMindAnalyticsConsent_v1";
   const consentLifetime = 180 * 24 * 60 * 60 * 1000;
   const notice = document.getElementById("analyticsConsent");
-  const acceptButton = document.getElementById("analyticsConsentAccept");
-  const rejectButton = document.getElementById("analyticsConsentReject");
+  const behaviorButton = document.getElementById("analyticsConsentBehavior");
+  const fullButton = document.getElementById("analyticsConsentFull");
+  const basicButton = document.getElementById("analyticsConsentBasic");
+  const rejectButton = basicButton;
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
 
@@ -38,22 +40,21 @@
   ]);
 
   let consent = readConsent();
-  let analyticsEnabled = consent === "granted";
+  let analyticsLevel = consent || "basic";
+  let analyticsEnabled = analyticsLevel === "behavior" || analyticsLevel === "full";
   let yandexInitialized = false;
   let behaviorTrackingInitialized = false;
-
-  if (yandexId) {
-    window["disableYaCounter" + yandexId] = !analyticsEnabled;
-  }
 
   function readConsent() {
     try {
       const saved = JSON.parse(window.localStorage.getItem(storageKey) || "null");
-      if (!saved || !["granted", "denied"].includes(saved.value)) return null;
+      if (!saved || !["granted", "denied", "basic", "behavior", "full"].includes(saved.value)) return null;
       if (!saved.expiresAt || saved.expiresAt <= Date.now()) {
         window.localStorage.removeItem(storageKey);
         return null;
       }
+      if (saved.value === "granted") return "full";
+      if (saved.value === "denied") return "basic";
       return saved.value;
     } catch (_) {
       return null;
@@ -129,7 +130,7 @@
   function initializeYandexMetrika() {
     if (!yandexId || yandexInitialized) return;
     yandexInitialized = true;
-    window["disableYaCounter" + yandexId] = false;
+    const fullAnalyticsEnabled = analyticsLevel === "full";
 
     // Do not let automatic link tracking collect Telegram URLs with prepared messages.
     document.querySelectorAll("a[href]").forEach(anchor => {
@@ -143,10 +144,10 @@
     };
     window.ym.l = window.ym.l || Date.now();
     window.ym(yandexId, "init", {
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
-      webvisor: true,
+      clickmap: fullAnalyticsEnabled,
+      trackLinks: fullAnalyticsEnabled,
+      accurateTrackBounce: fullAnalyticsEnabled,
+      webvisor: fullAnalyticsEnabled,
       trackHash: false,
       sendTitle: true,
       triggerEvent: true
@@ -404,9 +405,16 @@
   }
 
   function enableAnalytics() {
-    if (!analyticsEnabled) return;
     initializeYandexMetrika();
-    startBehaviorTracking();
+    if (analyticsEnabled) startBehaviorTracking();
+  }
+
+  function chooseAnalyticsLevel(level) {
+    saveConsent(level);
+    consent = level;
+    analyticsLevel = level;
+    analyticsEnabled = level === "behavior" || level === "full";
+    window.location.reload();
   }
 
   if (settingsButton) {
@@ -416,38 +424,23 @@
     });
   }
 
-  if (acceptButton) {
-    acceptButton.addEventListener("click", () => {
-      saveConsent("granted");
-      consent = "granted";
-      analyticsEnabled = true;
-      setNoticeVisibility(false);
-      enableAnalytics();
-      recordEvent("analytics_consent_granted", { consent_method: "banner" });
-    });
+  if (basicButton) {
+    basicButton.addEventListener("click", () => chooseAnalyticsLevel("basic"));
   }
 
-  if (rejectButton) {
-    rejectButton.addEventListener("click", () => {
-      const wasEnabled = analyticsEnabled;
-      saveConsent("denied");
-      consent = "denied";
-      analyticsEnabled = false;
-      setNoticeVisibility(false);
+  if (behaviorButton) {
+    behaviorButton.addEventListener("click", () => chooseAnalyticsLevel("behavior"));
+  }
 
-      if (yandexId) {
-        window["disableYaCounter" + yandexId] = true;
-      }
-      if (wasEnabled) {
-        window.location.reload();
-      }
-    });
+  if (fullButton) {
+    fullButton.addEventListener("click", () => chooseAnalyticsLevel("full"));
+  }
+
+  if (rejectButton && rejectButton !== basicButton) {
+    rejectButton.addEventListener("click", () => chooseAnalyticsLevel("basic"));
   }
 
   if (!hasAnalytics) return;
-  if (analyticsEnabled) {
-    enableAnalytics();
-  } else {
-    setNoticeVisibility(consent === null);
-  }
+  enableAnalytics();
+  setNoticeVisibility(consent === null);
 })();
