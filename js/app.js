@@ -52,7 +52,7 @@
     });
 
     document.addEventListener('click', event => {
-      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-booking-menu-trigger]')) menu.open = false;
+      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-booking-menu-trigger], #bookingMenu')) menu.open = false;
     });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && menu.open && !document.getElementById('bookingMenu')?.open) {
@@ -101,6 +101,7 @@
       });
     });
 
+    options.forEach(option => option.addEventListener('click', () => dialog.close()));
     closeButton?.addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => {
       if (event.target === dialog) dialog.close();
