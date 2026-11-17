@@ -5457,3 +5457,62 @@ h3,
 .mobile-menu__group a:hover {
   color: var(--gold-light);
 }
+
+
+/* Independent booking-channel dialog opened by booking CTAs. */
+.booking-menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  background: rgba(35, 40, 33, .42);
+  place-items: center;
+  z-index: 150;
+}
+.booking-menu[open] { display: grid; }
+.booking-menu::backdrop { background: transparent; }
+.booking-menu__panel {
+  position: relative;
+  display: grid;
+  width: min(420px, 100%);
+  gap: 8px;
+  padding: 26px 22px 22px;
+  border: 1px solid #e9e1d4;
+  border-radius: 20px;
+  background: #fbf8f1;
+  box-shadow: 0 18px 52px rgba(35, 40, 33, .24);
+}
+.booking-menu__close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #62695b;
+  background: transparent;
+  font: inherit;
+  font-size: 25px;
+  cursor: pointer;
+}
+.booking-menu__close:hover { background: #eee9df; }
+.booking-menu__panel .contact-menu__title { padding-right: 28px; }
+.booking-menu__close:focus-visible {
+  outline: 2px solid #78836b;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .booking-menu { padding: 16px; }
+  .booking-menu__panel { padding: 25px 16px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .booking-menu__close { transition: none; }
+}
