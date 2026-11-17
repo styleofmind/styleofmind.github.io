@@ -67,7 +67,7 @@
     });
 
     document.addEventListener('click', event => {
-      if (menu.open && !menu.contains(event.target)) menu.open = false;
+      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-contact-menu-trigger]')) menu.open = false;
     });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && menu.open) {
