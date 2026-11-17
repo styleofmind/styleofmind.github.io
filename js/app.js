@@ -509,6 +509,24 @@
     nextArrow?.addEventListener('click', () => setActive(active + 1));
     lightboxPreviousArrow?.addEventListener('click', () => setActive(active - 1));
     lightboxNextArrow?.addEventListener('click', () => setActive(active + 1));
+
+    // На сенсорных экранах перелистываем открытый документ горизонтальным свайпом.
+    let swipeStart = null;
+    dialog.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch' || event.target !== largeImage) return;
+      swipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+    });
+    dialog.addEventListener('pointerup', event => {
+      if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
+      const deltaX = event.clientX - swipeStart.x;
+      const deltaY = event.clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+      setActive(active + (deltaX < 0 ? 1 : -1));
+    });
+    dialog.addEventListener('pointercancel', () => {
+      swipeStart = null;
+    });
     dialog.addEventListener('keydown', event => {
       if (event.key === 'ArrowLeft' && active > 0) {
         event.preventDefault();
