@@ -20,8 +20,10 @@ on:
       - 'sitemap.xml'
       - 'js/analytics-config.js'
       - 'js/analytics.js'
-      - 'app.js'
-      - 'development/**'
+      - 'js/app.js'
+      - 'css/**'
+      - 'fonts/**'
+      - 'assets/**'
       - 'tools/seo_checks.mjs'
       - 'tools/site_browser_audit.mjs'
       - '.github/workflows/site-browser-audit.yml'
@@ -42,8 +44,10 @@ on:
       - 'sitemap.xml'
       - 'js/analytics-config.js'
       - 'js/analytics.js'
-      - 'app.js'
-      - 'development/**'
+      - 'js/app.js'
+      - 'css/**'
+      - 'fonts/**'
+      - 'assets/**'
       - 'tools/seo_checks.mjs'
       - 'tools/site_browser_audit.mjs'
       - '.github/workflows/site-browser-audit.yml'
@@ -69,17 +73,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Verify production SEO and development isolation
+      - name: Verify production SEO and local references
         run: node tools/seo_checks.mjs
 
       - name: Check production JavaScript syntax
         run: |
-          node --check app.js
+          node --check js/app.js
           node --check js/analytics.js
           node --check js/analytics-config.js
           node --check tools/seo_checks.mjs
           node --check tools/site_browser_audit.mjs
-          find development -type f -name '*.js' -exec node --check {} \;
 
       - name: Install browser QA tools
         run: npm install --no-save playwright axe-core lighthouse
