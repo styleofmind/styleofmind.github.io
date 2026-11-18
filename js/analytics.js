@@ -84,6 +84,21 @@
     }
   }
 
+  function cleanUtmParameters() {
+    const url = new URL(window.location.href);
+    let changed = false;
+    Array.from(url.searchParams.keys()).forEach(key => {
+      if (key.toLowerCase().startsWith("utm_")) {
+        url.searchParams.delete(key);
+        changed = true;
+      }
+    });
+    if (!changed) return;
+
+    const cleanUrl = url.pathname + url.search + url.hash;
+    window.history.replaceState(window.history.state, document.title, cleanUrl);
+  }
+
   function isTelegramLink(anchor) {
     const url = parseUrl(anchor);
     return Boolean(url && (
@@ -156,6 +171,11 @@
     script.async = true;
     script.src = "https://mc.yandex.ru/metrika/tag.js";
     document.head.appendChild(script);
+
+    // Wait until the counter is initialized and has processed the landing URL.
+    window.ym(yandexId, "getClientID", function () {
+      cleanUtmParameters();
+    });
   }
 
   function getPlacement(element) {
@@ -438,5 +458,6 @@
 
   if (!hasAnalytics) return;
   if (analyticsLevel !== "off") enableAnalytics();
+  else cleanUtmParameters();
   setNoticeVisibility(consent === null);
 })();

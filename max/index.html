@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Переход на сайт Ольги Сусленниковой</title>
+</head>
+<body>
+  <p>Переходим на сайт. Если переход не начался, <a id="continue-link" href="/">нажмите здесь</a>.</p>
+  <script>
+    (() => {
+      const destination = new URL("/", window.location.origin);
+      const incoming = new URLSearchParams(window.location.search);
+      incoming.forEach((value, key) => destination.searchParams.append(key, value));
+
+      const defaultParams = {
+  "utm_source": "max",
+  "utm_medium": "social",
+  "utm_campaign": "profile",
+  "utm_content": "bio"
+};
+      Object.entries(defaultParams).forEach(([key, value]) => {
+        if (!destination.searchParams.has(key)) {
+          destination.searchParams.set(key, value);
+        }
+      });
+
+      destination.hash = window.location.hash;
+      document.getElementById("continue-link").href = destination.href;
+      window.location.replace(destination.href);
+    })();
+  </script>
+</body>
+</html>
