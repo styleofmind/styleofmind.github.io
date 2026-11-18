@@ -5405,6 +5405,43 @@ h3,
   border-color: #c9cdbd;
   background: #fff;
 }
+/* Floating menu: standalone brand marks without a surrounding card. */
+.contact-menu__panel {
+  width: auto;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.contact-menu__panel .contact-menu__link {
+  display: grid;
+  width: 42px;
+  min-height: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+.contact-menu__panel .contact-menu__link:hover {
+  transform: scale(1.1);
+  border: 0;
+  background: transparent;
+}
+.contact-menu__panel .contact-menu__icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+.contact-menu__panel .contact-menu__icon svg,
+.contact-menu__panel .contact-menu__icon img {
+  width: 30px;
+  height: 30px;
+}
 .contact-menu__icon {
   display: grid;
   width: 30px;
@@ -5440,7 +5477,7 @@ h3,
     bottom: max(14px, env(safe-area-inset-bottom));
   }
   .contact-menu__toggle { width: 50px; height: 50px; }
-  .contact-menu__panel { padding: 10px; }
+  .contact-menu__panel { padding: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .contact-menu__toggle,
