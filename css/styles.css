@@ -5531,41 +5531,107 @@ h3,
 .booking-menu::backdrop { background: transparent; }
 .booking-menu__panel {
   position: relative;
+  width: min(240px, 100%);
+  height: 210px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.booking-menu__panel > .contact-menu__link {
+  position: absolute;
   display: grid;
-  width: min(420px, 100%);
-  gap: 8px;
-  padding: 26px 22px 22px;
-  border: 1px solid #e9e1d4;
-  border-radius: 20px;
-  background: #fbf8f1;
-  box-shadow: 0 18px 52px rgba(35, 40, 33, .24);
+  width: 62px;
+  height: 62px;
+  min-height: 62px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transition: transform .18s ease;
+}
+.booking-menu__panel > .contact-menu__link:hover {
+  transform: scale(1.12);
+  border: 0;
+  background: transparent;
+}
+.booking-menu__panel > .contact-menu__link--max {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.booking-menu__panel > .contact-menu__link--max:hover {
+  transform: translateX(-50%) scale(1.12);
+}
+.booking-menu__panel > .contact-menu__link--telegram {
+  bottom: 8px;
+  left: 18px;
+}
+.booking-menu__panel > .contact-menu__link--whatsapp {
+  right: 18px;
+  bottom: 8px;
+}
+.booking-menu__panel .contact-menu__icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+}
+.booking-menu__panel .contact-menu__icon svg,
+.booking-menu__panel .contact-menu__icon img {
+  width: 42px;
+  height: 42px;
+}
+@keyframes booking-channel-appear {
+  from {
+    opacity: 0;
+    transform: scale(.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.booking-menu[open] .contact-menu__link--max .contact-menu__icon {
+  animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) both;
+}
+.booking-menu[open] .contact-menu__link--telegram .contact-menu__icon {
+  animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) .12s both;
+}
+.booking-menu[open] .contact-menu__link--whatsapp .contact-menu__icon {
+  animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) .24s both;
 }
 .booking-menu__close {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: -34px;
+  right: 0;
   display: grid;
   width: 34px;
   height: 34px;
   place-items: center;
   border: 0;
   border-radius: 50%;
-  color: #62695b;
+  color: #fff;
   background: transparent;
   font: inherit;
   font-size: 25px;
   cursor: pointer;
 }
-.booking-menu__close:hover { background: #eee9df; }
-.booking-menu__panel .contact-menu__title { padding-right: 28px; }
+.booking-menu__close:hover { background: rgba(255, 255, 255, .14); }
 .booking-menu__close:focus-visible {
-  outline: 2px solid #78836b;
+  outline: 2px solid #fff;
   outline-offset: 3px;
 }
 @media (max-width: 600px) {
   .booking-menu { padding: 16px; }
-  .booking-menu__panel { padding: 25px 16px 16px; }
+  .booking-menu__panel { width: min(230px, 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .booking-menu__close { transition: none; }
+  .booking-menu__close,
+  .booking-menu__panel > .contact-menu__link { transition: none; }
+  .booking-menu[open] .contact-menu__link--max .contact-menu__icon,
+  .booking-menu[open] .contact-menu__link--telegram .contact-menu__icon,
+  .booking-menu[open] .contact-menu__link--whatsapp .contact-menu__icon { animation: none; }
 }
