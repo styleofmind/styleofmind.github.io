@@ -574,7 +574,8 @@
   (() => {
     const preview = document.getElementById('hero-kinescope-preview');
     if (!preview) return;
-    preview.addEventListener('click', () => {
+    const triggers = [preview, document.getElementById('hero-video-link')].filter(Boolean);
+    triggers.forEach(trigger => trigger.addEventListener('click', () => {
       const src = preview.dataset.videoSrc;
       if (!src) return;
 
@@ -610,7 +611,7 @@
       document.head.appendChild(apiScript);
     }, {
       once: true
-    });
+    }));
   })();
 
   /* Close the compact navigation after an in-page destination is selected. */

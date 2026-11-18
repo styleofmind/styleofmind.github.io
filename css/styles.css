@@ -283,9 +283,67 @@ summary:focus-visible {
 
 .hero-actions {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.hero-video-link {
+  display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  color: #eee9df;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.hero-video-link:hover {
+  color: var(--gold-light);
+}
+
+.hero-video-link:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+.hero-video-link__icon {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.hero-video-link__icon::after {
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  content: "";
+  transform: translate(-35%, -50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid currentColor;
+}
+
+.hero-video-link__text {
+  display: inline-flex;
+  align-items: baseline;
   flex-wrap: wrap;
+  gap: 7px;
+}
+
+.hero-video-link__duration {
+  color: var(--muted-light);
+  font-size: 12px;
 }
 
 .eyebrow {
