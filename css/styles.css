@@ -4616,3 +4616,105 @@ h3,
 @media (prefers-reduced-motion: reduce) {
   .booking-menu[open] .booking-menu__panel > .contact-menu__link { animation: none; }
 }
+
+
+/* Hero greeting transcript */
+.hero-media-column {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-transcript-trigger {
+  margin-top: 26px;
+  padding: 0 0 3px;
+  border: 0;
+  border-bottom: 1px solid rgba(240, 217, 166, .55);
+  color: var(--gold-light);
+  background: transparent;
+  font: 500 12px/1.5 var(--sans);
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease;
+}
+.hero-transcript-trigger:hover {
+  color: #fffaf1;
+  border-color: #fffaf1;
+}
+.hero-transcript-trigger:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+.hero-transcript-dialog {
+  width: min(620px, calc(100% - 32px));
+  max-width: none;
+  max-height: min(78vh, 720px);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(217, 180, 92, .28);
+  border-radius: 20px;
+  color: var(--ink);
+  background: var(--cream);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .34);
+}
+.hero-transcript-dialog::backdrop {
+  background: rgba(7, 12, 18, .72);
+  backdrop-filter: blur(4px);
+}
+.hero-transcript-dialog[open] {
+  animation: transcript-dialog-in .18s ease-out;
+}
+.hero-transcript-dialog__header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 26px 16px;
+  border-bottom: 1px solid rgba(36, 43, 45, .1);
+  background: var(--cream);
+}
+.hero-transcript-dialog__header h2 {
+  margin: 0;
+  font: 400 24px/1.2 var(--serif);
+}
+.hero-transcript-dialog__close {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: rgba(36, 43, 45, .06);
+  font: 400 25px/1 var(--sans);
+  cursor: pointer;
+}
+.hero-transcript-dialog__close:hover { background: rgba(36, 43, 45, .12); }
+.hero-transcript-dialog__body {
+  max-height: calc(min(78vh, 720px) - 76px);
+  padding: 12px 26px 26px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.hero-transcript-dialog__body p { margin: 0 0 14px; }
+.hero-transcript-dialog__body p:last-child { margin-bottom: 0; }
+@keyframes transcript-dialog-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 900px) {
+  .hero-media-column { grid-column: 2; }
+}
+@media (max-width: 700px) {
+  .hero-media-column { grid-column: 1; }
+  .hero-transcript-trigger { margin-top: 18px; }
+  .hero-transcript-dialog__header { padding: 18px 18px 14px; }
+  .hero-transcript-dialog__header h2 { font-size: 21px; }
+  .hero-transcript-dialog__body { padding: 10px 18px 20px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-transcript-dialog[open] { animation: none; }
+  .hero-transcript-trigger { transition: none; }
+}
