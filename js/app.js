@@ -36,9 +36,13 @@
       telegram: 'https://t.me/olga_styleofmind',
       whatsapp: 'https://wa.me/79313495634'
     };
+    const message = 'Здравствуйте! Хочу записаться на консультацию.';
     options.forEach(option => {
       const channel = option.dataset.contactChannel;
-      option.href = channels[channel] || '#';
+      const baseUrl = channels[channel] || '#';
+      option.href = channel === 'telegram' || channel === 'whatsapp'
+        ? `${baseUrl}?text=${encodeURIComponent(message)}`
+        : baseUrl;
       option.addEventListener('click', () => {
         menu.open = false;
       });
