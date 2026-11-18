@@ -36,17 +36,10 @@
       telegram: 'https://t.me/olga_styleofmind',
       whatsapp: 'https://wa.me/79313495634'
     };
-    const message = 'Здравствуйте! Хочу обсудить запись и подходящий формат работы.';
-
     options.forEach(option => {
       const channel = option.dataset.contactChannel;
       option.href = channels[channel] || '#';
       option.addEventListener('click', () => {
-        if (channel === 'telegram') {
-          option.href = `${channels.telegram}?text=${encodeURIComponent(message)}`;
-        } else if (channel === 'whatsapp') {
-          option.href = `${channels.whatsapp}?text=${encodeURIComponent(message)}`;
-        }
         menu.open = false;
       });
     });

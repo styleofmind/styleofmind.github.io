@@ -5334,7 +5334,7 @@ h3,
 }
 
 
-/* Contact chooser: warm neutral card with an olive floating action. */
+/* Compact floating messenger chooser. */
 .contact-menu {
   position: fixed;
   right: max(22px, env(safe-area-inset-right));
@@ -5375,36 +5375,28 @@ h3,
 .contact-menu__panel {
   position: absolute;
   right: 0;
-  bottom: calc(100% + 14px);
+  bottom: calc(100% + 10px);
   display: grid;
-  width: min(292px, calc(100vw - 32px));
-  gap: 8px;
-  padding: 18px;
+  width: min(224px, calc(100vw - 28px));
+  gap: 6px;
+  padding: 12px;
   border: 1px solid #e9e1d4;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #fbf8f1;
-  box-shadow: 0 18px 52px rgba(48, 48, 39, .17);
-}
-.contact-menu__title {
-  margin: 0 2px 7px;
-  color: #343a32;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.45;
+  box-shadow: 0 14px 38px rgba(48, 48, 39, .17);
 }
 .contact-menu__link {
   display: flex;
-  min-height: 54px;
+  min-height: 46px;
   align-items: center;
-  gap: 12px;
-  padding: 9px 12px;
+  gap: 10px;
+  padding: 7px 9px;
   border: 1px solid #e9e4da;
-  border-radius: 13px;
+  border-radius: 11px;
   color: #343a32;
   background: rgba(255, 255, 255, .72);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   transition: transform .18s ease, border-color .18s ease, background .18s ease;
 }
@@ -5415,16 +5407,16 @@ h3,
 }
 .contact-menu__icon {
   display: grid;
-  width: 34px;
-  height: 34px;
-  flex: 0 0 34px;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
   place-items: center;
-  border-radius: 11px;
+  border-radius: 9px;
   color: #fff;
 }
 .contact-menu__icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.7;
@@ -5434,7 +5426,7 @@ h3,
 .contact-menu__link--max .contact-menu__icon { background: #8063b5; }
 .contact-menu__link--telegram .contact-menu__icon { background: #42a5d8; }
 .contact-menu__link--whatsapp .contact-menu__icon { background: #4b9c68; }
-.contact-menu__arrow { margin-left: auto; color: #858d78; font-size: 16px; }
+.contact-menu__arrow { margin-left: auto; color: #858d78; font-size: 15px; }
 .contact-menu__toggle:focus-visible,
 .contact-menu__link:focus-visible {
   outline: 2px solid #78836b;
@@ -5446,7 +5438,7 @@ h3,
     bottom: max(14px, env(safe-area-inset-bottom));
   }
   .contact-menu__toggle { width: 50px; height: 50px; }
-  .contact-menu__panel { padding: 15px; }
+  .contact-menu__panel { padding: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .contact-menu__toggle,
