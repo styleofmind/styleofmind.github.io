@@ -273,17 +273,9 @@ FAQ
                 <span class="hero-video-link__text">Смотреть видео-приветствие <span class="hero-video-link__duration">1 минута</span></span>
               </button>
             </div>
-            <details class="hero-transcript" style="margin-top: 18px; color: #eee9df;">
-              <summary style="color: #e6d2a5; font-size: 13px; cursor: pointer; text-underline-offset: 4px;">Прочитать текст приветствия</summary>
-              <div style="max-width: 540px; margin-top: 12px; color: rgba(238, 233, 223, .82); font-size: 13px; line-height: 1.7;">
-                <p>Приветствую вас на своей странице. Меня зовут Ольга Сусленникова. Я клинический психолог, гипнолог, мастер и тренер НЛП и системный семейный расстановщик.</p>
-                <p>Знаю, как непросто бывает разобраться в отношениях, когда никак не получается встретить своего человека, когда в паре постоянные ссоры и конфликты, когда хочется сохранить семью или, наоборот, завершить отношения и наконец поставить эмоциональную точку.</p>
-                <p>Системные семейные расстановки — это метод, который позволяет увидеть скрытые причины проблем в отношениях, которые не осознаются и мешают быть счастливыми. Эти скрытые причины создают тот самый эффект хождения по кругу, когда раз за разом повторяются одни и те же сложности, проигрывается один и тот же сценарий.</p>
-                <p>Если чувствуете, что пора разобраться и вернуть себе опору, записывайтесь на системную расстановку или на диагностическую сессию, где мы познакомимся, разберём ваш запрос и наметим план работы.</p>
-                <p>Буду рада помочь.</p>
-              </div>
-            </details>
+  </details>
           </div>
+          <div class="hero-media-column">
           <div class="hero-art">
             <div
               class="hero-halo"
@@ -307,6 +299,8 @@ FAQ
             >
             <span class="hero-video-play" aria-hidden="true"><span></span></span>
             </button>
+          </div>
+          <button class="hero-transcript-trigger" type="button" id="hero-transcript-open">Прочитать текст приветствия</button>
           </div>
         </div>
 
@@ -1493,6 +1487,19 @@ Telegram-канал ↗
         <button class="button cookie-notice__button" id="analyticsConsentFull" type="button">Принять</button>
       </div>
     </aside>
+    <dialog class="hero-transcript-dialog" id="hero-transcript-dialog" aria-labelledby="hero-transcript-title">
+      <div class="hero-transcript-dialog__header">
+        <h2 id="hero-transcript-title">Текст видео-приветствия</h2>
+        <button class="hero-transcript-dialog__close" type="button" aria-label="Закрыть" data-transcript-close>×</button>
+      </div>
+      <div class="hero-transcript-dialog__body">
+        <p>Приветствую вас на своей странице. Меня зовут Ольга Сусленникова. Я клинический психолог, гипнолог, мастер и тренер НЛП и системный семейный расстановщик.</p>
+        <p>Знаю, как непросто бывает разобраться в отношениях, когда никак не получается встретить своего человека, когда в паре постоянные ссоры и конфликты, когда хочется сохранить семью или, наоборот, завершить отношения и наконец поставить эмоциональную точку.</p>
+        <p>Системные семейные расстановки — это метод, который позволяет увидеть скрытые причины проблем в отношениях, которые не осознаются и мешают быть счастливыми. Эти скрытые причины создают тот самый эффект хождения по кругу, когда раз за разом повторяются одни и те же сложности, проигрывается один и тот же сценарий.</p>
+        <p>Если чувствуете, что пора разобраться и вернуть себе опору, записывайтесь на системную расстановку или на диагностическую сессию, где мы познакомимся, разберём ваш запрос и наметим план работы.</p>
+        <p>Буду рада помочь.</p>
+      </div>
+    </dialog>
     <script src="/js/analytics-config.js" defer></script>
     <script src="/js/analytics.js?v=20261118-utm-cleanup" defer></script>
     <script src="/js/app.js?v=20261118-booking-row-animation" defer></script>
