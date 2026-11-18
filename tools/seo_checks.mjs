@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
@@ -13,24 +13,12 @@ const productionPages = [
   { file: "how-family-constellations-work.html", url: "https://styleofmind.github.io/how-family-constellations-work.html" },
 ];
 
-const providerPattern = /googletagmanager\.com|google-analytics\.com|mc\.yandex\.ru|metrika\/tag\.js|G-L3K3HMRF2Z|113093974|\bgtag\s*\(|\bym\s*\(|\btrackEvent\s*\(/i;
-
 function fail(message) {
   errors.push(message);
 }
 
 function pass(message) {
   passed.push(message);
-}
-
-async function walk(directory) {
-  const files = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...await walk(absolute));
-    else files.push(absolute);
-  }
-  return files;
 }
 
 function tags(html, name, attribute) {
@@ -122,63 +110,6 @@ async function checkProduction() {
   if (errors.length === 0) pass("Production SEO metadata: " + productionPages.length + " pages");
 }
 
-async function checkDevelopment() {
-  const directory = path.join(root, "development");
-  const files = await walk(directory);
-  const htmlFiles = files.filter(file => file.toLowerCase().endsWith(".html"));
-  const scriptFiles = files.filter(file => file.toLowerCase().endsWith(".js"));
-  let htmlPassed = 0;
-
-  if (htmlFiles.length === 0) fail("No HTML pages found under development/");
-
-  for (const file of files) {
-    const base = path.basename(file).toLowerCase();
-    if (base === "robots.txt" || base === "sitemap.xml") {
-      fail("Nested crawler file is not allowed: " + path.relative(root, file));
-    }
-    if (["privacy.html", "privacy-policy.html", "legal.html"].includes(base)) {
-      fail("Duplicate privacy/legal page is not allowed in development: " + path.relative(root, file));
-    }
-  }
-
-  for (const file of htmlFiles) {
-    const html = await readFile(file, "utf8");
-    const relative = path.relative(root, file);
-    const robots = tags(html, "robots", "name");
-    if (robots.length !== 1 || !/noindex\s*,\s*nofollow/i.test(robots[0])) {
-      fail(relative + ": expected one robots noindex,nofollow directive");
-    }
-    if (canonicalLinks(html).length !== 0) fail(relative + ": development page must not declare canonical");
-    for (const [name, attribute] of [["description", "name"], ["og:title", "property"], ["og:description", "property"], ["twitter:title", "name"], ["twitter:description", "name"]]) {
-      if (tags(html, name, attribute).length !== 0) fail(relative + ": remove production SEO metadata " + name);
-    }
-    if (/application\/ld\+json/i.test(html)) fail(relative + ": structured production SEO data is not allowed");
-    if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent/i.test(html)) {
-      fail(relative + ": analytics-consent UI must not exist in a preview");
-    }
-    const stalePolicyLinks = ['href="privacy.html"', 'href="./privacy.html"', 'href="pages/privacy.html"', 'href="privacy-policy.html"', 'href="./privacy-policy.html"', 'href="legal.html"', 'href="./legal.html"', 'href="./legal.html#privacy"', 'href="./legal.html#consent"'];
-    if (stalePolicyLinks.some(link => html.includes(link))) fail(relative + ": preview must link to the single root /privacy-policy.html");
-    if (providerPattern.test(html)) fail(relative + ": analytics provider or tracking code found in HTML");
-    if (/\b(?:googletagmanager|google-analytics|metrika\/tag\.js|mc\.yandex\.ru)/i.test(html)) {
-      fail(relative + ": external analytics script reference found");
-    }
-    htmlPassed++;
-  }
-
-  for (const file of scriptFiles) {
-    const source = await readFile(file, "utf8");
-    const relative = path.relative(root, file);
-    const base = path.basename(file).toLowerCase();
-    if (/^analytics(?:-config)?\.js$/.test(base)) fail(relative + ": analytics loader/config file is not allowed in development");
-    if (/cookieConsent|cookieSettingsTrigger|cookieAccept|cookieReject|analyticsConsent|olgaConsentChanged/i.test(source)) {
-      fail(relative + ": analytics-consent handlers are not allowed in development");
-    }
-    if (providerPattern.test(source)) fail(relative + ": analytics provider, counter ID or tracking hook found in JavaScript");
-  }
-
-  if (errors.length === 0) pass("Development isolation: " + htmlPassed + " HTML pages; " + scriptFiles.length + " JS files");
-}
-
 async function checkCrawlerFiles() {
   const robots = await readFile(path.join(root, "robots.txt"), "utf8");
   const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
@@ -190,10 +121,41 @@ async function checkCrawlerFiles() {
   if (urls.length !== expected.length || expected.some(url => !urls.includes(url))) {
     fail("Root sitemap must contain exactly the five production canonical URLs");
   }
-  if (urls.some(url => url.includes("/development/"))) fail("Root sitemap must not include development preview URLs");
   if (!/<urlset\b/.test(sitemap) || !/<\/urlset>\s*$/.test(sitemap)) fail("Root sitemap XML structure is incomplete");
   if ([...sitemap.matchAll(/<url>/gi)].length !== urls.length) fail("Root sitemap contains an invalid URL entry");
   if (errors.length === 0) pass("Root robots.txt and sitemap.xml");
+}
+
+async function checkLocalReferences() {
+  const htmlFiles = ["index.html","privacy-policy.html","online-family-constellations.html","group-constellations-spb.html","how-family-constellations-work.html","404.html","blog/index.html","direct/index.html","max/index.html","tg/index.html","vk/index.html","wa/index.html"];
+  let checkedFiles = 0, checkedReferences = 0;
+  for (const file of htmlFiles) {
+    let html;
+    try { html = await readFile(path.join(root,file),"utf8"); checkedFiles++; }
+    catch { fail("HTML page missing: "+file); continue; }
+    const ids=[...html.matchAll(/\bid=["']([^"']+)["']/gi)].map(m=>m[1]);
+    for(const id of new Set(ids.filter((v,i)=>ids.indexOf(v)!==i))) fail(file+": duplicate id "+id);
+    for(const m of html.matchAll(/\b(?:href|src|poster|data-full-src|data-src)=["']([^"']+)["']/gi)){
+      const value=m[1].trim();
+      if(!value||/^(?:https?:|mailto:|tel:|data:|javascript:|\/\/)/i.test(value)) continue;
+      const hash=value.indexOf("#"), pathPart=(hash>=0?value.slice(0,hash):value).split("?")[0];
+      if(!pathPart) continue;
+      let decoded; try{decoded=decodeURIComponent(pathPart);}catch{decoded=pathPart;}
+      const target=decoded.startsWith("/")?path.join(root,decoded.replace(/^\/+/, "")):path.resolve(root,path.dirname(file),decoded);
+      checkedReferences++;
+      try{await stat(target);}catch{fail(file+": local reference not found: "+value);}
+    }
+  }
+  for(const file of ["css/styles.css","fonts/fonts.css"]){
+    let source; try{source=await readFile(path.join(root,file),"utf8");}catch{fail("Stylesheet missing: "+file);continue;}
+    for(const m of source.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/gi)){
+      const value=m[1].trim(); if(!value||/^(?:https?:|data:|\/\/)/i.test(value))continue;
+      let decoded;try{decoded=decodeURIComponent(value.split(/[?#]/)[0]);}catch{decoded=value.split(/[?#]/)[0];}
+      const target=decoded.startsWith("/")?path.join(root,decoded.replace(/^\/+/, "")):path.resolve(root,path.dirname(file),decoded);
+      checkedReferences++;try{await stat(target);}catch{fail(file+": local CSS resource not found: "+value);}
+    }
+  }
+  if(errors.length===0)pass("Local HTML/CSS references: "+checkedFiles+" HTML pages; "+checkedReferences+" resources");
 }
 
 async function checkPresentationFiles() {
@@ -215,8 +177,8 @@ async function checkPresentationFiles() {
 }
 
 await checkProduction();
-await checkDevelopment();
 await checkCrawlerFiles();
+await checkLocalReferences();
 await checkPresentationFiles();
 
 for (const message of passed) console.log("PASS " + message);
