@@ -4434,20 +4434,20 @@ h3,
 @keyframes booking-channel-appear {
   from {
     opacity: 0;
-    transform: scale(.72);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
-.booking-menu[open] .contact-menu__link--max .contact-menu__icon {
+.booking-menu[open] .contact-menu__link--max {
   animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) both;
 }
-.booking-menu[open] .contact-menu__link--telegram .contact-menu__icon {
+.booking-menu[open] .contact-menu__link--telegram {
   animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) .12s both;
 }
-.booking-menu[open] .contact-menu__link--whatsapp .contact-menu__icon {
+.booking-menu[open] .contact-menu__link--whatsapp {
   animation: booking-channel-appear .42s cubic-bezier(.2, .75, .25, 1) .24s both;
 }
 .booking-menu__close {
@@ -4551,4 +4551,10 @@ h3,
   .booking-menu[open] .contact-menu__link--max .contact-menu__icon,
   .booking-menu[open] .contact-menu__link--telegram .contact-menu__icon,
   .booking-menu[open] .contact-menu__link--whatsapp .contact-menu__icon { animation: none; }
+}
+
+
+/* Respect reduced-motion preferences for the complete booking rows. */
+@media (prefers-reduced-motion: reduce) {
+  .booking-menu[open] .booking-menu__panel > .contact-menu__link { animation: none; }
 }

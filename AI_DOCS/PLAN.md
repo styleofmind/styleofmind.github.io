@@ -84,3 +84,11 @@
 - Updated CSS/JavaScript cache keys to 20261118-booking-list.
 - Validation: `node --check js/app.js` = 0 errors; tinycss2 = 0 CSS parse errors; `git diff --check` = clean. Chromium checks at 390 px and 1440 px: standard CTA opens the dialog; floating trigger opens the same dialog without opening its native details panel; 3 channel rows and labels are present; custom and generic Telegram messages are encoded in their respective links; WhatsApp number is correct; close button and Escape close the dialog; page errors = 0; horizontal overflow = false.
 - No commit or push.
+
+## Booking chooser row animation (2026-11-18)
+
+- Changed the staggered entrance animation from the channel icons alone to each complete channel row, so icon and label appear together.
+- Kept the 120 ms stagger between MAX, Telegram, and WhatsApp; rows fade in while moving upward by 8 px.
+- Added a final reduced-motion override for the complete rows.
+- Updated the CSS/JS cache key to `20261118-booking-row-animation`.
+- No commit or push.
