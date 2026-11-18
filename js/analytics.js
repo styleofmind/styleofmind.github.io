@@ -8,10 +8,9 @@
   const storageKey = "styleOfMindAnalyticsConsent_v1";
   const consentLifetime = 180 * 24 * 60 * 60 * 1000;
   const notice = document.getElementById("analyticsConsent");
-  const behaviorButton = document.getElementById("analyticsConsentBehavior");
   const fullButton = document.getElementById("analyticsConsentFull");
   const basicButton = document.getElementById("analyticsConsentBasic");
-  const optOutButton = document.getElementById("analyticsConsentOptOut");
+  const closeButton = document.getElementById("analyticsConsentClose");
   const settingsButton = document.getElementById("analyticsSettingsOpen");
   const hasAnalytics = Boolean(yandexId);
 
@@ -420,21 +419,18 @@
   if (settingsButton) {
     settingsButton.addEventListener("click", () => {
       setNoticeVisibility(true);
-      if (rejectButton) rejectButton.focus();
+      if (basicButton) basicButton.focus();
     });
   }
 
-  if (optOutButton) {
-    optOutButton.addEventListener("click", () => chooseAnalyticsLevel("off"));
+  if (closeButton) {
+    closeButton.addEventListener("click", () => chooseAnalyticsLevel("off"));
   }
 
   if (basicButton) {
     basicButton.addEventListener("click", () => chooseAnalyticsLevel("basic"));
   }
 
-  if (behaviorButton) {
-    behaviorButton.addEventListener("click", () => chooseAnalyticsLevel("behavior"));
-  }
 
   if (fullButton) {
     fullButton.addEventListener("click", () => chooseAnalyticsLevel("full"));
