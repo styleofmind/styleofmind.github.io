@@ -39,4 +39,7 @@
 
 Работаю онлайн; очные встречи проходят в Санкт-Петербурге.
 
-[Официальный сайт и информация о записи](https://styleofmind.github.io/)
+- [Официальный сайт и информация о записи](https://styleofmind.github.io/)
+- [Telegram](https://t.me/olga_styleofmind)
+
+![Ольга Сусленникова — клинический психолог](assets/og/olga-social-preview.webp)
