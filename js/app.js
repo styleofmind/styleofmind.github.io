@@ -34,7 +34,7 @@
     const channels = {
       max: 'https://max.ru/olga_styleofmind',
       telegram: 'https://t.me/olga_styleofmind',
-      whatsapp: 'https://wa.me/'
+      whatsapp: 'https://wa.me/79313495634'
     };
     const message = 'Здравствуйте! Хочу обсудить запись и подходящий формат работы.';
 
@@ -71,7 +71,7 @@
     const channels = {
       max: 'https://max.ru/olga_styleofmind',
       telegram: 'https://t.me/olga_styleofmind',
-      whatsapp: 'https://wa.me/'
+      whatsapp: 'https://wa.me/79313495634'
     };
     let currentMessage = '';
     let lastTrigger = null;
