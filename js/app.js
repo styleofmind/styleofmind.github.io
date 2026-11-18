@@ -614,6 +614,18 @@
     }));
   })();
 
+  /* Модальное окно с текстом видео-приветствия. */
+  (() => {
+    const dialog = document.getElementById('hero-transcript-dialog');
+    const openButton = document.getElementById('hero-transcript-open');
+    if (!dialog || !openButton) return;
+    openButton.addEventListener('click', () => dialog.showModal());
+    dialog.querySelector('[data-transcript-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+
   /* Close the compact navigation after an in-page destination is selected. */
   (() => {
     const mobileMenu = document.querySelector('.mobile-menu');
