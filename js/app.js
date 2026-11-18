@@ -582,17 +582,27 @@
       // Сразу блокируем предложение, не дожидаясь загрузки и старта плеера.
       document.dispatchEvent(new Event('styleofmind:video-playing'));
 
-      // Подключаем официальный Kinescope IFrame API для события Ended.
-      window.onKinescopeIframeAPIReady = playerFactory => {
-        playerFactory.on(playerFactory.Events.Created, ({ data: playerInstance }) => {
-          playerInstance.on(playerInstance.Events.Ended, () => {
-            document.dispatchEvent(new Event('styleofmind:video-ended'));
+      // Подключаем официальный Kinescope IFrame API один раз для события Ended.
+      if (!window.__styleOfMindKinescopeApiRequested) {
+        window.__styleOfMindKinescopeApiRequested = true;
+        window.onKinescopeIframeAPIReady = playerFactory => {
+          playerFactory.on(playerFactory.Events.Created, ({ data: playerInstance }) => {
+            playerInstance.on(playerInstance.Events.Ended, () => {
+              document.dispatchEvent(new Event('styleofmind:video-ended'));
+            });
           });
-        });
-      };
+        };
 
+        const apiScript = document.createElement('script');
+        apiScript.src = 'https://player.kinescope.io/latest/iframe.player.js?auto';
+        apiScript.async = true;
+        document.head.appendChild(apiScript);
+      }
+
+      // Пересоздаём iframe при каждом нажатии: новый экземпляр начинает с 0:00.
       const playerUrl = new URL(src, document.baseURI);
       playerUrl.searchParams.set('enableIframeApi', '');
+      playerUrl.searchParams.set('autoplay', '1');
       const player = document.createElement('iframe');
       player.className = 'hero-video';
       player.id = 'hero-kinescope-player';
@@ -603,14 +613,13 @@
       player.allowFullscreen = true;
       player.loading = 'eager';
       player.referrerPolicy = 'strict-origin-when-cross-origin';
-      preview.replaceWith(player);
 
-      const apiScript = document.createElement('script');
-      apiScript.src = 'https://player.kinescope.io/latest/iframe.player.js?auto';
-      apiScript.async = true;
-      document.head.appendChild(apiScript);
-    }, {
-      once: true
+      const currentPlayer = document.getElementById('hero-kinescope-player');
+      if (currentPlayer) {
+        currentPlayer.replaceWith(player);
+      } else {
+        preview.replaceWith(player);
+      }
     }));
   })();
 
