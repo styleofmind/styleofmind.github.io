@@ -26,38 +26,7 @@
     }
   })();
 
-  /* Независимое меню плавающей кнопки связи. */
-  (() => {
-    const menu = document.getElementById('contactMenu');
-    if (!menu) return;
-    const options = menu.querySelectorAll('[data-contact-channel]');
-    const channels = {
-      max: 'https://max.ru/olga_styleofmind',
-      telegram: 'https://t.me/olga_styleofmind',
-      whatsapp: 'https://wa.me/79313495634'
-    };
-    const message = 'Здравствуйте! Хочу записаться на консультацию.';
-    options.forEach(option => {
-      const channel = option.dataset.contactChannel;
-      const baseUrl = channels[channel] || '#';
-      option.href = channel === 'telegram' || channel === 'whatsapp'
-        ? `${baseUrl}?text=${encodeURIComponent(message)}`
-        : baseUrl;
-      option.addEventListener('click', () => {
-        menu.open = false;
-      });
-    });
-
-    document.addEventListener('click', event => {
-      if (menu.open && !menu.contains(event.target) && !event.target.closest('[data-booking-menu-trigger], #bookingMenu')) menu.open = false;
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && menu.open && !document.getElementById('bookingMenu')?.open) {
-        menu.open = false;
-        menu.querySelector('summary')?.focus();
-      }
-    });
-  })();
+  /* Плавающая кнопка открывает то же меню выбора канала, что и обычные CTA. */
 
   /* Отдельное модальное меню каналов для кнопок записи. */
   (() => {
@@ -70,8 +39,16 @@
       telegram: 'https://t.me/olga_styleofmind',
       whatsapp: 'https://wa.me/79313495634'
     };
-    let currentMessage = '';
+    let currentMessage = 'Здравствуйте! Хочу записаться на консультацию.';
     let lastTrigger = null;
+
+    const openMenu = (message, trigger) => {
+      currentMessage = message || 'Здравствуйте! Хочу записаться на консультацию.';
+      lastTrigger = trigger;
+      updateLinks();
+      if (!dialog.open) dialog.showModal();
+      dialog.querySelector('[data-booking-channel]')?.focus();
+    };
 
     const updateLinks = () => {
       options.forEach(option => {
@@ -90,12 +67,14 @@
       link.dataset.bookingMenuTrigger = '';
       link.addEventListener('click', event => {
         event.preventDefault();
-        currentMessage = link.dataset.bookingMessage || 'Здравствуйте! Хочу записаться на консультацию.';
-        lastTrigger = link;
-        updateLinks();
-        if (!dialog.open) dialog.showModal();
-        dialog.querySelector('[data-booking-channel]')?.focus();
+        openMenu(link.dataset.bookingMessage, link);
       });
+    });
+
+    const floatingTrigger = document.querySelector('#contactMenu > summary');
+    floatingTrigger?.addEventListener('click', event => {
+      event.preventDefault();
+      openMenu('Здравствуйте! Хочу записаться на консультацию.', floatingTrigger);
     });
 
     options.forEach(option => option.addEventListener('click', () => dialog.close()));
