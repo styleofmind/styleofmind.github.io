@@ -4619,6 +4619,31 @@ h3,
   font-family: var(--sans);
 }
 .cookie-notice[hidden] { display: none !important; }
+.cookie-notice { position: relative; padding-top: 42px; }
+.cookie-notice__close {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: #687078;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  font: 400 23px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+.cookie-notice__close:hover {
+  color: var(--white);
+  background: #c42b1c;
+}
+.cookie-notice__close:focus-visible {
+  outline: 2px solid var(--night-2);
+  outline-offset: 2px;
+}
 .cookie-notice__text {
   margin: 0;
   color: var(--ink);
