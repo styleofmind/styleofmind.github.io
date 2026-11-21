@@ -4627,23 +4627,24 @@ h3,
 }
 .hero-transcript-trigger {
   margin-top: 26px;
-  padding: 0 0 3px;
-  border: 0;
-  border-bottom: 1px solid rgba(240, 217, 166, .55);
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid rgba(240, 217, 166, .5);
+  border-radius: 999px;
   color: var(--gold-light);
-  background: transparent;
-  font: 500 12px/1.5 var(--sans);
+  background: rgba(255, 255, 255, .04);
+  font: 500 14px/1.5 var(--sans);
   cursor: pointer;
-  transition: color .2s ease, border-color .2s ease;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
 }
 .hero-transcript-trigger:hover {
   color: #fffaf1;
   border-color: #fffaf1;
+  background: rgba(255, 255, 255, .1);
 }
 .hero-transcript-trigger:focus-visible {
   outline: 2px solid var(--gold-light);
-  outline-offset: 5px;
-  border-radius: 2px;
+  outline-offset: 3px;
 }
 .hero-transcript-dialog {
   width: min(620px, calc(100% - 32px));
