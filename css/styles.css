@@ -590,6 +590,7 @@ summary:focus-visible {
 }
 
 .hero-bottom {
+  pointer-events: none;
   display: flex;
   align-items: center;
   gap: 15px;
